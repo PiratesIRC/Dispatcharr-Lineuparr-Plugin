@@ -1,9 +1,11 @@
 {
   "name": "Lineuparr",
-  "version": "1.26.095.1509",
-  "description": "Mirror real-world provider channel lineups (DIRECTV, etc.) by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
-  "author": "community",
-  "help_url": "",
+  "version": "1.26.9520",
+  "description": "Mirror real-world provider channel lineups by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
+  "author": "PiratesIRC",
+  "license": "MIT",
+  "repo_url": "https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin",
+  "min_dispatcharr_version": "v0.20.0",
   "fields": [
     {
       "id": "lineup_file",
