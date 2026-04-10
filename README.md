@@ -44,6 +44,7 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 | `US_DISH-Top250_lineup.json` | DISH Top 250 | US | ~210 |
 | `US_Verizon-FIOS_lineup.json` | Verizon FiOS | US | ~190 |
 | `UK_SkyTV_lineup.json` | Sky TV | UK | ~160 |
+| `AU_Foxtel_lineup.json` | Foxtel Platinum Plus | AU | ~140 |
 | `CA_Telus-Optik_lineup.json` | Telus Optik | CA | ~140 |
 | `NL_ODIDO_lineup.json` | ODIDO | NL | ~140 |
 
@@ -97,7 +98,10 @@ No API credentials are needed -- the plugin runs inside Dispatcharr with direct 
 | M3U Source | select | *(empty)* | M3U source to match streams from |
 | Channel Profile | select | *(empty)* | Channel profile to enable matched channels in |
 | Channel Group Prefix | string | *(empty)* | Prefix added to created channel group names |
+| Category Detail | select | `Normal` | Controls how lineup categories are grouped (None, Refined, Simple, Normal) |
 | Match Sensitivity | select | `Normal` | Matching strictness: Relaxed, Normal, Strict, or Exact |
+| Channel Numbering | select | `Use Channel Database Numbers` | How to assign channel numbers: Database, Auto-Assign Next, Auto-Assign After Highest, or Specific |
+| Starting Channel Number | string | *(empty)* | Starting number for "Use Specific Number" mode |
 | Order Matched Streams by Quality | boolean | `true` | Sort matched streams by detected quality (4K > HD > SD) |
 | Rate Limiting | select | `None` | Throttle between operations: None, Low, Medium, or High delay |
 | Custom Channel Aliases (JSON) | string | *(empty)* | JSON object of custom alias overrides (see [Custom Aliases](#custom-aliases)) |
@@ -260,7 +264,7 @@ All stages use:
 - **Length-scaled thresholds** -- Shorter names require higher similarity to prevent false positives
 - **Token overlap guards** -- At least one distinctive token must be shared between names
 - **Regional filtering** -- East/West/Pacific variants are matched to correct regional streams
-- **Channel number boost** -- 3+ digit channel numbers in stream names provide tiebreaker points
+- **Channel number boost** -- 3+ digit channel numbers in stream names provide tiebreaker points (only active in "Use Channel Database Numbers" mode)
 
 </details>
 

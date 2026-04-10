@@ -1,6 +1,6 @@
 {
   "name": "Lineuparr",
-  "version": "1.26.9520",
+  "version": "1.26.1001146",
   "description": "Mirror real-world provider channel lineups by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
   "author": "PiratesIRC",
   "license": "MIT",
@@ -42,6 +42,24 @@
         { "value": "strict", "label": "Strict \u2014 fewer matches, high confidence" },
         { "value": "exact", "label": "Exact \u2014 near-exact matches only" }
       ]
+    },
+    {
+      "id": "channel_numbering",
+      "label": "Channel Numbering",
+      "type": "select",
+      "default": "lineup",
+      "options": [
+        { "value": "lineup", "label": "Use Channel Database Numbers" },
+        { "value": "auto_next", "label": "Auto-Assign Next Available" },
+        { "value": "auto_highest", "label": "Auto-Assign After Highest" },
+        { "value": "specific", "label": "Use Specific Number" }
+      ]
+    },
+    {
+      "id": "starting_channel_number",
+      "label": "Starting Channel Number",
+      "type": "string",
+      "default": ""
     },
     {
       "id": "prioritize_quality",

@@ -1,0 +1,180 @@
+{
+  "package": "Foxtel Platinum Plus",
+  "date": "2026-04-10",
+  "description": "Foxtel Platinum Plus AU lineup with sports, movies, and entertainment add-on packs",
+  "source": "Foxtel Channel Lineup",
+  "notes": "Lineup excludes local network affiliates and their digital multi-channels (Seven, Nine, Ten, ABC, SBS). High-definition (HD) swaps are applied where available. Some channels are delivered over the internet or as on-demand services as noted. Regional availability of free-to-air channels may vary by postcode.",
+  "categories": {
+    "News": [
+      { "name": "Sky News", "number": 103 },
+      { "name": "Sky News HD", "number": 600 },
+      { "name": "Sky News Weather", "number": 601 },
+      { "name": "Sky News Extra", "number": 603 },
+      { "name": "Sky News UK", "number": 604 },
+      { "name": "Fox News Channel", "number": 608 },
+      { "name": "CNN International", "number": 609 },
+      { "name": "MS NOW", "number": 612 },
+      { "name": "NBC News NOW", "number": 613 },
+      { "name": "CNBC", "number": 620 },
+      { "name": "Bloomberg Television", "number": 621 },
+      { "name": "ABC News", "number": 642 },
+      { "name": "SBS WorldWatch", "number": 644 },
+      { "name": "Al Jazeera English", "number": 651 },
+      { "name": "CGTN", "number": 653 },
+      { "name": "NHK World", "number": 656 },
+      { "name": "GB News", "number": 658 }
+    ],
+    "Sports": [
+      { "name": "Fox Sports News", "number": 500 },
+      { "name": "Fox Cricket", "number": 501, "addon": "Sports" },
+      { "name": "Fox League", "number": 502, "addon": "Sports" },
+      { "name": "Fox Sports 503", "number": 503, "addon": "Sports" },
+      { "name": "Fox Footy", "number": 504, "addon": "Sports" },
+      { "name": "Fox Sports 505", "number": 505, "addon": "Sports" },
+      { "name": "Fox Sports 506", "number": 506, "addon": "Sports" },
+      { "name": "Fox Sports More+", "number": 507, "addon": "Sports" },
+      { "name": "ESPN", "number": 509, "addon": "Sports" },
+      { "name": "ESPN2", "number": 510, "addon": "Sports" },
+      { "name": "Main Event", "number": 522, "notes": "Pay-per-view" },
+      { "name": "Main Event UFC", "number": 523 },
+      { "name": "Sky Racing 1", "number": 526 },
+      { "name": "Sky Racing 2", "number": 527 },
+      { "name": "Sky Thoroughbred Central", "number": 528 },
+      { "name": "Racing.com", "number": 529 },
+      { "name": "Fox Sports Ultra HD", "number": 592, "addon": "Sports", "notes": "Channels 592-595" }
+    ],
+    "Regional Sports": [],
+    "Movies": [
+      { "name": "Movies 4K Ultra HD", "number": 400, "addon": "Movies" },
+      { "name": "Movies Premiere", "number": 401, "addon": "Movies" },
+      { "name": "Movies Hits", "number": 402, "addon": "Movies" },
+      { "name": "Movies Family", "number": 403, "addon": "Movies" },
+      { "name": "Movies Action", "number": 405, "addon": "Movies" },
+      { "name": "Movies Comedy", "number": 406, "addon": "Movies" },
+      { "name": "Movies Romance", "number": 408, "addon": "Movies" },
+      { "name": "Movies Drama", "number": 409, "addon": "Movies" },
+      { "name": "Movies Greats", "number": 410, "addon": "Movies" },
+      { "name": "British Cinema", "number": 413 },
+      { "name": "Aussie Classics", "number": 414 },
+      { "name": "PULP", "number": 415, "addon": "Movies" },
+      { "name": "SBS World Movies", "number": 433 },
+      { "name": "More Movies", "number": 424, "addon": "Movies", "notes": "On-demand" }
+    ],
+    "Kids": [
+      { "name": "DreamWorks", "number": 717 }
+    ],
+    "Entertainment": [
+      { "name": "Foxtel One", "number": 101 },
+      { "name": "BBC UKTV", "number": 105 },
+      { "name": "FOX8", "number": 108 },
+      { "name": "Showcase", "number": 112 },
+      { "name": "Classics", "number": 117 },
+      { "name": "British", "number": 118 },
+      { "name": "Universal TV", "number": 120 },
+      { "name": "Foxtel Pop Up", "number": 128 },
+      { "name": "More Drama", "number": 145, "notes": "On-demand" },
+      { "name": "More British", "number": 146, "notes": "On-demand" },
+      { "name": "More Classics", "number": 147, "notes": "On-demand" },
+      { "name": "BoxSets", "number": 150 },
+      { "name": "Aurora Community Channel", "number": 173 },
+      { "name": "NITV", "number": 172 }
+    ],
+    "Reality & Lifestyle": [
+      { "name": "Lifestyle", "number": 106 },
+      { "name": "Arena", "number": 111 },
+      { "name": "Real Life", "number": 121 },
+      { "name": "TLC", "number": 123 },
+      { "name": "LifeStyle Home", "number": 126 },
+      { "name": "More Lifestyle", "number": 127, "notes": "On-demand" },
+      { "name": "Fashion TV", "number": 151 }
+    ],
+    "Comedy": [
+      { "name": "Comedy", "number": 114 },
+      { "name": "Seinfeld", "number": 115 },
+      { "name": "More Comedy", "number": 144, "notes": "On-demand" }
+    ],
+    "Discovery": [
+      { "name": "DocPlay Channel", "number": 119 },
+      { "name": "Real History", "number": 130 },
+      { "name": "Trace Sport Stars", "number": 132 },
+      { "name": "Discovery", "number": 133 },
+      { "name": "Nature Time", "number": 134 },
+      { "name": "HauntTV", "number": 137 },
+      { "name": "Love Pets", "number": 138 },
+      { "name": "More Docos", "number": 140, "notes": "On-demand" },
+      { "name": "Animal Planet", "number": 141 },
+      { "name": "Discovery Turbo", "number": 143 },
+      { "name": "CGTN Documentary", "number": 654 }
+    ],
+    "Crime": [
+      { "name": "Crime", "number": 113 },
+      { "name": "Real Crime", "number": 135 },
+      { "name": "Investigation Discovery", "number": 136 }
+    ],
+    "Faith": [
+      { "name": "GOOD.", "number": 182 },
+      { "name": "Daystar", "number": 185 },
+      { "name": "SBN", "number": 186 }
+    ],
+    "Music": [
+      { "name": "Trending", "number": 801 },
+      { "name": "Kids Music", "number": 802 },
+      { "name": "Club", "number": 803 },
+      { "name": "Retro", "number": 804 },
+      { "name": "CMC", "number": 805 },
+      { "name": "Max", "number": 806 },
+      { "name": "Australian Played", "number": 807 },
+      { "name": "Vevo Pop", "number": 810 },
+      { "name": "Vevo 2K", "number": 811 },
+      { "name": "Vevo '90s", "number": 812 },
+      { "name": "Vevo '70s", "number": 813 },
+      { "name": "Vevo Retro Rock", "number": 814 },
+      { "name": "Vevo Country", "number": 815 },
+      { "name": "Good Vibes", "number": 830, "notes": "Audio" },
+      { "name": "Triple M 70s", "number": 831, "notes": "Audio" },
+      { "name": "Oldskool 80s Hits", "number": 832, "notes": "Audio" },
+      { "name": "Triple M 90s", "number": 833, "notes": "Audio" },
+      { "name": "Triple M 2000s", "number": 834, "notes": "Audio" },
+      { "name": "Almost Acoustic", "number": 835, "notes": "Audio" },
+      { "name": "Rock 'n' Road Trip", "number": 836, "notes": "Audio" },
+      { "name": "Triple M Classic Rock", "number": 837, "notes": "Audio" },
+      { "name": "Indie & Alt", "number": 838, "notes": "Audio" },
+      { "name": "60s Hits", "number": 839, "notes": "Audio" },
+      { "name": "Blender Beats", "number": 840, "notes": "Audio" },
+      { "name": "Triple M 80s", "number": 841, "notes": "Audio" },
+      { "name": "Almost Acoustic Pop", "number": 842, "notes": "Audio" },
+      { "name": "Easy Hits", "number": 843, "notes": "Audio" },
+      { "name": "Deep Calm", "number": 844, "notes": "Audio" },
+      { "name": "RnB Chill", "number": 845, "notes": "Audio" },
+      { "name": "Chill Pop Hits", "number": 847, "notes": "Audio" },
+      { "name": "Oldskool 90s Hits", "number": 848, "notes": "Audio" },
+      { "name": "Top 30", "number": 851, "notes": "Audio" },
+      { "name": "90s Soft Pop", "number": 852, "notes": "Audio" },
+      { "name": "RnB Fridays Radio", "number": 853, "notes": "Audio" },
+      { "name": "Dance Hits", "number": 854, "notes": "Audio" },
+      { "name": "2010s", "number": 855, "notes": "Audio" },
+      { "name": "Triple M Country", "number": 856, "notes": "Audio" },
+      { "name": "Country Classics", "number": 857, "notes": "Audio" },
+      { "name": "BBC World Service", "number": 858, "notes": "Audio" },
+      { "name": "SBS Radio 1", "number": 867, "notes": "Audio" },
+      { "name": "SBS Radio 2", "number": 868, "notes": "Audio" },
+      { "name": "SBS Chill", "number": 869, "notes": "Audio" },
+      { "name": "Easy 97.2", "number": 940, "addon": "Antenna Pacific", "notes": "Audio" },
+      { "name": "Rai Radio 1", "number": 943, "addon": "RAI International", "notes": "Audio" }
+    ],
+    "Shopping": [
+      { "name": "TVSN", "number": 176 }
+    ],
+    "Spanish": [
+      { "name": "Antenna Pacific", "number": 941, "addon": "Antenna Pacific", "notes": "Greek" },
+      { "name": "Rai Italia", "number": 942, "addon": "RAI International", "notes": "Italian" }
+    ],
+    "Outdoors": [
+      { "name": "Outdoor Channel", "number": 131 }
+    ],
+    "Food & Travel": [
+      { "name": "LifeStyle Food", "number": 125 },
+      { "name": "SBS Food", "number": 171 }
+    ]
+  }
+}
