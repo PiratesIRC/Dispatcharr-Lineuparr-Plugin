@@ -675,7 +675,11 @@ class FuzzyMatcher:
         _has_abbrev_pacific = bool(re.search(r'\(\s*p\s*\)', original_lower))
         query_has_east = "east" in query_lower or _has_abbrev_east
         query_has_west = ("west" in query_lower and "western" not in query_lower) or _has_abbrev_west
-        query_has_pacific = "pacific" in query_lower or _has_abbrev_pacific
+        # REGIONAL_PATTERNS strips the full word "pacific" during normalize_name
+        # (unlike east/west which are preserved), so we must detect it from the
+        # original lineup name. Without this, "Sportsnet Pacific" normalizes to
+        # "Sportsnet" and wrongly matches a regionless "Sportsnet" stream.
+        query_has_pacific = ("pacific" in original_lower) or _has_abbrev_pacific
 
         if query_has_east or query_has_west or query_has_pacific:
             filtered = {}

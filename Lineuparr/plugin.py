@@ -47,8 +47,22 @@ LOGGER.setLevel(logging.DEBUG)
 LOG_PREFIX = "[Lineuparr]"
 
 
+# BOM + zero-width characters that sneak in from rich-text paste (editors,
+# Slack/Discord, web docs). Python's str.strip() treats none of these as
+# whitespace, so they survive `.strip()` and trip json.loads with
+# "Expecting value: line 1 column 1 (char 0)".
+_INVISIBLE_CHARS = "\ufeff\u200b\u200c\u200d\u2060"
+
+
+def _clean_json_text(s):
+    """Strip whitespace and invisible paste artifacts from a JSON blob."""
+    if not s:
+        return ""
+    return s.strip().strip(_INVISIBLE_CHARS).strip()
+
+
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.1091004"
+    PLUGIN_VERSION = "1.26.1091027"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -706,7 +720,7 @@ class Plugin:
         """Merge built-in aliases with user custom aliases."""
         alias_map = dict(CHANNEL_ALIASES)
 
-        custom_str = (settings.get("custom_aliases") or "").strip()
+        custom_str = _clean_json_text(settings.get("custom_aliases") or "")
         if custom_str:
             try:
                 custom = json.loads(custom_str)
@@ -1089,7 +1103,7 @@ class Plugin:
             results.append({"Setting": "M3U Sources", "Value": "(all)", "Status": f"OK (using all - {stream_count} streams)"})
 
         # Check custom aliases
-        custom_str = (settings.get("custom_aliases") or "").strip()
+        custom_str = _clean_json_text(settings.get("custom_aliases") or "")
         if custom_str:
             try:
                 custom = json.loads(custom_str)
