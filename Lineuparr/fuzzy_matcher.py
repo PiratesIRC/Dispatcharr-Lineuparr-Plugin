@@ -439,8 +439,12 @@ class FuzzyMatcher:
             effective_threshold = self._length_scaled_threshold(self.match_threshold, best_alias_len)
 
             if score >= effective_threshold and score < 100:
-                need_majority = score < 90
-                if not self._has_token_overlap(best_alias_norm, candidate_lower, require_majority=need_majority):
+                # Aliases are short/curated — a fuzzy alias match must share a
+                # majority of tokens, not just one. This rejects false positives
+                # like alias "ABC News" vs stream "BBC News" (93%, shares only
+                # "news"; the 3-char call sign "abc"/"bbc" is below the basic
+                # overlap guard's 4-char token floor).
+                if not self._has_token_overlap(best_alias_norm, candidate_lower, require_majority=True):
                     continue
 
             if score >= effective_threshold:
@@ -510,8 +514,7 @@ class FuzzyMatcher:
                             sub_score = int(sub_ratio * 100)
                             shorter_len = min(len(normalized_query_lower), len(candidate_lower))
                             effective_threshold = self._length_scaled_threshold(self.match_threshold, shorter_len)
-                            need_majority = sub_score < 90
-                            if sub_score >= effective_threshold and self._has_token_overlap(normalized_query_lower, candidate_lower, require_majority=need_majority):
+                            if sub_score >= effective_threshold and self._has_token_overlap(normalized_query_lower, candidate_lower, require_majority=True):
                                 best_match = candidate
                                 best_ratio = sub_ratio
                                 best_match_type = "substring"
@@ -543,8 +546,7 @@ class FuzzyMatcher:
         if percentage_score >= self.match_threshold:
             shorter_len = min(len(processed_query), len(best_fuzzy_proc_candidate))
             effective_threshold = self._length_scaled_threshold(self.match_threshold, shorter_len)
-            need_majority = percentage_score < 90
-            if percentage_score >= effective_threshold and self._has_token_overlap(processed_query, best_fuzzy_proc_candidate, require_majority=need_majority):
+            if percentage_score >= effective_threshold and self._has_token_overlap(processed_query, best_fuzzy_proc_candidate, require_majority=True):
                 return best_fuzzy, percentage_score, f"fuzzy ({percentage_score})"
 
         return None, 0, None
@@ -618,8 +620,7 @@ class FuzzyMatcher:
                             sub_score = int(ratio * 100)
                             shorter_len = min(len(normalized_query_lower), len(candidate_lower))
                             sub_threshold = self._length_scaled_threshold(self.match_threshold, shorter_len)
-                            need_majority = sub_score < 90
-                            if sub_score >= sub_threshold and self._has_token_overlap(normalized_query_lower, candidate_lower, require_majority=need_majority):
+                            if sub_score >= sub_threshold and self._has_token_overlap(normalized_query_lower, candidate_lower, require_majority=True):
                                 score = sub_score
                                 mtype = "substring"
 
@@ -631,8 +632,7 @@ class FuzzyMatcher:
                         fuzzy_score = int(ratio * 100)
                         shorter_len = min(len(processed_query), len(processed_candidate))
                         fuzzy_threshold = self._length_scaled_threshold(self.match_threshold, shorter_len)
-                        need_majority = fuzzy_score < 90
-                        if fuzzy_score >= fuzzy_threshold and self._has_token_overlap(processed_query, processed_candidate, require_majority=need_majority):
+                        if fuzzy_score >= fuzzy_threshold and self._has_token_overlap(processed_query, processed_candidate, require_majority=True):
                             score = fuzzy_score
                             mtype = f"fuzzy ({fuzzy_score})"
 
