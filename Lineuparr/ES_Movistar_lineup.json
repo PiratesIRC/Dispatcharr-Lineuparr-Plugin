@@ -1,11 +1,9 @@
 {
   "package": "Movistar+",
-  "date": "2026-05-05",
+  "date": "09-05-2026",
   "description": "Movistar Plus+ España",
   "source": "Custom M3U",
-
   "categories": {
-
     "Generalistas": [
       { "name": "La 1", "number": 1 },
       { "name": "La 2", "number": 2 },
@@ -14,26 +12,9 @@
       { "name": "Telecinco", "number": 5 },
       { "name": "La Sexta", "number": 6 }
     ],
-
-    "Autonómicos": [
-      { "name": "ETB 1", "number": 9 },
-      { "name": "ETB 2", "number": 10 },
-      { "name": "TeleBilbao", "number": 11 },
-      { "name": "7TV", "number": 158 },
-      { "name": "7TV Sevilla", "number": 155 },
-      { "name": "Canal Sur Andalucía", "number": 151 },
-      { "name": "Telemadrid", "number": 157 },
-      { "name": "TVG Europa", "number": 152 },
-      { "name": "Canal Extremadura", "number": 153 },
-      { "name": "TV3CAT", "number": 154 },
-      { "name": "Aragón TV", "number": 156 },
-      { "name": "Betevé", "number": 166 }
-    ],
-
     "Movistar+": [
       { "name": "Movistar Plus", "number": 7 },
-      { "name": "M+ Vamos", "number": 8 },
-      { "name": "M+ Vamos 2", "number": 51 },
+      { "name": "Movistar Vamos", "number": 8 },
       { "name": "M+ Estrenos", "number": 12 },
       { "name": "M+ Hits", "number": 13 },
       { "name": "M+ Originales", "number": 14 },
@@ -45,9 +26,24 @@
       { "name": "M+ Indie", "number": 24 },
       { "name": "M+ Cine Español", "number": 25 }
     ],
-
+    "Autonómicos": [
+      { "name": "ETB 1", "number": 9 },
+      { "name": "ETB 2", "number": 10 },
+      { "name": "TeleBilbao", "number": 11 },
+      { "name": "Canal Sur Andalucía", "number": 151 },
+      { "name": "TVG Europa", "number": 152 },
+      { "name": "Canal Extremadura", "number": 153 },
+      { "name": "TV3CAT", "number": 154 },
+      { "name": "7TV Sevilla", "number": 155 },
+      { "name": "Aragón TV", "number": 156 },
+      { "name": "Telemadrid", "number": 157 },
+      { "name": "7TV", "number": 158 },
+      { "name": "ETBon 1", "number": 159 },
+      { "name": "ETBon 2", "number": 160 },
+      { "name": "Betevé", "number": 166 },
+      { "name": "Esport 3", "number": 164 }
+    ],
     "Cine y Series": [
-      { "name": "FOX", "number": 26 },
       { "name": "AMC", "number": 27 },
       { "name": "AMC Western", "number": 28 },
       { "name": "AMC Break", "number": 29 },
@@ -68,10 +64,10 @@
       { "name": "SundanceTV", "number": 104 },
       { "name": "Canal Hollywood", "number": 105 },
       { "name": "XTRM", "number": 106 },
-      { "name": "AXN White", "number": 107 },
-      { "name": "AMC Living", "number": 108 }
+      { "name": "STAR TVE", "number": 107 },
+      { "name": "AMC Living", "number": 108 },
+      { "name": "VinTV", "number": 109 }
     ],
-
     "Entretenimiento": [
       { "name": "Veo 7", "number": 44 },
       { "name": "Trece", "number": 45 },
@@ -85,71 +81,61 @@
       { "name": "Ten", "number": 98 },
       { "name": "Squirrel", "number": 99 },
       { "name": "Squirrel 2", "number": 100 },
-      { "name": "Bom Cine", "number": 101 },
-      { "name": "VinTv", "number": 109 },
-      { "name": "STAR TVE", "number": 110 }
+      { "name": "Bom Cine", "number": 101 }
     ],
-
     "Deportes": [
       { "name": "M+ Vamos", "number": 50 },
       { "name": "Primera Federación", "number": 52 },
       { "name": "DAZN MotoGP", "number": 53 },
-
       { "name": "M+ LaLiga", "number": 54 },
       { "name": "DAZN LaLiga", "number": 55 },
-
-      { "name": "M+ LaLiga TV Hypermotion", "number": 56 },
-
+      { "name": "LaLiga TV Hypermotion", "number": 56 },
       { "name": "M+ LaLiga 2", "number": 57 },
       { "name": "DAZN LaLiga 2", "number": 58 },
-
-      { "name": "M+ LaLiga TV Hypermotion 2", "number": 59 },
-
+      { "name": "LaLiga TV Hypermotion 2", "number": 59 },
       { "name": "M+ Liga de Campeones", "number": 60 },
       { "name": "M+ Liga de Campeones 2", "number": 61 },
       { "name": "M+ Liga de Campeones 3", "number": 62 },
-
       { "name": "M+ Deportes", "number": 63 },
       { "name": "M+ Deportes 2", "number": 64 },
       { "name": "M+ Deportes 3", "number": 65 },
-
-      { "name": "M+ Ellas Vamos", "number": 66 },
-
+      { "name": "M+ Vamos 2", "number": 51 },
+      { "name": "M+ Vamos 3", "number": 66 },
       { "name": "M+ Golf", "number": 67 },
       { "name": "M+ Golf 2", "number": 68 },
-
       { "name": "DAZN F1", "number": 69 },
-
       { "name": "DAZN 1", "number": 70 },
       { "name": "DAZN 2", "number": 71 },
-      { "name": "DAZN 3", "number": 196 },
-      { "name": "DAZN 4", "number": 197 },
-
       { "name": "Eurosport 1", "number": 72 },
       { "name": "Eurosport 2", "number": 73 },
-
       { "name": "GOL", "number": 74 },
       { "name": "Teledeporte", "number": 75 },
-
       { "name": "Real Madrid TV", "number": 76 },
-
       { "name": "Caza y Pesca TV", "number": 77 },
       { "name": "Iberalia TV", "number": 78 },
       { "name": "El Garage TV", "number": 79 },
       { "name": "Rally TV", "number": 80 },
-
+      { "name": "UBEAT", "number": 81 },
       { "name": "DAZN Baloncesto", "number": 87 },
       { "name": "DAZN Baloncesto 2", "number": 88 },
       { "name": "DAZN Baloncesto 3", "number": 89 },
-
       { "name": "CazaVision", "number": 102 },
-
       { "name": "UCL", "number": 143 },
       { "name": "ONETORO", "number": 163 },
-      { "name": "Esport 3", "number": 164 },
-      { "name": "TyC Sport", "number": 165 }
+      { "name": "TYC SPORT", "number": 165 },
+      { "name": "M+ LaLiga 3", "number": 167 },
+      { "name": "M+ LaLiga 4", "number": 168 },
+      { "name": "M+ LaLiga 5", "number": 169 },
+      { "name": "LaLiga TV Hypermotion 3", "number": 170 },
+      { "name": "M+ Deportes 4", "number": 191 },
+      { "name": "M+ Deportes 5", "number": 192 },
+      { "name": "M+ Deportes 6", "number": 193 },
+      { "name": "M+ Deportes 7", "number": 194 },
+      { "name": "UFC Fight HD", "number": 195 },
+      { "name": "DAZN 3", "number": 196 },
+      { "name": "DAZN 4", "number": 197 },
+      { "name": "Canal Fútbol Replay", "number": 198 }
     ],
-
     "Documentales": [
       { "name": "National Geographic", "number": 82 },
       { "name": "Nat Geo Wild", "number": 83 },
@@ -158,12 +144,14 @@
       { "name": "BBC Earth", "number": 86 },
       { "name": "Canal Odisea", "number": 90 },
       { "name": "Canal Cocina", "number": 91 },
+      { "name": "BBC Food", "number": 92 },
       { "name": "DMAX", "number": 93 },
-      { "name": "Historia", "number": 103 }
+      { "name": "DKiss", "number": 94 },
+      { "name": "Historia", "number": 103 },
+      { "name": "BBC Lifestyle", "number": 121 }
     ],
-
     "Infantil": [
-      { "name": "BabyTV", "number": 110 },
+      { "name": "Baby TV", "number": 110 },
       { "name": "Disney Junior", "number": 111 },
       { "name": "Nick Jr", "number": 113 },
       { "name": "Nickelodeon", "number": 114 },
@@ -172,14 +160,12 @@
       { "name": "Clan", "number": 118 },
       { "name": "SX3", "number": 119 }
     ],
-
     "Música": [
       { "name": "MTV España", "number": 120 },
       { "name": "Mezzo", "number": 123 },
       { "name": "Mezzo Live", "number": 124 },
       { "name": "Stingray Classica", "number": 125 }
     ],
-
     "Noticias": [
       { "name": "24 Horas", "number": 127 },
       { "name": "BBC World", "number": 128 },
@@ -196,7 +182,6 @@
       { "name": "El Toro TV", "number": 139 },
       { "name": "Negocios TV", "number": 140 }
     ],
-
     "Internacional": [
       { "name": "CGTN Español", "number": 141 },
       { "name": "CGTN Documentary", "number": 142 },
@@ -205,19 +190,14 @@
       { "name": "EWTN", "number": 146 },
       { "name": "Cubavisión", "number": 147 },
       { "name": "TeleSUR", "number": 148 },
+      { "name": "Daystar TV", "number": 149 },
       { "name": "TV Chile", "number": 150 }
     ],
-
-    "Otros": [
-      { "name": "UBEAT", "number": 81 },
-      { "name": "Chile Channel", "number": 126 }
-    ],
-
     "Eventos": [
-      { "name": "Alquiler 1", "number": 198 },
-      { "name": "Alquiler 2", "number": 199 },
-      { "name": "Alquiler 3", "number": 200 },
-      { "name": "Alquiler 4", "number": 201 }
+      { "name": "Alquiler 1", "number": 201 },
+      { "name": "Alquiler 2", "number": 202 },
+      { "name": "Alquiler 3", "number": 203 },
+      { "name": "Alquiler 4", "number": 204 }
     ]
   }
 }
