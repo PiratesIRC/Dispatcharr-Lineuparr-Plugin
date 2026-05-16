@@ -2112,7 +2112,7 @@ class Plugin:
 
             # Cleanup: remove channels with no streams in Lineuparr-managed groups
             cleanup_count = 0
-            if not dry_run and channels_unmatched > 0:
+            if not dry_run and channels_unmatched > 0 and not preserve:
                 lineup = self._load_lineup(settings, logger)
                 prefix = self._get_group_prefix(settings, lineup)
                 lineuparr_group_names = [
