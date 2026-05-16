@@ -1317,6 +1317,12 @@ class Plugin:
             numbering_mode = self._resolve_numbering_mode(settings)
             use_number_boost = (numbering_mode == "lineup")
             lineup = self._load_lineup(settings, logger)
+            single_name = (settings.get("single_channel_name") or "").strip()
+            if single_name:
+                _filtered = self._filter_lineup_to_channel(lineup, single_name, logger)
+                if isinstance(_filtered, dict) and _filtered.get("status") == "error":
+                    return _filtered
+                lineup = _filtered
             matcher = self._init_fuzzy_matcher(settings, logger)
             alias_map = self._build_alias_map(settings, logger)
             streams = self._get_all_streams(settings, logger)
@@ -1733,6 +1739,12 @@ class Plugin:
             )
 
             lineup = self._load_lineup(settings, logger)
+            single_name = (settings.get("single_channel_name") or "").strip()
+            if single_name:
+                _filtered = self._filter_lineup_to_channel(lineup, single_name, logger)
+                if isinstance(_filtered, dict) and _filtered.get("status") == "error":
+                    return _filtered
+                lineup = _filtered
             prefix = self._get_group_prefix(settings, lineup)
             lineup_file = settings.get("lineup_file", "")
             cc, _ = self._parse_lineup_filename(lineup_file)
@@ -1968,6 +1980,12 @@ class Plugin:
 
         try:
             lineup = self._load_lineup(settings, logger)
+            single_name = (settings.get("single_channel_name") or "").strip()
+            if single_name:
+                _filtered = self._filter_lineup_to_channel(lineup, single_name, logger)
+                if isinstance(_filtered, dict) and _filtered.get("status") == "error":
+                    return _filtered
+                lineup = _filtered
             prefix = self._get_group_prefix(settings, lineup)
             matcher = self._init_fuzzy_matcher(settings, logger)
             alias_map = self._build_alias_map(settings, logger)
@@ -2232,6 +2250,12 @@ class Plugin:
         try:
             use_number_boost = (self._resolve_numbering_mode(settings) == "lineup")
             lineup = self._load_lineup(settings, logger)
+            single_name = (settings.get("single_channel_name") or "").strip()
+            if single_name:
+                _filtered = self._filter_lineup_to_channel(lineup, single_name, logger)
+                if isinstance(_filtered, dict) and _filtered.get("status") == "error":
+                    return _filtered
+                lineup = _filtered
             prefix = self._get_group_prefix(settings, lineup)
             matcher = self._init_fuzzy_matcher(settings, logger)
             alias_map = self._build_alias_map(settings, logger)
@@ -2522,6 +2546,11 @@ class Plugin:
     def _do_full_sync(self, settings, logger):
         """Background thread for full sync."""
         try:
+            # Full Sync is whole-lineup by contract. Its sub-steps route
+            # through the same _do_apply_* methods that honor
+            # single_channel_name, so neutralize it on a local copy here
+            # rather than threading a flag through four signatures.
+            settings = {**settings, "single_channel_name": ""}
             logger.info(f"{LOG_PREFIX} === FULL SYNC STARTED ===")
             sync_start = time.time()
             send_websocket_update('updates', 'update', {
