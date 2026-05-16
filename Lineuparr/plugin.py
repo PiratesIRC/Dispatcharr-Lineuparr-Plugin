@@ -2030,6 +2030,7 @@ class Plugin:
                                     total_streams_attached += len(new_streams)
                                     attached_count = len(new_streams)
                                 except Exception as e:
+                                    attached_count = 0
                                     logger.error(f"{LOG_PREFIX} Failed to append streams to '{ch_name}': {e}")
                             else:
                                 try:
@@ -2047,6 +2048,8 @@ class Plugin:
                                     logger.error(f"{LOG_PREFIX} Failed to attach streams to '{ch_name}': {e}")
                         else:
                             if preserve:
+                                # Read-only dedupe so the dry-run CSV reports the
+                                # count a real preserve run would actually append.
                                 existing_ids = set(
                                     ChannelStream.objects.filter(
                                         channel_id=channel_id
@@ -2113,7 +2116,9 @@ class Plugin:
                 "dry_run": dry_run,
             }, logger)
 
-            # Cleanup: remove channels with no streams in Lineuparr-managed groups
+            # Cleanup: remove channels with no streams in Lineuparr-managed groups.
+            # Skipped in preserve mode: a no-match channel may still hold streams
+            # from another source the user explicitly asked us not to disturb.
             cleanup_count = 0
             if not dry_run and channels_unmatched > 0 and not preserve:
                 lineup = self._load_lineup(settings, logger)
