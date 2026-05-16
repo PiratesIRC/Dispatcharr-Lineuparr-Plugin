@@ -1913,6 +1913,7 @@ class Plugin:
         dry_run = settings.get("dry_run_mode", False)
         use_number_boost = (self._resolve_numbering_mode(settings) == "lineup")
         prioritize_quality = settings.get("prioritize_quality", PluginConfig.DEFAULT_PRIORITIZE_QUALITY)
+        preserve = settings.get("preserve_existing_streams", False)
 
         if not self._acquire_lock(logger):
             return {"status": "error", "message": "Another operation is in progress. Try again later."}
