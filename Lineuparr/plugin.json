@@ -75,6 +75,13 @@
       "help_text": "When on, newly matched streams are appended to channels without deleting existing streams, duplicates are skipped, and unmatched channels are not deleted. Use this to add a second M3U source non-destructively."
     },
     {
+      "id": "single_channel_name",
+      "label": "\u2316 Single Channel Match",
+      "type": "string",
+      "default": "",
+      "help_text": "When set, Preview Stream Match, Apply Stream Match, Apply EPG Match, and Assign Logos operate ONLY on the lineup channel(s) whose name equals this value (case-insensitive). Leave blank to process the whole lineup. Full Sync ignores this setting."
+    },
+    {
       "id": "rate_limiting",
       "label": "\u23f3 Rate Limiting",
       "type": "select",
