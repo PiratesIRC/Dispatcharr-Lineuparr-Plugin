@@ -69,7 +69,7 @@
     },
     {
       "id": "preserve_existing_streams",
-      "label": "\ud83d\udee1\ufe0f Preserve Existing Streams",
+      "label": "\u267b Preserve Existing Streams",
       "type": "boolean",
       "default": false,
       "help_text": "When on, newly matched streams are appended to channels without deleting existing streams, duplicates are skipped, and unmatched channels are not deleted. Use this to add a second M3U source non-destructively."
