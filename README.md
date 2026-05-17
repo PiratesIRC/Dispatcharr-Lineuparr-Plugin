@@ -24,6 +24,8 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 
 - **Provider Lineup Sync:** Create channel groups and channels that mirror real TV provider packages
 - **Fuzzy Stream Matching:** 4-stage matching pipeline (alias, exact, substring, fuzzy token-sort) with length-scaled thresholds to minimize false positives
+- **Non-Destructive Add Mode:** Optionally append matched streams without deleting existing streams or removing unmatched channels -- safely add a second M3U source
+- **Single-Channel Targeting:** Optionally scope stream, EPG, and logo matching to one named lineup channel instead of the whole lineup
 - **EPG Assignment:** Fuzzy-match EPG data to channels and assign program guides from any configured EPG source
 - **Logo Assignment:** Auto-assign channel logos from EPG icons, Logo Manager, or the [tv-logos](https://github.com/tv-logo/tv-logos) GitHub repository
 - **Quality Ordering:** Automatically sort matched streams by quality (4K > UHD > FHD > HD > SD) using name-based detection or [IPTV Checker](https://github.com/PiratesIRC/Dispatcharr-IPTV-Checker-Plugin) metadata
@@ -106,6 +108,8 @@ No API credentials are needed -- the plugin runs inside Dispatcharr with direct 
 | Channel Numbering | select | `Use Channel Database Numbers` | How to assign channel numbers: Database, Auto-Assign Next, Auto-Assign After Highest, or Specific |
 | Starting Channel Number | string | *(empty)* | Starting number for "Use Specific Number" mode |
 | Order Matched Streams by Quality | boolean | `true` | Sort matched streams by detected quality (4K > HD > SD) |
+| Preserve Existing Streams | boolean | `false` | Append newly matched streams without deleting existing ones; skip duplicates; do not delete unmatched channels (non-destructive add) |
+| Single Channel Match | string | *(empty)* | When set, Preview/Apply Stream Match, Apply EPG Match, and Assign Logos act only on the lineup channel(s) with this exact name (case-insensitive). Blank = whole lineup. Full Sync ignores it. |
 | Rate Limiting | select | `None` | Throttle between operations: None, Low, Medium, or High delay |
 | Custom Channel Aliases (JSON) | string | *(empty)* | JSON object of custom alias overrides (see [Custom Aliases](#custom-aliases)) |
 | EPG Sources | select | `All EPG sources` | EPG source(s) to match against |
@@ -161,9 +165,13 @@ For more control, run individual steps instead of Full Sync:
 - **Re-sort Streams by Quality** -- Re-order already-attached streams using latest quality data (see [IPTV Checker Integration](#iptv-checker-integration))
 - **Clear CSV Exports** -- Delete all Lineuparr CSV export files
 
+> **Single Channel Match:** set the *Single Channel Match* setting to a channel name to scope **Preview Stream Match**, **Apply Stream Match Only**, **Apply EPG Match**, and **Assign Logos** to just that channel. Leave it blank for whole-lineup behavior. **Full Sync** always runs the whole lineup regardless of this setting.
+
 ### Unmatched Channel Cleanup
 
 After stream matching, **Full Sync** and **Apply Stream Match Only** will automatically delete any channels in Lineuparr-managed groups that have zero streams attached. This keeps your channel list clean by removing lineup entries that don't exist in your M3U source.
+
+When **Preserve Existing Streams** is enabled, this cleanup is skipped -- unmatched channels are kept so a non-destructive add does not remove channels populated by another source.
 
 Only channels in groups created by Lineuparr are affected -- your other channels are never touched. If you want to see what would be removed before committing, run **Preview Stream Match** first to review the unmatched channels in the CSV export.
 
