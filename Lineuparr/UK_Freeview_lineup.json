@@ -1,0 +1,683 @@
+{
+  "package": "Freeview UK",
+  "date": "2026-05-20",
+  "description": "Freeview UK channel lineup based with data from freeview.co.uk",
+  "source": "Freeview",
+  "notes": "Categories are derived from the Freeview LCN specification.",
+  "categories": {
+    "General Entertainment": [
+      {
+        "name": "BBC One",
+        "number": 1
+      },
+      {
+        "name": "BBC Two",
+        "number": 2
+      },
+      {
+        "name": "ITV",
+        "number": 3
+      },
+      {
+        "name": "Channel 4",
+        "number": 4
+      },
+      {
+        "name": "5",
+        "number": 5
+      },
+      {
+        "name": "ITV2",
+        "number": 6
+      },
+      {
+        "name": "London TV",
+        "number": 8
+      },
+      {
+        "name": "BBC Four",
+        "number": 9
+      },
+      {
+        "name": "ITV3",
+        "number": 10
+      },
+      {
+        "name": "Sky Mix",
+        "number": 11
+      },
+      {
+        "name": "HGTV",
+        "number": 12
+      },
+      {
+        "name": "E4",
+        "number": 13
+      },
+      {
+        "name": "Film4",
+        "number": 14
+      },
+      {
+        "name": "Channel 4 +1",
+        "number": 15
+      },
+      {
+        "name": "QVC",
+        "number": 16
+      },
+      {
+        "name": "QUEST",
+        "number": 17
+      },
+      {
+        "name": "More4",
+        "number": 18
+      },
+      {
+        "name": "Dave",
+        "number": 19
+      },
+      {
+        "name": "Drama",
+        "number": 20
+      },
+      {
+        "name": "5USA",
+        "number": 21
+      },
+      {
+        "name": "TJC",
+        "number": 22
+      },
+      {
+        "name": "BBC Three",
+        "number": 23
+      },
+      {
+        "name": "W",
+        "number": 25
+      },
+      {
+        "name": "ITV4",
+        "number": 26
+      },
+      {
+        "name": "Yesterday",
+        "number": 27
+      },
+      {
+        "name": "ITVBe",
+        "number": 28
+      },
+      {
+        "name": "ITV2 +1",
+        "number": 29
+      },
+      {
+        "name": "E4 +1",
+        "number": 30
+      },
+      {
+        "name": "E4 Extra",
+        "number": 31
+      },
+      {
+        "name": "5STAR",
+        "number": 32
+      },
+      {
+        "name": "5ACTION",
+        "number": 33
+      },
+      {
+        "name": "GREAT! tv",
+        "number": 34
+      },
+      {
+        "name": "ITV +1",
+        "number": 35
+      },
+      {
+        "name": "Sky Arts",
+        "number": 36
+      },
+      {
+        "name": "QVC Beauty",
+        "number": 37
+      },
+      {
+        "name": "5 +1",
+        "number": 38
+      },
+      {
+        "name": "DMAX",
+        "number": 39
+      },
+      {
+        "name": "Quest Red",
+        "number": 40
+      },
+      {
+        "name": "LEGEND",
+        "number": 41
+      },
+      {
+        "name": "Great! Action",
+        "number": 42
+      },
+      {
+        "name": "Food Network",
+        "number": 43
+      },
+      {
+        "name": "Really",
+        "number": 44
+      },
+      {
+        "name": "Gems TV",
+        "number": 45
+      },
+      {
+        "name": "5SELECT",
+        "number": 46
+      },
+      {
+        "name": "Film4 +1",
+        "number": 47
+      },
+      {
+        "name": "Challenge",
+        "number": 48
+      },
+      {
+        "name": "4seven",
+        "number": 49
+      },
+      {
+        "name": "Great! Mystery",
+        "number": 50
+      },
+      {
+        "name": "Ideal World",
+        "number": 51
+      },
+      {
+        "name": "Great! Christmas",
+        "number": 52
+      },
+      {
+        "name": "That's TV (UK)",
+        "number": 56
+      },
+      {
+        "name": "U&Eden",
+        "number": 57
+      },
+      {
+        "name": "ITV3 +1",
+        "number": 58
+      },
+      {
+        "name": "ITV4 +1",
+        "number": 59
+      },
+      {
+        "name": "Drama +1",
+        "number": 60
+      },
+      {
+        "name": "Great! TV +1",
+        "number": 61
+      },
+      {
+        "name": "Great! Movies",
+        "number": 62
+      },
+      {
+        "name": "Great! Player",
+        "number": 63
+      },
+      {
+        "name": "Blaze",
+        "number": 64
+      },
+      {
+        "name": "That's TV 2",
+        "number": 65
+      },
+      {
+        "name": "TBN UK",
+        "number": 66
+      },
+      {
+        "name": "TRUE CRIME",
+        "number": 67
+      },
+      {
+        "name": "TRUE CRIME XTRA",
+        "number": 68
+      },
+      {
+        "name": "LEGEND XTRA",
+        "number": 69
+      },
+      {
+        "name": "QUEST +1",
+        "number": 70
+      },
+      {
+        "name": "TCC",
+        "number": 71
+      },
+      {
+        "name": "Jewellery Maker",
+        "number": 72
+      },
+      {
+        "name": "HobbyMaker",
+        "number": 73
+      },
+      {
+        "name": "Dave ja vu",
+        "number": 74
+      },
+      {
+        "name": "That's 60s",
+        "number": 76
+      },
+      {
+        "name": "That's 70s",
+        "number": 78
+      },
+      {
+        "name": "Rewind TV",
+        "number": 81
+      },
+      {
+        "name": "TalkingPictures TV",
+        "number": 82
+      },
+      {
+        "name": "Together TV",
+        "number": 83
+      },
+      {
+        "name": "PBS America",
+        "number": 84
+      },
+      {
+        "name": "Shop On TV",
+        "number": 89
+      },
+      {
+        "name": "Together TV+1",
+        "number": 90
+      },
+      {
+        "name": "WildEarth",
+        "number": 91
+      },
+      {
+        "name": "Blaze +1",
+        "number": 92
+      },
+      {
+        "name": "SonLife",
+        "number": 94
+      },
+      {
+        "name": "High Street TV",
+        "number": 95
+      },
+      {
+        "name": "Must Have Ideas",
+        "number": 96
+      },
+      {
+        "name": "Shop Unlimited",
+        "number": 97
+      },
+      {
+        "name": "wedotv Movies UK",
+        "number": 98
+      },
+      {
+        "name": "TLC+1",
+        "number": 99
+      }
+    ],
+    "HD": [
+      {
+        "name": "BBC One HD",
+        "number": 101
+      },
+      {
+        "name": "BBC Two HD",
+        "number": 102
+      },
+      {
+        "name": "ITV HD",
+        "number": 103
+      },
+      {
+        "name": "Channel 4 HD",
+        "number": 104
+      },
+      {
+        "name": "5 HD",
+        "number": 105
+      },
+      {
+        "name": "BBC Four HD",
+        "number": 106
+      },
+      {
+        "name": "BBC Three HD",
+        "number": 107
+      }
+    ],
+    "Children's": [
+      {
+        "name": "CBBC",
+        "number": 201
+      },
+      {
+        "name": "CBeebies",
+        "number": 202
+      },
+      {
+        "name": "CBBC HD",
+        "number": 203
+      },
+      {
+        "name": "CBeebies HD",
+        "number": 204
+      },
+      {
+        "name": "POP",
+        "number": 205
+      },
+      {
+        "name": "Tiny Pop",
+        "number": 206
+      },
+      {
+        "name": "Pop Up",
+        "number": 207
+      },
+      {
+        "name": "Ketchup TV",
+        "number": 209
+      },
+      {
+        "name": "Ketchup Too",
+        "number": 210
+      },
+      {
+        "name": "Cartoon Classics",
+        "number": 214
+      }
+    ],
+    "News": [
+      {
+        "name": "BBC News",
+        "number": 231
+      },
+      {
+        "name": "BBC Parliament",
+        "number": 232
+      },
+      {
+        "name": "Sky News",
+        "number": 233
+      },
+      {
+        "name": "GB News",
+        "number": 236
+      }
+    ],
+    "Hybrid Streamed and Text": [
+      {
+        "name": "BBC Red Button",
+        "number": 250
+      },
+      {
+        "name": "Al Jazeera English",
+        "number": 251
+      },
+      {
+        "name": "Al Jazeera Arabic",
+        "number": 252
+      },
+      {
+        "name": "Trailblazer",
+        "number": 253
+      },
+      {
+        "name": "On Demand 365",
+        "number": 254
+      },
+      {
+        "name": "FRANCE 24",
+        "number": 255
+      },
+      {
+        "name": "Odyssey TV",
+        "number": 256
+      },
+      {
+        "name": "EuroNews",
+        "number": 257
+      },
+      {
+        "name": "MBC",
+        "number": 259
+      },
+      {
+        "name": "ASHARQ NEWS",
+        "number": 260
+      },
+      {
+        "name": "AL ARABIYA",
+        "number": 261
+      },
+      {
+        "name": "Sonlife",
+        "number": 263
+      },
+      {
+        "name": "Alaraby Network",
+        "number": 264
+      },
+      {
+        "name": "ROK",
+        "number": 265
+      },
+      {
+        "name": "Revelation TV",
+        "number": 266
+      },
+      {
+        "name": "It Is Written TV",
+        "number": 268
+      },
+      {
+        "name": "New Media TV",
+        "number": 269
+      },
+      {
+        "name": "Together TV IP",
+        "number": 270
+      },
+      {
+        "name": "Channelbox",
+        "number": 271
+      },
+      {
+        "name": "NHK WORLD",
+        "number": 272
+      },
+      {
+        "name": "Newsmax",
+        "number": 273
+      },
+      {
+        "name": "Amazing Facts",
+        "number": 274
+      },
+      {
+        "name": "wedotv Big Stories",
+        "number": 275
+      },
+      {
+        "name": "CNA Originals",
+        "number": 276
+      },
+      {
+        "name": "Nosey",
+        "number": 278
+      },
+      {
+        "name": "Purpose Media",
+        "number": 279
+      },
+      {
+        "name": "Talk",
+        "number": 280
+      },
+      {
+        "name": "Global Arabic +",
+        "number": 283
+      },
+      {
+        "name": "GIGS",
+        "number": 284
+      },
+      {
+        "name": "Nolly Africa",
+        "number": 287
+      },
+      {
+        "name": "OUTflix Proud",
+        "number": 288
+      },
+      {
+        "name": "MBC Group",
+        "number": 289
+      },
+      {
+        "name": "Music & Memories",
+        "number": 290
+      },
+      {
+        "name": "Outdoor Channel",
+        "number": 291
+      }
+    ],
+    "Interactive Services": [
+      {
+        "name": "BBC Red Button",
+        "number": 601
+      }
+    ],
+    "Radio": [
+      {
+        "name": "BBC Radio 1",
+        "number": 700
+      },
+      {
+        "name": "BBC Radio 1Xtra",
+        "number": 701
+      },
+      {
+        "name": "BBC Radio 2",
+        "number": 702
+      },
+      {
+        "name": "BBC Radio 3",
+        "number": 703
+      },
+      {
+        "name": "BBC Radio 4",
+        "number": 704
+      },
+      {
+        "name": "BBC Radio 5 Live",
+        "number": 705
+      },
+      {
+        "name": "BBC Radio 5 Sports Extra",
+        "number": 706
+      },
+      {
+        "name": "BBC Radio 6 Music",
+        "number": 707
+      },
+      {
+        "name": "BBC Radio 4 Extra",
+        "number": 708
+      },
+      {
+        "name": "BBC Asian Network",
+        "number": 709
+      },
+      {
+        "name": "BBC World Service",
+        "number": 710
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 711
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 712
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 713
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 714
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 716
+      },
+      {
+        "name": "Smooth Radio",
+        "number": 718
+      },
+      {
+        "name": "talkSPORT",
+        "number": 723
+      },
+      {
+        "name": "Capital",
+        "number": 724
+      },
+      {
+        "name": "Premier Radio",
+        "number": 725
+      },
+      {
+        "name": "Heart",
+        "number": 728
+      },
+      {
+        "name": "RNIB Connect",
+        "number": 730
+      },
+      {
+        "name": "Classic FM",
+        "number": 731
+      },
+      {
+        "name": "LBC",
+        "number": 732
+      }
+    ]
+  }
+}
