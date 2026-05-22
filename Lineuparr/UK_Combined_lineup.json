@@ -1,0 +1,1925 @@
+{
+  "package": "UK Combined",
+  "date": "2026-05-22",
+  "description": "Consolidated UK channel lineup merged and de-duplicated from Freeview and Sky TV UK (England) Full Lineup.",
+  "source": "Freeview + Sky TV UK (England) Full Lineup",
+  "notes": "This lineup is a de-duplicated union of the Freeview and Sky TV UK (England) Full lineups, using category-blocked numbering where each category's block widens to the next multiple of 100 to accommodate large categories.",
+  "categories": {
+    "News": [
+      {
+        "name": "Al Jazeera HD",
+        "number": 101
+      },
+      {
+        "name": "Arirang TV HD",
+        "number": 102
+      },
+      {
+        "name": "Arise News",
+        "number": 103
+      },
+      {
+        "name": "BBC News",
+        "number": 104
+      },
+      {
+        "name": "BBC News HD",
+        "number": 105
+      },
+      {
+        "name": "BBC Parliament",
+        "number": 106
+      },
+      {
+        "name": "BBC Parliament HD",
+        "number": 107
+      },
+      {
+        "name": "Bloomberg HD",
+        "number": 108
+      },
+      {
+        "name": "Channels 24",
+        "number": 109
+      },
+      {
+        "name": "CNBC HD",
+        "number": 110
+      },
+      {
+        "name": "CNN HD",
+        "number": 111
+      },
+      {
+        "name": "DM News English",
+        "number": 112
+      },
+      {
+        "name": "France 24 English HD",
+        "number": 113
+      },
+      {
+        "name": "GB News",
+        "number": 114
+      },
+      {
+        "name": "GB News HD",
+        "number": 115
+      },
+      {
+        "name": "NDTV World",
+        "number": 116
+      },
+      {
+        "name": "NHK World HD",
+        "number": 117
+      },
+      {
+        "name": "NTD",
+        "number": 118
+      },
+      {
+        "name": "Sky News",
+        "number": 119
+      },
+      {
+        "name": "Sky News HD",
+        "number": 120
+      },
+      {
+        "name": "TRT World HD",
+        "number": 121
+      },
+      {
+        "name": "TVC News",
+        "number": 122
+      }
+    ],
+    "Sports": [
+      {
+        "name": "LFCTV HD",
+        "number": 201
+      },
+      {
+        "name": "MUTV HD",
+        "number": 202
+      },
+      {
+        "name": "Premier Sports 1 HD",
+        "number": 203
+      },
+      {
+        "name": "Premier Sports 2 HD",
+        "number": 204
+      },
+      {
+        "name": "Racing TV HD",
+        "number": 205
+      },
+      {
+        "name": "Sky Sports Action HD",
+        "number": 206
+      },
+      {
+        "name": "Sky Sports Box Office HD",
+        "number": 207
+      },
+      {
+        "name": "Sky Sports Cricket HD",
+        "number": 208
+      },
+      {
+        "name": "Sky Sports F1 UHD",
+        "number": 209
+      },
+      {
+        "name": "Sky Sports Football HD",
+        "number": 210
+      },
+      {
+        "name": "Sky Sports Golf HD",
+        "number": 211
+      },
+      {
+        "name": "Sky Sports Main Event UHD",
+        "number": 212
+      },
+      {
+        "name": "Sky Sports Mix HD",
+        "number": 213
+      },
+      {
+        "name": "Sky Sports News HD",
+        "number": 214
+      },
+      {
+        "name": "Sky Sports Premier League HD",
+        "number": 215
+      },
+      {
+        "name": "Sky Sports Racing HD",
+        "number": 216
+      },
+      {
+        "name": "Sky Sports Tennis HD",
+        "number": 217
+      },
+      {
+        "name": "Sky Sports+ HD",
+        "number": 218
+      },
+      {
+        "name": "TNT Sports 1 HD",
+        "number": 219
+      },
+      {
+        "name": "TNT Sports 10",
+        "number": 220
+      },
+      {
+        "name": "TNT Sports 2 HD",
+        "number": 221
+      },
+      {
+        "name": "TNT Sports 3 HD",
+        "number": 222
+      },
+      {
+        "name": "TNT Sports 4 HD",
+        "number": 223
+      },
+      {
+        "name": "TNT Sports 5 HD",
+        "number": 224
+      },
+      {
+        "name": "TNT Sports 6",
+        "number": 225
+      },
+      {
+        "name": "TNT Sports 7",
+        "number": 226
+      },
+      {
+        "name": "TNT Sports 8",
+        "number": 227
+      },
+      {
+        "name": "TNT Sports 9",
+        "number": 228
+      },
+      {
+        "name": "TNT Sports Box Office 2 HD",
+        "number": 229
+      },
+      {
+        "name": "TNT Sports Box Office HD",
+        "number": 230
+      },
+      {
+        "name": "TNT Sports Ultimate UHD",
+        "number": 231
+      }
+    ],
+    "Movies": [
+      {
+        "name": "Disney+ Cinema HD",
+        "number": 301
+      },
+      {
+        "name": "Film4 HD",
+        "number": 302
+      },
+      {
+        "name": "GREAT! Action +1",
+        "number": 303
+      },
+      {
+        "name": "GREAT! Mystery +1",
+        "number": 304
+      },
+      {
+        "name": "GREAT! Romance",
+        "number": 305
+      },
+      {
+        "name": "GREAT! Romance +1",
+        "number": 306
+      },
+      {
+        "name": "Legend Xtra +1",
+        "number": 307
+      },
+      {
+        "name": "Movies24",
+        "number": 308
+      },
+      {
+        "name": "Movies24+",
+        "number": 309
+      },
+      {
+        "name": "Sky Cinema Action HD",
+        "number": 310
+      },
+      {
+        "name": "Sky Cinema Comedy HD",
+        "number": 311
+      },
+      {
+        "name": "Sky Cinema Decades HD",
+        "number": 312
+      },
+      {
+        "name": "Sky Cinema Drama HD",
+        "number": 313
+      },
+      {
+        "name": "Sky Cinema Family HD",
+        "number": 314
+      },
+      {
+        "name": "Sky Cinema Fast HD",
+        "number": 315
+      },
+      {
+        "name": "Sky Cinema Greats HD",
+        "number": 316
+      },
+      {
+        "name": "Sky Cinema Premiere HD",
+        "number": 317
+      },
+      {
+        "name": "Sky Cinema Sci-Fi & Horror HD",
+        "number": 318
+      },
+      {
+        "name": "Sky Cinema Thriller HD",
+        "number": 319
+      },
+      {
+        "name": "Talking Pictures TV",
+        "number": 320
+      }
+    ],
+    "Kids": [
+      {
+        "name": "BabyTV",
+        "number": 401
+      },
+      {
+        "name": "Boomerang +1",
+        "number": 402
+      },
+      {
+        "name": "Boomerang HD",
+        "number": 403
+      },
+      {
+        "name": "Cartoon Classics",
+        "number": 404
+      },
+      {
+        "name": "Cartoon Network +1",
+        "number": 405
+      },
+      {
+        "name": "Cartoon Network HD",
+        "number": 406
+      },
+      {
+        "name": "Cartoonito",
+        "number": 407
+      },
+      {
+        "name": "CBBC",
+        "number": 408
+      },
+      {
+        "name": "CBBC HD",
+        "number": 409
+      },
+      {
+        "name": "CBeebies",
+        "number": 410
+      },
+      {
+        "name": "CBeebies HD",
+        "number": 411
+      },
+      {
+        "name": "Disney Jr.",
+        "number": 412
+      },
+      {
+        "name": "Ketchup Too",
+        "number": 413
+      },
+      {
+        "name": "Ketchup TV",
+        "number": 414
+      },
+      {
+        "name": "Nick Jr. +1",
+        "number": 415
+      },
+      {
+        "name": "Nick Jr. HD",
+        "number": 416
+      },
+      {
+        "name": "Nick Jr. Peppa",
+        "number": 417
+      },
+      {
+        "name": "Nickelodeon +1",
+        "number": 418
+      },
+      {
+        "name": "Nickelodeon HD",
+        "number": 419
+      },
+      {
+        "name": "Nicktoons",
+        "number": 420
+      },
+      {
+        "name": "POP",
+        "number": 421
+      },
+      {
+        "name": "Pop Up",
+        "number": 422
+      },
+      {
+        "name": "Sky Kids HD",
+        "number": 423
+      },
+      {
+        "name": "Tiny Pop",
+        "number": 424
+      }
+    ],
+    "Entertainment": [
+      {
+        "name": "4seven",
+        "number": 501
+      },
+      {
+        "name": "5",
+        "number": 502
+      },
+      {
+        "name": "5 +1",
+        "number": 503
+      },
+      {
+        "name": "5ACTION",
+        "number": 504
+      },
+      {
+        "name": "5SELECT",
+        "number": 505
+      },
+      {
+        "name": "5STAR",
+        "number": 506
+      },
+      {
+        "name": "5USA",
+        "number": 507
+      },
+      {
+        "name": "Animal Planet",
+        "number": 508
+      },
+      {
+        "name": "BBC Alba HD",
+        "number": 509
+      },
+      {
+        "name": "BBC Four",
+        "number": 510
+      },
+      {
+        "name": "BBC One",
+        "number": 511
+      },
+      {
+        "name": "BBC Scotland HD",
+        "number": 512
+      },
+      {
+        "name": "BBC Three",
+        "number": 513
+      },
+      {
+        "name": "BBC Two",
+        "number": 514
+      },
+      {
+        "name": "Blaze",
+        "number": 515
+      },
+      {
+        "name": "Blaze +1",
+        "number": 516
+      },
+      {
+        "name": "Challenge",
+        "number": 517
+      },
+      {
+        "name": "Channel 4",
+        "number": 518
+      },
+      {
+        "name": "Channel 4 +1",
+        "number": 519
+      },
+      {
+        "name": "Channel 5 HD",
+        "number": 520
+      },
+      {
+        "name": "Comedy Central Extra",
+        "number": 521
+      },
+      {
+        "name": "Comedy Central HD",
+        "number": 522
+      },
+      {
+        "name": "Court TV",
+        "number": 523
+      },
+      {
+        "name": "Crime+Investigation HD",
+        "number": 524
+      },
+      {
+        "name": "Dave",
+        "number": 525
+      },
+      {
+        "name": "Dave ja vu",
+        "number": 526
+      },
+      {
+        "name": "Discovery Channel HD",
+        "number": 527
+      },
+      {
+        "name": "Discovery History",
+        "number": 528
+      },
+      {
+        "name": "Discovery Science",
+        "number": 529
+      },
+      {
+        "name": "Discovery Turbo",
+        "number": 530
+      },
+      {
+        "name": "DMAX",
+        "number": 531
+      },
+      {
+        "name": "Drama",
+        "number": 532
+      },
+      {
+        "name": "Drama +1",
+        "number": 533
+      },
+      {
+        "name": "E4",
+        "number": 534
+      },
+      {
+        "name": "E4 +1",
+        "number": 535
+      },
+      {
+        "name": "E4 Extra",
+        "number": 536
+      },
+      {
+        "name": "E4 HD",
+        "number": 537
+      },
+      {
+        "name": "Film4",
+        "number": 538
+      },
+      {
+        "name": "Film4 +1",
+        "number": 539
+      },
+      {
+        "name": "Food Network",
+        "number": 540
+      },
+      {
+        "name": "Gems TV",
+        "number": 541
+      },
+      {
+        "name": "Great! Action",
+        "number": 542
+      },
+      {
+        "name": "Great! Christmas",
+        "number": 543
+      },
+      {
+        "name": "Great! Movies",
+        "number": 544
+      },
+      {
+        "name": "Great! Mystery",
+        "number": 545
+      },
+      {
+        "name": "Great! Player",
+        "number": 546
+      },
+      {
+        "name": "GREAT! tv",
+        "number": 547
+      },
+      {
+        "name": "Great! TV +1",
+        "number": 548
+      },
+      {
+        "name": "HGTV",
+        "number": 549
+      },
+      {
+        "name": "High Street TV",
+        "number": 550
+      },
+      {
+        "name": "HobbyMaker",
+        "number": 551
+      },
+      {
+        "name": "Ideal World",
+        "number": 552
+      },
+      {
+        "name": "Investigation Discovery",
+        "number": 553
+      },
+      {
+        "name": "ITV",
+        "number": 554
+      },
+      {
+        "name": "ITV +1",
+        "number": 555
+      },
+      {
+        "name": "ITV Quiz HD",
+        "number": 556
+      },
+      {
+        "name": "ITV1 HD",
+        "number": 557
+      },
+      {
+        "name": "ITV2",
+        "number": 558
+      },
+      {
+        "name": "ITV2 +1",
+        "number": 559
+      },
+      {
+        "name": "ITV2 HD",
+        "number": 560
+      },
+      {
+        "name": "ITV3",
+        "number": 561
+      },
+      {
+        "name": "ITV3 +1",
+        "number": 562
+      },
+      {
+        "name": "ITV3 HD",
+        "number": 563
+      },
+      {
+        "name": "ITV4",
+        "number": 564
+      },
+      {
+        "name": "ITV4 +1",
+        "number": 565
+      },
+      {
+        "name": "ITV4 HD",
+        "number": 566
+      },
+      {
+        "name": "ITVBe",
+        "number": 567
+      },
+      {
+        "name": "Jewellery Maker",
+        "number": 568
+      },
+      {
+        "name": "LEGEND",
+        "number": 569
+      },
+      {
+        "name": "LEGEND XTRA",
+        "number": 570
+      },
+      {
+        "name": "London TV",
+        "number": 571
+      },
+      {
+        "name": "More4",
+        "number": 572
+      },
+      {
+        "name": "More4 HD",
+        "number": 573
+      },
+      {
+        "name": "MTV HD",
+        "number": 574
+      },
+      {
+        "name": "Must Have Ideas",
+        "number": 575
+      },
+      {
+        "name": "National Geographic HD",
+        "number": 576
+      },
+      {
+        "name": "National Geographic Wild HD",
+        "number": 577
+      },
+      {
+        "name": "PBS America",
+        "number": 578
+      },
+      {
+        "name": "QUEST",
+        "number": 579
+      },
+      {
+        "name": "QUEST +1",
+        "number": 580
+      },
+      {
+        "name": "Quest HD",
+        "number": 581
+      },
+      {
+        "name": "Quest Red",
+        "number": 582
+      },
+      {
+        "name": "QVC",
+        "number": 583
+      },
+      {
+        "name": "QVC Beauty",
+        "number": 584
+      },
+      {
+        "name": "Really",
+        "number": 585
+      },
+      {
+        "name": "Rewind TV",
+        "number": 586
+      },
+      {
+        "name": "S4C HD",
+        "number": 587
+      },
+      {
+        "name": "Shop On TV",
+        "number": 588
+      },
+      {
+        "name": "Shop Unlimited",
+        "number": 589
+      },
+      {
+        "name": "Sky Arts",
+        "number": 590
+      },
+      {
+        "name": "Sky Arts HD",
+        "number": 591
+      },
+      {
+        "name": "Sky Atlantic HD",
+        "number": 592
+      },
+      {
+        "name": "Sky Comedy HD",
+        "number": 593
+      },
+      {
+        "name": "Sky Crime HD",
+        "number": 594
+      },
+      {
+        "name": "Sky Documentaries HD",
+        "number": 595
+      },
+      {
+        "name": "Sky History 2",
+        "number": 596
+      },
+      {
+        "name": "Sky History HD",
+        "number": 597
+      },
+      {
+        "name": "Sky Mix",
+        "number": 598
+      },
+      {
+        "name": "Sky Mix HD",
+        "number": 599
+      },
+      {
+        "name": "Sky Nature HD",
+        "number": 600
+      },
+      {
+        "name": "Sky One HD",
+        "number": 601
+      },
+      {
+        "name": "Sky Sci-Fi HD",
+        "number": 602
+      },
+      {
+        "name": "Sky Witness HD",
+        "number": 603
+      },
+      {
+        "name": "SonLife",
+        "number": 604
+      },
+      {
+        "name": "TalkingPictures TV",
+        "number": 605
+      },
+      {
+        "name": "TBN UK",
+        "number": 606
+      },
+      {
+        "name": "TCC",
+        "number": 607
+      },
+      {
+        "name": "That's 20th Century",
+        "number": 608
+      },
+      {
+        "name": "That's 60s",
+        "number": 609
+      },
+      {
+        "name": "That's 70s",
+        "number": 610
+      },
+      {
+        "name": "That's TV",
+        "number": 611
+      },
+      {
+        "name": "That's TV (UK)",
+        "number": 612
+      },
+      {
+        "name": "That's TV 2",
+        "number": 613
+      },
+      {
+        "name": "TJC",
+        "number": 614
+      },
+      {
+        "name": "TLC HD",
+        "number": 615
+      },
+      {
+        "name": "TLC+1",
+        "number": 616
+      },
+      {
+        "name": "Together TV",
+        "number": 617
+      },
+      {
+        "name": "Together TV+1",
+        "number": 618
+      },
+      {
+        "name": "Travelxp",
+        "number": 619
+      },
+      {
+        "name": "TRUE CRIME",
+        "number": 620
+      },
+      {
+        "name": "TRUE CRIME XTRA",
+        "number": 621
+      },
+      {
+        "name": "U&Alibi HD",
+        "number": 622
+      },
+      {
+        "name": "U&Dave HD",
+        "number": 623
+      },
+      {
+        "name": "U&Drama",
+        "number": 624
+      },
+      {
+        "name": "U&Eden",
+        "number": 625
+      },
+      {
+        "name": "U&Gold HD",
+        "number": 626
+      },
+      {
+        "name": "U&W",
+        "number": 627
+      },
+      {
+        "name": "U&Yesterday",
+        "number": 628
+      },
+      {
+        "name": "W",
+        "number": 629
+      },
+      {
+        "name": "wedotv Movies UK",
+        "number": 630
+      },
+      {
+        "name": "WildEarth",
+        "number": 631
+      },
+      {
+        "name": "Yesterday",
+        "number": 632
+      }
+    ],
+    "Faith": [
+      {
+        "name": "Daystar HD",
+        "number": 701
+      },
+      {
+        "name": "Dunamis TV",
+        "number": 702
+      },
+      {
+        "name": "EWTN Catholic",
+        "number": 703
+      },
+      {
+        "name": "Faith UK",
+        "number": 704
+      },
+      {
+        "name": "Faith World TV",
+        "number": 705
+      },
+      {
+        "name": "God Channel",
+        "number": 706
+      },
+      {
+        "name": "LoveWorld HD",
+        "number": 707
+      },
+      {
+        "name": "Revelation",
+        "number": 708
+      },
+      {
+        "name": "SonLife Broadcasting Network",
+        "number": 709
+      }
+    ],
+    "Music": [
+      {
+        "name": "Clubland TV",
+        "number": 801
+      },
+      {
+        "name": "Now 70s",
+        "number": 802
+      },
+      {
+        "name": "Now 80s",
+        "number": 803
+      },
+      {
+        "name": "Now 90s & 00s",
+        "number": 804
+      },
+      {
+        "name": "Now Rock",
+        "number": 805
+      }
+    ],
+    "Shopping": [
+      {
+        "name": "Best Direct",
+        "number": 901
+      },
+      {
+        "name": "Cruise1st.TV",
+        "number": 902
+      },
+      {
+        "name": "Gemporia HD",
+        "number": 903
+      },
+      {
+        "name": "High Street TV 1",
+        "number": 904
+      },
+      {
+        "name": "High Street TV 2",
+        "number": 905
+      },
+      {
+        "name": "HobbyMaker HD",
+        "number": 906
+      },
+      {
+        "name": "Ideal World HD",
+        "number": 907
+      },
+      {
+        "name": "Must Have Ideas HD",
+        "number": 908
+      },
+      {
+        "name": "QVC Extra",
+        "number": 909
+      },
+      {
+        "name": "QVC HD",
+        "number": 910
+      },
+      {
+        "name": "QVC Style HD",
+        "number": 911
+      },
+      {
+        "name": "TJC HD",
+        "number": 912
+      },
+      {
+        "name": "TV Warehouse",
+        "number": 913
+      }
+    ],
+    "Adult": [
+      {
+        "name": "Babenation",
+        "number": 1001
+      },
+      {
+        "name": "Babes&Brazzers",
+        "number": 1002
+      },
+      {
+        "name": "Television X",
+        "number": 1003
+      },
+      {
+        "name": "The Adult Channel",
+        "number": 1004
+      },
+      {
+        "name": "TVX 40+",
+        "number": 1005
+      },
+      {
+        "name": "Xpanded TV",
+        "number": 1006
+      },
+      {
+        "name": "XXX Girl Girl",
+        "number": 1007
+      }
+    ],
+    "Entertainment & Documentaries +1": [
+      {
+        "name": "5STAR +1",
+        "number": 1101
+      },
+      {
+        "name": "5USA +1",
+        "number": 1102
+      },
+      {
+        "name": "Animal Planet +1",
+        "number": 1103
+      },
+      {
+        "name": "Channel 5 +1",
+        "number": 1104
+      },
+      {
+        "name": "Comedy Central +1",
+        "number": 1105
+      },
+      {
+        "name": "Crime+Investigation +1",
+        "number": 1106
+      },
+      {
+        "name": "Discovery Channel +1",
+        "number": 1107
+      },
+      {
+        "name": "Discovery History +1",
+        "number": 1108
+      },
+      {
+        "name": "Discovery Science +1",
+        "number": 1109
+      },
+      {
+        "name": "Discovery Turbo +1",
+        "number": 1110
+      },
+      {
+        "name": "DMAX +1",
+        "number": 1111
+      },
+      {
+        "name": "Food Network +1",
+        "number": 1112
+      },
+      {
+        "name": "Investigation Discovery +1",
+        "number": 1113
+      },
+      {
+        "name": "ITV1 London +1",
+        "number": 1114
+      },
+      {
+        "name": "More4 +1",
+        "number": 1115
+      },
+      {
+        "name": "National Geographic +1",
+        "number": 1116
+      },
+      {
+        "name": "Quest Red +1",
+        "number": 1117
+      },
+      {
+        "name": "Really +1",
+        "number": 1118
+      },
+      {
+        "name": "Sky Atlantic +1",
+        "number": 1119
+      },
+      {
+        "name": "Sky Crime +1",
+        "number": 1120
+      },
+      {
+        "name": "Sky Witness +1",
+        "number": 1121
+      },
+      {
+        "name": "TLC +1",
+        "number": 1122
+      },
+      {
+        "name": "True Crime +1",
+        "number": 1123
+      },
+      {
+        "name": "U&Alibi +1",
+        "number": 1124
+      },
+      {
+        "name": "U&DaveJaVu",
+        "number": 1125
+      },
+      {
+        "name": "U&Drama +1",
+        "number": 1126
+      },
+      {
+        "name": "U&Eden +1",
+        "number": 1127
+      },
+      {
+        "name": "U&Gold +1",
+        "number": 1128
+      },
+      {
+        "name": "U&W +1",
+        "number": 1129
+      },
+      {
+        "name": "U&Yesterday +1",
+        "number": 1130
+      }
+    ],
+    "HD": [
+      {
+        "name": "5 HD",
+        "number": 1201
+      },
+      {
+        "name": "BBC Four HD",
+        "number": 1202
+      },
+      {
+        "name": "BBC One HD",
+        "number": 1203
+      },
+      {
+        "name": "BBC Three HD",
+        "number": 1204
+      },
+      {
+        "name": "BBC Two HD",
+        "number": 1205
+      },
+      {
+        "name": "Channel 4 HD",
+        "number": 1206
+      },
+      {
+        "name": "ITV HD",
+        "number": 1207
+      }
+    ],
+    "Hybrid Streamed and Text": [
+      {
+        "name": "AL ARABIYA",
+        "number": 1301
+      },
+      {
+        "name": "Al Jazeera Arabic",
+        "number": 1302
+      },
+      {
+        "name": "Al Jazeera English",
+        "number": 1303
+      },
+      {
+        "name": "Alaraby Network",
+        "number": 1304
+      },
+      {
+        "name": "Amazing Facts",
+        "number": 1305
+      },
+      {
+        "name": "ASHARQ NEWS",
+        "number": 1306
+      },
+      {
+        "name": "BBC Red Button",
+        "number": 1307
+      },
+      {
+        "name": "Channelbox",
+        "number": 1308
+      },
+      {
+        "name": "CNA Originals",
+        "number": 1309
+      },
+      {
+        "name": "EuroNews",
+        "number": 1310
+      },
+      {
+        "name": "FRANCE 24",
+        "number": 1311
+      },
+      {
+        "name": "GIGS",
+        "number": 1312
+      },
+      {
+        "name": "Global Arabic +",
+        "number": 1313
+      },
+      {
+        "name": "It Is Written TV",
+        "number": 1314
+      },
+      {
+        "name": "MBC",
+        "number": 1315
+      },
+      {
+        "name": "MBC Group",
+        "number": 1316
+      },
+      {
+        "name": "Music & Memories",
+        "number": 1317
+      },
+      {
+        "name": "New Media TV",
+        "number": 1318
+      },
+      {
+        "name": "Newsmax",
+        "number": 1319
+      },
+      {
+        "name": "NHK WORLD",
+        "number": 1320
+      },
+      {
+        "name": "Nolly Africa",
+        "number": 1321
+      },
+      {
+        "name": "Nosey",
+        "number": 1322
+      },
+      {
+        "name": "Odyssey TV",
+        "number": 1323
+      },
+      {
+        "name": "On Demand 365",
+        "number": 1324
+      },
+      {
+        "name": "Outdoor Channel",
+        "number": 1325
+      },
+      {
+        "name": "OUTflix Proud",
+        "number": 1326
+      },
+      {
+        "name": "Purpose Media",
+        "number": 1327
+      },
+      {
+        "name": "Revelation TV",
+        "number": 1328
+      },
+      {
+        "name": "ROK",
+        "number": 1329
+      },
+      {
+        "name": "Talk",
+        "number": 1330
+      },
+      {
+        "name": "Together TV IP",
+        "number": 1331
+      },
+      {
+        "name": "Trailblazer",
+        "number": 1332
+      },
+      {
+        "name": "wedotv Big Stories",
+        "number": 1333
+      }
+    ],
+    "International": [
+      {
+        "name": "Aaj Tak",
+        "number": 1401
+      },
+      {
+        "name": "Aastha",
+        "number": 1402
+      },
+      {
+        "name": "Ahlebait TV",
+        "number": 1403
+      },
+      {
+        "name": "Akaal Channel",
+        "number": 1404
+      },
+      {
+        "name": "Apna MA TV",
+        "number": 1405
+      },
+      {
+        "name": "ARY Digital",
+        "number": 1406
+      },
+      {
+        "name": "ATN Bangla",
+        "number": 1407
+      },
+      {
+        "name": "B4U Movies",
+        "number": 1408
+      },
+      {
+        "name": "B4U Music",
+        "number": 1409
+      },
+      {
+        "name": "Channel S",
+        "number": 1410
+      },
+      {
+        "name": "Colors Cineplex",
+        "number": 1411
+      },
+      {
+        "name": "Colors Gujarati",
+        "number": 1412
+      },
+      {
+        "name": "Colors HD",
+        "number": 1413
+      },
+      {
+        "name": "Colors Rishtey",
+        "number": 1414
+      },
+      {
+        "name": "Deen TV",
+        "number": 1415
+      },
+      {
+        "name": "Eman Channel",
+        "number": 1416
+      },
+      {
+        "name": "Geo News",
+        "number": 1417
+      },
+      {
+        "name": "Geo TV",
+        "number": 1418
+      },
+      {
+        "name": "GTC Punjabi",
+        "number": 1419
+      },
+      {
+        "name": "Hum Europe",
+        "number": 1420
+      },
+      {
+        "name": "Hum News",
+        "number": 1421
+      },
+      {
+        "name": "iON TV",
+        "number": 1422
+      },
+      {
+        "name": "IQRA Bangla",
+        "number": 1423
+      },
+      {
+        "name": "IQRA TV",
+        "number": 1424
+      },
+      {
+        "name": "Islam Channel",
+        "number": 1425
+      },
+      {
+        "name": "Islam Channel Bangla",
+        "number": 1426
+      },
+      {
+        "name": "Islam Channel Urdu",
+        "number": 1427
+      },
+      {
+        "name": "Islam TV",
+        "number": 1428
+      },
+      {
+        "name": "Kanshi TV",
+        "number": 1429
+      },
+      {
+        "name": "Madani Channel",
+        "number": 1430
+      },
+      {
+        "name": "MTA1 World HD",
+        "number": 1431
+      },
+      {
+        "name": "New Vision TV",
+        "number": 1432
+      },
+      {
+        "name": "Noor TV",
+        "number": 1433
+      },
+      {
+        "name": "NTV",
+        "number": 1434
+      },
+      {
+        "name": "Panjab Broadcasting Channel",
+        "number": 1435
+      },
+      {
+        "name": "Panjab TV",
+        "number": 1436
+      },
+      {
+        "name": "Phoenix CNE HD",
+        "number": 1437
+      },
+      {
+        "name": "Pitaara",
+        "number": 1438
+      },
+      {
+        "name": "Politics Punjab",
+        "number": 1439
+      },
+      {
+        "name": "PTC Punjabi",
+        "number": 1440
+      },
+      {
+        "name": "QTV Religious",
+        "number": 1441
+      },
+      {
+        "name": "Sangat Television",
+        "number": 1442
+      },
+      {
+        "name": "Sanskar",
+        "number": 1443
+      },
+      {
+        "name": "Sikh Channel",
+        "number": 1444
+      },
+      {
+        "name": "Sky News Arabia",
+        "number": 1445
+      },
+      {
+        "name": "Sony Max 2",
+        "number": 1446
+      },
+      {
+        "name": "Sony Max HD",
+        "number": 1447
+      },
+      {
+        "name": "Sony SAB",
+        "number": 1448
+      },
+      {
+        "name": "Sony TV HD",
+        "number": 1449
+      },
+      {
+        "name": "Takbeer TV",
+        "number": 1450
+      },
+      {
+        "name": "TV One",
+        "number": 1451
+      },
+      {
+        "name": "Utsav Bharat",
+        "number": 1452
+      },
+      {
+        "name": "Utsav Gold HD",
+        "number": 1453
+      },
+      {
+        "name": "Utsav Plus HD",
+        "number": 1454
+      },
+      {
+        "name": "Zee Cinema",
+        "number": 1455
+      },
+      {
+        "name": "Zee Punjabi",
+        "number": 1456
+      },
+      {
+        "name": "Zee TV HD",
+        "number": 1457
+      }
+    ],
+    "Radio": [
+      {
+        "name": "BBC Asian Network",
+        "number": 1501
+      },
+      {
+        "name": "BBC Local Radio",
+        "number": 1502
+      },
+      {
+        "name": "BBC Radio 1",
+        "number": 1503
+      },
+      {
+        "name": "BBC Radio 1Xtra",
+        "number": 1504
+      },
+      {
+        "name": "BBC Radio 2",
+        "number": 1505
+      },
+      {
+        "name": "BBC Radio 3",
+        "number": 1506
+      },
+      {
+        "name": "BBC Radio 4",
+        "number": 1507
+      },
+      {
+        "name": "BBC Radio 4 Extra",
+        "number": 1508
+      },
+      {
+        "name": "BBC Radio 5 Live",
+        "number": 1509
+      },
+      {
+        "name": "BBC Radio 5 Sports Extra",
+        "number": 1510
+      },
+      {
+        "name": "BBC Radio 6 Music",
+        "number": 1511
+      },
+      {
+        "name": "BBC World Service",
+        "number": 1512
+      },
+      {
+        "name": "Capital",
+        "number": 1513
+      },
+      {
+        "name": "Classic FM",
+        "number": 1514
+      },
+      {
+        "name": "Heart",
+        "number": 1515
+      },
+      {
+        "name": "LBC",
+        "number": 1516
+      },
+      {
+        "name": "Premier Radio",
+        "number": 1517
+      },
+      {
+        "name": "RNIB Connect",
+        "number": 1518
+      },
+      {
+        "name": "Smooth Radio",
+        "number": 1519
+      },
+      {
+        "name": "talkSPORT",
+        "number": 1520
+      }
+    ],
+    "Regional & Interactive": [
+      {
+        "name": "BBC One Channel Islands HD",
+        "number": 1601
+      },
+      {
+        "name": "BBC One East HD",
+        "number": 1602
+      },
+      {
+        "name": "BBC One East Midlands HD",
+        "number": 1603
+      },
+      {
+        "name": "BBC One East Yorkshire & Lincolnshire HD",
+        "number": 1604
+      },
+      {
+        "name": "BBC One London HD",
+        "number": 1605
+      },
+      {
+        "name": "BBC One North East & Cumbria HD",
+        "number": 1606
+      },
+      {
+        "name": "BBC One North West HD",
+        "number": 1607
+      },
+      {
+        "name": "BBC One Northern Ireland HD",
+        "number": 1608
+      },
+      {
+        "name": "BBC One Scotland HD",
+        "number": 1609
+      },
+      {
+        "name": "BBC One South East HD",
+        "number": 1610
+      },
+      {
+        "name": "BBC One South HD",
+        "number": 1611
+      },
+      {
+        "name": "BBC One South West HD",
+        "number": 1612
+      },
+      {
+        "name": "BBC One Wales HD",
+        "number": 1613
+      },
+      {
+        "name": "BBC One West HD",
+        "number": 1614
+      },
+      {
+        "name": "BBC One West Midlands HD",
+        "number": 1615
+      },
+      {
+        "name": "BBC One Yorkshire HD",
+        "number": 1616
+      },
+      {
+        "name": "BBC Red Button 1 HD",
+        "number": 1617
+      },
+      {
+        "name": "BBC Two Northern Ireland HD",
+        "number": 1618
+      },
+      {
+        "name": "BBC Two Wales HD",
+        "number": 1619
+      }
+    ],
+    "Secondary & Information": [
+      {
+        "name": "Boomerang",
+        "number": 1701
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 1702
+      },
+      {
+        "name": "Channel Line-up",
+        "number": 1703
+      },
+      {
+        "name": "Colors",
+        "number": 1704
+      },
+      {
+        "name": "Comedy Central",
+        "number": 1705
+      },
+      {
+        "name": "Crime+Investigation",
+        "number": 1706
+      },
+      {
+        "name": "Discovery Channel",
+        "number": 1707
+      },
+      {
+        "name": "MTV",
+        "number": 1708
+      },
+      {
+        "name": "National Geographic",
+        "number": 1709
+      },
+      {
+        "name": "National Geographic Wild",
+        "number": 1710
+      },
+      {
+        "name": "Nick Jr.",
+        "number": 1711
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 1712
+      },
+      {
+        "name": "S4C",
+        "number": 1713
+      },
+      {
+        "name": "Sky Atlantic",
+        "number": 1714
+      },
+      {
+        "name": "Sky Comedy",
+        "number": 1715
+      },
+      {
+        "name": "Sky Crime",
+        "number": 1716
+      },
+      {
+        "name": "Sky Documentaries",
+        "number": 1717
+      },
+      {
+        "name": "Sky History",
+        "number": 1718
+      },
+      {
+        "name": "Sky Nature",
+        "number": 1719
+      },
+      {
+        "name": "Sky One",
+        "number": 1720
+      },
+      {
+        "name": "Sky Sci-Fi",
+        "number": 1721
+      },
+      {
+        "name": "Sky Sports F1",
+        "number": 1722
+      },
+      {
+        "name": "Sky Sports F1 HD",
+        "number": 1723
+      },
+      {
+        "name": "Sky Sports Main Event",
+        "number": 1724
+      },
+      {
+        "name": "Sky Sports Main Event HD",
+        "number": 1725
+      },
+      {
+        "name": "Sky Sports Mix",
+        "number": 1726
+      },
+      {
+        "name": "Sky Sports News",
+        "number": 1727
+      },
+      {
+        "name": "Sky Witness",
+        "number": 1728
+      },
+      {
+        "name": "Sony Max",
+        "number": 1729
+      },
+      {
+        "name": "Sony TV",
+        "number": 1730
+      },
+      {
+        "name": "TLC",
+        "number": 1731
+      },
+      {
+        "name": "TNT Sports 1",
+        "number": 1732
+      },
+      {
+        "name": "TNT Sports 2",
+        "number": 1733
+      },
+      {
+        "name": "TNT Sports 3",
+        "number": 1734
+      },
+      {
+        "name": "TNT Sports 4",
+        "number": 1735
+      },
+      {
+        "name": "TRT World",
+        "number": 1736
+      },
+      {
+        "name": "U&Alibi",
+        "number": 1737
+      },
+      {
+        "name": "U&Dave",
+        "number": 1738
+      },
+      {
+        "name": "U&Gold",
+        "number": 1739
+      },
+      {
+        "name": "Utsav Gold",
+        "number": 1740
+      },
+      {
+        "name": "Utsav Plus",
+        "number": 1741
+      },
+      {
+        "name": "Zee TV",
+        "number": 1742
+      }
+    ]
+  }
+}
