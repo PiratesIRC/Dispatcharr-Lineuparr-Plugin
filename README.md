@@ -23,7 +23,7 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 ## Features
 
 - **Provider Lineup Sync:** Create channel groups and channels that mirror real TV provider packages
-- **Fuzzy Stream Matching:** 4-stage matching pipeline (alias, exact, substring, fuzzy token-sort) with length-scaled thresholds to minimize false positives
+- **Fuzzy Stream Matching:** 4-stage matching pipeline (alias, exact, substring, fuzzy token-sort) with length-scaled thresholds and US broadcast-callsign anchoring to minimize false positives
 - **Non-Destructive Add Mode:** Optionally append matched streams without deleting existing streams or removing unmatched channels -- safely add a second M3U source
 - **Single-Channel Targeting:** Optionally scope stream, EPG, and logo matching to one named lineup channel instead of the whole lineup
 - **EPG Assignment:** Fuzzy-match EPG data to channels and assign program guides from any configured EPG source
@@ -31,14 +31,14 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 - **Quality Ordering:** Automatically sort matched streams by quality (4K > UHD > FHD > HD > SD) using name-based detection or [IPTV Checker](https://github.com/PiratesIRC/Dispatcharr-IPTV-Checker-Plugin) metadata
 - **Channel Number Preservation:** Lineup channel numbers are stored and used for tiebreaking during matching
 - **East/West/Pacific Filtering:** Regional channel variants are matched to the correct regional streams
-- **Country-Aware Matching:** Streams whose name prefix indicates a different country than the active lineup (e.g. `UK: Discovery Channel`, `(IN) Bloomberg TV`, `(PLUTO Brazil) MTV`) are rejected automatically. US and CA lineups share compatibility so border-network streams are preserved.
+- **Country-Aware Matching:** Streams whose name prefix indicates a different country than the active lineup (e.g. `UK: Discovery Channel`, `(IN) Bloomberg TV`, `(PLUTO Brazil) MTV`) are rejected automatically. US/CA and US/MX lineups share compatibility, so cross-border networks and US Spanish-language feeds are preserved.
 - **Built-in Alias Table:** 200+ channel alias mappings for common IPTV naming variations (CNN US, Fox News Channel, ESPN 2, etc.)
 - **Custom Aliases:** User-configurable JSON alias overrides merged on top of built-in aliases
 - **Match Sensitivity Modes:** Relaxed, Normal, Strict, and Exact sensitivity presets
 - **Rate Limiting:** Configurable throttling between operations (None, Low, Medium, High) to reduce load on Dispatcharr
 - **CSV Preview/Export:** Dry-run stream matching with confidence scores exported to CSV for review before committing
 - **Channel Profile Support:** Automatically enable synced channels in selected channel profiles
-- **Real-Time Progress:** Live ETA calculations with WebSocket progress notifications
+- **Real-Time Progress:** Live ETA and progress, checkable any time via the **Show Status** action -- no need to watch toast notifications or container logs
 - **Direct ORM Integration:** Runs inside Dispatcharr with direct database access -- no API credentials needed
 
 ## Included Lineups
@@ -117,7 +117,7 @@ No API credentials are needed -- the plugin runs inside Dispatcharr with direct 
 | Single Channel Match | string | *(empty)* | When set, Preview/Apply Stream Match, Apply EPG Match, and Assign Logos act only on the lineup channel(s) with this exact name (case-insensitive). Blank = whole lineup. Full Sync ignores it. |
 | Rate Limiting | select | `None` | Throttle between operations: None, Low, Medium, or High delay |
 | Custom Channel Aliases (JSON) | string | *(empty)* | JSON object of custom alias overrides (see [Custom Aliases](#custom-aliases)) |
-| EPG Sources | select | `All EPG sources` | EPG source(s) to match against |
+| EPG Sources | select | `All EPG sources` | EPG source(s) to match against. "All" uses every source, ordered by the priority configured in Dispatcharr |
 
 ### Match Sensitivity Levels
 
@@ -163,6 +163,7 @@ No API credentials are needed -- the plugin runs inside Dispatcharr with direct 
 
 For more control, run individual steps instead of Full Sync:
 
+- **Show Status** -- Show live progress of the current operation, or the result of the last one, without opening the container logs
 - **Sync Channels Only** -- Create/update groups and channels from lineup (no stream matching)
 - **Apply Stream Match Only** -- Attach matched streams to existing channels with quality ordering
 - **Apply EPG Match** -- Fuzzy-match EPG data to channels and assign program guides
@@ -216,7 +217,7 @@ Place the file in the plugin directory and it will appear in the **Lineup File**
 
 ## Custom Aliases
 
-Override or extend the built-in alias table using the **Custom Channel Aliases (JSON)** setting. Paste a JSON object where keys are the **exact lineup channel name** (as it appears in the lineup JSON) and values are arrays of alternate names your IPTV provider uses for that channel:
+Override or extend the built-in alias table using the **Custom Channel Aliases (JSON)** setting. Paste a JSON object where keys are the **exact lineup channel name** (as it appears in the lineup JSON) and values are arrays of alternate names your IPTV provider uses for that channel (a single alias may also be given as a plain string instead of a one-item array):
 
 ```json
 {
@@ -263,8 +264,9 @@ docker restart dispatcharr
 - Check container logs: `docker logs dispatcharr | grep "Lineuparr"`
 
 **Progress Not Updating:**
-- Operations run in background and continue even if browser times out
-- Check container logs for actual processing status
+- Operations run in the background and continue even if the browser times out
+- Click the **Show Status** action (📊 Status) any time to see live progress and ETA, or the last run's result summary
+- Container logs also show detailed step-by-step progress
 
 <details>
 <summary><strong>How Matching Works (Technical Details)</strong></summary>
@@ -280,6 +282,7 @@ All stages use:
 - **Length-scaled thresholds** -- Shorter names require higher similarity to prevent false positives
 - **Token overlap guards** -- At least one distinctive token must be shared between names
 - **Regional filtering** -- East/West/Pacific variants are matched to correct regional streams
+- **Callsign anchoring** -- a shared high-confidence US broadcast callsign (e.g. "WABC") rescues a correct match or hard-rejects a disagreeing one
 - **Channel number boost** -- 3+ digit channel numbers in stream names provide tiebreaker points (only active in "Use Channel Database Numbers" mode)
 
 </details>
@@ -287,7 +290,7 @@ All stages use:
 ## File Locations
 
 - **CSV Exports:** `/data/exports/lineuparr_*.csv` (persist across container restarts)
-- **Plugin Directory:** `/app/plugins/Lineuparr/`
+- **Plugin Directory:** `/data/plugins/lineuparr/` (inside the Dispatcharr Docker data volume)
 - **Logs:** `docker logs dispatcharr | grep "Lineuparr"`
 
 ## Contributing
