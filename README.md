@@ -45,18 +45,19 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 
 | File | Provider | Country | Channels |
 |------|----------|---------|----------|
-| `US_DirecTV-Premier_lineup.json` | DIRECTV Premier | US | ~300 |
-| `US_DISH-Top250_lineup.json` | DISH Top 250 | US | ~210 |
-| `US_Verizon-FIOS_lineup.json` | Verizon FiOS | US | ~190 |
+| `US_DirecTV-Premier_lineup.json` | DIRECTV Premier | US | ~355 |
+| `US_DISH-Top250_lineup.json` | DISH Top 250 | US | ~230 |
+| `US_Verizon-FIOS_lineup.json` | Verizon FiOS | US | ~205 |
 | `US_Combined_lineup.json` | US Combined (DIRECTV + DISH + Verizon) | US | ~545 |
 | `UK_Freeview_lineup.json` | Freeview | UK | ~160 |
-| `UK_SkyTV_lineup.json` | Sky TV | UK | ~160 |
-| `UK_SkyTV_ENG_full_lineup.json` | Sky TV (Full LineUp) | UK | ~362 |
-| `UK_SkyTV_ENG_simple_lineup.json` | Sky TV (Simple LineUp) | UK | ~297 |
+| `UK_SkyTV_lineup.json` | Sky TV | UK | ~175 |
+| `UK_SkyTV_ENG_full_lineup.json` | Sky TV (Full LineUp) | UK | ~360 |
+| `UK_SkyTV_ENG_simple_lineup.json` | Sky TV (Simple LineUp) | UK | ~295 |
 | `UK_Combined_lineup.json` | UK Combined (Freeview + Sky TV Full) | UK | ~400 |
+| `ES_Movistar_lineup.json` | Movistar+ | ES | ~170 |
 | `AU_Foxtel_lineup.json` | Foxtel Platinum Plus | AU | ~140 |
-| `CA_Telus-Optik_lineup.json` | Telus Optik | CA | ~140 |
-| `NL_ODIDO_lineup.json` | ODIDO | NL | ~140 |
+| `CA_Telus-Optik_lineup.json` | Telus Optik | CA | ~145 |
+| `NL_ODIDO_lineup.json` | ODIDO | NL | ~155 |
 
 These are community-compiled channel lists based on publicly available provider lineup information. Custom lineup files can be created following the same JSON format and placed in the plugin directory.
 
