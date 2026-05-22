@@ -63,7 +63,7 @@ def _clean_json_text(s):
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.1421627"
+    PLUGIN_VERSION = "1.26.1421641"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -1149,14 +1149,22 @@ class Plugin:
             logger.error(f"{LOG_PREFIX} Failed to save state: {e}")
 
     def _trigger_frontend_refresh(self, logger):
-        """Notify frontend of channel updates via WebSocket."""
+        """Tell the Dispatcharr UI to refetch the channel list.
+
+        The frontend re-queries channels and streams when it receives a
+        'channels_created' websocket event -- verified against Dispatcharr's
+        own handler, which calls requeryChannels()/requeryStreams() for that
+        type. A generic plugin toast does NOT refresh the list, so this emits
+        the same event shape Dispatcharr itself sends after creating channels
+        (see apps/channels/api_views.py). count is omitted, so the frontend
+        shows "...created multiple channel(s)"; Lineuparr's own completion
+        notification carries the exact numbers."""
         try:
             send_websocket_update('updates', 'update', {
-                "type": "plugin", "plugin": "Lineuparr",
-                "message": "Channels updated"
+                "type": "channels_created",
             })
         except Exception as e:
-            logger.error(f"{LOG_PREFIX} WebSocket update failed: {e}")
+            logger.error(f"{LOG_PREFIX} WebSocket refresh failed: {e}")
 
     # ========================================================================
     # NON-DESTRUCTIVE ACTIONS
