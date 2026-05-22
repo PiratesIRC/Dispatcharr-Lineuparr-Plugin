@@ -5,7 +5,7 @@
   "source": "Sky Q",
   "notes": "This lineup includes the main channels available on Sky TV in the UK (England), categorized by genre. It also includes timeshift channels (+1) where available. Regional variations and HD channels are not included in this simple lineup.",
   "categories": {
-    "Entertainment & Documentaries": [
+    "Entertainment": [
       {
         "name": "BBC One",
         "number": 101
@@ -777,7 +777,7 @@
         "number": 522
       }
     ],
-    "Religion": [
+    "Faith": [
       {
         "name": "God Channel",
         "number": 580

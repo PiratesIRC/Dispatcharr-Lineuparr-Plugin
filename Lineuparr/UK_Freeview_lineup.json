@@ -5,7 +5,7 @@
   "source": "Freeview",
   "notes": "Categories are derived from the Freeview LCN specification.",
   "categories": {
-    "General Entertainment": [
+    "Entertainment": [
       {
         "name": "BBC One",
         "number": 1
@@ -377,7 +377,7 @@
         "number": 107
       }
     ],
-    "Children's": [
+    "Kids": [
       {
         "name": "CBBC",
         "number": 201
