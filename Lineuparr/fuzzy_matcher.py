@@ -218,6 +218,20 @@ class FuzzyMatcher:
         # Normalize hyphens to spaces
         name = re.sub(r'-', ' ', name)
 
+        # Replace dots between word chars with spaces (e.g. "JusticeCentral.TV"
+        # → "JusticeCentral TV"). Keeps the dot-suffix variant equivalent to
+        # the spaced form for matching purposes.
+        name = re.sub(r'(?<=\w)\.(?=\w)', ' ', name)
+
+        # Split CamelCase boundaries so "JusticeCentral" becomes "Justice
+        # Central" and "DangerTV" becomes "Danger TV". Two separate patterns:
+        #   1. lower → Upper followed by lower  (Justice|Central, Danger|Iq → no, etc.)
+        #   2. lower(4+) → UPPER acronym at word boundary  (Danger|TV, Beauty|IQ)
+        # The 4-char floor on rule 2 protects short brand names like "MeTV" and
+        # "truTV" whose existing EPG matches rely on the un-split form.
+        name = re.sub(r'([a-z])([A-Z][a-z])', r'\1 \2', name)
+        name = re.sub(r'([a-z]{4,})([A-Z]{2,})\b', r'\1 \2', name)
+
         # Preserve parenthesized East/West -- and the (E)/(W) abbreviations --
         # as bare words so they survive both the leading-parenthetical strip
         # below and the generic parenthetical strip (MISC_PATTERNS). Bare
