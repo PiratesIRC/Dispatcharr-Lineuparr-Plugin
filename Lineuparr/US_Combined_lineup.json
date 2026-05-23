@@ -585,10 +585,6 @@
         "number": 404
       },
       {
-        "name": "Cinemax East",
-        "number": 405
-      },
-      {
         "name": "Cinemax Hits HD",
         "number": 406
       },
@@ -643,10 +639,6 @@
       {
         "name": "HBO Comedy",
         "number": 420
-      },
-      {
-        "name": "HBO Comedy East HD",
-        "number": 421
       },
       {
         "name": "HBO Drama HD East",
@@ -785,10 +777,6 @@
         "number": 459
       },
       {
-        "name": "STARZ (E)",
-        "number": 460
-      },
-      {
         "name": "STARZ (W)",
         "number": 461
       },
@@ -797,32 +785,16 @@
         "number": 462
       },
       {
-        "name": "STARZ Cinema East HD",
-        "number": 463
-      },
-      {
         "name": "STARZ Comedy",
         "number": 464
-      },
-      {
-        "name": "STARZ Comedy East HD",
-        "number": 465
       },
       {
         "name": "STARZ Edge",
         "number": 466
       },
       {
-        "name": "STARZ Edge East HD",
-        "number": 467
-      },
-      {
         "name": "Starz Encore",
         "number": 468
-      },
-      {
-        "name": "STARZ Encore (E)",
-        "number": 469
       },
       {
         "name": "STARZ Encore (W)",
@@ -857,10 +829,6 @@
         "number": 479
       },
       {
-        "name": "STARZ In Black East HD",
-        "number": 480
-      },
-      {
         "name": "STARZ Kids & Family",
         "number": 481
       },
@@ -877,20 +845,12 @@
         "number": 485
       },
       {
-        "name": "The Movie Channel (E)",
-        "number": 486
-      },
-      {
         "name": "The Movie Channel (W)",
         "number": 487
       },
       {
         "name": "The Movie Channel Xtra",
         "number": 488
-      },
-      {
-        "name": "The Movie Channel Xtra (E)",
-        "number": 489
       },
       {
         "name": "Thriller Max",
@@ -923,20 +883,12 @@
         "number": 506
       },
       {
-        "name": "Cartoon Network (E)",
-        "number": 507
-      },
-      {
         "name": "Cartoon Network (W)",
         "number": 508
       },
       {
         "name": "Disney Channel",
         "number": 510
-      },
-      {
-        "name": "Disney Channel (E)",
-        "number": 511
       },
       {
         "name": "Disney Channel (W)",
@@ -1111,10 +1063,6 @@
       {
         "name": "Ion",
         "number": 631
-      },
-      {
-        "name": "ION East HD",
-        "number": 632
       },
       {
         "name": "LAFF TV",

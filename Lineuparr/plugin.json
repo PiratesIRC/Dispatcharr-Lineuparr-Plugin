@@ -1,6 +1,6 @@
 {
   "name": "Lineuparr",
-  "version": "1.26.1431212",
+  "version": "1.26.1431225",
   "description": "Mirror real-world provider channel lineups by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
   "author": "PiratesIRC",
   "license": "MIT",
