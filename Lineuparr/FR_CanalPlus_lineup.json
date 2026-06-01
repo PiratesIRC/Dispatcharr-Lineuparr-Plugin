@@ -1,0 +1,1139 @@
+{
+  "package": "Canal+ France (Numérotation Canal+)",
+  "date": "2026-06-01",
+  "description": "Chaînes Canal+ France avec numérotation Canal+, en vigueur à compter du 30 mars 2026",
+  "source": "Canal+ Plan de Service Canal+ 2026",
+  "notes": "Numérotation Canal+ utilisée sur les décodeurs Canal+ en France métropolitaine. Les flux en direct (Canal+ Live, Eurosport 360), les services à la demande (VOD, Netflix, etc.) et les mosaïques ne sont pas inclus.",
+  "categories": {
+    "Canal+ & Grandes Chaînes": [
+      {
+        "name": "Chaîne Événement",
+        "number": 29
+      },
+      {
+        "name": "TF1",
+        "number": 1
+      },
+      {
+        "name": "France 2",
+        "number": 2
+      },
+      {
+        "name": "France 3",
+        "number": 3
+      },
+      {
+        "name": "Canal+",
+        "number": 4
+      },
+      {
+        "name": "France 5",
+        "number": 5
+      },
+      {
+        "name": "M6",
+        "number": 6
+      },
+      {
+        "name": "Arte",
+        "number": 7
+      },
+      {
+        "name": "Canal+Sport 360",
+        "number": 10
+      },
+      {
+        "name": "Canal+Foot",
+        "number": 11
+      },
+      {
+        "name": "Canal+Sport",
+        "number": 12
+      },
+      {
+        "name": "Canal+Box Office",
+        "number": 13
+      },
+      {
+        "name": "Canal+Grand Écran",
+        "number": 14
+      },
+      {
+        "name": "Canal+Cinéma(s)",
+        "number": 15
+      },
+      {
+        "name": "Canal+Docs",
+        "number": 17
+      },
+      {
+        "name": "Canal+Kids",
+        "number": 18
+      }
+    ],
+    "UHD": [
+      {
+        "name": "Canal+ UHD",
+        "number": 100
+      },
+      {
+        "name": "Événement Sport UHD",
+        "number": 101
+      },
+      {
+        "name": "France 2 UHD",
+        "number": 102
+      }
+    ],
+    "Cinéma": [
+      {
+        "name": "OCS",
+        "number": 33
+      },
+      {
+        "name": "Ciné+ Frisson",
+        "number": 34
+      },
+      {
+        "name": "Ciné+ Émotion",
+        "number": 35
+      },
+      {
+        "name": "Ciné+ Family",
+        "number": 36
+      },
+      {
+        "name": "Ciné+ Festival",
+        "number": 37
+      },
+      {
+        "name": "Ciné+ Classic",
+        "number": 38
+      },
+      {
+        "name": "Action",
+        "number": 44
+      },
+      {
+        "name": "TCM Cinéma",
+        "number": 45
+      }
+    ],
+    "Séries": [
+      {
+        "name": "Polar+",
+        "number": 51
+      },
+      {
+        "name": "Serieclub",
+        "number": 52
+      },
+      {
+        "name": "Warner TV",
+        "number": 53
+      },
+      {
+        "name": "TV Breizh",
+        "number": 54
+      },
+      {
+        "name": "RTL9",
+        "number": 55
+      },
+      {
+        "name": "AB1",
+        "number": 56
+      },
+      {
+        "name": "Novelas TV",
+        "number": 57
+      },
+      {
+        "name": "TF1 Séries Films",
+        "number": 59
+      }
+    ],
+    "Sports": [
+      {
+        "name": "Infosport+",
+        "number": 63
+      },
+      {
+        "name": "beIN Sports 1",
+        "number": 66
+      },
+      {
+        "name": "beIN Sports 2",
+        "number": 67
+      },
+      {
+        "name": "beIN Sports 3",
+        "number": 68
+      },
+      {
+        "name": "Eurosport 1",
+        "number": 69
+      },
+      {
+        "name": "Eurosport 2",
+        "number": 70
+      },
+      {
+        "name": "Golf+",
+        "number": 72
+      },
+      {
+        "name": "Automoto",
+        "number": 73
+      },
+      {
+        "name": "Equidia",
+        "number": 74
+      },
+      {
+        "name": "Sport en France",
+        "number": 75
+      },
+      {
+        "name": "Cheval TV",
+        "number": 76
+      },
+      {
+        "name": "L'Équipe",
+        "number": 79
+      }
+    ],
+    "Divertissement": [
+      {
+        "name": "Comédie+",
+        "number": 80
+      },
+      {
+        "name": "Olympia TV",
+        "number": 81
+      },
+      {
+        "name": "Paris Première",
+        "number": 83
+      },
+      {
+        "name": "Teva",
+        "number": 84
+      },
+      {
+        "name": "TLC",
+        "number": 86
+      },
+      {
+        "name": "W9",
+        "number": 89
+      },
+      {
+        "name": "TMC",
+        "number": 90
+      },
+      {
+        "name": "TFX",
+        "number": 91
+      },
+      {
+        "name": "CSTAR",
+        "number": 92
+      },
+      {
+        "name": "T18",
+        "number": 93
+      },
+      {
+        "name": "Novo19",
+        "number": 94
+      },
+      {
+        "name": "6ter",
+        "number": 95
+      },
+      {
+        "name": "RMC Story",
+        "number": 96
+      },
+      {
+        "name": "RMC Life",
+        "number": 97
+      },
+      {
+        "name": "TV5 Monde",
+        "number": 98
+      }
+    ],
+    "Découverte": [
+      {
+        "name": "Planète+",
+        "number": 111
+      },
+      {
+        "name": "Planète+Crime",
+        "number": 112
+      },
+      {
+        "name": "Planète+Aventure",
+        "number": 113
+      },
+      {
+        "name": "Museum TV",
+        "number": 114
+      },
+      {
+        "name": "Ushuaïa TV",
+        "number": 115
+      },
+      {
+        "name": "Love Nature",
+        "number": 116
+      },
+      {
+        "name": "Histoire TV",
+        "number": 117
+      },
+      {
+        "name": "Toute l'Histoire",
+        "number": 118
+      },
+      {
+        "name": "Discovery Channel",
+        "number": 119
+      },
+      {
+        "name": "Discovery Investigation",
+        "number": 120
+      },
+      {
+        "name": "Dog & Cat TV",
+        "number": 121
+      },
+      {
+        "name": "Seasons",
+        "number": 122
+      },
+      {
+        "name": "Chasse et Pêche",
+        "number": 123
+      },
+      {
+        "name": "Animaux",
+        "number": 124
+      },
+      {
+        "name": "TV Monaco",
+        "number": 125
+      },
+      {
+        "name": "Le Figaro TV",
+        "number": 126
+      },
+      {
+        "name": "8 Mont Blanc",
+        "number": 127
+      },
+      {
+        "name": "Mieux",
+        "number": 128
+      },
+      {
+        "name": "RMC Découverte",
+        "number": 129
+      }
+    ],
+    "Jeunesse": [
+      {
+        "name": "Piwi+",
+        "number": 131
+      },
+      {
+        "name": "Nickelodeon Junior",
+        "number": 133
+      },
+      {
+        "name": "Tiji",
+        "number": 134
+      },
+      {
+        "name": "Cartoonito",
+        "number": 135
+      },
+      {
+        "name": "Boomerang",
+        "number": 136
+      },
+      {
+        "name": "Teletoon+",
+        "number": 137
+      },
+      {
+        "name": "Teletoon+1",
+        "number": 138
+      },
+      {
+        "name": "Disney Channel",
+        "number": 139
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 141
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 142
+      },
+      {
+        "name": "Nickelodeon+1",
+        "number": 143
+      },
+      {
+        "name": "Canal J",
+        "number": 144
+      },
+      {
+        "name": "Nicktoons",
+        "number": 146
+      },
+      {
+        "name": "France 4",
+        "number": 147
+      },
+      {
+        "name": "Gulli",
+        "number": 148
+      }
+    ],
+    "Nouvelle Génération": [
+      {
+        "name": "MTV",
+        "number": 152
+      },
+      {
+        "name": "MCM",
+        "number": 153
+      },
+      {
+        "name": "Comedy Central",
+        "number": 154
+      },
+      {
+        "name": "Mangas",
+        "number": 156
+      },
+      {
+        "name": "MGG TV",
+        "number": 158
+      },
+      {
+        "name": "Warner TV Next",
+        "number": 159
+      }
+    ],
+    "Information": [
+      {
+        "name": "La Chaîne Météo",
+        "number": 160
+      },
+      {
+        "name": "CNews",
+        "number": 161
+      },
+      {
+        "name": "BFM TV",
+        "number": 162
+      },
+      {
+        "name": "LCI",
+        "number": 163
+      },
+      {
+        "name": "France Info",
+        "number": 164
+      },
+      {
+        "name": "LCP",
+        "number": 165
+      },
+      {
+        "name": "CNews Prime",
+        "number": 166
+      },
+      {
+        "name": "Europe 1 TV",
+        "number": 167
+      },
+      {
+        "name": "France 24",
+        "number": 168
+      },
+      {
+        "name": "Euronews",
+        "number": 169
+      },
+      {
+        "name": "BBC News",
+        "number": 170
+      },
+      {
+        "name": "CNN",
+        "number": 171
+      },
+      {
+        "name": "BFM Business",
+        "number": 172
+      },
+      {
+        "name": "Bloomberg",
+        "number": 173
+      },
+      {
+        "name": "CNBC",
+        "number": 174
+      },
+      {
+        "name": "i24 News",
+        "number": 175
+      },
+      {
+        "name": "KTO",
+        "number": 176
+      },
+      {
+        "name": "Africa 24",
+        "number": 177
+      }
+    ],
+    "Musique": [
+      {
+        "name": "Europe 2 Pop TV",
+        "number": 180
+      },
+      {
+        "name": "M6 Music",
+        "number": 181
+      },
+      {
+        "name": "NRJ Hits",
+        "number": 183
+      },
+      {
+        "name": "Trace Urban",
+        "number": 184
+      },
+      {
+        "name": "RFM TV",
+        "number": 186
+      },
+      {
+        "name": "Mélody",
+        "number": 188
+      },
+      {
+        "name": "Mezzo",
+        "number": 200
+      },
+      {
+        "name": "Mezzo Live HD",
+        "number": 201
+      },
+      {
+        "name": "Deutsche Grammophon+",
+        "number": 202
+      }
+    ],
+    "Charme": [
+      {
+        "name": "XXL",
+        "number": 222
+      },
+      {
+        "name": "Dorcel TV",
+        "number": 223
+      },
+      {
+        "name": "Dorcel XXX",
+        "number": 224
+      },
+      {
+        "name": "Vixen",
+        "number": 225
+      },
+      {
+        "name": "UnionTV",
+        "number": 226
+      },
+      {
+        "name": "Pink X",
+        "number": 228
+      },
+      {
+        "name": "Man-X",
+        "number": 229
+      }
+    ],
+    "Canal+ Live": [
+      {
+        "name": "Canal+ Live 1",
+        "number": 231
+      },
+      {
+        "name": "Canal+ Live 2",
+        "number": 232
+      },
+      {
+        "name": "Canal+ Live 3",
+        "number": 233
+      },
+      {
+        "name": "Canal+ Live 4",
+        "number": 234
+      },
+      {
+        "name": "Canal+ Live 5",
+        "number": 235
+      },
+      {
+        "name": "Canal+ Live 6",
+        "number": 236
+      },
+      {
+        "name": "Canal+ Live 7",
+        "number": 237
+      },
+      {
+        "name": "Canal+ Live 8",
+        "number": 238
+      },
+      {
+        "name": "Canal+ Live 9",
+        "number": 239
+      },
+      {
+        "name": "Canal+ Live 10",
+        "number": 240
+      },
+      {
+        "name": "Canal+ Live 11",
+        "number": 241
+      },
+      {
+        "name": "Canal+ Live 12",
+        "number": 242
+      },
+      {
+        "name": "Canal+ Live 13",
+        "number": 243
+      },
+      {
+        "name": "Canal+ Live 14",
+        "number": 244
+      },
+      {
+        "name": "Canal+ Live 15",
+        "number": 245
+      },
+      {
+        "name": "Canal+ Live 16",
+        "number": 246
+      },
+      {
+        "name": "Canal+ Live 17",
+        "number": 247
+      },
+      {
+        "name": "Canal+ Live 18",
+        "number": 248
+      },
+      {
+        "name": "Canal+ Live 19",
+        "number": 249
+      },
+      {
+        "name": "Canal+ Premier League",
+        "number": 250
+      }
+    ],
+    "Sports Multi-Diffusion": [
+      {
+        "name": "Eurosport 360 1",
+        "number": 252
+      },
+      {
+        "name": "Eurosport 360 2",
+        "number": 253
+      },
+      {
+        "name": "Eurosport 360 3",
+        "number": 254
+      },
+      {
+        "name": "Eurosport 360 4",
+        "number": 255
+      },
+      {
+        "name": "Eurosport 360 5",
+        "number": 256
+      },
+      {
+        "name": "Eurosport 360 6",
+        "number": 257
+      },
+      {
+        "name": "Eurosport 360 7",
+        "number": 258
+      },
+      {
+        "name": "Eurosport 360 8",
+        "number": 259
+      },
+      {
+        "name": "Eurosport 360 9",
+        "number": 260
+      },
+      {
+        "name": "Eurosport 360 10",
+        "number": 261
+      },
+      {
+        "name": "Eurosport 360 11",
+        "number": 262
+      },
+      {
+        "name": "Eurosport 360 12",
+        "number": 263
+      },
+      {
+        "name": "Eurosport 360 13",
+        "number": 264
+      },
+      {
+        "name": "Eurosport 360 14",
+        "number": 265
+      },
+      {
+        "name": "Eurosport 360 15",
+        "number": 266
+      },
+      {
+        "name": "Eurosport 360 16",
+        "number": 267
+      },
+      {
+        "name": "Eurosport 360 17",
+        "number": 268
+      },
+      {
+        "name": "Eurosport 360 18",
+        "number": 269
+      },
+      {
+        "name": "Eurosport 360 19",
+        "number": 270
+      },
+      {
+        "name": "Eurosport 360 20",
+        "number": 271
+      },
+      {
+        "name": "Eurosport 360 21",
+        "number": 272
+      },
+      {
+        "name": "Eurosport 360 22",
+        "number": 273
+      },
+      {
+        "name": "Eurosport 360 23",
+        "number": 274
+      },
+      {
+        "name": "Eurosport 360 24",
+        "number": 275
+      },
+      {
+        "name": "Eurosport 360 25",
+        "number": 276
+      },
+      {
+        "name": "Eurosport 360 26",
+        "number": 277
+      },
+      {
+        "name": "Eurosport 360 27",
+        "number": 278
+      },
+      {
+        "name": "Eurosport 360 28",
+        "number": 279
+      },
+      {
+        "name": "Eurosport 360 29",
+        "number": 280
+      },
+      {
+        "name": "Eurosport 360 30",
+        "number": 281
+      },
+      {
+        "name": "Eurosport 360 31",
+        "number": 282
+      },
+      {
+        "name": "Eurosport 360 32",
+        "number": 283
+      },
+      {
+        "name": "beIN Sports MAX 4",
+        "number": 284
+      },
+      {
+        "name": "beIN Sports MAX 5",
+        "number": 285
+      },
+      {
+        "name": "beIN Sports MAX 6",
+        "number": 286
+      },
+      {
+        "name": "beIN Sports MAX 7",
+        "number": 287
+      },
+      {
+        "name": "beIN Sports MAX 8",
+        "number": 288
+      },
+      {
+        "name": "beIN Sports MAX 9",
+        "number": 289
+      },
+      {
+        "name": "beIN Sports MAX 10",
+        "number": 290
+      },
+      {
+        "name": "RMC Sport 1",
+        "number": 291
+      },
+      {
+        "name": "Ligue 1+ 1",
+        "number": 292
+      },
+      {
+        "name": "Ligue 1+ 2",
+        "number": 293
+      },
+      {
+        "name": "Ligue 1+ 3",
+        "number": 294
+      },
+      {
+        "name": "Ligue 1+ 4",
+        "number": 295
+      },
+      {
+        "name": "Ligue 1+ 5",
+        "number": 296
+      },
+      {
+        "name": "Ligue 1+ 6",
+        "number": 297
+      },
+      {
+        "name": "Ligue 1+ 7",
+        "number": 298
+      },
+      {
+        "name": "Ligue 1+ 8",
+        "number": 299
+      },
+      {
+        "name": "Ligue 1+ 9",
+        "number": 300
+      },
+      {
+        "name": "Ligue 1+ 10",
+        "number": 301
+      }
+    ],
+    "DOM-TOM": [
+      {
+        "name": "Martinique la 1ère",
+        "number": 337
+      },
+      {
+        "name": "Guadeloupe la 1ère",
+        "number": 338
+      },
+      {
+        "name": "Réunion la 1ère",
+        "number": 339
+      },
+      {
+        "name": "Mayotte la 1ère",
+        "number": 340
+      },
+      {
+        "name": "Guyane la 1ère",
+        "number": 341
+      }
+    ],
+    "BFM Régionales": [
+      {
+        "name": "BFM Paris",
+        "number": 326
+      },
+      {
+        "name": "BFM Grand Lille",
+        "number": 327
+      },
+      {
+        "name": "BFM Grand Littoral",
+        "number": 328
+      },
+      {
+        "name": "BFM Normandie",
+        "number": 329
+      },
+      {
+        "name": "BFM Alsace",
+        "number": 330
+      },
+      {
+        "name": "BFM Lyon",
+        "number": 331
+      },
+      {
+        "name": "BFM Alpes Sud",
+        "number": 332
+      },
+      {
+        "name": "BFM Marseille Provence",
+        "number": 333
+      },
+      {
+        "name": "BFM Toulon Var",
+        "number": 334
+      },
+      {
+        "name": "BFM Côte d'Azur",
+        "number": 335
+      },
+      {
+        "name": "BFM Haute-Provence",
+        "number": 336
+      }
+    ],
+    "Via Occitanie": [
+      {
+        "name": "Via Occitanie Montpellier",
+        "number": 342
+      },
+      {
+        "name": "Via Occitanie Toulouse",
+        "number": 343
+      },
+      {
+        "name": "Via Occitanie Pays Catalan",
+        "number": 344
+      },
+      {
+        "name": "Via Occitanie Pays Gardois",
+        "number": 345
+      }
+    ],
+    "France 3 Régions": [
+      {
+        "name": "France 3 Alpes",
+        "number": 350
+      },
+      {
+        "name": "France 3 Alsace",
+        "number": 351
+      },
+      {
+        "name": "France 3 Aquitaine",
+        "number": 352
+      },
+      {
+        "name": "France 3 Auvergne",
+        "number": 353
+      },
+      {
+        "name": "France 3 Basse-Normandie",
+        "number": 354
+      },
+      {
+        "name": "France 3 Bourgogne",
+        "number": 355
+      },
+      {
+        "name": "France 3 Bretagne",
+        "number": 356
+      },
+      {
+        "name": "France 3 Centre-Val de Loire",
+        "number": 357
+      },
+      {
+        "name": "France 3 Champagne-Ardenne",
+        "number": 358
+      },
+      {
+        "name": "France 3 Via Stella",
+        "number": 359
+      },
+      {
+        "name": "France 3 Côte d'Azur",
+        "number": 360
+      },
+      {
+        "name": "France 3 Franche-Comté",
+        "number": 361
+      },
+      {
+        "name": "France 3 Haute-Normandie",
+        "number": 362
+      },
+      {
+        "name": "France 3 Languedoc-Roussillon",
+        "number": 363
+      },
+      {
+        "name": "France 3 Limousin",
+        "number": 364
+      },
+      {
+        "name": "France 3 Lorraine",
+        "number": 365
+      },
+      {
+        "name": "France 3 Midi-Pyrénées",
+        "number": 366
+      },
+      {
+        "name": "France 3 Nord-Pas-de-Calais",
+        "number": 367
+      },
+      {
+        "name": "France 3 Paris Île-de-France",
+        "number": 368
+      },
+      {
+        "name": "France 3 Pays de la Loire",
+        "number": 369
+      },
+      {
+        "name": "France 3 Picardie",
+        "number": 370
+      },
+      {
+        "name": "France 3 Poitou-Charentes",
+        "number": 371
+      },
+      {
+        "name": "France 3 Provence-Alpes",
+        "number": 372
+      },
+      {
+        "name": "France 3 Rhône-Alpes",
+        "number": 373
+      },
+      {
+        "name": "France 3 NoA",
+        "number": 374
+      }
+    ],
+    "International": [
+      {
+        "name": "A+",
+        "number": 378
+      },
+      {
+        "name": "A+ Bénin",
+        "number": 379
+      },
+      {
+        "name": "A+ Ivoire",
+        "number": 380
+      },
+      {
+        "name": "Nollywood TV",
+        "number": 381
+      },
+      {
+        "name": "Nollywood TV Epic",
+        "number": 382
+      },
+      {
+        "name": "Sunu Yeuf",
+        "number": 383
+      },
+      {
+        "name": "Pulaagu",
+        "number": 384
+      },
+      {
+        "name": "Mandeka",
+        "number": 385
+      },
+      {
+        "name": "Maboke TV",
+        "number": 386
+      },
+      {
+        "name": "Canal+ Magic",
+        "number": 387
+      },
+      {
+        "name": "2M Monde",
+        "number": 388
+      },
+      {
+        "name": "Echorouk News",
+        "number": 389
+      },
+      {
+        "name": "Echourouk TV",
+        "number": 390
+      },
+      {
+        "name": "Nessma TV",
+        "number": 391
+      },
+      {
+        "name": "Samira TV",
+        "number": 392
+      },
+      {
+        "name": "El Hiwar Ettounsi",
+        "number": 393
+      },
+      {
+        "name": "Sky News Arabia",
+        "number": 394
+      },
+      {
+        "name": "MBC 5",
+        "number": 395
+      },
+      {
+        "name": "MBC Drama",
+        "number": 396
+      },
+      {
+        "name": "Rotana Cinéma FR",
+        "number": 397
+      },
+      {
+        "name": "Rotana Cinéma",
+        "number": 398
+      },
+      {
+        "name": "Rotana Kids",
+        "number": 399
+      }
+    ]
+  }
+}

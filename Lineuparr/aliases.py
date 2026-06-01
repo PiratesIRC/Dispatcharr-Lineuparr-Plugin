@@ -265,6 +265,85 @@ CHANNEL_ALIASES = {
     "Home": ["U&Home", "U&Home HD", "Home"],
     "Dave ja vu": ["Dave ja vu", "U&Dave ja vu"],
 
+    # --- FR: Free DTT (TNT) ---
+    "BFM TV": ["BFMTV"],
+    "CNews": ["i>TELE", "iTELE", "i-Tele"],
+    "TFX": ["NT1"],
+    "T18": ["C8"],
+    "RMC Life": ["Chérie 25"],
+    "L'Équipe": ["La Chaîne L'Équipe", "L'Equipe 21"],
+    "TF1 Séries Films": ["TF1SF"],
+    "LCP": ["LCP AN", "LCP Assemblée nationale"],
+
+    # --- FR: Divertissement ---
+    "TLC": ["Discovery Science"],
+
+    # --- FR: Canal+ Channels ---
+    "Canal+": ["Canal Plus"],
+    "Canal+Sport 360": ["Canal+ 360"],
+
+    # --- FR: Movies ---
+    "OCS": ["Ciné+ OCS", "Ciné+ Premier"],
+    "Ciné+ Festival": ["Ciné+ Club"],
+    "Ciné+ Family": ["Cine+ Famiz", "Cine+ Familly"],
+
+    # --- FR: Sports ---
+    "Equidia": ["Equidia Live"],
+    "beIN Sports 1": ["beIN Sports 1 French"],
+    "beIN Sports 2": ["beIN Sports 2 French"],
+    "beIN Sports 3": ["beIN Sports 3 French"],
+
+    # --- FR: beIN Sports MAX ---
+    "beIN Sports MAX 4": ["beIN MAX 4"],
+    "beIN Sports MAX 5": ["beIN MAX 5"],
+    "beIN Sports MAX 6": ["beIN MAX 6"],
+    "beIN Sports MAX 7": ["beIN MAX 7"],
+    "beIN Sports MAX 8": ["beIN MAX 8"],
+    "beIN Sports MAX 9": ["beIN MAX 9"],
+    "beIN Sports MAX 10": ["beIN MAX 10"],
+
+    # --- FR: RMC Sport ---
+    "RMC Sport 1": ["RMC Sport"],
+
+    # --- FR: Kids ---
+    "Cartoonito": ["Boing"],
+    "Nicktoons": ["Nickelodeon 4 Teen"],
+    "Teletoon+": ["Teletoon Plus", "Télétoon+"],
+
+    # --- FR: News ---
+    "France 24": ["FR24"],
+
+    # --- FR: Music ---
+    "Europe 2 Pop TV": ["CSTAR Hits France", "C Star Hits France"],
+    "MTV": ["MTV France"],
+
+    # --- FR: France 3 Régions ---
+    "France 3 Champagne-Ardenne": ["France 3 Champ Ardenne", "F3 Champ Ardenne"],
+    "France 3 Paris Île-de-France": ["France 3 Paris IDF", "France 3 Paris Ile de France"],
+    "France 3 Nord-Pas-de-Calais": ["France 3 Nord PDC", "France 3 Nord Pas de Calais", "France 3 Nord - Pas-de-Calais"],
+    "France 3 Côte d'Azur": ["France 3 Cote d'Azur", "F3 Cote d'Azur", "France 3 Cote D Azur"],
+    "France 3 Via Stella": ["France 3 Corse Via Stella", "France 3 Corse"],
+    "France 3 Centre-Val de Loire": ["France 3 Centre"],
+
+    # --- FR: BFM Régionales ---
+    "BFM Haute-Provence": ["BFM Haute Province", "BFM DICI Haute-Provence", "BFM Dici Haute Province"],
+    "BFM Alpes Sud": ["BFM DICI Alpes du Sud", "BFM Alpes du Sud"],
+    "BFM Marseille Provence": ["BFM Marseille", "BFM Marseille Provence"],
+    "BFM Côte d'Azur": ["BFM Cote d'Azur", "BFM Cote D Azur"],
+
+    # --- FR: Via Occitanie ---
+    "Via Occitanie Montpellier": ["Via Occitanie Monpellier"],
+
+    # --- FR: DOM-TOM 1ères ---
+    "Martinique la 1ère": ["Martinique 1ere"],
+    "Guadeloupe la 1ère": ["Guadeloupe 1ere"],
+    "Réunion la 1ère": ["Reunion 1ere"],
+    "Mayotte la 1ère": ["Mayotte 1ere"],
+    "Guyane la 1ère": ["Guyane 1ere"],
+
+    # --- FR: International ---
+    "2M Monde": ["2M"],
+
     # --- UK: Factual ---
     "Discovery History": ["Disc.History", "Disc.History+1", "UK: Discovery History"],
     "Discovery Turbo": ["Disc.Turbo", "Disc.Turbo+1", "UK: DISCOVERY TURBO", "DISCOVERY TURBO"],
