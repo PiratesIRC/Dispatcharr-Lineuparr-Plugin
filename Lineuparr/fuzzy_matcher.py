@@ -35,6 +35,20 @@ QUALITY_PATTERNS = [
     r'\s+\b(4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead)\b\s+',
 ]
 
+# Upgrade quality markers for quality-aware stream filtering.
+# HD / FHD / HEVC are intentionally excluded — they are standard IPTV quality
+# and their presence does not signal a premium or event-only channel.
+_UPGRADE_QUALITY_RE = re.compile(
+    r'\b(?:4K|8K|UHD|HDR)\b|ᵁᴴᴰ',
+    re.IGNORECASE,
+)
+
+
+def _has_upgrade_quality(name: str) -> bool:
+    """Return True if name contains an upgrade quality marker (4K/8K/UHD/HDR)."""
+    return bool(_UPGRADE_QUALITY_RE.search(name))
+
+
 REGIONAL_PATTERNS = [
     # East/West are intentionally NOT stripped — they distinguish separate channel feeds
     # (e.g., "HBO East" and "HBO West" are different channels)
