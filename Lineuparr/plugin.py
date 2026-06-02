@@ -67,6 +67,7 @@ class PluginConfig:
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
+    DEFAULT_BLOCK_QUALITY_STREAMS = False
     DEFAULT_RATE_LIMITING = "none"
     DEFAULT_CHANNEL_NUMBERING = "lineup"
 
@@ -442,6 +443,18 @@ class Plugin:
                 "type": "boolean",
                 "default": True,
                 "help_text": "Sort attached streams by quality (4K > UHD > FHD > HD > SD). Uses probed resolution if available.",
+            },
+            {
+                "id": "block_quality_streams_on_sd_channels",
+                "label": "Block Quality Streams on Standard Channels",
+                "type": "boolean",
+                "default": False,
+                "help_text": (
+                    "When on, streams with 4K/8K/UHD/HDR tags in their name are excluded "
+                    "from matching lineup channels that have no quality suffix (e.g. TF1, M6). "
+                    "Quality-declared lineup channels (e.g. France 2 UHD) always require a "
+                    "matching quality stream, regardless of this setting."
+                ),
             },
             {
                 "id": "preserve_existing_streams",
@@ -1474,6 +1487,7 @@ class Plugin:
         try:
             numbering_mode = self._resolve_numbering_mode(settings)
             use_number_boost = (numbering_mode == "lineup")
+            block_quality = settings.get("block_quality_streams_on_sd_channels", PluginConfig.DEFAULT_BLOCK_QUALITY_STREAMS)
             lineup = self._load_filtered_lineup(settings, logger)
             if lineup.get("status") == "error":
                 return lineup
@@ -1526,6 +1540,7 @@ class Plugin:
                         ch_name, unique_stream_names, alias_map,
                         channel_number=boost_number,
                         lineup_country=lineup_cc,
+                        block_quality_streams=block_quality,
                     )
 
                     if matches:
@@ -2135,6 +2150,7 @@ class Plugin:
         use_number_boost = (self._resolve_numbering_mode(settings) == "lineup")
         prioritize_quality = settings.get("prioritize_quality", PluginConfig.DEFAULT_PRIORITIZE_QUALITY)
         preserve = settings.get("preserve_existing_streams", False)
+        block_quality = settings.get("block_quality_streams_on_sd_channels", PluginConfig.DEFAULT_BLOCK_QUALITY_STREAMS)
 
         if not self._acquire_lock(logger):
             return {"status": "error", "message": "Another operation is in progress. Try again later."}
@@ -2214,6 +2230,7 @@ class Plugin:
                         ch_name, unique_stream_names, alias_map,
                         channel_number=ch_number,
                         lineup_country=lineup_cc,
+                        block_quality_streams=block_quality,
                     )
 
                     if matches:
