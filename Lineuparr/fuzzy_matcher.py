@@ -830,7 +830,7 @@ class FuzzyMatcher:
         return None, 0, None
 
     def match_all_streams(self, lineup_name, candidate_names, alias_map, channel_number=None,
-                          user_ignored_tags=None, lineup_country=None):
+                          user_ignored_tags=None, lineup_country=None, block_quality_streams=False):
         """
         Full matching pipeline for Lineuparr: alias → exact → substring → fuzzy, with number boost.
         Returns ALL matching streams sorted by score.
@@ -841,6 +841,8 @@ class FuzzyMatcher:
             alias_map: Alias dict
             channel_number: Expected channel number for boost
             user_ignored_tags: Tags to strip
+            block_quality_streams: When True, upgrade-quality streams (4K/8K/UHD/HDR) are
+                excluded from matching standard lineup channels (those without an upgrade marker).
 
         Returns:
             List of (stream_name, score, match_type) tuples sorted by score desc.
@@ -850,6 +852,21 @@ class FuzzyMatcher:
 
         if user_ignored_tags is None:
             user_ignored_tags = []
+
+        # Quality-aware pre-filtering (runs before alias + fuzzy stages).
+        # Rule 1 (unconditional): upgrade-declared lineup channels accept only
+        #   upgrade streams — e.g. "France 2 UHD" won't match "FR: FRANCE 2".
+        # Rule 2 (opt-in): when block_quality_streams is True, upgrade streams
+        #   are excluded from standard channels — e.g. "FR: TF1 4K" won't match
+        #   "TF1" when the option is on.
+        lineup_is_upgrade = _has_upgrade_quality(lineup_name or "")
+        if lineup_is_upgrade or block_quality_streams:
+            candidate_names = [
+                c for c in candidate_names
+                if _has_upgrade_quality(c) == lineup_is_upgrade
+            ]
+            if not candidate_names:
+                return []
 
         # Callsign anchor (asymmetric): extract the lineup channel's US
         # broadcast callsign up front. Used after the fuzzy stages to floor
