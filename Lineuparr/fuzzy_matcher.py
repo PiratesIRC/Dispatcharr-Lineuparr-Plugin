@@ -194,6 +194,18 @@ def detect_stream_country(name):
     if m:
         return _normalize_country_token(m.group(1))
 
+    # Bare country tag + whitespace, no separator (e.g. "US beIN SPORTS (S)",
+    # "CA TSN 1 HD"). normalize_name() already strips this exact prefix via
+    # PROVIDER_PREFIX_PATTERNS, so the country filter must recognize it too —
+    # otherwise these match a foreign lineup cleanly but can't be proven
+    # wrong-country, and leak in as backup streams. Restricted to the
+    # unambiguous 2-letter US/UK/CA/AU codes (same restriction as the prefix
+    # stripper) so it can't eat "USA Network" (USA, not US+space) or "IN
+    # Country Television".
+    m = re.match(r'^\s*(US|UK|CA|AU)\s+', name, re.IGNORECASE)
+    if m:
+        return m.group(1).upper()
+
     return None
 
 
