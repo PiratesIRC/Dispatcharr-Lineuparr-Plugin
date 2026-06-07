@@ -10,7 +10,7 @@ import re
 import logging
 import unicodedata
 
-__version__ = "1.3.1"
+__version__ = "1.3.2"
 
 LOGGER = logging.getLogger("plugins.lineuparr.fuzzy_matcher")
 if not LOGGER.handlers:
@@ -21,12 +21,31 @@ LOGGER.setLevel(logging.DEBUG)
 
 # --- Pattern categories for normalization ---
 
+# Unicode categories considered decorative/badge characters by IPTV providers.
+# So = Other Symbol (◉), No = Other Number (², ³), Lm = Modifier Letter
+# (ᴿᴬᵂ, ᴴᴰ, ⱽᴵᴾ superscripts), Sk = Modifier Symbol, Sm = Math Symbol.
+# Accented letters (é, î, ü…) are Ll/Lu and are NOT in this set.
+_DECORATOR_CATS = frozenset({'So', 'No', 'Lm', 'Sk', 'Sm'})
+
+# Tokens that are non-distinctive stream-label variants (e.g. "ABC News Live"
+# should still match "ABC News"). Used by the subset/divergent guards.
+_NON_DISTINCTIVE_TOKENS = frozenset({"live", "now", "new"})
+
+def _is_distinctive(t):
+    """Return True if token t is distinctive enough to matter in subset/divergent guards."""
+    return t not in _NON_DISTINCTIVE_TOKENS and (len(t) >= 4 or (t.isdigit() and len(t) >= 2))
+
+# Matches "+1" / "+2" time-shift suffixes in the ORIGINAL (pre-normalization)
+# channel name. Must be checked before normalization because "+" is in the Sm
+# category and gets stripped, making "+1" indistinguishable from "1" afterward.
+_PLUS_SHIFT_RE = re.compile(r'\+\s{0,2}\d{1,2}\b')
+
 QUALITY_PATTERNS = [
-    r'\s*\[(4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead|Backup)\]\s*',
-    r'\s*\((4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead|Backup)\)\s*',
-    r'^\s*(4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead)\b\s*',
-    r'\s*\b(4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead)$',
-    r'\s+\b(4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead)\b\s+',
+    r'\s*\[(4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead|Backup)\]\s*',
+    r'\s*\((4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead|Backup)\)\s*',
+    r'^\s*(4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead)\b\s*',
+    r'\s*\b(4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead)$',
+    r'\s+\b(4K|8K|UHD|FHD|HD|HDR|HEVC|SD|FD|Unknown|Unk|Slow|Dead)\b\s+',
 ]
 
 # Quality markers that distinguish an upgrade-tier channel from its standard twin.
@@ -69,6 +88,8 @@ PROVIDER_PREFIX_PATTERNS = [
     r'^(?:US|UK|CA|AU)\s+',
     r'^\s*\((?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\)\s*',
     r'\s*\|\s*(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*$',
+    # Content-category group prefixes used by some IPTV providers.
+    r'^(?:ADULT|EROTIC|PRIME)\s*[:\-\|]\s*',
 ]
 
 MISC_PATTERNS = [
@@ -142,7 +163,7 @@ def detect_stream_country(name):
     if m:
         return _normalize_country_token(m.group(1))
 
-    m = re.match(r'^\s*([A-Za-z]{2,3})\s*[:|]', name)
+    m = re.match(r'^\s*([A-Za-z]{2,3})\s*[-:|]', name)
     if m:
         return _normalize_country_token(m.group(1))
 
@@ -178,6 +199,8 @@ class FuzzyMatcher:
         self._callsign_cache.clear()
 
         for name in names:
+            if self._is_group_header(name):
+                continue
             norm = self.normalize_name(name, user_ignored_tags)
             if norm and len(norm) >= 2:
                 norm_lower = norm.lower()
@@ -216,10 +239,22 @@ class FuzzyMatcher:
 
         original_name = name
 
-        # Quality patterns FIRST (before space normalization)
+        # Strip IPTV provider prefixes BEFORE hyphen normalization so that
+        # "FR - Canal+ FHD" loses its "FR - " while the hyphen is still a
+        # hyphen. After hyphen normalization the separator would become a space
+        # and the pattern would fail to match, leaving "FR" as a stray token.
+        for pattern in PROVIDER_PREFIX_PATTERNS:
+            name = re.sub(pattern, '', name, flags=re.IGNORECASE)
+
+        # Quality patterns (before space normalization). Loop until stable so
+        # chained suffixes like "4K HDR" or "UHD HDR" are fully stripped in
+        # successive passes (each pass may expose a token for the next).
         if ignore_quality:
-            for pattern in QUALITY_PATTERNS:
-                name = re.sub(pattern, '', name, flags=re.IGNORECASE)
+            prev = None
+            while prev != name:
+                prev = name
+                for pattern in QUALITY_PATTERNS:
+                    name = re.sub(pattern, '', name, flags=re.IGNORECASE)
 
         # Normalize spacing around numbers
         name = re.sub(r'([a-zA-Z])(\d)', r'\1 \2', name)
@@ -277,10 +312,6 @@ class FuzzyMatcher:
                 break
             name = new_name
 
-        # Remove IPTV provider prefixes (enhanced for Lineuparr)
-        for pattern in PROVIDER_PREFIX_PATTERNS:
-            name = re.sub(pattern, '', name, flags=re.IGNORECASE)
-
         # Build pattern list based on flags
         patterns_to_apply = []
         if ignore_regional:
@@ -318,6 +349,15 @@ class FuzzyMatcher:
         name = re.sub(r'\s+Network\s*$', '', name, flags=re.IGNORECASE)
         name = re.sub(r'\s+Channel\s*$', '', name, flags=re.IGNORECASE)
         name = re.sub(r'\s+TV\s*$', '', name, flags=re.IGNORECASE)
+
+        # Strip decorative Unicode markers (◉, ², superscript letters ᴿᴬᵂ…)
+        # that some IPTV providers append as quality/status badges. Only
+        # characters in decorator categories are removed; accented letters
+        # (é, î, ü…) are in Ll/Lu and are preserved.
+        name = ''.join(
+            ' ' if unicodedata.category(c) in _DECORATOR_CATS else c
+            for c in name
+        )
 
         # Clean up whitespace
         name = re.sub(r'\s+', ' ', name).strip()
@@ -415,18 +455,19 @@ class FuzzyMatcher:
             unique_b = tokens_b - tokens_a
 
             # Subset guard: when one side is a strict subset of the other and
-            # the larger side has a distinctive (>=5 char) token the smaller
-            # lacks, the candidate is a more specific channel than the query
-            # and the high fuzzy score is a false positive. Catches e.g.
-            # "In Country Television" {country, television} vs "Country Music
-            # Television" {country, music, television} — "music" distinguishes
-            # them. Short extras like "live"/"two" do not trigger this guard,
-            # preserving legitimate matches like "ABC News" → "ABC News Live".
+            # the larger side has a distinctive token the smaller lacks, the
+            # candidate is a more specific channel than the query and the high
+            # fuzzy score is a false positive. Catches e.g. "Nickelodeon" vs
+            # "Nickelodeon Teen". Threshold is >=4 chars; "live"/"now" are
+            # explicitly non-distinctive (stream label variants) so "ABC News"
+            # still matches "ABC News Live". Pure-digit tokens >=2 chars
+            # (e.g. "360") are also distinctive: "Canal+Sport" must not match
+            # "Canal+Sport 360".
             if not unique_a:
-                if any(len(t) >= 5 for t in unique_b):
+                if any(_is_distinctive(t) for t in unique_b):
                     return False
             elif not unique_b:
-                if any(len(t) >= 5 for t in unique_a):
+                if any(_is_distinctive(t) for t in unique_a):
                     return False
 
             # Divergent guard: when BOTH sides have unique tokens AND at least
@@ -479,6 +520,12 @@ class FuzzyMatcher:
                 cleaned_s += ' '
         tokens = sorted([token for token in cleaned_s.split() if token])
         return " ".join(tokens)
+
+    @staticmethod
+    def _is_group_header(name):
+        """Return True for M3U playlist group/section separators like '##### EUROSPORT #####'.
+        These are not real stream names and must be excluded from matching."""
+        return bool(re.search(r'[#=*|]{3,}', name or ""))
 
     @staticmethod
     def _trailing_number(name):
@@ -640,6 +687,8 @@ class FuzzyMatcher:
             return []
 
         for candidate in candidate_names:
+            if self._is_group_header(candidate):
+                continue
             candidate_lower, candidate_nospace = self._get_cached_norm(candidate, user_ignored_tags)
             if not candidate_lower:
                 continue
@@ -670,7 +719,13 @@ class FuzzyMatcher:
                 # like alias "ABC News" vs stream "BBC News" (93%, shares only
                 # "news"; the 3-char call sign "abc"/"bbc" is below the basic
                 # overlap guard's 4-char token floor).
-                if not self._has_token_overlap(best_alias_norm, candidate_lower, require_majority=True):
+                # Use process_string_for_matching (NFD) so accented tokens like
+                # "chérie" match their unaccented stream form "cherie".
+                if not self._has_token_overlap(
+                    self.process_string_for_matching(best_alias_norm),
+                    self.process_string_for_matching(candidate_lower),
+                    require_majority=True,
+                ):
                     continue
 
             if score >= effective_threshold:
@@ -854,15 +909,26 @@ class FuzzyMatcher:
             # channel ("DIRECTV 4K Live 1" vs "... Live 2") -- used to skip
             # those near-identical false positives in the fuzzy stages below.
             query_trailing_num = self._trailing_number(normalized_query_lower)
+            # Detect "+1"/"+2" time-shift suffix so shift channels never match
+            # non-shift streams and vice versa ("Nickelodeon+1" vs "Nickelodeon").
+            # Must check the ORIGINAL name: normalize_name strips "+" (Sm category)
+            # so "+1" becomes "1" post-normalization and would be undetectable.
+            query_is_shift = bool(_PLUS_SHIFT_RE.search(lineup_name or ""))
 
             for candidate in candidate_names:
                 if candidate in all_matches:
                     continue  # Already matched via alias
+                if self._is_group_header(candidate):
+                    continue  # Skip M3U group/section separators
 
                 # Use cached normalizations for performance
                 candidate_lower, candidate_nospace = self._get_cached_norm(candidate, user_ignored_tags)
                 if not candidate_lower:
                     continue
+
+                cand_is_shift = bool(_PLUS_SHIFT_RE.search(candidate))
+                if query_is_shift != cand_is_shift:
+                    continue  # Shift channel (+1/+2) must only match shift streams
 
                 if query_trailing_num is not None:
                     cand_trailing_num = self._trailing_number(candidate_lower)
@@ -1041,7 +1107,26 @@ class FuzzyMatcher:
             cand_tokens = set(re.findall(r'[a-z0-9]+', candidate_name.lower()))
             return len(lineup_tokens & cand_tokens)
 
+        # Secondary sort key: prefer streams whose country marker matches the
+        # lineup country (score 1) over streams with an unrecognized prefix like
+        # AF:, TS:, MEO: that pass the hard country filter but should rank below
+        # FR: streams (score 0). Streams with a recognized but wrong country
+        # (already dropped by the filter) would score -1.
+        _sort_lc = lineup_country.upper() if lineup_country else None
+        _sort_accepted = None
+        if _sort_lc and _sort_lc in _KNOWN_COUNTRY_CODES:
+            _sort_accepted = _COMPATIBLE_COUNTRIES.get(_sort_lc, set()) | {_sort_lc}
+
+        def _country_key(candidate_name):
+            if _sort_accepted is not None:
+                sc = detect_stream_country(candidate_name)
+                return 1 if (sc is not None and sc in _sort_accepted) else 0
+            return 0
+
         results = [(name, score, mtype) for name, (score, mtype) in all_matches.items()]
-        results.sort(key=lambda x: (x[1], _orig_overlap(x[0])), reverse=True)
+        results.sort(
+            key=lambda x: (x[1], _country_key(x[0]), _orig_overlap(x[0])),
+            reverse=True,
+        )
         return results
 
