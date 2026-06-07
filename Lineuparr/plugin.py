@@ -17,7 +17,7 @@ from glob import glob
 
 from django.db import transaction
 
-from .fuzzy_matcher import FuzzyMatcher
+from .fuzzy_matcher import FuzzyMatcher, has_upgrade_quality
 from .aliases import CHANNEL_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
 
@@ -67,6 +67,7 @@ class PluginConfig:
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
+    DEFAULT_QUALITY_AWARE_STREAM_MATCHING = False
     DEFAULT_RATE_LIMITING = "none"
     DEFAULT_CHANNEL_NUMBERING = "lineup"
 
@@ -442,6 +443,19 @@ class Plugin:
                 "type": "boolean",
                 "default": True,
                 "help_text": "Sort attached streams by quality (4K > UHD > FHD > HD > SD). Uses probed resolution if available.",
+            },
+            {
+                "id": "quality_aware_stream_matching",
+                "label": "Quality-Aware Stream Matching",
+                "type": "boolean",
+                "default": False,
+                "help_text": (
+                    "When on, if the lineup contains both TF1 and TF1 UHD, each is restricted "
+                    "to streams of its own quality tier: TF1 only matches standard streams, "
+                    "TF1 UHD only matches upgrade streams (4K/8K/UHD/HDR). "
+                    "Channels with no twin in the lineup are unaffected. "
+                    "Streams listed in a channel's aliases bypass this filter."
+                ),
             },
             {
                 "id": "preserve_existing_streams",
@@ -874,6 +888,43 @@ class Plugin:
                 )
 
         return alias_map
+
+    def _build_upgrade_twin_set(self, lineup, matcher):
+        """Return lineup channel names (both tiers) that have a twin in the other tier.
+
+        Example: if the lineup contains both "France 2" and "France 2 UHD", both
+        are returned. The matcher then restricts each to streams of its own quality
+        tier (standard streams for "France 2", upgrade streams for "France 2 UHD").
+        """
+        all_names = [ch["name"] for cat in lineup["categories"].values() for ch in cat]
+        upgrade_bases = set()
+        standard_bases = set()
+        for name in all_names:
+            base = matcher.normalize_name(name, ignore_quality=True)
+            if base:
+                if has_upgrade_quality(name):
+                    upgrade_bases.add(base.lower())
+                else:
+                    standard_bases.add(base.lower())
+        twin_set = set()
+        for name in all_names:
+            base = matcher.normalize_name(name, ignore_quality=True)
+            if base:
+                if has_upgrade_quality(name) and base.lower() in standard_bases:
+                    twin_set.add(name)
+                elif not has_upgrade_quality(name) and base.lower() in upgrade_bases:
+                    twin_set.add(name)
+        return twin_set
+
+    def _get_upgrade_twin_set(self, settings, lineup, matcher, logger=None):
+        """Return the upgrade twin set if quality_aware_stream_matching is enabled, else empty set."""
+        if not settings.get("quality_aware_stream_matching", PluginConfig.DEFAULT_QUALITY_AWARE_STREAM_MATCHING):
+            return set()
+        twin_set = self._build_upgrade_twin_set(lineup, matcher)
+        if logger and twin_set:
+            logger.info(f"{LOG_PREFIX} Quality-aware matching active for {len(twin_set)} channel(s)")
+            logger.debug(f"{LOG_PREFIX} Quality-aware twins: {sorted(twin_set)}")
+        return twin_set
 
     def _get_filtered_epg_data(self, settings, logger):
         """Fetch EPG data, optionally filtered and prioritized by selected sources."""
@@ -1479,6 +1530,7 @@ class Plugin:
                 return lineup
             matcher = self._init_fuzzy_matcher(settings, logger)
             alias_map = self._build_alias_map(settings, logger)
+            upgrade_twin_set = self._get_upgrade_twin_set(settings, lineup, matcher)
             streams = self._get_all_streams(settings, logger)
             assigner = self._init_assigner_state(settings)
             lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
@@ -1526,6 +1578,7 @@ class Plugin:
                         ch_name, unique_stream_names, alias_map,
                         channel_number=boost_number,
                         lineup_country=lineup_cc,
+                        quality_aware=(ch_name in upgrade_twin_set),
                     )
 
                     if matches:
@@ -2169,6 +2222,8 @@ class Plugin:
             matcher.precompute_normalizations(unique_stream_names)
             matcher.country_filter_drops = 0
 
+            upgrade_twin_set = self._get_upgrade_twin_set(settings, lineup, matcher, logger)
+
             # Get existing groups and channels
             existing_groups = {g['name']: g['id'] for g in ChannelGroup.objects.all().values('id', 'name')}
             existing_channels = {}
@@ -2214,6 +2269,7 @@ class Plugin:
                         ch_name, unique_stream_names, alias_map,
                         channel_number=ch_number,
                         lineup_country=lineup_cc,
+                        quality_aware=(ch_name in upgrade_twin_set),
                     )
 
                     if matches:

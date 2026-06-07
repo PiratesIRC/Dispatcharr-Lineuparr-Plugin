@@ -29,6 +29,16 @@ QUALITY_PATTERNS = [
     r'\s+\b(4K|8K|UHD|FHD|HD|SD|FD|Unknown|Unk|Slow|Dead)\b\s+',
 ]
 
+# Quality markers that distinguish an upgrade-tier channel from its standard twin.
+# HD/FHD/HEVC are intentionally excluded — they don't create a separate twin channel.
+_UPGRADE_QUALITY_RE = re.compile(r'\b(?:4K|8K|UHD|HDR)\b|ᵁᴴᴰ', re.IGNORECASE)
+
+
+def has_upgrade_quality(name: str) -> bool:
+    """Return True if name contains an upgrade quality marker (4K/8K/UHD/HDR)."""
+    return bool(_UPGRADE_QUALITY_RE.search(name))
+
+
 REGIONAL_PATTERNS = [
     # East/West are intentionally NOT stripped — they distinguish separate channel feeds
     # (e.g., "HBO East" and "HBO West" are different channels)
@@ -768,7 +778,7 @@ class FuzzyMatcher:
         return None, 0, None
 
     def match_all_streams(self, lineup_name, candidate_names, alias_map, channel_number=None,
-                          user_ignored_tags=None, lineup_country=None):
+                          user_ignored_tags=None, lineup_country=None, quality_aware=False):
         """
         Full matching pipeline for Lineuparr: alias → exact → substring → fuzzy, with number boost.
         Returns ALL matching streams sorted by score.
@@ -779,6 +789,9 @@ class FuzzyMatcher:
             alias_map: Alias dict
             channel_number: Expected channel number for boost
             user_ignored_tags: Tags to strip
+            quality_aware: When True, upgrade streams (4K/8K/UHD/HDR) are excluded
+                from standard channels. Streams listed in alias_map for this channel bypass
+                the filter (e.g. "France 2": ["FRANCE 2 4K HDR"] allows that specific stream).
 
         Returns:
             List of (stream_name, score, match_type) tuples sorted by score desc.
@@ -788,6 +801,32 @@ class FuzzyMatcher:
 
         if user_ignored_tags is None:
             user_ignored_tags = []
+
+        # Quality-aware pre-filtering (opt-in via quality_aware).
+        # Both tiers are gated: upgrade channels only match upgrade streams,
+        # standard channels only match standard streams. Streams listed in
+        # alias_map for either tier bypass the filter.
+        if quality_aware:
+            lineup_is_upgrade = has_upgrade_quality(lineup_name or "")
+            explicit_bypass = set()
+            if alias_map:
+                raw = alias_map.get(lineup_name, [])
+                alias_list = [raw] if isinstance(raw, str) else list(raw)
+                norm_aliases = {
+                    self.normalize_name(a, ignore_quality=False).lower()
+                    for a in alias_list
+                    if self.normalize_name(a, ignore_quality=False)
+                }
+                for c in candidate_names:
+                    norm_c = self.normalize_name(c, ignore_quality=False)
+                    if norm_c and norm_c.lower() in norm_aliases:
+                        explicit_bypass.add(c)
+            candidate_names = [
+                c for c in candidate_names
+                if has_upgrade_quality(c) == lineup_is_upgrade or c in explicit_bypass
+            ]
+            if not candidate_names:
+                return []
 
         # Callsign anchor (asymmetric): extract the lineup channel's US
         # broadcast callsign up front. Used after the fuzzy stages to floor
