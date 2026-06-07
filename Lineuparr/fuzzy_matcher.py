@@ -129,6 +129,16 @@ _KNOWN_COUNTRY_CODES = {
     # deliberately excluded: in these feeds it tags Arabic-language channels,
     # not Argentina, so mapping it to a country would be wrong.
     "TR", "GR", "IR", "AL",
+    # Second batch (2026-06-07): foreign feeds that were leaking in as BACKUP
+    # streams on globally-named channels (CNN, BBC) in a US lineup preview.
+    # Each was confirmed against real stream content (e.g. RO=Acasa, RU=2X2,
+    # AZ=Baku TV, MK=24 Vesti, IL=Kan 11/13/14, CO=Cable Noticias, CR=FUTV).
+    # Provider tags (HUB/AMP/STC/OSN/MEO/MXC) and regions (LA/AFR/AF) are NOT
+    # added: HUB/AMP carry US channels, the rest are not single countries.
+    "BG", "RO", "RU", "AZ", "HR", "TH", "RS", "MK", "IL", "CO", "CR", "CY",
+    # Lower-volume but unambiguous ISO-2 countries also seen as colon-prefixes
+    # (JP=Animax/BS, KR=Arirang, CZ/HU=European feeds, PH=GMA/Manila, NZ).
+    "JP", "KR", "CZ", "HU", "NZ", "PH",
 }
 
 # ISO-3 or colloquial codes seen in M3U streams → ISO-2.
