@@ -68,7 +68,6 @@
       { "name": "HBO", "number": 899, "addon": "HBO" },
       { "name": "HBO 2", "number": 902, "addon": "HBO" },
       { "name": "HBO Comedy", "number": 908, "addon": "HBO" },
-      { "name": "HBO Family", "number": 906, "addon": "HBO" },
       { "name": "HBO Signature", "number": 904, "addon": "HBO" },
       { "name": "HBO Zone", "number": 910, "addon": "HBO" },
       { "name": "IFC", "number": 734 },
@@ -76,8 +75,6 @@
       { "name": "MGM+", "number": 895, "addon": "MGM+" },
       { "name": "MGM+ Hits", "number": 896, "addon": "MGM+" },
       { "name": "More Max", "number": 922, "addon": "Cinemax" },
-      { "name": "Movie Max", "number": 928, "addon": "Cinemax" },
-      { "name": "Outer Max", "number": 931, "addon": "Cinemax" },
       { "name": "Paramount+ with SHOWTIME", "number": 865, "addon": "Movie Package" },
       { "name": "RetroPlex", "number": 849, "addon": "Movie Package" },
       { "name": "Showtime 2", "number": 869, "addon": "Movie Package" },
@@ -93,7 +90,6 @@
       { "name": "Starz Kids & Family", "number": 845, "addon": "Movie Package" },
       { "name": "Sundance TV", "number": 735 },
       { "name": "The Movie Channel", "number": 885, "addon": "Movie Package" },
-      { "name": "Thriller Max", "number": 926, "addon": "Cinemax" },
       { "name": "Turner Classic Movies", "number": 730 }
     ],
     "Kids": [

@@ -38,13 +38,10 @@
       { "name": "MLB Network", "number": 152, "addon": "Multi-Sport Pack" },
       { "name": "MLB Strike Zone", "number": 153, "addon": "Multi-Sport Pack" },
       { "name": "NBA TV", "number": 156, "addon": "Multi-Sport Pack" },
-      { "name": "NBCSN", "number": 159 },
       { "name": "NFL Network", "number": 154, "addon": "Multi-Sport Pack" },
       { "name": "NFL RedZone", "number": 155, "addon": "Multi-Sport Pack" },
       { "name": "NHL Network", "number": 157, "addon": "Multi-Sport Pack" },
-      { "name": "Olympic Channel", "number": 389 },
       { "name": "Outside TV", "number": 390, "addon": "Multi-Sport Pack" },
-      { "name": "Pac-12 Network", "number": 406, "addon": "Multi-Sport Pack" },
       { "name": "SEC Network", "number": 404, "addon": "Multi-Sport Pack" },
       { "name": "Tennis Channel", "number": 400 },
       { "name": "TV Games Network", "number": 399, "addon": "National Action Pack" },
@@ -52,8 +49,7 @@
     ],
     "Regional Sports": [
       { "name": "Regional Sports Networks (market-based)", "number": 412, "addon": "Multi-Sport Pack", "notes": "Varies by ZIP code. Hopper receivers only. All other receivers 409-437." },
-      { "name": "Big 10 Network", "number": 405, "addon": "Multi-Sport Pack" },
-      { "name": "Longhorn Network", "number": 407, "addon": "Multi-Sport Pack" }
+      { "name": "Big 10 Network", "number": 405, "addon": "Multi-Sport Pack" }
     ],
     "Movies": [
       { "name": "EPIX Drive-In", "number": 292 },

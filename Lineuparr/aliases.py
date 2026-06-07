@@ -27,7 +27,7 @@ CHANNEL_ALIASES = {
     "MS Now": ["MSNBC", "MSNBC Now", "MS Now"],
     "MSNBC": ["MSNBC", "MS Now", "MSNBC Now"],
     "Newsmax": ["Newsmax", "Newsmax TV"],
-    "NewsNation": ["NewsNation", "News Nation"],
+    "NewsNation": ["NewsNation", "News Nation", "WGN America", "WGN"],
     "Weather Channel": ["Weather Channel", "TWC", "The Weather Channel"],
 
     # --- Sports ---
@@ -66,10 +66,10 @@ CHANNEL_ALIASES = {
     "Cinemax": ["Cinemax", "Cinemax US"],
     "HBO East": ["HBO East", "HBO (East)", "HBO"],
     "HBO Comedy East HD": ["HBO Comedy East", "HBO Comedy (East)", "HBO Comedy"],
-    "HBO Drama HD East": ["HBO Drama East", "HBO Drama (East)", "HBO Drama"],
-    "HBO Hits HD East": ["HBO Hits East", "HBO Hits (East)", "HBO Hits"],
+    "HBO Drama HD East": ["HBO Drama East", "HBO Drama (East)", "HBO Drama", "HBO Signature"],
+    "HBO Hits HD East": ["HBO Hits East", "HBO Hits (East)", "HBO Hits", "HBO 2", "HBO2"],
     "HBO Latino": ["HBO Latino"],
-    "HBO Movies HD": ["HBO Movies", "HBO Movies HD", "HBO Movies East", "HBO Movies (East)"],
+    "HBO Movies HD": ["HBO Movies", "HBO Movies HD", "HBO Movies East", "HBO Movies (East)", "HBO Zone"],
     "Paramount+ with SHOWTIME EAST": ["Showtime East", "Showtime (East)", "SHOWTIME EAST", "Showtime"],
     "Showtime (E)": ["Paramount+ with Showtime", "Paramount+ with Showtime HD", "Showtime East", "Showtime"],
     "Showtime (W)": ["Paramount+ with Showtime (Pacific)", "Paramount+ with Showtime HD (Pacific)", "Showtime West"],
@@ -278,9 +278,6 @@ CHANNEL_ALIASES = {
     "TF1 Séries Films": ["TF1SF"],
     "LCP": ["LCP AN", "LCP Assemblée nationale"],
 
-    # --- FR: Divertissement ---
-    "TLC": ["Discovery Science"],
-
     # --- FR: Canal+ Channels ---
     "Canal+": ["Canal Plus"],
     "Canal+Sport 360": ["Canal+ 360"],
@@ -318,7 +315,6 @@ CHANNEL_ALIASES = {
 
     # --- FR: Music ---
     "Europe 2 Pop TV": ["CSTAR Hits France", "C Star Hits France"],
-    "MTV": ["MTV France"],
 
     # --- FR: France 3 Régions ---
     "France 3 Champagne-Ardenne": ["France 3 Champ Ardenne", "F3 Champ Ardenne"],
@@ -352,4 +348,58 @@ CHANNEL_ALIASES = {
     "Discovery Turbo": ["Disc.Turbo", "Disc.Turbo+1", "UK: DISCOVERY TURBO", "DISCOVERY TURBO"],
     "Discovery Science": ["Disc.Science", "Disc.Sci+1", "Discovery Science", "UK: DISCOVERY SCIENCE"],
     "Crime+Investigation": ["Crime+Inv HD", "Crime+Inv+1", "Crime + Investigation", "Crime+Investigation"],
+
+    # --- US rebrands (old broadcast names <-> current names) ----------------
+    # Provider lineups were captured at different times, so a channel may carry
+    # either its pre- or post-rebrand name. These aliases let a lineup channel
+    # match streams/EPG under EITHER name. US_Combined has been de-duped so the
+    # old and new names never coexist there; per-provider lineups (DISH/Verizon)
+    # keep whatever name the provider used, hence both directions are covered.
+    # NOTE: deliberately NOT aliasing regional Bally/FanDuel/Fox Sports Net
+    # feeds (see the FanDuel TV note above) — that catch-all was harmful.
+    #
+    # Sports
+    "SportsNet Pittsburgh": ["SportsNet Pittsburgh", "AT&T SportsNet Pittsburgh", "ATT SportsNet Pittsburgh", "Root Sports Pittsburgh"],
+    # Premium movies — current names also matching the old multiplex names
+    "MGM+": ["MGM+", "MGM Plus", "MGM+ East", "EPIX", "Epix", "EPIX 1"],
+    "MGM+ Hits": ["MGM+ Hits", "MGM Hits", "EPIX Hits"],
+    "Cinemax Action": ["Cinemax Action", "ActionMax", "Action Max"],
+    "Cinemax Classics": ["Cinemax Classics", "5StarMax", "5 Star Max", "Five Star Max"],
+    "Cinemax Hits HD": ["Cinemax Hits HD", "Cinemax Hits", "MoreMax", "More Max"],
+    # Premium movies — lineups still using the pre-rebrand multiplex names
+    "Action Max": ["Action Max", "ActionMax", "Cinemax Action"],
+    "Five Star Max": ["Five Star Max", "5StarMax", "5 Star Max", "Cinemax Classics"],
+    "More Max": ["More Max", "MoreMax", "Cinemax Hits"],
+    "HBO Signature": ["HBO Signature", "HBO Drama", "HBO Drama HD"],
+    "HBO Zone": ["HBO Zone", "HBO Movies", "HBO Movies HD"],
+    "HBO 2": ["HBO 2", "HBO2", "HBO Hits"],
+    # Entertainment / lifestyle
+    "Magnolia Network": ["Magnolia Network", "Magnolia", "DIY Network", "DIY"],
+    "Great American Family": ["Great American Family", "Great American Country", "GAC", "GAC Family"],
+    "Great American Country": ["Great American Country", "Great American Family", "GAC"],
+    "Hallmark Drama": ["Hallmark Drama", "Hallmark Family"],
+    # News — DISH lineup still carries the pre-rebrand "WGN America" name.
+    "WGN America": ["WGN America", "WGN", "NewsNation", "News Nation"],
+}
+
+
+# Country-scoped alias overrides.
+#
+# Some channel NAMES exist in more than one country with DIFFERENT stream-name
+# variants. Because CHANNEL_ALIASES is keyed only by channel name, putting a
+# country-specific variant there silently collided with (and clobbered) the
+# entry for the same name in another market — e.g. a France-only "TLC" ->
+# "Discovery Science" mapping overrode the US "TLC" -> "TLC US" entry AND
+# leaked into US/UK/NL/CA lineups, where TLC and Discovery Science are
+# SEPARATE channels (bug-063).
+#
+# These overrides are merged on top of CHANNEL_ALIASES by _build_alias_map()
+# only for the lineup's own country, so they never leak across markets.
+COUNTRY_ALIASES = {
+    "FR": {
+        # TLC France airs on the former Discovery Science feed; some French
+        # IPTV sources still label the stream "Discovery Science".
+        "TLC": ["Discovery Science"],
+        "MTV": ["MTV France"],
+    },
 }

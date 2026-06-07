@@ -18,7 +18,7 @@ from glob import glob
 from django.db import transaction
 
 from .fuzzy_matcher import FuzzyMatcher, has_upgrade_quality
-from .aliases import CHANNEL_ALIASES
+from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
 
 from apps.channels.models import Channel, ChannelGroup, ChannelProfile, ChannelProfileMembership, ChannelStream, Stream
@@ -63,7 +63,7 @@ def _clean_json_text(s):
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.1431300"
+    PLUGIN_VERSION = "1.26.1581751"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -835,8 +835,23 @@ class Plugin:
         return streams
 
     def _build_alias_map(self, settings, logger):
-        """Merge built-in aliases with user custom aliases."""
+        """Merge built-in aliases with user custom aliases.
+
+        Built-in aliases are global (keyed by channel name). Country-scoped
+        overrides from COUNTRY_ALIASES are merged on top for THIS lineup's
+        country only, so a name that exists in multiple markets (e.g. "TLC",
+        "MTV") doesn't leak one country's stream-name variants into another
+        (bug-063). Custom user aliases are merged last and win.
+        """
         alias_map = dict(CHANNEL_ALIASES)
+
+        try:
+            lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
+        except Exception:
+            lineup_cc = None
+        if lineup_cc:
+            for k, v in COUNTRY_ALIASES.get(lineup_cc.upper(), {}).items():
+                alias_map[k] = list(dict.fromkeys(alias_map.get(k, []) + list(v)))
 
         custom_str = _clean_json_text(settings.get("custom_aliases") or "")
         if custom_str:
