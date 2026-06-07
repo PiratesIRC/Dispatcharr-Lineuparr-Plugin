@@ -84,11 +84,12 @@ GEOGRAPHIC_PATTERNS = [
 # Enhanced provider prefix patterns for IPTV-specific naming
 PROVIDER_PREFIX_PATTERNS = [
     r'^(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*[:\-\|]\s*',
-    # Bare country tag + whitespace, no separator (e.g. "US Racer Network").
-    # Restricted to the 2-letter US/UK/CA/AU codes so it cannot eat a real
-    # channel name: "USA Network" (USA != US + space) and "In Country
-    # Television" ("IN") are both safe from this pattern.
-    r'^(?:US|UK|CA|AU)\s+',
+    # Bare country tag + whitespace, no separator (e.g. "US Racer Network",
+    # "FR beIN SPORTS MAX", "MEX Bein Sports"). Restricted to a curated set so
+    # it cannot eat a real channel name: "USA Network" (USA != US + space),
+    # "In Country Television" ("IN") and "IT Crowd" ("IT") are all safe.
+    # Keep this set in sync with detect_stream_country()'s bare-space branch.
+    r'^(?:US|UK|CA|AU|FR|DE|MX|MEX|FRA|GER)\s+',
     r'^\s*\((?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\)\s*',
     r'\s*\|\s*(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*$',
     # Content-category group prefixes used by some IPTV providers.
@@ -195,16 +196,17 @@ def detect_stream_country(name):
         return _normalize_country_token(m.group(1))
 
     # Bare country tag + whitespace, no separator (e.g. "US beIN SPORTS (S)",
-    # "CA TSN 1 HD"). normalize_name() already strips this exact prefix via
-    # PROVIDER_PREFIX_PATTERNS, so the country filter must recognize it too —
-    # otherwise these match a foreign lineup cleanly but can't be proven
-    # wrong-country, and leak in as backup streams. Restricted to the
-    # unambiguous 2-letter US/UK/CA/AU codes (same restriction as the prefix
-    # stripper) so it can't eat "USA Network" (USA, not US+space) or "IN
-    # Country Television".
-    m = re.match(r'^\s*(US|UK|CA|AU)\s+', name, re.IGNORECASE)
+    # "CA TSN 1 HD", "FR beIN SPORTS MAX", "MEX Bein Sports"). normalize_name()
+    # strips this exact prefix via PROVIDER_PREFIX_PATTERNS, so the country
+    # filter must recognize it too — otherwise these match a foreign lineup
+    # cleanly but can't be proven wrong-country, and leak in as backup streams.
+    # Restricted to a curated set of unambiguous codes (same set as the prefix
+    # stripper) so it can't eat "USA Network" (USA, not US+space), "IN Country
+    # Television" (IN), or "IT Crowd" (IT). MEX/FRA/GER 3-letter aliases are
+    # included and folded to ISO-2 via _normalize_country_token.
+    m = re.match(r'^\s*(US|UK|CA|AU|FR|DE|MX|MEX|FRA|GER)\s+', name, re.IGNORECASE)
     if m:
-        return m.group(1).upper()
+        return _normalize_country_token(m.group(1))
 
     return None
 
