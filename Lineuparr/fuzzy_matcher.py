@@ -10,7 +10,7 @@ import re
 import logging
 import unicodedata
 
-__version__ = "1.3.3"
+__version__ = "1.3.4"
 
 LOGGER = logging.getLogger("plugins.lineuparr.fuzzy_matcher")
 if not LOGGER.handlers:
@@ -122,16 +122,40 @@ _PLUTO_COUNTRY_MAP = {
     # "LATIN"/"EUROPE" etc. intentionally omitted — ambiguous region.
 }
 
-# Country pairs that share enough cross-border channels that users consider
-# them interchangeable. US<->CA share CBS/ABC/ESPN/A&E/TSN etc.; US<->MX share
-# the US Spanish-language networks (Univision, Telemundo, Galavision, NBC
-# Universo), whose M3U feeds are frequently tagged MEX. A US lineup should
-# accept a `(CA) ESPN` or `MEX: Galavision` stream, and vice versa.
-_COMPATIBLE_COUNTRIES = {
-    "US": {"CA", "MX"},
-    "CA": {"US"},
-    "MX": {"US"},
+# Cross-border country matching is STRICT by default: a lineup accepts only
+# streams tagged with its own country (plus untagged streams, which can't be
+# proven wrong). Blanket compatibility was removed — it wrongly merged
+# channels that merely share a name across a border (Food Network US != Food
+# Network CA; ESPN US != ESPN MX).
+#
+# The ONLY cross-border exceptions are specific channels that are genuinely the
+# SAME feed on both sides. Keyed by the unordered country pair (frozenset), so
+# the rule applies in both directions. Values are comparison keys produced by
+# _fold_key() (accent-folded, lowercased, alphanumerics only).
+#
+# US<->MX: the US Spanish-language networks, whose M3U feeds are frequently
+# tagged MEX/(MX) even though they are the US feed. To add a genuinely-shared
+# channel, fold its name the same way (e.g. "NBC Universo" -> "nbcuniverso").
+_CROSS_BORDER_SHARED = {
+    frozenset({"US", "MX"}): frozenset({
+        "univision", "unimas", "telemundo", "galavision", "universo",
+        "nbcuniverso", "tudn", "telexitos", "bandamax", "tlnovelas",
+        "univisiontlnovelas", "telemundodeportes", "universonbc",
+    }),
 }
+
+
+def _fold_key(name):
+    """Accent-fold, lowercase, and strip to alphanumerics for set membership.
+
+    "Univisión" -> "univision", "NBC Universo" -> "nbcuniverso". Used to test a
+    channel name against _CROSS_BORDER_SHARED regardless of accents/spacing.
+    """
+    if not name:
+        return ""
+    name = unicodedata.normalize('NFD', name)
+    name = ''.join(c for c in name if unicodedata.category(c) != 'Mn')
+    return re.sub(r'[^a-z0-9]', '', name.lower())
 
 
 def _normalize_country_token(tok):
@@ -297,16 +321,19 @@ class FuzzyMatcher:
         name = re.sub(r'([a-z])([A-Z][a-z])', r'\1 \2', name)
         name = re.sub(r'([a-z]{4,})([A-Z]{2,})\b', r'\1 \2', name)
 
-        # Preserve parenthesized East/West -- and the (E)/(W) abbreviations --
-        # as bare words so they survive both the leading-parenthetical strip
-        # below and the generic parenthetical strip (MISC_PATTERNS). Bare
-        # "East"/"West" are intentionally kept (they distinguish separate
-        # feeds); the parenthesized forms must be kept too, or a zoned lineup
-        # channel cannot match a zoned stream (e.g. "Cartoon Network (W)" vs
-        # "US: Cartoon Network West"). Only E/W are converted -- the other
-        # single letters (A/S/H/F/X/D) are stream source/quality tags.
-        name = re.sub(r'\(\s*(?:east|e)\s*\)', ' East ', name, flags=re.IGNORECASE)
-        name = re.sub(r'\(\s*(?:west|w)\s*\)', ' West ', name, flags=re.IGNORECASE)
+        # Strip region tokens (East / Eastern / West and the (E)/(W)
+        # abbreviations) for SCORING. Region CORRECTNESS — East vs West vs
+        # Pacific — is enforced separately by the post-match region filter in
+        # match_all_streams, which reads the ORIGINAL un-normalized names, not
+        # this output. Stripping here lets a regionless lineup channel
+        # ("Food Network") still score-match a region-tagged stream
+        # ("Food Network Eastern" / "... East") instead of being dragged below
+        # threshold by the extra token; the filter then accepts it (regionless
+        # defaults to East). "Western"/"Westerns" is a movie genre, NOT a
+        # region, so bare "west" is stripped only on a word boundary (\bwest\b
+        # does not match inside "western") and "western" is never touched.
+        name = re.sub(r'\(\s*(?:eastern|east|e|west|w)\s*\)', ' ', name, flags=re.IGNORECASE)
+        name = re.sub(r'\b(?:eastern|east|west)\b', ' ', name, flags=re.IGNORECASE)
 
         # Remove leading parenthetical prefixes
         while name.lstrip().startswith('('):
@@ -1006,40 +1033,46 @@ class FuzzyMatcher:
         # "(PLUTO Brazil) MTV") and that marker differs from the lineup's country
         # is dropped. Streams without a country marker are kept — we can't prove
         # they're wrong and over-filtering breaks lineups whose M3U sources don't
-        # tag country at all. Countries in _COMPATIBLE_COUNTRIES (US↔CA) are
-        # treated as a single compatibility class.
+        # tag country at all.
+        #
+        # Matching is STRICT by default: only the lineup's own country passes.
+        # The single exception is a channel that is genuinely the same feed
+        # across a border (e.g. US Spanish networks tagged MEX) — see
+        # _CROSS_BORDER_SHARED. This deliberately rejects same-name-different-
+        # channel cases like "(CA) Food Network" or "(MX) ESPN" for a US lineup.
         if lineup_country:
             lc = lineup_country.upper()
             # Defensive: if caller passes an unrecognized code, skip filtering
             # rather than drop every country-marked candidate.
             if lc in _KNOWN_COUNTRY_CODES:
-                accepted = _COMPATIBLE_COUNTRIES.get(lc, set()) | {lc}
+                nq_fold = _fold_key(normalized_query)
                 kept = {}
                 for name, val in all_matches.items():
                     sc = detect_stream_country(name)
-                    if sc is None or sc in accepted:
+                    if sc is None or sc == lc:
                         kept[name] = val
-                    else:
-                        self.country_filter_drops += 1
+                        continue
+                    shared = _CROSS_BORDER_SHARED.get(frozenset({lc, sc}))
+                    if shared and nq_fold in shared:
+                        kept[name] = val  # genuinely-shared cross-border feed
+                        continue
+                    self.country_filter_drops += 1
                 all_matches = kept
 
-        # Filter out wrong-region matches (East vs West vs Pacific)
-        # Check both normalized query AND original name for regional indicators.
-        # normalize_name converts (E)/(W) to bare East/West and strips other
-        # parentheticals, so detect abbreviated regional suffixes (incl. the
-        # Pacific (P) abbreviation it does drop) from the original name.
-        query_lower = (normalized_query or "").lower()
+        # Filter out wrong-region matches (East vs West vs Pacific).
+        # Detect the lineup channel's region from the ORIGINAL un-normalized
+        # name: normalize_name now strips East/West/Eastern (and Pacific via
+        # REGIONAL_PATTERNS) for scoring, so the normalized form no longer
+        # carries the region word. "east" as a substring also catches the
+        # adjective "Eastern"; for west we require the word but exclude the
+        # "western"/"westerns" genre.
         original_lower = (lineup_name or "").lower()
         # Detect (e)/(w)/(p) abbreviations in the original name
         _has_abbrev_east = bool(re.search(r'\(\s*e\s*\)', original_lower))
         _has_abbrev_west = bool(re.search(r'\(\s*w\s*\)', original_lower))
         _has_abbrev_pacific = bool(re.search(r'\(\s*p\s*\)', original_lower))
-        query_has_east = "east" in query_lower or _has_abbrev_east
-        query_has_west = ("west" in query_lower and "western" not in query_lower) or _has_abbrev_west
-        # REGIONAL_PATTERNS strips the full word "pacific" during normalize_name
-        # (unlike east/west which are preserved), so we must detect it from the
-        # original lineup name. Without this, "Sportsnet Pacific" normalizes to
-        # "Sportsnet" and wrongly matches a regionless "Sportsnet" stream.
+        query_has_east = "east" in original_lower or _has_abbrev_east
+        query_has_west = ("west" in original_lower and "western" not in original_lower) or _has_abbrev_west
         query_has_pacific = ("pacific" in original_lower) or _has_abbrev_pacific
 
         if query_has_east or query_has_west or query_has_pacific:
@@ -1116,14 +1149,14 @@ class FuzzyMatcher:
         # FR: streams (score 0). Streams with a recognized but wrong country
         # (already dropped by the filter) would score -1.
         _sort_lc = lineup_country.upper() if lineup_country else None
-        _sort_accepted = None
-        if _sort_lc and _sort_lc in _KNOWN_COUNTRY_CODES:
-            _sort_accepted = _COMPATIBLE_COUNTRIES.get(_sort_lc, set()) | {_sort_lc}
+        _sort_active = bool(_sort_lc and _sort_lc in _KNOWN_COUNTRY_CODES)
 
         def _country_key(candidate_name):
-            if _sort_accepted is not None:
+            if _sort_active:
                 sc = detect_stream_country(candidate_name)
-                return 1 if (sc is not None and sc in _sort_accepted) else 0
+                # Streams tagged with the lineup's own country rank first; any
+                # surviving cross-border-shared or untagged stream ranks below.
+                return 1 if sc == _sort_lc else 0
             return 0
 
         results = [(name, score, mtype) for name, (score, mtype) in all_matches.items()]
