@@ -87,13 +87,20 @@ PROVIDER_PREFIX_PATTERNS = [
     # Bare country tag + whitespace, no separator (e.g. "US Racer Network",
     # "FR beIN SPORTS MAX", "MEX Bein Sports"). Restricted to a curated set so
     # it cannot eat a real channel name: "USA Network" (USA != US + space),
-    # "In Country Television" ("IN") and "IT Crowd" ("IT") are all safe.
+    # "In Country Television" ("IN") and "IT Crowd" ("IT") are all safe too.
     # Keep this set in sync with detect_stream_country()'s bare-space branch.
     r'^(?:US|UK|CA|AU|FR|DE|MX|MEX|FRA|GER)\s+',
     r'^\s*\((?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\)\s*',
     r'\s*\|\s*(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*$',
     # Content-category group prefixes used by some IPTV providers.
     r'^(?:ADULT|EROTIC|PRIME)\s*[:\-\|]\s*',
+    # FAST streaming-platform source tags (Roku, Tubi, Pluto, etc.). These mark
+    # the distribution platform, not the channel or its country, so strip them
+    # for matching ("RK: beIN Sports Xtra" -> "beIN Sports Xtra"). A separator
+    # is required so this can't eat real names like "GOLF" or "PLEX TV Movies".
+    # NOT a country signal: detect_stream_country() ignores these (correctly,
+    # since a platform like Roku spans US/CA/UK).
+    r'^(?:RK|GO|TUBI|PLUTO|XUMO|PLEX|STIRR|FREEVEE|GLANCE)\s*[:\-\|]\s*',
 ]
 
 MISC_PATTERNS = [
@@ -198,7 +205,7 @@ def detect_stream_country(name):
     # Bare country tag + whitespace, no separator (e.g. "US beIN SPORTS (S)",
     # "CA TSN 1 HD", "FR beIN SPORTS MAX", "MEX Bein Sports"). normalize_name()
     # strips this exact prefix via PROVIDER_PREFIX_PATTERNS, so the country
-    # filter must recognize it too — otherwise these match a foreign lineup
+    # filter must recognize it too, otherwise these match a foreign lineup
     # cleanly but can't be proven wrong-country, and leak in as backup streams.
     # Restricted to a curated set of unambiguous codes (same set as the prefix
     # stripper) so it can't eat "USA Network" (USA, not US+space), "IN Country
