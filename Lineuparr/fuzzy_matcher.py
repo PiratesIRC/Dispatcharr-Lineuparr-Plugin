@@ -266,6 +266,69 @@ def detect_stream_country(name):
     return None
 
 
+def detect_category_country(category_name):
+    """Detect an ISO-2 country code from a lineup category-name prefix.
+
+    Single-country lineups carry one country code in the filename and use plain
+    theme categories ("News", "Sports", "Movies"). Mixed-country lineups instead
+    encode each channel's country in the category name, e.g. "AU| AUSTRALIA VIP",
+    "UK: Sports", "NZ Movies", "US News". This lets the country filter run
+    per-category when the filename has no single country (e.g.
+    "AU-NZ-UK_Test_Mixed_lineup.json").
+
+    Returns a whitelisted ISO-2 code, or None for ordinary theme categories so
+    the caller falls back to the lineup-level code. Only the curated
+    _KNOWN_COUNTRY_CODES are accepted, so a category like "Sci-Fi" (token "SCI")
+    or "On-Demand" (token "ON") is not misread as a country.
+
+    Two branches with deliberately different breadth:
+      - delimiter branch ("XX:"/"XX-"/"XX|"): accepts ANY code in the full
+        _KNOWN_COUNTRY_CODES set, so a mixed lineup can prefix categories with
+        ES/IT/etc. A theme category that happens to start "XX<delim>" where XX
+        is a real country code (e.g. "IT: ...") IS read as that country - this
+        is intended for the mixed-lineup use case, and such category names do
+        not occur in single-country theme lineups.
+      - bare-space branch ("XX Movies"): restricted to a small curated set so a
+        plain word cannot be eaten by a space-separated token.
+    """
+    if not category_name:
+        return None
+
+    # Country code followed by a delimiter: "AU| ...", "UK: ...", "US-...".
+    m = re.match(r'^\s*([A-Za-z]{2,3})\s*[-:|]', category_name)
+    if m:
+        return _normalize_country_token(m.group(1))
+
+    # Bare country tag + whitespace ("NZ Movies", "US News"). Restricted to a
+    # curated set so an ordinary theme word can't be eaten.
+    m = re.match(r'^\s*(US|UK|CA|AU|NZ|FR|DE|MX|MEX|FRA|GER)\s+', category_name, re.IGNORECASE)
+    if m:
+        return _normalize_country_token(m.group(1))
+
+    return None
+
+
+def country_codes_in_text(text):
+    """Return the set of whitelisted ISO-2 country codes that appear as whole
+    tokens anywhere in `text`.
+
+    A "token" is a maximal run of letters bounded by anything non-alpha (start,
+    end, whitespace, separators like - : |, or wildcards * ?). Only 2-3 letter
+    tokens are considered, and only those that resolve to a known country code
+    (via _normalize_country_token, which folds ISO-3 like USA->US). This is used
+    to warn when a group prefix or EPG source filter targets a country other
+    than the lineup's, e.g. "UK*", "UK-*", "*-UK", "UK Jesmann" all yield {"UK"};
+    "AU:" / "AU " yield {"AU"}; "EPG Share", "Jessman", "DTV-" yield set().
+    """
+    codes = set()
+    for tok in re.split(r'[^A-Za-z]+', text or ""):
+        if 2 <= len(tok) <= 3:
+            cc = _normalize_country_token(tok)
+            if cc:
+                codes.add(cc)
+    return codes
+
+
 class FuzzyMatcher:
     """Handles fuzzy matching for Lineuparr with alias support and channel number boosting."""
 

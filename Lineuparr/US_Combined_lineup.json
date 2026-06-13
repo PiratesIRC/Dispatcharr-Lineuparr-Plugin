@@ -83,10 +83,6 @@
         "number": 123
       },
       {
-        "name": "HLN Headline News Network",
-        "number": 124
-      },
-      {
         "name": "i24NEWS",
         "number": 125
       },
@@ -109,10 +105,6 @@
       {
         "name": "NewsNation",
         "number": 131
-      },
-      {
-        "name": "Russia Today",
-        "number": 132
       },
       {
         "name": "Scripps News",
@@ -543,10 +535,6 @@
         "number": 338
       },
       {
-        "name": "YES National",
-        "number": 339
-      },
-      {
         "name": "YES Network",
         "number": 340
       }
@@ -587,10 +575,6 @@
       {
         "name": "FX Movie Channel",
         "number": 414
-      },
-      {
-        "name": "FXM",
-        "number": 415
       },
       {
         "name": "Hallmark Mystery",
@@ -795,10 +779,6 @@
       {
         "name": "Tribeca Festival+",
         "number": 491
-      },
-      {
-        "name": "Turner Classic Movies",
-        "number": 492
       }
     ],
     "Kids": [
@@ -857,10 +837,6 @@
       {
         "name": "Nick Jr.",
         "number": 520
-      },
-      {
-        "name": "Nick/Nick at Nite (E)",
-        "number": 522
       },
       {
         "name": "Nick/Nick at Nite (W)",
@@ -969,10 +945,6 @@
         "number": 622
       },
       {
-        "name": "GET",
-        "number": 623
-      },
-      {
         "name": "getTV",
         "number": 624
       },
@@ -1027,10 +999,6 @@
       {
         "name": "OWN: Oprah Winfrey Network",
         "number": 642
-      },
-      {
-        "name": "Oxygen",
-        "number": 643
       },
       {
         "name": "Paramount Network",
@@ -1103,10 +1071,6 @@
       {
         "name": "VICE",
         "number": 665
-      },
-      {
-        "name": "Viceland",
-        "number": 666
       },
       {
         "name": "WE tv",
@@ -1465,10 +1429,6 @@
         "number": 1010
       },
       {
-        "name": "Justice Network",
-        "number": 1012
-      },
-      {
         "name": "JusticeCentral.TV",
         "number": 1013
       },
@@ -1815,10 +1775,6 @@
         "number": 1506
       },
       {
-        "name": "Great American Country",
-        "number": 1507
-      },
-      {
         "name": "Great American Family",
         "number": 1508
       },
@@ -1875,10 +1831,6 @@
         "number": 1523
       },
       {
-        "name": "Speedvision",
-        "number": 1524
-      },
-      {
         "name": "Sweet Escapes",
         "number": 1525
       },
@@ -1933,16 +1885,8 @@
         "number": 1607
       },
       {
-        "name": "Tastemade Home",
-        "number": 1608
-      },
-      {
         "name": "Tastemade Travel",
         "number": 1609
-      },
-      {
-        "name": "Z Living",
-        "number": 1610
       }
     ]
   }

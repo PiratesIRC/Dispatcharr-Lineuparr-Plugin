@@ -1,0 +1,33 @@
+name: Validate plugin
+
+# Static validation of the committed plugin runtime (compile, lineup JSON,
+# manifest, em-dash ban). Catches a shipped-broken file before a user installs
+# from GitHub. The full matcher regression suite is intentionally kept local
+# and is not run here.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Lineuparr/**"
+      - "README.md"
+      - ".github/scripts/validate_plugin.py"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "Lineuparr/**"
+      - "README.md"
+      - ".github/scripts/validate_plugin.py"
+      - ".github/workflows/validate.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate plugin runtime
+        run: python .github/scripts/validate_plugin.py

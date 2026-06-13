@@ -8,8 +8,7 @@
     "News": [
       { "name": "Al Jazeera English", "number": 825 },
       { "name": "BBC World News", "number": 821 },
-      { "name": "Bloomberg TV Canada", "number": 817 },
-      { "name": "BNN", "number": 815 },
+      { "name": "BNN Bloomberg", "number": 815 },
       { "name": "CBC News Network", "number": 800 },
       { "name": "CCTV News", "number": 834 },
       { "name": "CNBC", "number": 806 },
@@ -23,7 +22,6 @@
     ],
     "Sports": [
       { "name": "beIN SPORTS", "number": 983, "addon": "Premium Sports" },
-      { "name": "ESPN Classic Sports", "number": 951 },
       { "name": "Fight Network", "number": 945 },
       { "name": "FNTSY Sports Network", "number": 921 },
       { "name": "Golf Channel", "number": 922 },
@@ -63,56 +61,46 @@
       { "name": "Hollywood Suite 80", "number": 427, "addon": "Movies & Series" },
       { "name": "Hollywood Suite 90", "number": 428, "addon": "Movies & Series" },
       { "name": "Hollywood Suite 00", "number": 429, "addon": "Movies & Series" },
-      { "name": "IFC", "number": 451 },
       { "name": "MovieTime", "number": 445 },
       { "name": "Rewind", "number": 457 },
       { "name": "Silver Screen Classics", "number": 460 },
-      { "name": "Sundance Channel", "number": 453 },
+      { "name": "SundanceTV", "number": 453 },
       { "name": "Super Channel 1", "number": 417, "addon": "Movies & Series" },
       { "name": "Super Channel 2", "number": 418, "addon": "Movies & Series" },
       { "name": "Super Channel 3", "number": 419, "addon": "Movies & Series" },
       { "name": "Super Channel 4", "number": 420, "addon": "Movies & Series" },
-      { "name": "TMN 1", "number": 406, "addon": "Movies & Series" },
-      { "name": "TMN Encore 1", "number": 431, "addon": "Movies & Series" },
+      { "name": "Crave 1", "number": 406, "addon": "Movies & Series" },
+      { "name": "Crave 2", "number": 431, "addon": "Movies & Series" },
       { "name": "Turner Classic Movies", "number": 462 },
       { "name": "W Movies", "number": 455 }
     ],
     "Kids": [
       { "name": "BabyTV", "number": 639 },
-      { "name": "BBC Kids", "number": 631 },
       { "name": "Cartoon Network", "number": 627 },
-      { "name": "CHRGD", "number": 619 },
       { "name": "Disney Channel", "number": 607 },
       { "name": "Disney Junior", "number": 602 },
       { "name": "Disney XD", "number": 616 },
       { "name": "Family Channel", "number": 604 },
       { "name": "Family Jr", "number": 603 },
       { "name": "Nickelodeon", "number": 614 },
-      { "name": "Teletoon", "number": 623 },
       { "name": "Treehouse", "number": 601 },
       { "name": "TumbleBooks TV", "number": 610 },
       { "name": "YTV", "number": 600 }
     ],
     "Entertainment": [
       { "name": "A&E", "number": 300 },
-      { "name": "ABC Spark", "number": 327 },
       { "name": "AMC", "number": 303 },
-      { "name": "BBC Canada", "number": 376 },
-      { "name": "Bravo", "number": 302 },
-      { "name": "Cosmopolitan TV", "number": 335 },
+      { "name": "CTV Drama Channel", "number": 302 },
       { "name": "DejaView", "number": 506 },
       { "name": "E!", "number": 333 },
-      { "name": "Fashion Television Channel", "number": 345 },
-      { "name": "G4", "number": 374 },
       { "name": "Game Show Network", "number": 370 },
       { "name": "Lifetime", "number": 386 },
       { "name": "One", "number": 349 },
       { "name": "OUTtv", "number": 347 },
       { "name": "OWN", "number": 341 },
       { "name": "Showcase", "number": 301 },
-      { "name": "Space", "number": 392 },
-      { "name": "Spike TV", "number": 390 },
-      { "name": "VICELAND", "number": 397 },
+      { "name": "CTV Sci-Fi Channel", "number": 392 },
+      { "name": "Paramount Network", "number": 390 },
       { "name": "W Network", "number": 329 }
     ],
     "Reality & Lifestyle": [
@@ -123,16 +111,14 @@
       { "name": "Slice", "number": 331 }
     ],
     "Comedy": [
-      { "name": "Comedy Gold", "number": 501 },
       { "name": "Peachtree TV", "number": 511 },
-      { "name": "The Comedy Network", "number": 500 }
+      { "name": "CTV Comedy Channel", "number": 500 }
     ],
     "Discovery": [
-      { "name": "Animal Planet", "number": 721 },
-      { "name": "Book TV", "number": 741 },
-      { "name": "Discovery Channel", "number": 701 },
-      { "name": "Discovery Science", "number": 702 },
-      { "name": "Discovery Velocity", "number": 711 },
+      { "name": "CTV Wild Channel", "number": 721 },
+      { "name": "USA Network", "number": 701 },
+      { "name": "CTV Nature Channel", "number": 702 },
+      { "name": "CTV Speed Channel", "number": 711 },
       { "name": "Documentary", "number": 731 },
       { "name": "H2", "number": 706 },
       { "name": "History", "number": 704 },
@@ -143,7 +129,7 @@
     ],
     "Crime": [
       { "name": "Crime+ Investigation", "number": 380 },
-      { "name": "Investigation Discovery", "number": 378 }
+      { "name": "Oxygen True Crime", "number": 378 }
     ],
     "Faith": [
       { "name": "Daystar Canada", "number": 872 },
@@ -159,10 +145,7 @@
       { "name": "HIFI", "number": 551 },
       { "name": "MTV", "number": 561 },
       { "name": "MTV2", "number": 582 },
-      { "name": "MuchLoud", "number": 581 },
-      { "name": "MuchMusic", "number": 557 },
-      { "name": "Much Retro", "number": 582 },
-      { "name": "MuchVibe", "number": 680 },
+      { "name": "Much", "number": 557 },
       { "name": "Stingray Music", "number": "7500-7962" }
     ],
     "Shopping": [
@@ -179,8 +162,8 @@
     ],
     "Food & Travel": [
       { "name": "Food Network", "number": 313 },
-      { "name": "Gusto TV", "number": 315 },
-      { "name": "Travel + Escape", "number": 717 }
+      { "name": "CTV Life Channel", "number": 315 },
+      { "name": "T+E", "number": 717 }
     ]
   }
 }

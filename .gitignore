@@ -75,3 +75,5 @@ _stream_exports/
 extract_stream_names.ps1
 _export_stream_names.py
 _analyze_streams.py
+_audit_streams.py
+_aud*.py

@@ -11,13 +11,14 @@ import csv
 import os
 import re
 import time
+import fnmatch
 import threading
 from datetime import datetime, timedelta
 from glob import glob
 
 from django.db import transaction
 
-from .fuzzy_matcher import FuzzyMatcher, has_upgrade_quality
+from .fuzzy_matcher import FuzzyMatcher, has_upgrade_quality, detect_category_country, country_codes_in_text
 from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
 
@@ -63,7 +64,7 @@ def _clean_json_text(s):
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.1582125"
+    PLUGIN_VERSION = "1.26.1641222"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -317,6 +318,11 @@ class Plugin:
                 pass
         # Alphabetize (case-insensitive), keeping "All EPG sources" pinned first
         epg_source_options[1:] = sorted(epg_source_options[1:], key=lambda o: o["label"].lower())
+        # Readable list of discovered EPG source names for the free-text field's
+        # help (the field is no longer a single-select, so the dropdown options
+        # are surfaced here instead).
+        epg_source_names = [o["label"] for o in epg_source_options[1:]]
+        epg_sources_hint = ", ".join(epg_source_names) if epg_source_names else "(none discovered)"
 
         # Discover channel profiles
         profile_options = [{"value": "_none", "label": "None (don't enable in profiles)"}]
@@ -355,10 +361,16 @@ class Plugin:
             {
                 "id": "epg_sources",
                 "label": "EPG Sources for Matching",
-                "type": "select",
-                "default": "_all",
-                "options": epg_source_options,
-                "help_text": "Which EPG source to match against. 'All' uses every source, ordered by the priority configured in Dispatcharr.",
+                "type": "string",
+                "default": "",
+                "placeholder": "blank = All  |  UK*, EPG Share  |  Jessman",
+                "help_text": (
+                    "Which EPG source(s) to match against. Leave blank for All (every source, "
+                    "ordered by the priority configured in Dispatcharr). Otherwise list one or "
+                    "more source names separated by commas; shell wildcards * and ? are allowed "
+                    "(e.g. 'UK*' matches every source whose name starts with UK). Earlier names "
+                    "win on priority. Available sources: " + epg_sources_hint
+                ),
             },
             {
                 "id": "channel_profiles",
@@ -436,6 +448,13 @@ class Plugin:
                     {"value": "exact", "label": "Exact - near-exact matches only"},
                 ],
                 "help_text": "How closely stream and EPG names must match channel names. Lower = more matches but more errors.",
+            },
+            {
+                "id": "refresh_epg_after_match",
+                "label": "Refresh EPG After Matching",
+                "type": "boolean",
+                "default": True,
+                "help_text": "After EPG matching, trigger a Dispatcharr EPG refresh so newly matched channels get program info. Only the sources listed in 'EPG Sources for Matching' that were actually matched to lineup channels are refreshed.",
             },
             {
                 "id": "prioritize_quality",
@@ -664,6 +683,41 @@ class Plugin:
         if match:
             return match.group(1), match.group(2)
         return None, None
+
+    @staticmethod
+    def _resolve_category_country(category_name, lineup_cc, logger=None):
+        """Country code to enforce for a category's channels.
+
+        Mixed-country lineups (filename like "AU-NZ-UK_Test_Mixed_lineup.json")
+        do not match the single {CC}_ filename pattern, so lineup_cc is None and
+        the country filter would otherwise be disabled, letting foreign streams
+        (e.g. a Canadian beIN feed) attach to an Australian channel as backups.
+        For those lineups the country is encoded in the category name
+        ("AU| AUSTRALIA VIP"). Prefer the per-category code when present; fall
+        back to the lineup-level code for ordinary single-country lineups whose
+        categories are plain themes ("News", "Sports").
+
+        When a logger is supplied and the category overrides the lineup code,
+        the override is logged (so the three matching loops stay consistent).
+        """
+        cat_cc = detect_category_country(category_name) or lineup_cc
+        if logger is not None and cat_cc and cat_cc != lineup_cc:
+            logger.info(f"{LOG_PREFIX} Category '{category_name}' country: {cat_cc} (from category name)")
+        return cat_cc
+
+    @staticmethod
+    def _parse_source_filter(raw):
+        """Tokenize a comma-separated source filter into (tokens, is_all).
+
+        Tokens are comma-split and individually stripped (each may carry shell
+        wildcards). is_all is True when the filter means "every source": a blank
+        value, or any token equal to "_all", "all", or "*". Single source of
+        truth for the EPG-source "all" test used across filtering, validation,
+        and the CSV header.
+        """
+        tokens = [t.strip() for t in (raw or "").split(",") if t.strip()]
+        is_all = (not tokens) or any(t.lower() in ("_all", "all", "*") for t in tokens)
+        return tokens, is_all
 
     @staticmethod
     def _extract_epg_country(tvg_id):
@@ -950,12 +1004,15 @@ class Plugin:
         all_epg = list(EPGData.objects.all().values('id', 'name', 'tvg_id', 'epg_source'))
         logger.info(f"{LOG_PREFIX} Fetched {len(all_epg)} EPG data entries")
 
-        epg_sources_str = (settings.get("epg_sources") or "").strip()
-        if not epg_sources_str or epg_sources_str == "_all":
-            # "All" selected: order EPG entries by Dispatcharr's per-source
-            # priority (EPGSource.priority - higher number = higher priority)
-            # so downstream consumers that take the first match honor the
-            # priority the user configured in Dispatcharr.
+        # Comma-separated source names, each of which may carry shell wildcards
+        # (* and ?). Blank / "_all" / "all" / "*" mean "every source".
+        tokens, select_all = self._parse_source_filter(settings.get("epg_sources"))
+
+        if select_all:
+            # "All": order EPG entries by Dispatcharr's per-source priority
+            # (EPGSource.priority - higher number = higher priority) so
+            # downstream consumers that take the first match honor the priority
+            # the user configured in Dispatcharr.
             priority_by_id = {
                 src['id']: (src['priority'] or 0)
                 for src in EPGSource.objects.all().values('id', 'priority')
@@ -970,30 +1027,33 @@ class Plugin:
             )
             return all_epg
 
-        # Map source names to IDs (case-insensitive)
-        available = {}
-        for src in EPGSource.objects.all().values('id', 'name'):
-            available[src['name'].strip().upper()] = src['id']
-
-        source_names = [s.strip() for s in epg_sources_str.split(",") if s.strip()]
-        valid_ids = []
+        # Match each token against available source names (case-insensitive,
+        # wildcards via fnmatch). A plain name with no wildcard is an exact
+        # match. Sources keep the order their first matching token appeared in,
+        # so earlier tokens win on priority.
+        available = [
+            (src['name'], src['id'])
+            for src in EPGSource.objects.all().values('id', 'name')
+        ]
+        # src_id -> priority index (insertion order = first matching token wins).
         priority_map = {}
+        for token in tokens:
+            tk = token.upper()
+            matched_any = False
+            for name, src_id in available:
+                if fnmatch.fnmatch((name or "").upper(), tk):
+                    matched_any = True
+                    priority_map.setdefault(src_id, len(priority_map))
+            if not matched_any:
+                logger.warning(f"{LOG_PREFIX} EPG source pattern matched nothing: '{token}'")
 
-        for idx, name in enumerate(source_names):
-            src_id = available.get(name.upper())
-            if src_id:
-                valid_ids.append(src_id)
-                priority_map[src_id] = idx
-            else:
-                logger.warning(f"{LOG_PREFIX} EPG source not found: '{name}'")
-
-        if not valid_ids:
+        if not priority_map:
             logger.warning(f"{LOG_PREFIX} No valid EPG sources matched. Using all EPG data.")
             return all_epg
 
-        filtered = [e for e in all_epg if e.get('epg_source') in valid_ids]
+        filtered = [e for e in all_epg if e.get('epg_source') in priority_map]
         filtered.sort(key=lambda e: priority_map.get(e.get('epg_source'), 999))
-        logger.info(f"{LOG_PREFIX} Filtered to {len(filtered)} EPG entries from {len(valid_ids)} source(s)")
+        logger.info(f"{LOG_PREFIX} Filtered to {len(filtered)} EPG entries from {len(priority_map)} source(s)")
         return filtered
 
     def _get_epg_ids_with_programs(self, epg_ids, logger):
@@ -1200,7 +1260,8 @@ class Plugin:
                     epg_val = settings.get('epg_sources', '_all')
                     try:
                         if _EPG_AVAILABLE:
-                            if epg_val == '_all':
+                            _, _epg_all = self._parse_source_filter(epg_val)
+                            if _epg_all:
                                 epg_names = [src['name'] for src in EPGSource.objects.all().values('name')]
                                 f.write(f"# EPG Sources: {', '.join(epg_names) or '(none)'} (all)\n")
                             else:
@@ -1371,7 +1432,8 @@ class Plugin:
                 results.append({"Setting": "EPG Data", "Value": f"{epg_count} entries from {source_count} sources", "Status": "OK"})
 
                 epg_sources_str = (settings.get("epg_sources") or "").strip()
-                if epg_sources_str and epg_sources_str != "_all":
+                _, epg_all = self._parse_source_filter(epg_sources_str)
+                if not epg_all:
                     filtered = self._get_filtered_epg_data(settings, logger)
                     results.append({"Setting": "EPG Sources Filter", "Value": epg_sources_str, "Status": f"OK ({len(filtered)} entries after filtering)"})
                 else:
@@ -1381,6 +1443,39 @@ class Plugin:
                 errors += 1
         else:
             results.append({"Setting": "EPG Data", "Value": "EPG models not available", "Status": "SKIP"})
+
+        # Country mismatch warnings: when the selected lineup has a single
+        # country code (e.g. US_Combined -> US), warn if the Channel Group Prefix
+        # or the EPG Sources filter targets a DIFFERENT country code. This
+        # catches setups like a US lineup with prefix "AU " or EPG filter "UK*",
+        # which silently group/label or guide-match the wrong country.
+        lineup_cc, _ = self._parse_lineup_filename(os.path.basename(lineup_file or ""))
+        if lineup_cc:
+            lineup_cc = lineup_cc.upper()
+
+            gp_raw = (settings.get("group_prefix") or "")
+            if gp_raw.strip().lower() != "none":
+                gp_foreign = sorted(c for c in country_codes_in_text(gp_raw) if c != lineup_cc)
+                if gp_foreign:
+                    results.append({
+                        "Setting": "Country Check: Group Prefix",
+                        "Value": gp_raw.strip(),
+                        "Status": (f"WARNING: prefix country {', '.join(gp_foreign)} does not match "
+                                   f"lineup country {lineup_cc}. Channels may be grouped/labeled for "
+                                   f"the wrong country."),
+                    })
+
+            epg_raw = (settings.get("epg_sources") or "")
+            _, epg_is_all = self._parse_source_filter(epg_raw)
+            if not epg_is_all:
+                epg_foreign = sorted(c for c in country_codes_in_text(epg_raw) if c != lineup_cc)
+                if epg_foreign:
+                    results.append({
+                        "Setting": "Country Check: EPG Sources",
+                        "Value": epg_raw.strip(),
+                        "Status": (f"WARNING: EPG source filter targets country {', '.join(epg_foreign)} "
+                                   f"but the lineup is {lineup_cc}. EPG may match the wrong country's guide."),
+                    })
 
         # DB connectivity
         try:
@@ -1392,12 +1487,15 @@ class Plugin:
             results.append({"Setting": "Database", "Value": "", "Status": f"ERROR: {e}"})
             errors += 1
 
+        warn_details = [r["Setting"] + ": " + r["Status"] for r in results if "WARNING" in r.get("Status", "")]
         status = "ok" if errors == 0 else "error"
         if errors == 0:
             msg = "✅ All settings valid."
         else:
             error_details = [r["Setting"] + ": " + r["Status"] for r in results if "ERROR" in r.get("Status", "")]
             msg = f"❌ {errors} error(s) found.\n" + "\n".join(error_details)
+        if warn_details:
+            msg += f"\n\n⚠️ {len(warn_details)} warning(s):\n" + "\n".join(warn_details)
         return {"status": status, "message": msg, "data": results}
 
     def _scan_lineups(self, settings, logger):
@@ -1580,6 +1678,7 @@ class Plugin:
             )
 
             for category, channels in lineup["categories"].items():
+                cat_cc = self._resolve_category_country(category, lineup_cc, logger)
                 for entry in channels:
                     if self._stop_event.is_set():
                         logger.info(f"{LOG_PREFIX} Preview cancelled.")
@@ -1592,7 +1691,7 @@ class Plugin:
                     matches = matcher.match_all_streams(
                         ch_name, unique_stream_names, alias_map,
                         channel_number=boost_number,
-                        lineup_country=lineup_cc,
+                        lineup_country=cat_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
                     )
 
@@ -1630,7 +1729,7 @@ class Plugin:
 
                     progress.update()
 
-            if lineup_cc and matcher.country_filter_drops:
+            if matcher.country_filter_drops:
                 logger.info(
                     f"{LOG_PREFIX} Country filter dropped "
                     f"{matcher.country_filter_drops} cross-country candidate(s)"
@@ -2264,6 +2363,8 @@ class Plugin:
                         progress.update()
                     continue
 
+                cat_cc = self._resolve_category_country(category, lineup_cc, logger)
+
                 for entry in channels:
                     if self._stop_event.is_set():
                         logger.info(f"{LOG_PREFIX} Stream matching cancelled.")
@@ -2283,7 +2384,7 @@ class Plugin:
                     matches = matcher.match_all_streams(
                         ch_name, unique_stream_names, alias_map,
                         channel_number=ch_number,
-                        lineup_country=lineup_cc,
+                        lineup_country=cat_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
                     )
 
@@ -2385,7 +2486,7 @@ class Plugin:
 
             progress.finish()
 
-            if lineup_cc and matcher.country_filter_drops:
+            if matcher.country_filter_drops:
                 logger.info(
                     f"{LOG_PREFIX} Country filter dropped "
                     f"{matcher.country_filter_drops} cross-country candidate(s)"
@@ -2449,6 +2550,44 @@ class Plugin:
         msg += " CSV exported."
         logger.info(f"{LOG_PREFIX} {msg}")
         return {"status": "ok", "message": msg}
+
+    def _refresh_epg_sources(self, source_ids, logger):
+        """Trigger a Dispatcharr EPG refresh for the given EPGSource IDs.
+
+        Called after EPG matching so newly matched channels pick up program
+        info. source_ids are the sources that were actually matched to lineup
+        channels (and, by construction, are within the user's "EPG Sources for
+        Matching" selection). Each refresh is dispatched as an async Celery task
+        so it does not block the matching operation. Returns the count of
+        sources for which a refresh was dispatched.
+        """
+        if not _EPG_AVAILABLE:
+            return 0
+        ids = sorted({sid for sid in source_ids if sid})
+        if not ids:
+            return 0
+        try:
+            from apps.epg.tasks import refresh_epg_data
+        except Exception as e:
+            logger.warning(f"{LOG_PREFIX} EPG refresh task unavailable, skipping EPG refresh: {e}")
+            return 0
+        # Map IDs to names for readable logging.
+        names = {}
+        try:
+            for src in EPGSource.objects.filter(id__in=ids).values('id', 'name'):
+                names[src['id']] = src['name']
+        except Exception:
+            pass
+        triggered = 0
+        for sid in ids:
+            try:
+                refresh_epg_data.delay(sid)
+                triggered += 1
+                logger.info(f"{LOG_PREFIX} Triggered EPG refresh for source '{names.get(sid, sid)}' (id={sid})")
+            except Exception as e:
+                logger.warning(f"{LOG_PREFIX} Failed to trigger EPG refresh for source id={sid}: {e}")
+        logger.info(f"{LOG_PREFIX} EPG refresh dispatched for {triggered}/{len(ids)} matched source(s)")
+        return triggered
 
     def _do_apply_epg_match_bg(self, settings, logger):
         """Background wrapper for EPG matching."""
@@ -2546,6 +2685,11 @@ class Plugin:
             skipped_existing = 0
             csv_rows = []
             epg_assignments = []
+            # EPGSource IDs that were actually matched to a lineup channel. These
+            # already come only from the selected "EPG Sources for Matching"
+            # (see _get_filtered_epg_data), so they are exactly the sources to
+            # refresh: matched AND user-selected.
+            matched_epg_source_ids = set()
 
             for category, channels in lineup["categories"].items():
                 group_name = self._make_group_name(prefix, category)
@@ -2556,6 +2700,8 @@ class Plugin:
                         skipped_no_match += 1
                         progress.update()
                     continue
+
+                cat_cc = self._resolve_category_country(category, lineup_cc, logger)
 
                 for entry in channels:
                     if self._stop_event.is_set():
@@ -2583,7 +2729,8 @@ class Plugin:
                     # (all candidates already have program data - pre-filtered above)
                     matches = matcher.match_all_streams(
                         ch_name, unique_epg_names, alias_map,
-                        channel_number=ch_number
+                        channel_number=ch_number,
+                        lineup_country=cat_cc,
                     )
 
                     # Take best match (all candidates have program data)
@@ -2596,7 +2743,7 @@ class Plugin:
                         top_name, top_score, top_method = matches[0]
                         top_entries = epg_by_name.get(top_name, [])
                         if top_entries:
-                            best_epg = self._pick_epg_by_country(top_entries, lineup_cc)
+                            best_epg = self._pick_epg_by_country(top_entries, cat_cc)
                             best_score = top_score
                             best_method = top_method
 
@@ -2604,13 +2751,14 @@ class Plugin:
                     if not best_epg and unique_epg_names_all:
                         fallback_matches = matcher.match_all_streams(
                             ch_name, unique_epg_names_all, alias_map,
-                            channel_number=ch_number
+                            channel_number=ch_number,
+                            lineup_country=cat_cc,
                         )
                         if fallback_matches:
                             top_name, top_score, top_method = fallback_matches[0]
                             top_entries = epg_by_name_all.get(top_name, [])
                             if top_entries:
-                                best_epg = self._pick_epg_by_country(top_entries, lineup_cc)
+                                best_epg = self._pick_epg_by_country(top_entries, cat_cc)
                                 best_score = top_score
                                 best_method = top_method
                                 has_program_data = False
@@ -2631,6 +2779,8 @@ class Plugin:
 
                     if best_epg:
                         epg_assignments.append((channel_id, best_epg['id']))
+                        if best_epg.get('epg_source'):
+                            matched_epg_source_ids.add(best_epg.get('epg_source'))
                         matched += 1
                         if not has_program_data:
                             matched_fallback += 1
@@ -2658,6 +2808,14 @@ class Plugin:
                         Channel.objects.bulk_update(channels_to_update, ['epg_data_id'])
                     logger.info(f"{LOG_PREFIX} Bulk-updated EPG for {len(channels_to_update)} channels")
 
+            # Optionally refresh the EPG sources we matched against, so the newly
+            # matched channels pick up program info. Defaults on.
+            refresh_note = ""
+            if settings.get("refresh_epg_after_match", True) and matched_epg_source_ids:
+                refreshed = self._refresh_epg_sources(matched_epg_source_ids, logger)
+                if refreshed:
+                    refresh_note = f", refreshing EPG for {refreshed} source(s)"
+
             # Export CSV
             if csv_rows:
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -2674,7 +2832,7 @@ class Plugin:
 
             fallback_note = f" ({matched_fallback} via fallback without program data)" if matched_fallback else ""
             existing_note = f", {skipped_existing} skipped (already assigned)" if skipped_existing else ""
-            msg = f"EPG matching complete: {matched} matched{fallback_note}, {skipped_no_match} no match{existing_note} (from {len(epg_data_with_programs)} EPG entries with program data)"
+            msg = f"EPG matching complete: {matched} matched{fallback_note}, {skipped_no_match} no match{existing_note} (from {len(epg_data_with_programs)} EPG entries with program data){refresh_note}"
             logger.info(f"{LOG_PREFIX} {msg}")
             return {"status": "ok", "message": msg}
 

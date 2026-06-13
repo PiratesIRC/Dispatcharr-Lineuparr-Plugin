@@ -64,6 +64,10 @@ CHANNEL_ALIASES = {
 
     # --- Movies ---
     "Cinemax": ["Cinemax", "Cinemax US"],
+    # FXM is the former Fox Movie Channel; fully rebranded FX Movie Channel (FXM)
+    # in 2013. The classic-films block carries the "FXM Retro" name.
+    "FXM": ["FXM", "FX Movie Channel", "FXMovie", "Fox Movie Channel", "FXM Retro"],
+    "FX Movie Channel": ["FXM", "FX Movie Channel", "FXMovie", "Fox Movie Channel", "FXM Retro"],
     "HBO East": ["HBO East", "HBO (East)", "HBO"],
     "HBO Comedy East HD": ["HBO Comedy East", "HBO Comedy (East)", "HBO Comedy"],
     "HBO Drama HD East": ["HBO Drama East", "HBO Drama (East)", "HBO Drama", "HBO Signature"],
@@ -95,7 +99,7 @@ CHANNEL_ALIASES = {
     "Disney Junior": ["Disney Junior", "Disney Jr"],
     "Disney Jr HD": ["Disney Junior HD", "Disney Junior", "Disney Jr"],
     "Nick Jr.": ["Nick Jr", "Nick Junior"],
-    "Nick/Nick at Nite (E)": ["Nickelodeon", "Nickelodeon East", "Nick", "Nick at Nite"],
+    "Nickelodeon": ["Nickelodeon", "Nickelodeon East", "Nick", "Nick at Nite"],
     "Nick/Nick at Nite (W)": ["Nickelodeon West", "Nick West", "Nick at Nite West"],
     "Nickelodeon East": ["Nickelodeon", "Nickelodeon East", "Nick", "Nickelodeon US"],
 
@@ -153,10 +157,15 @@ CHANNEL_ALIASES = {
     "Oxygen": ["Oxygen True Crime", "Oxygen True Crime HD"],
     "Oxygen True Crime": ["Oxygen", "Oxygen True Crime"],
     "Oxygen True Crime Archives": ["Oxygen True Crime Archives"],
+    # Justice Network relaunched as True Crime Network in 2020; "Justice
+    # Central.TV" was its companion streaming brand. Match all three names.
+    "Justice Network": ["Justice Network", "Justice Central.TV", "Justice Central TV", "Justice Central", "True Crime Network"],
+    "True Crime Network": ["True Crime Network", "Justice Network", "Justice Central.TV", "Justice Central TV", "Justice Central"],
+    "Justice Central.TV": ["Justice Central.TV", "Justice Central TV", "Justice Central", "Justice Network", "True Crime Network"],
 
     # --- Music ---
     "CMT": ["CMT", "Country Music Television"],
-    "MTV": ["MTV", "MTV US"],
+    "MTV": ["MTV", "MTV US", "MTV - Music Television", "MTV Music Television"],
     "MTV2": ["MTV2", "MTV 2", "MTV2: Music Television", "MTV2: Music Television HD"],
     "VH1": ["VH1", "VH 1"],
 
@@ -180,7 +189,14 @@ CHANNEL_ALIASES = {
     # --- Additional aliases for DISH lineup ---
     "American Heroes Channel": ["AHC", "American Heroes Channel", "American Heroes"],
     "BabyFirstTV": ["Baby First", "BabyFirst", "BabyFirstTV", "Baby First TV"],
-    "getTV": ["Get TV", "getTV"],
+    # getTV is owned by Sony; rebranded to "Great Entertainment Television" in
+    # 2023. Match the old and new branding. Bare "GET"/"get."/"great." are NOT
+    # used as alias VALUES: they normalize to "get"/"great" and would force a
+    # false score-100 match against any stream that happens to normalize the
+    # same way. "Get TV"/"getTV"/"GETTV" all normalize to "gettv" (unambiguous).
+    "getTV": ["Get TV", "getTV", "GETTV", "Great Entertainment Television"],
+    "GET": ["getTV", "Get TV", "GETTV", "Great Entertainment Television"],
+    "Great Entertainment Television": ["getTV", "Get TV", "GETTV", "Great Entertainment Television"],
     "GSN": ["GSN", "Game Show Network"],
     "Pop": ["Pop TV", "Pop TV East"],
     "ReelzChannel": ["Reelz", "ReelzChannel"],
@@ -377,9 +393,53 @@ CHANNEL_ALIASES = {
     "Magnolia Network": ["Magnolia Network", "Magnolia", "DIY Network", "DIY"],
     "Great American Family": ["Great American Family", "Great American Country", "GAC", "GAC Family"],
     "Great American Country": ["Great American Country", "Great American Family", "GAC"],
+    # Tastemade Home/Travel are sibling FAST channels; the lineup carries one
+    # Tastemade entry and folds the Home variant in (shared EPG row upstream).
+    "Tastemade": ["Tastemade", "Tastemade Home"],
     "Hallmark Drama": ["Hallmark Drama", "Hallmark Family"],
     # News - DISH lineup still carries the pre-rebrand "WGN America" name.
     "WGN America": ["WGN America", "WGN", "NewsNation", "News Nation"],
+
+    # --- US: EPG guide-name bridges ---------------------------------------
+    # Some US EPG sources list channels under their full legal/broadcast name
+    # (e.g. "Daystar Television Network" instead of "Daystar"). At Exact match
+    # sensitivity the short lineup name never reaches those entries, so the
+    # channel gets no guide. These aliases bridge the lineup name to the EPG
+    # entry name. NOTE: "TBN" maps to Trinity Broadcasting, NOT "TBN Inspire"
+    # (the Hillsong rebrand, a separate channel - see "Hillsong Channel").
+    "Daystar": ["Daystar", "Daystar Television Network", "Daystar Television Network HD"],
+    "TBN": ["TBN", "Trinity Broadcasting Network", "Trinity Broadcasting Network HD (TBN)"],
+    # Lineup channel "UP" maps to UPtv. Bare "UP" is intentionally NOT a value
+    # (it would 100-match any stream normalizing to "up").
+    "UP": ["UPtv", "UPTV", "UP TV"],
+    "Cheddar News": ["Cheddar News", "Cheddar"],
+    "Galavisión": ["Galavision", "Galavision Cable Network", "Galavision Cable Network HD"],
+    "UniMás": ["UniMas", "UniMas East HD (UNIMAS)", "UniMas East", "Unimas"],
+    "NBC Universo": ["NBC Universo", "Universo", "UNIVERSO"],
+    # Reverse/abbreviation bridges: lineup uses the full name, streams use the
+    # short form (or vice versa). normalize_name() strips a standalone "Channel"
+    # token but NOT a glued one, so the glued "REELZCHANNEL" form is listed
+    # explicitly (the spaced "Reelz Channel" would fold to "Reelz").
+    "Turner Classic Movies": ["Turner Classic Movies", "TCM"],
+    "REELZ": ["REELZ", "Reelz", "ReelzChannel", "REELZCHANNEL"],
+    # More full-name / rebrand / abbreviation bridges confirmed against real US
+    # streams (provider uses a fuller or rebranded name than the lineup).
+    "YES Network": ["YES Network", "YES National"],
+    "Sportsnet New York National": ["Sportsnet New York National", "SNY", "Sportsnet New York", "Sportsnet NY"],
+    "CCTV News": ["CCTV News", "CGTN"],  # CCTV News rebranded to CGTN
+    "Antena 3": ["Antena 3", "Antena 3 Internacional"],
+    "Univision tINovelas": ["Univision tINovelas", "Univision tlnovelas", "Univision tlNovelas", "tlnovelas"],
+    "TV Games Network": ["TV Games Network", "TVG Network"],
+    "Christian Television Network": ["Christian Television Network", "CTN"],
+
+    # --- CA: Bell 2025 Discovery -> CTV rebrands -------------------------
+    # On 2025-01-01 Bell rebranded the Canadian feeds: Animal Planet -> CTV Wild
+    # Channel, Discovery Science -> CTV Nature Channel, Discovery Velocity -> CTV
+    # Speed Channel. The lineup now uses the current names; these aliases let
+    # them still match streams/EPG carrying the old Discovery names.
+    "CTV Wild Channel": ["CTV Wild Channel", "CTV Wild", "Animal Planet"],
+    "CTV Nature Channel": ["CTV Nature Channel", "CTV Nature", "Discovery Science"],
+    "CTV Speed Channel": ["CTV Speed Channel", "CTV Speed", "Discovery Velocity"],
 }
 
 
@@ -401,5 +461,14 @@ COUNTRY_ALIASES = {
         # IPTV sources still label the stream "Discovery Science".
         "TLC": ["Discovery Science"],
         "MTV": ["MTV France"],
+    },
+    "CA": {
+        # Bell rebranded its Canadian Discovery and Investigation Discovery
+        # feeds on 2025-01-01: Discovery Channel -> USA Network, Investigation
+        # Discovery -> Oxygen True Crime. These names collide with the genuine
+        # US channels, so the old-name bridges are CA-scoped (merged only for
+        # CA lineups) to avoid leaking into US "USA Network"/"Oxygen True Crime".
+        "USA Network": ["Discovery Channel"],
+        "Oxygen True Crime": ["Investigation Discovery"],
     },
 }

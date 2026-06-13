@@ -1,10 +1,11 @@
 {
   "name": "Lineuparr",
-  "version": "1.26.1582125",
+  "version": "1.26.1641222",
   "description": "Mirror real-world provider channel lineups by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
   "author": "PiratesIRC",
   "license": "MIT",
   "repo_url": "https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin",
+  "help_url": "https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin",
   "min_dispatcharr_version": "v0.20.0",
   "_fields_note": "Settings fields are defined dynamically by the Plugin.fields property in plugin.py (the single source of truth \u2014 it builds live dropdowns for lineups, M3U/EPG sources and profiles). Dispatcharr only falls back to a manifest 'fields' array when the plugin provides none, so it is intentionally omitted here to prevent drift.",
   "fields": [],

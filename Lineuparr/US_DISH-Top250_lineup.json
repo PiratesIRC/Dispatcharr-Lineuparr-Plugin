@@ -19,7 +19,6 @@
       { "name": "MSNBC", "number": 209 },
       { "name": "NASA", "number": 286 },
       { "name": "Newsmax", "number": 216 },
-      { "name": "Russia Today", "number": 280 },
       { "name": "Weather Channel", "number": 214 },
       { "name": "WeatherNation", "number": 215 }
     ],
@@ -153,7 +152,6 @@
       { "name": "TV Land", "number": 106 },
       { "name": "Uplifting Entertainment", "number": 188 },
       { "name": "USA", "number": 105 },
-      { "name": "Viceland", "number": 121 },
       { "name": "WE tv", "number": 128 },
       { "name": "WGN America", "number": 239 }
     ],
@@ -181,8 +179,7 @@
     "Crime": [
       { "name": "Crime & Investigation", "number": 249, "addon": "Movie Pack" },
       { "name": "Investigation Discovery", "number": 192 },
-      { "name": "Justice Central", "number": 240 },
-      { "name": "Justice Network", "number": 252 }
+      { "name": "Justice Central", "number": 240 }
     ],
     "Faith": [
       { "name": "Christian Television Network", "number": 267 },
@@ -259,8 +256,7 @@
     ],
     "Food & Travel": [
       { "name": "Cooking Channel", "number": 113 },
-      { "name": "Food Network", "number": 110 },
-      { "name": "Z Living", "number": 191 }
+      { "name": "Food Network", "number": 110 }
     ]
   }
 }
