@@ -125,6 +125,49 @@ class NormalizeNameStripsBars(unittest.TestCase):
         self.assertNotIn("fr", toks)
 
 
+class NormalizeNameLeadingBarTag(unittest.TestCase):
+    """A leading box-bar bouquet/source tag is stripped even when its inner
+    text is not a country code (e.g. Dispatcharr stores '┃CANAL+┃ NPO 1 HD' as
+    the EPG name for npo1.nl). Regression for the EPG no-match investigation."""
+
+    def setUp(self):
+        self.fm = FuzzyMatcher()
+
+    def norm(self, s):
+        return self.fm.normalize_name(s)
+
+    def test_canalplus_tag_stripped(self):
+        # The "+" must not leave a "CANAL" token behind.
+        self.assertEqual(self.norm("┃CANAL+┃ NPO 1 HD").lower().split(), ["npo", "1"])
+
+    def test_nlziet_tag_stripped(self):
+        self.assertEqual(self.norm("┃NLZIET┃ NPO 2 HD").lower().split(), ["npo", "2"])
+
+    def test_multitoken_tag_stripped(self):
+        toks = self.norm("┃CA EN┃ BBC WORLD NEWS").lower().split()
+        self.assertNotIn("ca", toks)
+        self.assertIn("bbc", toks)
+
+    def test_country_tag_still_works(self):
+        # The existing 2-letter country case keeps stripping cleanly.
+        self.assertEqual(self.norm("┃NL┃ SBS 9 HD").lower().split(), ["sbs", "9"])
+
+    def test_light_bar_tag_stripped(self):
+        self.assertEqual(self.norm("│PLUTO│ Comedy").lower().split(), ["comedy"])
+
+    def test_canalplus_matches_lineup_name(self):
+        # End-to-end: the stored EPG name now matches the lineup channel.
+        res = self.fm.match_all_streams(
+            "NPO 1", ["┃CANAL+┃ NPO 1 HD"], alias_map={}, lineup_country="NL"
+        )
+        self.assertTrue(res, "stored '┃CANAL+┃ NPO 1 HD' should match lineup 'NPO 1'")
+        self.assertEqual(res[0][1], 100)
+
+    def test_no_bar_name_untouched(self):
+        self.assertEqual(self.norm("Discovery Channel"), self.norm("Discovery Channel"))
+        self.assertIn("discovery", self.norm("Discovery Channel").lower())
+
+
 class ProcessStringNFKD(unittest.TestCase):
     """NFKD compatibility folding + accent folding."""
 

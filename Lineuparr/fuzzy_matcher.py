@@ -99,6 +99,16 @@ def _balanced_delim(token):
 # the five same-shaped capture groups is populated per match.
 _BRACKETED_CC_RE = re.compile(r'^\s*' + _balanced_delim(r'([A-Za-z]{2,3})'))
 
+# Leading provider/bouquet tag wrapped in box-drawing bars: "┃CANAL+┃ NPO 1",
+# "┃NLZIET┃ NPO 2", "┃CA EN┃ BBC WORLD NEWS". Unlike the 2-3 letter country
+# tags handled above, the inner text is an arbitrary source label, so the
+# country-code patterns don't catch it and the leftover token (CANAL, NLZIET)
+# would poison matching. Box bars (┃ U+2503, │ U+2502) never appear in real
+# channel names, so a leading bar-delimited segment is always strippable.
+# Applied in normalize_name(); detect_stream_country() reads the RAW name, so
+# country detection is unaffected.
+_LEADING_BAR_TAG_RE = re.compile(r'^\s*[┃│]\s*[^┃│]*[┃│]\s*')
+
 GEOGRAPHIC_PATTERNS = [
     r'\b[A-Z]{2,3}[:┃│]\s*',
     r'\b[A-Z]{2,3}\s*-\s*',
@@ -425,6 +435,12 @@ class FuzzyMatcher:
             user_ignored_tags = []
 
         original_name = name
+
+        # Strip a leading box-bar bouquet/source tag ("┃CANAL+┃ NPO 1" ->
+        # "NPO 1", "┃NLZIET┃ NPO 2" -> "NPO 2"). These wrap an arbitrary source
+        # label that the country-code prefix patterns below can't match, and the
+        # leftover tag text would otherwise survive as a junk matching token.
+        name = _LEADING_BAR_TAG_RE.sub('', name)
 
         # Strip IPTV provider prefixes BEFORE hyphen normalization so that
         # "FR - Canal+ FHD" loses its "FR - " while the hyphen is still a
