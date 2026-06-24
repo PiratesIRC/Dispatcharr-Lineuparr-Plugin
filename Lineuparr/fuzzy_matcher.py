@@ -74,9 +74,9 @@ REGIONAL_PATTERNS = [
     r'\s*\([Aa][Tt][Ll][Aa][Nn][Tt][Ii][Cc]\)\s*',
 ]
 
-# Country tokens accepted inside a bracketed/piped prefix like "(US)" or
-# "│US│". Curated set so a bare bracketed word ("(SPORTS)") can't be misread
-# as a country. Keep in sync with detect_stream_country()'s bracket branch.
+# Country tokens for the delimited provider-prefix patterns below: "US: ...",
+# "(US)", "│US│", "... | US". Curated set so a bare delimited word ("(SPORTS)")
+# can't be misread as a country. Keep in sync with detect_stream_country().
 _PREFIX_COUNTRY = r'US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN'
 
 # Delimiter pairs treated as interchangeable wrappers around a tag. The open
@@ -106,7 +106,10 @@ _BRACKETED_CC_RE = re.compile(r'^\s*' + _balanced_delim(r'([A-Za-z]{2,3})'))
 # would poison matching. Box bars (┃ U+2503, │ U+2502) never appear in real
 # channel names, so a leading bar-delimited segment is always strippable.
 # Applied in normalize_name(); detect_stream_country() reads the RAW name, so
-# country detection is unaffected.
+# country detection is unaffected. NOTE: this runs first and therefore also
+# subsumes a *leading* "┃XX┃" country tag that GEOGRAPHIC_PATTERNS /
+# PROVIDER_PREFIX_PATTERNS would otherwise strip -- those remain authoritative
+# for non-leading and bracket/pipe forms.
 _LEADING_BAR_TAG_RE = re.compile(r'^\s*[┃│]\s*[^┃│]*[┃│]\s*')
 
 GEOGRAPHIC_PATTERNS = [
@@ -119,7 +122,7 @@ GEOGRAPHIC_PATTERNS = [
 
 # Enhanced provider prefix patterns for IPTV-specific naming
 PROVIDER_PREFIX_PATTERNS = [
-    r'^(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*[:\-\|┃│]\s*',
+    r'^(?:' + _PREFIX_COUNTRY + r')\s*[:\-\|┃│]\s*',
     # Bare country tag + whitespace, no separator (e.g. "US Racer Network",
     # "FR beIN SPORTS MAX", "MEX Bein Sports"). Restricted to a curated set so
     # it cannot eat a real channel name: "USA Network" (USA != US + space),
@@ -137,7 +140,7 @@ PROVIDER_PREFIX_PATTERNS = [
     r'^(?:US|UK)(?:SD|HD|FHD|UHD|FD|HEVC|4K|8K)\b\s*[:\-\|┃│]?\s*',
     # Bracketed/piped country tag with a MATCHED delimiter pair ("(US)", "│US│").
     r'^\s*' + _balanced_delim(_PREFIX_COUNTRY) + r'\s*',
-    r'\s*[\|┃│]\s*(?:US|USA|UK|CA|AU|FR|DE|ES|IT|NL|BR|MX|IN)\s*$',
+    r'\s*[\|┃│]\s*(?:' + _PREFIX_COUNTRY + r')\s*$',
     # Content-category group prefixes used by some IPTV providers.
     r'^(?:ADULT|EROTIC|PRIME|GOLD)\s*[:\-\|┃│]\s*',
     # FAST streaming-platform source tags (Roku, Tubi, Pluto, etc.). These mark

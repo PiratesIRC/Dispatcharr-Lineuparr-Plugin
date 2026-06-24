@@ -2691,6 +2691,13 @@ class Plugin:
             # refresh: matched AND user-selected.
             matched_epg_source_ids = set()
 
+            # Candidate pools to try per channel, in priority order: program-data
+            # entries first, then all entries. Invariant across the whole lineup.
+            match_passes = [
+                (unique_epg_names, epg_by_name, True),           # program-data
+                (unique_epg_names_all, epg_by_name_all, False),  # all entries
+            ]
+
             for category, channels in lineup["categories"].items():
                 group_name = self._make_group_name(prefix, category)
                 group_id = existing_groups.get(group_name)
@@ -2702,6 +2709,9 @@ class Plugin:
                     continue
 
                 cat_cc = self._resolve_category_country(category, lineup_cc, logger)
+                # Country tiers to try, in priority order. The relaxed (None)
+                # tier runs only when the lineup-country tier finds nothing.
+                countries = (cat_cc, None) if cat_cc else (None,)
 
                 for entry in channels:
                     if self._stop_event.is_set():
@@ -2742,11 +2752,6 @@ class Plugin:
                     best_method = None
                     has_program_data = True
 
-                    match_passes = [
-                        (unique_epg_names, epg_by_name, True),       # program-data
-                        (unique_epg_names_all, epg_by_name_all, False),  # all entries
-                    ]
-                    countries = (cat_cc, None) if cat_cc else (None,)
                     for country in countries:
                         for pool, lookup, has_prog in match_passes:
                             if not pool:
