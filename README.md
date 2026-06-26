@@ -131,6 +131,13 @@ No API credentials are needed -- the plugin runs inside Dispatcharr with direct 
 | Strict | High confidence matches only -- fewer results, fewer mistakes |
 | Exact | Near-exact matches only -- minimal false positives, may miss valid matches |
 
+> **Tip: noisy or multi-country providers.** Lineuparr attaches every stream at or above the match threshold to a channel (for failover), so a large multi-country M3U can attach sibling-but-different feeds that share a common word: e.g. a US "Fox Sports 1" picking up "TNT Sports 1" / "Sky Sports F1" / "AFN Sports", or "Sports Mix" picking up "Sky Sports Mix". These land in the 81-89% range, so switching to **Strict** removes them while keeping the genuine matches. Use **Strict** when your source mixes countries or carries untagged foreign channels. Note that **Order Matched Streams by Quality** only changes the ordering of attached streams, not which streams attach -- it does not affect false positives.
+>
+> If Strict still lets a few cross-country feeds through, you have two more levers. Matching only ever reads the stream **name**, never its channel group, so:
+>
+> - **Limit the M3U Source.** This is the cleanest fix. If the foreign feeds come from a different M3U account than the channels you want, just don't select that source for the run -- those streams never enter the candidate pool, at any sensitivity. (Sorting streams into country-named *groups* does **not** help, because the matcher does not read group names.)
+> - **Prefix the stream name with a country code.** The country filter drops a stream when its name carries a recognized marker that differs from the lineup's country -- e.g. `UK: Sky Sports F1`, `UK| Sky Sports`, `UK Sky Sports` (bare space), or `(UK) Sky Sports`. Bulk-renaming the offending streams to a `UK ...` prefix makes them drop from a US lineup automatically. (Exception: a bare `IN ` prefix is **not** treated as India, because it collides with the English word "In" -- e.g. the real channel "In Country Television" -- so use `(IN)` or `IN:` if you need to tag Indian feeds.)
+
 ## Usage Guide
 
 ### Step-by-Step Workflow
