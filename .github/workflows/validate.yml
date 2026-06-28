@@ -1,9 +1,9 @@
 name: Validate plugin
 
 # Static validation of the committed plugin runtime (compile, lineup JSON,
-# manifest, em-dash ban). Catches a shipped-broken file before a user installs
-# from GitHub. The full matcher regression suite is intentionally kept local
-# and is not run here.
+# manifest, em-dash ban) plus the matcher golden drift gate. Catches a
+# shipped-broken file before a user installs from GitHub. The full matcher
+# regression suite is intentionally kept local and is not run here.
 
 on:
   push:
@@ -12,12 +12,20 @@ on:
       - "Lineuparr/**"
       - "README.md"
       - ".github/scripts/validate_plugin.py"
+      - ".github/scripts/check_matcher_golden.py"
+      - ".github/scripts/matcher_golden_baseline.json"
+      - ".github/scripts/check_core_parity.py"
+      - ".github/scripts/core_manifest.json"
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
       - "Lineuparr/**"
       - "README.md"
       - ".github/scripts/validate_plugin.py"
+      - ".github/scripts/check_matcher_golden.py"
+      - ".github/scripts/matcher_golden_baseline.json"
+      - ".github/scripts/check_core_parity.py"
+      - ".github/scripts/core_manifest.json"
       - ".github/workflows/validate.yml"
   workflow_dispatch:
 
@@ -31,3 +39,15 @@ jobs:
           python-version: "3.12"
       - name: Validate plugin runtime
         run: python .github/scripts/validate_plugin.py
+      # The vendored shared matching core must byte-compile and stay byte-identical to its
+      # pinned hash (catches a CRLF checkout or a stray hand-edit to the vendored copy).
+      - name: Vendored-core compile + parity gate
+        run: |
+          python -m py_compile Lineuparr/matching_core.py
+          python .github/scripts/check_core_parity.py
+      # The matcher golden gate needs rapidfuzz to reproduce the production
+      # similarity path that the committed baseline was generated against.
+      - name: Install matcher-check deps
+        run: pip install rapidfuzz
+      - name: Matcher golden drift gate
+        run: python .github/scripts/check_matcher_golden.py
