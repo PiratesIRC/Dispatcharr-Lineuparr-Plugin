@@ -41,7 +41,7 @@ def locate():
     repo_root = here.parents[2]               # .github/scripts/sync_core.py -> <repo>/
     workspace = repo_root.parent              # <workspace>/
     shared_dir = workspace / "_shared"
-    inner_dir = repo_root / repo_root.name    # <repo>/Lineuparr/  (flat inner folder)
+    inner_dir = next((p.parent for p in repo_root.glob("*/fuzzy_matcher.py")), repo_root / repo_root.name)
     manifest_path = here.parent / "core_manifest.json"
     return inner_dir, shared_dir, manifest_path
 

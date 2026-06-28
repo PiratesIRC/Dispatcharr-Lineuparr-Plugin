@@ -17,7 +17,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parent.parent                  # <repo>/.github/scripts -> <repo>
-INNER = REPO_ROOT / REPO_ROOT.name              # <repo>/Lineuparr (flat deploy folder)
+INNER = next((p.parent for p in REPO_ROOT.glob("*/fuzzy_matcher.py")), REPO_ROOT / REPO_ROOT.name)
 MANIFEST = HERE / "core_manifest.json"
 
 
