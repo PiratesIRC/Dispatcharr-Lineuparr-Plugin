@@ -5,11 +5,10 @@ class Plugin(_BasePlugin):
     """Lineuparr plugin with support for aliases embedded in lineup JSON files."""
 
     def _build_alias_map(self, settings, logger):
-        """Merge built-in, country, lineup, and custom aliases.
+        """Merge embedded lineup aliases into the existing alias map.
 
         Lineup entries may define ``aliases`` as either a string or a list of
-        strings. Embedded aliases are merged after built-in/country aliases and
-        before custom aliases, preserving the existing custom-alias precedence.
+        strings. Existing built-in, country, and custom aliases remain intact.
         """
         alias_map = super()._build_alias_map(settings, logger)
 
