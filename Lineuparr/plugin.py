@@ -1,12 +1,78 @@
 """Dispatcharr loader entrypoint for Lineuparr.
 
-The upstream implementation lives in plugin_base.py.  This wrapper keeps
+The upstream implementation lives in plugin_base.py. This wrapper keeps
 Dispatcharr's direct plugin.py loading path while adding aliases embedded in
 lineup JSON channel entries.
 """
 
+import re
+
+from . import plugin_base as _plugin_base
 from .plugin_base import *
 from .plugin_base import Plugin as _BasePlugin
+from .fuzzy_matcher import FuzzyMatcher as _BaseFuzzyMatcher
+
+
+class _EmbeddedAliasFuzzyMatcher(_BaseFuzzyMatcher):
+    """Fuzzy matcher with safe whole-token matching for US callsign aliases."""
+
+    @staticmethod
+    def _callsign_alias_base(alias):
+        """Return a base US broadcast callsign or None.
+
+        Accepts forms such as WWOR, WWOR-TV and WWORDT, but deliberately does
+        not treat generic short aliases such as HBO, CNN or MAX as callsigns.
+        """
+        compact = re.sub(r"[^A-Za-z0-9]", "", alias or "").upper()
+        compact = re.sub(r"(?:DT|TV)$", "", compact)
+        if re.fullmatch(r"[WK][A-Z]{2,5}", compact):
+            return compact.lower()
+        return None
+
+    def alias_match(self, lineup_name, candidate_names, alias_map, user_ignored_tags=None):
+        matches = super().alias_match(
+            lineup_name,
+            candidate_names,
+            alias_map,
+            user_ignored_tags,
+        )
+
+        aliases = alias_map.get(lineup_name, []) if alias_map else []
+        if isinstance(aliases, str):
+            aliases = [aliases]
+
+        callsigns = {
+            base
+            for alias in aliases
+            for base in [self._callsign_alias_base(alias)]
+            if base
+        }
+        if not callsigns:
+            return matches
+
+        existing = {name for name, _, _ in matches}
+        for candidate in candidate_names:
+            if candidate in existing or self._is_group_header(candidate):
+                continue
+
+            normalized = self.normalize_name(candidate, user_ignored_tags or [])
+            if not normalized:
+                continue
+
+            # Hyphens, parentheses and provider separators normalize to token
+            # boundaries, so this matches WWOR in MNT-WWOR and (WWOR), while
+            # refusing partial words such as WWORLD.
+            tokens = set(re.findall(r"[a-z0-9]+", normalized.lower()))
+            if callsigns & tokens:
+                matches.append((candidate, 100, "alias-callsign-token"))
+
+        matches.sort(key=lambda item: item[1], reverse=True)
+        return matches
+
+
+# plugin_base creates the matcher through its module-global FuzzyMatcher name.
+# Replace that reference before the Plugin class is instantiated.
+_plugin_base.FuzzyMatcher = _EmbeddedAliasFuzzyMatcher
 
 
 class Plugin(_BasePlugin):
