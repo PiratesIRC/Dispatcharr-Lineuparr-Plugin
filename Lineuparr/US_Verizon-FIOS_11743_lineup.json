@@ -1,7 +1,7 @@
 {
   "package": "Verizon Fios — All Available Channels (ZIP 11743)",
   "date": "2026-07-19",
-  "description": "Verizon Fios ZIP 11743 lineup with Strong8K stream aliases and aliases taken directly from the uploaded XMLTV EPG channel display names.",
+  "description": "Verizon Fios ZIP 11743 lineup with aliases from Strong8K, XMLTV EPG, HDHomeRun, and TV Everywhere M3U sources.",
   "source": "Gracenote lineup USA-NY67791-DEFAULT, supplemented with the Verizon Fios all-channel database and known inactive seasonal channel ranges",
   "notes": "Aliases include curated Strong8K stream names plus Gracenote callSign, channelId, station id, event callSign, and applicable FiOS SD/HD twin callsigns. Generic affiliate names were intentionally excluded to avoid matching the wrong local affiliate. Gracenote affiliateName values are included as aliases; empty/null and overly generic INDEPENDENT values are excluded.",
   "categories": {
@@ -262,7 +262,8 @@
           "CHARGE",
           "102148",
           "102148242",
-          "458 CHARGE"
+          "458 CHARGE",
+          "WCWNDT2"
         ],
         "epg_ids": [
           "102148"
@@ -277,7 +278,8 @@
           "COMET",
           "97051",
           "97051243",
-          "459 COMET"
+          "459 COMET",
+          "WRGBDT3"
         ],
         "epg_ids": [
           "97051"
@@ -319,7 +321,9 @@
           "70260",
           "70260246",
           "REWIND TV",
-          "462 WPIXDT4"
+          "462 WPIXDT4",
+          "462 WPIX Rewind",
+          "WPIX Rewind"
         ],
         "epg_ids": [
           "70260"
@@ -417,7 +421,8 @@
           "97965",
           "97965257",
           "ROAR",
-          "479 WNYWDT4"
+          "479 WNYWDT4",
+          "ROARTV"
         ],
         "epg_ids": [
           "97965"
@@ -463,7 +468,9 @@
           "55347",
           "55347260",
           "COURT TV",
-          "485 WPXNDT4"
+          "485 WPXNDT4",
+          "COURTTV",
+          "COURT"
         ],
         "epg_ids": [
           "55347"
@@ -495,7 +502,8 @@
           "75009",
           "75009262",
           "BUZZR",
-          "487 WWORDT3"
+          "487 WWORDT3",
+          "WYBNLD"
         ],
         "epg_ids": [
           "75009"
@@ -661,7 +669,9 @@
           "11331",
           "113310",
           "CBS TELEVISION NETWORK",
-          "502 WCBSDT"
+          "502 WCBSDT",
+          "502 WCBS-DT",
+          "WCBS-DT"
         ],
         "epg_ids": [
           "16689"
@@ -700,7 +710,9 @@
           "11705",
           "117052",
           "NATIONAL BROADCASTING COMPANY",
-          "504 WNBCDT"
+          "504 WNBCDT",
+          "504 WNBC-DT",
+          "WNBC-DT"
         ],
         "epg_ids": [
           "20459"
@@ -721,7 +733,9 @@
           "11746",
           "117463",
           "FOX ENTERTAINMENT",
-          "505 WNYWDT"
+          "505 WNYWDT",
+          "505 WNYW-DT",
+          "WNYW-DT"
         ],
         "epg_ids": [
           "20360"
@@ -761,7 +775,9 @@
           "11259",
           "112595",
           "AMERICAN BROADCASTING COMPANY",
-          "507 WABCDT"
+          "507 WABCDT",
+          "507 WABC-DT",
+          "WABC-DT"
         ],
         "epg_ids": [
           "20453"
@@ -781,7 +797,9 @@
           "11760",
           "117606",
           "MYNETWORKTV",
-          "509 WWORDT"
+          "509 WWORDT",
+          "509 WWOR-DT",
+          "WWOR-DT"
         ],
         "epg_ids": [
           "26566"
@@ -800,7 +818,9 @@
           "WLNYSD",
           "75363",
           "753637",
-          "510 WLNYDT"
+          "510 WLNYDT",
+          "510 WLNY HD",
+          "WLNY HD"
         ],
         "epg_ids": [
           "31225"
@@ -820,7 +840,9 @@
           "11779",
           "117798",
           "THE CW TELEVISION NETWORK",
-          "511 WPIXDT"
+          "511 WPIXDT",
+          "511 CW WPIX-DT",
+          "CW WPIX-DT"
         ],
         "epg_ids": [
           "20373"
@@ -1005,7 +1027,9 @@
           "11743",
           "1174324",
           "ION: INDEPENDENT TELEVISION",
-          "531 WPXNDT"
+          "531 WPXNDT",
+          "531 WPXN-DT30",
+          "WPXN-DT30"
         ],
         "epg_ids": [
           "43818"
@@ -1090,7 +1114,9 @@
           "66077291",
           "46648",
           "4664822",
-          "529 N12HD"
+          "529 N12HD",
+          "529 News12 HD",
+          "News12 HD"
         ],
         "epg_ids": [
           "66077"
@@ -1106,7 +1132,9 @@
           "PEG030",
           "23906",
           "2390623",
-          "530 N12TWHD"
+          "530 N12TWHD",
+          "530 News12 Plus HD",
+          "News12 Plus HD"
         ],
         "epg_ids": [
           "77772"
@@ -1122,7 +1150,9 @@
           "CNNHD",
           "58646",
           "58646328",
-          "600 CNNHD"
+          "600 CNNHD",
+          "600 CNN HD",
+          "CNN HD"
         ],
         "epg_ids": [
           "58646"
@@ -1137,7 +1167,9 @@
           "CNBCHD",
           "58780",
           "58780329",
-          "602 CNBCHD"
+          "602 CNBCHD",
+          "602 CNBC HD",
+          "CNBC HD"
         ],
         "epg_ids": [
           "58780"
@@ -1154,7 +1186,8 @@
           "MSNOWHD",
           "64241",
           "64241330",
-          "603 MSNOWHD"
+          "603 MSNOWHD",
+          "603 MS NOW HD"
         ],
         "epg_ids": [
           "64241"
@@ -1167,7 +1200,8 @@
           "NEWSNTN",
           "91096",
           "91096331",
-          "604 NEWSNTN"
+          "604 NEWSNTN",
+          "NEWSNATION"
         ],
         "epg_ids": [
           "91096"
@@ -1181,7 +1215,10 @@
           "BLOOMHD",
           "71799",
           "71799332",
-          "605 BLOOMHD"
+          "605 BLOOMHD",
+          "605 Bloomberg TV HD",
+          "Bloomberg TV HD",
+          "BLOOMBERG"
         ],
         "epg_ids": [
           "71799"
@@ -1197,7 +1234,10 @@
           "CSPANHD",
           "68344",
           "68344333",
-          "606 CSPANHD"
+          "606 CSPANHD",
+          "606 C-SPAN HD",
+          "C-SPAN HD",
+          "CSPAN"
         ],
         "epg_ids": [
           "68344"
@@ -1210,7 +1250,8 @@
           "CSPN2HD",
           "68334",
           "68334334",
-          "607 CSPN2HD"
+          "607 CSPN2HD",
+          "CSPAN2"
         ],
         "epg_ids": [
           "68334"
@@ -1223,7 +1264,8 @@
           "CSPN3HD",
           "68332",
           "68332335",
-          "608 CSPN3HD"
+          "608 CSPN3HD",
+          "CSPAN3"
         ],
         "epg_ids": [
           "68332"
@@ -1269,7 +1311,9 @@
           "WEATHHD",
           "58812",
           "58812338",
-          "611 WEATHHD"
+          "611 WEATHHD",
+          "611 The Weather Cha",
+          "The Weather Cha"
         ],
         "epg_ids": [
           "58812"
@@ -1284,7 +1328,9 @@
           "FOXWX",
           "93141",
           "93141339",
-          "613 FOXWX"
+          "613 FOXWX",
+          "613 Fox Weather HD",
+          "Fox Weather HD"
         ],
         "epg_ids": [
           "93141"
@@ -1312,7 +1358,9 @@
           "NEWSMXH",
           "97163",
           "97163341",
-          "616 NEWSMXH"
+          "616 NEWSMXH",
+          "616 Newsmax TV HD",
+          "Newsmax TV HD"
         ],
         "epg_ids": [
           "97163"
@@ -1328,7 +1376,10 @@
           "FBNHD",
           "58718",
           "58718342",
-          "617 FBNHD"
+          "617 FBNHD",
+          "617 Fox Business Ne",
+          "Fox Business Ne",
+          "FBN"
         ],
         "epg_ids": [
           "58718"
@@ -1346,7 +1397,10 @@
           "FNCHD",
           "60179",
           "60179343",
-          "618 FNCHD"
+          "618 FNCHD",
+          "618 Fox News HD",
+          "Fox News HD",
+          "FNC"
         ],
         "epg_ids": [
           "60179"
@@ -1359,7 +1413,9 @@
           "AWNYHD",
           "102910",
           "102910344",
-          "619 AWNYHD"
+          "619 AWNYHD",
+          "619 AccuWeather NY",
+          "AccuWeather NY"
         ],
         "epg_ids": [
           "102910"
@@ -1379,7 +1435,9 @@
           "ESPN",
           "10179",
           "1017947",
-          "570 ESPNHD"
+          "570 ESPNHD",
+          "570 ESPN HD",
+          "ESPN HD"
         ],
         "epg_ids": [
           "32645"
@@ -1413,7 +1471,9 @@
           "ESPNEWS",
           "16485",
           "1648549",
-          "572 ESPNWHD"
+          "572 ESPNWHD",
+          "572 ESPNews HD",
+          "ESPNews HD"
         ],
         "epg_ids": [
           "59976"
@@ -1445,7 +1505,9 @@
           "ESPN2",
           "12444",
           "1244451",
-          "574 ESPN2HD"
+          "574 ESPN2HD",
+          "574 ESPN 2 HD",
+          "ESPN 2 HD"
         ],
         "epg_ids": [
           "45507"
@@ -1486,7 +1548,9 @@
           "46275308",
           "30017",
           "3001753",
-          "576 YESHDNY"
+          "576 YESHDNY",
+          "576 YES-HD",
+          "YES-HD"
         ],
         "epg_ids": [
           "46275"
@@ -1506,7 +1570,9 @@
           "50038309",
           "49603",
           "4960354",
-          "577 SNYHD"
+          "577 SNYHD",
+          "577 SportsNet NY HD",
+          "SportsNet NY HD"
         ],
         "epg_ids": [
           "50038"
@@ -1523,7 +1589,9 @@
           "35402310",
           "10979",
           "1097955",
-          "578 MSGHD"
+          "578 MSGHD",
+          "578 MSG HD",
+          "MSG HD"
         ],
         "epg_ids": [
           "35402"
@@ -1541,7 +1609,9 @@
           "70283311",
           "10980",
           "1098056",
-          "579 MSG2HD"
+          "579 MSG2HD",
+          "579 MSG 2 HD",
+          "MSG 2 HD"
         ],
         "epg_ids": [
           "70283"
@@ -1558,7 +1628,9 @@
           "35383312",
           "11105",
           "1110557",
-          "580 MSGSNHD"
+          "580 MSGSNHD",
+          "580 MSG Sportsnet H",
+          "MSG Sportsnet H"
         ],
         "epg_ids": [
           "35383"
@@ -1576,7 +1648,9 @@
           "70285313",
           "17798",
           "1779858",
-          "581 MSG2SNH"
+          "581 MSG2SNH",
+          "581 MSG Sportsnet 2",
+          "MSG Sportsnet 2"
         ],
         "epg_ids": [
           "70285"
@@ -1600,7 +1674,9 @@
           "82547314",
           "82541",
           "8254159",
-          "583 FS1HD"
+          "583 FS1HD",
+          "583 Fox Sports 1 HD",
+          "Fox Sports 1 HD"
         ],
         "epg_ids": [
           "82547"
@@ -1624,7 +1700,9 @@
           "59305315",
           "33178",
           "3317860",
-          "584 FS2HD"
+          "584 FS2HD",
+          "584 Fox Sports 2 HD",
+          "Fox Sports 2 HD"
         ],
         "epg_ids": [
           "59305"
@@ -1660,7 +1738,9 @@
           "MLBN",
           "62079",
           "6207962",
-          "586 MLBHD"
+          "586 MLBHD",
+          "586 MLB Network HD",
+          "MLB Network HD"
         ],
         "epg_ids": [
           "62081"
@@ -1694,7 +1774,9 @@
           "NFLNET",
           "34710",
           "3471064",
-          "588 NFLHD"
+          "588 NFLHD",
+          "588 NFL Network HD",
+          "NFL Network HD"
         ],
         "epg_ids": [
           "45399"
@@ -1779,7 +1861,10 @@
           "CBSSN",
           "16365",
           "1636568",
-          "594 CBSSNHD"
+          "594 CBSSNHD",
+          "594 CBS Sports Netw",
+          "CBS Sports Netw",
+          "CBSSPORTS"
         ],
         "epg_ids": [
           "59250"
@@ -1836,7 +1921,9 @@
           "YES2HD",
           "82128",
           "82128326",
-          "598 YES2HD"
+          "598 YES2HD",
+          "598 YES2 HD",
+          "YES2 HD"
         ],
         "epg_ids": [
           "82128"
@@ -2160,7 +2247,9 @@
           "FIOS4K5",
           "120903",
           "120903514",
-          "1495 FIOS4K5"
+          "1495 FIOS4K5",
+          "1495 Fios 4K5",
+          "Fios 4K5"
         ],
         "epg_ids": [
           "120903"
@@ -2174,7 +2263,9 @@
           "FIOS4K6",
           "120904",
           "120904515",
-          "1496 FIOS4K6"
+          "1496 FIOS4K6",
+          "1496 Fios 4K6",
+          "Fios 4K6"
         ],
         "epg_ids": [
           "120904"
@@ -2202,7 +2293,9 @@
           "FIOS4K8",
           "117275",
           "117275517",
-          "1498 FIOS4K8"
+          "1498 FIOS4K8",
+          "1498 Fios 4K8",
+          "Fios 4K8"
         ],
         "epg_ids": [
           "117275"
@@ -2216,7 +2309,9 @@
           "FIOS4K9",
           "117276",
           "117276518",
-          "1499 FIOS4K9"
+          "1499 FIOS4K9",
+          "1499 Fios 4K9",
+          "Fios 4K9"
         ],
         "epg_ids": [
           "117276"
@@ -2487,7 +2582,9 @@
           "TCMHD",
           "64312",
           "64312407",
-          "730 TCMHD"
+          "730 TCMHD",
+          "730 Turner Classics",
+          "Turner Classics"
         ],
         "epg_ids": [
           "64312"
@@ -2502,7 +2599,10 @@
           "AMCHD",
           "59337",
           "59337408",
-          "731 AMCHD"
+          "731 AMCHD",
+          "731 AMC HD",
+          "AMC HD",
+          "AMC"
         ],
         "epg_ids": [
           "59337"
@@ -2533,7 +2633,11 @@
           "IFCHD",
           "59444",
           "59444410",
-          "734 IFCHD"
+          "734 IFCHD",
+          "734 IFC (HD)",
+          "IFC (HD)",
+          "IFC",
+          "IFCSTR"
         ],
         "epg_ids": [
           "59444"
@@ -2546,7 +2650,9 @@
           "SUNDHD",
           "71280",
           "71280411",
-          "735 SUNDHD"
+          "735 SUNDHD",
+          "735 Sundance HD",
+          "Sundance HD"
         ],
         "epg_ids": [
           "71280"
@@ -2572,7 +2678,9 @@
           "UPHD",
           "66143",
           "66143413",
-          "738 UPHD"
+          "738 UPHD",
+          "738 UP HD (East)",
+          "UP HD (East)"
         ],
         "epg_ids": [
           "66143"
@@ -2602,7 +2710,9 @@
           "HALLHD",
           "66268",
           "66268415",
-          "740 HALLHD"
+          "740 HALLHD",
+          "740 Hallmark Channe",
+          "Hallmark Channe"
         ],
         "epg_ids": [
           "66268"
@@ -2617,7 +2727,9 @@
           "TVLNDHD",
           "73541",
           "73541416",
-          "741 TVLNDHD"
+          "741 TVLNDHD",
+          "741 TV Land HD (Eas",
+          "TV Land HD (Eas"
         ],
         "epg_ids": [
           "73541"
@@ -2978,7 +3090,9 @@
           "PARSHOH",
           "21868",
           "21868470",
-          "865 PARSHOH"
+          "865 PARSHOH",
+          "865 Paramount+ with",
+          "Paramount+ with"
         ],
         "epg_ids": [
           "21868"
@@ -3000,7 +3114,9 @@
           "PASHOHW",
           "22532",
           "22532471",
-          "866 PASHOHW"
+          "866 PASHOHW",
+          "866 Paramount+ with",
+          "Paramount+ with"
         ],
         "epg_ids": [
           "22532"
@@ -3016,7 +3132,9 @@
           "SHOCSHD",
           "61001",
           "61001472",
-          "867 SHOCSHD"
+          "867 SHOCSHD",
+          "867 Showcase HD",
+          "Showcase HD"
         ],
         "epg_ids": [
           "61001"
@@ -3029,7 +3147,9 @@
           "SHOBETH",
           "68340",
           "68340473",
-          "868 SHOBETH"
+          "868 SHOBETH",
+          "868 SHO BET HD",
+          "SHO BET HD"
         ],
         "epg_ids": [
           "68340"
@@ -3045,7 +3165,9 @@
           "SHO2HD",
           "58533",
           "58533474",
-          "869 SHO2HD"
+          "869 SHO2HD",
+          "869 Showtime 2 HD",
+          "Showtime 2 HD"
         ],
         "epg_ids": [
           "58533"
@@ -3061,7 +3183,9 @@
           "SHO2PHD",
           "60953",
           "60953475",
-          "870 SHO2PHD"
+          "870 SHO2PHD",
+          "870 Showtime 2 HD (",
+          "Showtime 2 HD ("
         ],
         "epg_ids": [
           "60953"
@@ -3077,7 +3201,9 @@
           "SHOWXHD",
           "60947",
           "60947476",
-          "873 SHOWXHD"
+          "873 SHOWXHD",
+          "873 Showtime Extrem",
+          "Showtime Extrem"
         ],
         "epg_ids": [
           "60947"
@@ -3093,7 +3219,9 @@
           "SHWXPHD",
           "60945",
           "60945477",
-          "874 SHWXPHD"
+          "874 SHWXPHD",
+          "874 Showtime Extrem",
+          "Showtime Extrem"
         ],
         "epg_ids": [
           "60945"
@@ -3109,7 +3237,9 @@
           "TMCHD",
           "35329",
           "35329478",
-          "885 TMCHD"
+          "885 TMCHD",
+          "885 TMC HD",
+          "TMC HD"
         ],
         "epg_ids": [
           "35329"
@@ -3125,7 +3255,9 @@
           "TMCXHD",
           "60951",
           "60951479",
-          "887 TMCXHD"
+          "887 TMCXHD",
+          "887 TMC Xtra HD",
+          "TMC Xtra HD"
         ],
         "epg_ids": [
           "60951"
@@ -3189,7 +3321,9 @@
           "HBOHD",
           "19548",
           "19548482",
-          "899 HBOHD"
+          "899 HBOHD",
+          "899 HBO HD",
+          "HBO HD"
         ],
         "epg_ids": [
           "19548"
@@ -3219,7 +3353,9 @@
           "HBOHDP",
           "19566",
           "19566484",
-          "901 HBOHDP"
+          "901 HBOHDP",
+          "901 HBO HD West",
+          "HBO HD West"
         ],
         "epg_ids": [
           "19566"
@@ -3235,7 +3371,9 @@
           "HBOHTHD",
           "59368",
           "59368485",
-          "902 HBOHTHD"
+          "902 HBOHTHD",
+          "902 HBO Hits HD",
+          "HBO Hits HD"
         ],
         "epg_ids": [
           "59368"
@@ -3251,7 +3389,9 @@
           "HBOHHDP",
           "59355",
           "59355486",
-          "903 HBOHHDP"
+          "903 HBOHHDP",
+          "903 HBO Hits HD (We",
+          "HBO Hits HD (We"
         ],
         "epg_ids": [
           "59355"
@@ -3267,7 +3407,9 @@
           "HBODRHD",
           "59363",
           "59363487",
-          "904 HBODRHD"
+          "904 HBODRHD",
+          "904 HBO Drama HD",
+          "HBO Drama HD"
         ],
         "epg_ids": [
           "59363"
@@ -3283,7 +3425,9 @@
           "HBODHDP",
           "59366",
           "59366488",
-          "905 HBODHDP"
+          "905 HBODHDP",
+          "905 HBO Drama HD (W",
+          "HBO Drama HD (W"
         ],
         "epg_ids": [
           "59366"
@@ -3301,7 +3445,9 @@
           "HBOCHD",
           "59839",
           "59839489",
-          "908 HBOCHD"
+          "908 HBOCHD",
+          "908 HBO Comedy HD",
+          "HBO Comedy HD"
         ],
         "epg_ids": [
           "59839"
@@ -3319,7 +3465,9 @@
           "HBOCPHD",
           "59841",
           "59841490",
-          "909 HBOCPHD"
+          "909 HBOCPHD",
+          "909 HBO Comedy HD (",
+          "HBO Comedy HD ("
         ],
         "epg_ids": [
           "59841"
@@ -3335,7 +3483,9 @@
           "HBOMVHD",
           "59845",
           "59845491",
-          "910 HBOMVHD"
+          "910 HBOMVHD",
+          "910 HBO Movies HD",
+          "HBO Movies HD"
         ],
         "epg_ids": [
           "59845"
@@ -3351,7 +3501,9 @@
           "HBOMHDP",
           "59847",
           "59847492",
-          "911 HBOMHDP"
+          "911 HBOMHDP",
+          "911 HBO Movies HD (",
+          "HBO Movies HD ("
         ],
         "epg_ids": [
           "59847"
@@ -3616,7 +3768,9 @@
           "NIKHD",
           "59432",
           "59432420",
-          "752 NIKHD"
+          "752 NIKHD",
+          "752 Nick HD (East)",
+          "Nick HD (East)"
         ],
         "epg_ids": [
           "59432"
@@ -3948,7 +4102,9 @@
           "USA",
           "11207",
           "1120742",
-          "550 USAHD"
+          "550 USAHD",
+          "550 USA HD",
+          "USA HD"
         ],
         "epg_ids": [
           "58452"
@@ -3970,7 +4126,9 @@
           "TNT",
           "11164",
           "1116443",
-          "551 TNTHD"
+          "551 TNTHD",
+          "551 TNT HD",
+          "TNT HD"
         ],
         "epg_ids": [
           "42642"
@@ -3988,7 +4146,9 @@
           "TBS",
           "11867",
           "1186744",
-          "552 TBSHD"
+          "552 TBSHD",
+          "552 TBS HD",
+          "TBS HD"
         ],
         "epg_ids": [
           "58515"
@@ -4007,7 +4167,9 @@
           "FX",
           "14321",
           "1432145",
-          "553 FXHD"
+          "553 FXHD",
+          "553 FX HD (EAST)",
+          "FX HD (EAST)"
         ],
         "epg_ids": [
           "58574"
@@ -4025,7 +4187,9 @@
           "PAR",
           "11163",
           "1116346",
-          "554 PARHD"
+          "554 PARHD",
+          "554 Paramount Netwo",
+          "Paramount Netwo"
         ],
         "epg_ids": [
           "59186"
@@ -4054,7 +4218,9 @@
           "SYFYHD",
           "58623",
           "58623384",
-          "680 SYFYHD"
+          "680 SYFYHD",
+          "680 SYFY HD",
+          "SYFY HD"
         ],
         "epg_ids": [
           "58623"
@@ -4069,7 +4235,10 @@
           "AETVHD",
           "51529",
           "51529385",
-          "681 AETVHD"
+          "681 AETVHD",
+          "681 A&E HD",
+          "A&E HD",
+          "AETV"
         ],
         "epg_ids": [
           "51529"
@@ -4085,7 +4254,9 @@
           "TRUTVHD",
           "64490",
           "64490386",
-          "683 TRUTVHD"
+          "683 TRUTVHD",
+          "683 tru TV HD",
+          "tru TV HD"
         ],
         "epg_ids": [
           "64490"
@@ -4118,7 +4289,9 @@
           "BRAVOHD",
           "58625",
           "58625388",
-          "685 BRAVOHD"
+          "685 BRAVOHD",
+          "685 Bravo HD",
+          "Bravo HD"
         ],
         "epg_ids": [
           "58625"
@@ -4131,7 +4304,9 @@
           "LOGOHD",
           "96971",
           "96971389",
-          "687 LOGOHD"
+          "687 LOGOHD",
+          "687 Logo HD (East)",
+          "Logo HD (East)"
         ],
         "epg_ids": [
           "96971"
@@ -4144,7 +4319,9 @@
           "OVATNHD",
           "69061",
           "69061390",
-          "688 OVATNHD"
+          "688 OVATNHD",
+          "688 Ovation HD",
+          "Ovation HD"
         ],
         "epg_ids": [
           "69061"
@@ -4159,7 +4336,10 @@
           "BBCAHD",
           "64492",
           "64492391",
-          "689 BBCAHD"
+          "689 BBCAHD",
+          "689 BBC America HD",
+          "BBC America HD",
+          "BBCA"
         ],
         "epg_ids": [
           "64492"
@@ -4180,7 +4360,9 @@
           "CCHD",
           "62420",
           "62420392",
-          "690 CCHD"
+          "690 CCHD",
+          "690 Comedy Central",
+          "Comedy Central"
         ],
         "epg_ids": [
           "62420"
@@ -4196,7 +4378,9 @@
           "FXXHD",
           "66379",
           "66379393",
-          "691 FXXHD"
+          "691 FXXHD",
+          "691 FXX HD",
+          "FXX HD"
         ],
         "epg_ids": [
           "66379"
@@ -4209,7 +4393,10 @@
           "REELZHD",
           "68385",
           "68385394",
-          "692 REELZHD"
+          "692 REELZHD",
+          "692 Reelz Channel H",
+          "Reelz Channel H",
+          "REELZ"
         ],
         "epg_ids": [
           "68385"
@@ -4222,7 +4409,9 @@
           "POPHD",
           "68796",
           "68796395",
-          "694 POPHD"
+          "694 POPHD",
+          "694 POP HD (East)",
+          "POP HD (East)"
         ],
         "epg_ids": [
           "68796"
@@ -4235,7 +4424,9 @@
           "CMDTVHD",
           "82470",
           "82470396",
-          "695 CMDTVHD"
+          "695 CMDTVHD",
+          "695 Comedy.TV HD",
+          "Comedy.TV HD"
         ],
         "epg_ids": [
           "82470"
@@ -4251,7 +4442,9 @@
           "EHD",
           "61812",
           "61812397",
-          "696 EHD"
+          "696 EHD",
+          "696 E! TV HD",
+          "E! TV HD"
         ],
         "epg_ids": [
           "61812"
@@ -4264,7 +4457,9 @@
           "VICEHD",
           "65732",
           "65732398",
-          "697 VICEHD"
+          "697 VICEHD",
+          "697 VICE HD",
+          "VICE HD"
         ],
         "epg_ids": [
           "65732"
@@ -4280,7 +4475,9 @@
           "FREFMHD",
           "59615",
           "59615399",
-          "699 FREFMHD"
+          "699 FREFMHD",
+          "699 Freeform HD",
+          "Freeform HD"
         ],
         "epg_ids": [
           "59615"
@@ -4324,7 +4521,10 @@
           "LIFEHD",
           "60150",
           "60150360",
-          "640 LIFEHD"
+          "640 LIFEHD",
+          "640 Lifetime HD",
+          "Lifetime HD",
+          "LIFETIME"
         ],
         "epg_ids": [
           "60150"
@@ -4340,7 +4540,9 @@
           "LMNHD",
           "55887",
           "55887361",
-          "641 LMNHD"
+          "641 LMNHD",
+          "641 LMN HD",
+          "LMN HD"
         ],
         "epg_ids": [
           "55887"
@@ -4356,7 +4558,9 @@
           "OXYGNHD",
           "70522",
           "70522362",
-          "644 OXYGNHD"
+          "644 OXYGNHD",
+          "644 Oxygen HD (East",
+          "Oxygen HD (East"
         ],
         "epg_ids": [
           "70522"
@@ -4371,7 +4575,9 @@
           "OWNHD",
           "70388",
           "70388363",
-          "645 OWNHD"
+          "645 OWNHD",
+          "645 OWN HD",
+          "OWN HD"
         ],
         "epg_ids": [
           "70388"
@@ -4386,7 +4592,9 @@
           "WEHD",
           "59296",
           "59296364",
-          "649 WEHD"
+          "649 WEHD",
+          "649 WE TV (HD)",
+          "WE TV (HD)"
         ],
         "epg_ids": [
           "59296"
@@ -4417,7 +4625,8 @@
           "HSNHD",
           "62077",
           "62077366",
-          "651 HSNHD"
+          "651 HSNHD",
+          "HSN"
         ],
         "epg_ids": [
           "62077"
@@ -4458,7 +4667,8 @@
           "HSN2HD",
           "99450",
           "99450369",
-          "654 HSN2HD"
+          "654 HSN2HD",
+          "HSN2"
         ],
         "epg_ids": [
           "99450"
@@ -4471,7 +4681,8 @@
           "QVC3HD",
           "102337",
           "102337370",
-          "656 QVC3HD"
+          "656 QVC3HD",
+          "QVC3"
         ],
         "epg_ids": [
           "102337"
@@ -4512,7 +4723,9 @@
           "COOKHD",
           "68065",
           "68065373",
-          "663 COOKHD"
+          "663 COOKHD",
+          "663 Cooking Channel",
+          "Cooking Channel"
         ],
         "epg_ids": [
           "68065"
@@ -4528,7 +4741,9 @@
           "FOODHD",
           "50747",
           "50747374",
-          "664 FOODHD"
+          "664 FOODHD",
+          "664 Food Network HD",
+          "Food Network HD"
         ],
         "epg_ids": [
           "50747"
@@ -4544,7 +4759,9 @@
           "HGTVD",
           "49788",
           "49788375",
-          "665 HGTVD"
+          "665 HGTVD",
+          "665 Home & Garden T",
+          "Home & Garden T"
         ],
         "epg_ids": [
           "49788"
@@ -4590,7 +4807,9 @@
           "TRAVHD",
           "59303",
           "59303378",
-          "670 TRAVHD"
+          "670 TRAVHD",
+          "670 Travel Channel",
+          "Travel Channel"
         ],
         "epg_ids": [
           "59303"
@@ -4700,7 +4919,9 @@
           "DSCHD",
           "56905",
           "56905345",
-          "620 DSCHD"
+          "620 DSCHD",
+          "620 Discovery HD",
+          "Discovery HD"
         ],
         "epg_ids": [
           "56905"
@@ -4717,7 +4938,9 @@
           "NGCHD",
           "49438",
           "49438346",
-          "621 NGCHD"
+          "621 NGCHD",
+          "621 National Geo HD",
+          "National Geo HD"
         ],
         "epg_ids": [
           "49438"
@@ -4789,7 +5012,8 @@
           "HSTRYHD",
           "57708",
           "57708351",
-          "628 HSTRYHD"
+          "628 HSTRYHD",
+          "HISTORY"
         ],
         "epg_ids": [
           "57708"
@@ -4802,7 +5026,8 @@
           "FYIHD",
           "58988",
           "58988352",
-          "629 FYIHD"
+          "629 FYIHD",
+          "FYI"
         ],
         "epg_ids": [
           "58988"
@@ -4901,7 +5126,9 @@
           "TLCHD",
           "57391",
           "57391359",
-          "639 TLCHD"
+          "639 TLCHD",
+          "639 TLC HD",
+          "TLC HD"
         ],
         "epg_ids": [
           "57391"
@@ -5119,7 +5346,9 @@
           "MTVHD",
           "60964",
           "60964400",
-          "710 MTVHD"
+          "710 MTVHD",
+          "710 MTV HD (East)",
+          "MTV HD (East)"
         ],
         "epg_ids": [
           "60964"
@@ -5132,7 +5361,9 @@
           "MTV2HD",
           "75077",
           "75077401",
-          "711 MTV2HD"
+          "711 MTV2HD",
+          "711 MTV2 HD (East)",
+          "MTV2 HD (East)"
         ],
         "epg_ids": [
           "75077"
@@ -5158,7 +5389,10 @@
           "VH1HD",
           "60046",
           "60046403",
-          "717 VH1HD"
+          "717 VH1HD",
+          "717 VH1 HD (East)",
+          "VH1 HD (East)",
+          "VH1"
         ],
         "epg_ids": [
           "60046"
@@ -5171,7 +5405,9 @@
           "BHERHD",
           "63220",
           "63220404",
-          "720 BHERHD"
+          "720 BHERHD",
+          "720 BET Her HD",
+          "BET Her HD"
         ],
         "epg_ids": [
           "63220"
@@ -5186,7 +5422,9 @@
           "CMTVHD",
           "59440",
           "59440405",
-          "721 CMTVHD"
+          "721 CMTVHD",
+          "721 CMT HD (East)",
+          "CMT HD (East)"
         ],
         "epg_ids": [
           "59440"
@@ -7024,7 +7262,8 @@
     "Strong8K live stream metadata",
     "Gracenote FiOS ZIP 11743 channel metadata",
     "Gracenote affiliateName and affiliateCallSign matched by exact FiOS channel number and local SD/HD twin number",
-    "xmlguide.xmltv: exact <channel> display-name values matched by FiOS channel number"
+    "xmlguide.xmltv: exact <channel> display-name values matched by FiOS channel number",
+    "hdhr-lineup.m3u and channels.m3u: stream display names and tvg-name values matched to the FiOS lineup"
   ],
   "xmltv_epg_matching": {
     "source_file": "xmlguide.xmltv",
@@ -7041,5 +7280,14 @@
       "NULL",
       "empty values"
     ]
+  },
+  "m3u_alias_matching": {
+    "hdhomerun_entries": 106,
+    "tv_everywhere_entries": 76,
+    "matched_entries": 134,
+    "unmatched_entries": 48,
+    "channels_updated": 119,
+    "aliases_added": 238,
+    "matching_policy": "HDHomeRun entries matched by exact FiOS channel number. TV Everywhere entries matched by exact normalized name, with only REELZ and ROARTV added as manually reviewed brand matches."
   }
 }
