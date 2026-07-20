@@ -1,0 +1,173 @@
+{
+  "package": "Verizon Fios 11743 Embedded Alias Test",
+  "date": "2026-07-19",
+  "description": "Focused Huntington/Long Island test lineup for validating aliases embedded in lineup JSON entries against Strong8K stream naming.",
+  "source": "Gracenote USA-NY67791-DEFAULT and Strong8K live stream metadata",
+  "notes": "Test subset only. Use this lineup to confirm embedded alias loading before replacing the full Verizon Fios lineup.",
+  "categories": {
+    "Local": [
+      {
+        "name": "CBS 2 New York",
+        "number": 502,
+        "aliases": [
+          "US: CBS 2 WCBS (NEW YORK) HD",
+          "US: CBS 2 (WCBS) NEW YORK HD",
+          "WCBS",
+          "WCBS-TV",
+          "WCBSDT",
+          "CBS 2",
+          "CBS NEW YORK"
+        ]
+      },
+      {
+        "name": "NBC 4 New York",
+        "number": 504,
+        "aliases": [
+          "US: NBC 4 (WNBC) NEW YORK (A) RAW",
+          "US: NBC 4 (WNBC) NEW YORK (H) RAW",
+          "WNBC",
+          "WNBC-TV",
+          "WNBCDT",
+          "NBC 4",
+          "NBC NEW YORK"
+        ]
+      },
+      {
+        "name": "FOX 5 New York",
+        "number": 505,
+        "aliases": [
+          "US: FOX 5 (WNYW) NEW YORK HD",
+          "WNYW",
+          "WNYW-TV",
+          "WNYWDT",
+          "FOX 5",
+          "FOX 5 NEW YORK"
+        ]
+      },
+      {
+        "name": "ABC 7 New York",
+        "number": 507,
+        "aliases": [
+          "US: ABC HD [NEW YORK]",
+          "US: ABC 7 NEW YORK",
+          "WABC",
+          "WABC-TV",
+          "WABCDT",
+          "ABC 7",
+          "ABC 7 NEW YORK"
+        ]
+      },
+      {
+        "name": "My9 New York",
+        "number": 509,
+        "aliases": ["WWOR", "WWOR-TV", "WWORDT", "MY9", "MY NETWORK TV NEW YORK"]
+      },
+      {
+        "name": "PIX11 New York",
+        "number": 511,
+        "aliases": ["WPIX", "WPIX-TV", "WPIXDT", "PIX11", "CW 11 NEW YORK"]
+      },
+      {
+        "name": "Telemundo 47 New York",
+        "number": 512,
+        "aliases": ["WNJU", "WNJU-TV", "WNJUDT", "TELEMUNDO 47", "TELEMUNDO NEW YORK"]
+      },
+      {
+        "name": "Thirteen PBS",
+        "number": 513,
+        "aliases": ["WNET", "WNET-TV", "WNETDT", "PBS 13 NEW YORK", "THIRTEEN"]
+      },
+      {
+        "name": "UniMas 68",
+        "number": 517,
+        "aliases": ["WFUT", "WFUT-TV", "WFUTDT", "UNIMAS 68 NEW YORK"]
+      },
+      {
+        "name": "News 12 Long Island",
+        "number": 529,
+        "aliases": ["US: NEWS 12 LONG ISLAND 4K", "N12", "N12HD", "NEWS 12 LI", "NEWS12 LONG ISLAND"]
+      }
+    ],
+    "News": [
+      {
+        "name": "CNN",
+        "number": 600,
+        "aliases": ["US: CNN HD", "cnn.us", "US: CNN 4K"]
+      },
+      {
+        "name": "CNBC",
+        "number": 602,
+        "aliases": ["US: CNBC HD", "CNBC.us"]
+      },
+      {
+        "name": "MS NOW",
+        "number": 603,
+        "aliases": ["MSNBC", "MSNBC HD", "MS NOW HD"]
+      },
+      {
+        "name": "BBC News",
+        "number": 609,
+        "aliases": ["US: BBC WORLD NEWS", "BBC WORLD NEWS", "BBC WORLD NEWS HD"]
+      },
+      {
+        "name": "FOX Business Network",
+        "number": 617,
+        "aliases": ["US: FOX BUSINESS NETWORK HD", "FoxBusiness.us", "foxbusiness.us"]
+      },
+      {
+        "name": "FOX News Channel",
+        "number": 618,
+        "aliases": ["US: FOX NEWS HD", "FoxNews.us", "foxnews.us", "US: FOX NEWS CHANNEL 4K"]
+      }
+    ],
+    "Sports": [
+      {
+        "name": "YES Network",
+        "number": 576,
+        "aliases": ["US: FOX SPORTS YES NETWORK HD", "US: YES NETWORK HD", "YESNetwork.us", "YES", "YESHDNY", "YES NETWORK NY"]
+      },
+      {
+        "name": "SportsNet New York",
+        "number": 577,
+        "aliases": ["US: SPORTSNET NEW YORK HD", "SNY", "SNYHD", "SPORTSNET NEW YORK", "SNY NEW YORK"]
+      },
+      {
+        "name": "MSG Network",
+        "number": 578,
+        "aliases": ["MSG", "MSGHD", "MSG NETWORK NY"]
+      },
+      {
+        "name": "FOX Sports 1",
+        "number": 583,
+        "aliases": ["US: FOX SPORTS 1 4K", "FoxSports1.us", "US: FOX SPORTS 1 HD", "FS1", "FOX SPORTS 1 HD"]
+      },
+      {
+        "name": "FOX Sports 2",
+        "number": 584,
+        "aliases": ["US: FOX SPORTS 2 4K", "FoxSports2.us", "US: FOX SPORTS 2 HD", "FS2", "FOX SPORTS 2 HD"]
+      },
+      {
+        "name": "CBS Sports Network",
+        "number": 594,
+        "aliases": ["US: CBS SPORTS NETWORK HD", "CBSSportsNetwork.us"]
+      }
+    ],
+    "Movies": [
+      {
+        "name": "MGM+",
+        "number": 895,
+        "aliases": ["EPIX", "EPIX HD", "EPIX 1", "MGM PLUS", "MGM PLUS HD"]
+      },
+      {
+        "name": "FX Movie Channel",
+        "number": 732,
+        "aliases": ["FXM", "FX MOVIE", "FXM HD"]
+      },
+      {
+        "name": "Turner Classic Movies",
+        "number": 730,
+        "aliases": ["TCM", "TCM HD", "TURNER CLASSIC MOVIES HD"]
+      }
+    ]
+  }
+}

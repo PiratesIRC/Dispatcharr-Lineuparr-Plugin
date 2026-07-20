@@ -1,0 +1,7275 @@
+{
+  "package": "Verizon Fios — All Available Channels (ZIP 11743)",
+  "date": "2026-07-19",
+  "description": "Verizon Fios ZIP 11743 lineup with aliases from Strong8K, XMLTV EPG, HDHomeRun, and TV Everywhere M3U sources.",
+  "source": "Gracenote lineup USA-NY67791-DEFAULT, supplemented with the Verizon Fios all-channel database and known inactive seasonal channel ranges",
+  "notes": "Aliases include curated Strong8K stream names plus Gracenote callSign, channelId, station id, event callSign, and applicable FiOS SD/HD twin callsigns. Generic affiliate names were intentionally excluded to avoid matching the wrong local affiliate. Gracenote affiliateName values are included as aliases; empty/null and overly generic INDEPENDENT values are excluded.",
+  "categories": {
+    "Local": [
+      {
+        "name": "WVVHCA",
+        "number": 14,
+        "aliases": [
+          "WVVHCA",
+          "15760",
+          "1576011",
+          "14 WVVHCA"
+        ],
+        "epg_ids": [
+          "15760"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 24",
+        "number": 24,
+        "aliases": [
+          "PEG024",
+          "23900",
+          "2390017",
+          "24 PEG024"
+        ],
+        "epg_ids": [
+          "23900"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 26",
+        "number": 26,
+        "aliases": [
+          "PEG026",
+          "23902",
+          "2390219",
+          "26 PEG026"
+        ],
+        "epg_ids": [
+          "23902"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 27",
+        "number": 27,
+        "aliases": [
+          "PEG027",
+          "23903",
+          "2390320",
+          "27 PEG027"
+        ],
+        "epg_ids": [
+          "23903"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 32",
+        "number": 32,
+        "aliases": [
+          "PEG032",
+          "23908",
+          "2390825",
+          "32 PEG032"
+        ],
+        "epg_ids": [
+          "23908"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 33",
+        "number": 33,
+        "aliases": [
+          "PEG033",
+          "23909",
+          "2390926",
+          "33 PEG033"
+        ],
+        "epg_ids": [
+          "23909"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 34",
+        "number": 34,
+        "aliases": [
+          "PEG034",
+          "23910",
+          "2391027",
+          "34 PEG034"
+        ],
+        "epg_ids": [
+          "23910"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 35",
+        "number": 35,
+        "aliases": [
+          "PEG035",
+          "23911",
+          "2391128",
+          "35 PEG035"
+        ],
+        "epg_ids": [
+          "23911"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 36",
+        "number": 36,
+        "aliases": [
+          "PEG036",
+          "23912",
+          "2391229",
+          "36 PEG036"
+        ],
+        "epg_ids": [
+          "23912"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 37",
+        "number": 37,
+        "aliases": [
+          "PEG037",
+          "23913",
+          "2391330",
+          "37 PEG037"
+        ],
+        "epg_ids": [
+          "23913"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 38",
+        "number": 38,
+        "aliases": [
+          "PEG038",
+          "23914",
+          "2391431",
+          "38 PEG038"
+        ],
+        "epg_ids": [
+          "23914"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 39",
+        "number": 39,
+        "aliases": [
+          "PEG039",
+          "23915",
+          "2391532",
+          "39 PEG039"
+        ],
+        "epg_ids": [
+          "23915"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 40",
+        "number": 40,
+        "aliases": [
+          "PEG040",
+          "23916",
+          "2391633",
+          "40 PEG040"
+        ],
+        "epg_ids": [
+          "23916"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 42",
+        "number": 42,
+        "aliases": [
+          "PEG042",
+          "23918",
+          "2391835",
+          "42 PEG042"
+        ],
+        "epg_ids": [
+          "23918"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 43",
+        "number": 43,
+        "aliases": [
+          "PEG043",
+          "23919",
+          "2391936",
+          "43 PEG043"
+        ],
+        "epg_ids": [
+          "23919"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 44",
+        "number": 44,
+        "aliases": [
+          "PEG044",
+          "23920",
+          "2392037",
+          "44 PEG044"
+        ],
+        "epg_ids": [
+          "23920"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 45",
+        "number": 45,
+        "aliases": [
+          "PEG045",
+          "23921",
+          "2392138",
+          "45 PEG045"
+        ],
+        "epg_ids": [
+          "23921"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 46",
+        "number": 46,
+        "aliases": [
+          "PEG046",
+          "23922",
+          "2392239",
+          "46 PEG046"
+        ],
+        "epg_ids": [
+          "23922"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 47",
+        "number": 47,
+        "aliases": [
+          "PEG047",
+          "23923",
+          "2392340",
+          "47 PEG047"
+        ],
+        "epg_ids": [
+          "23923"
+        ]
+      },
+      {
+        "name": "CHARGE",
+        "number": 458,
+        "aliases": [
+          "US: CHARGE!",
+          "ChargeTV.us",
+          "CHARGE",
+          "102148",
+          "102148242",
+          "458 CHARGE",
+          "WCWNDT2"
+        ],
+        "epg_ids": [
+          "102148"
+        ]
+      },
+      {
+        "name": "COMET",
+        "number": 459,
+        "aliases": [
+          "US: COMET HD",
+          "Comet.us",
+          "COMET",
+          "97051",
+          "97051243",
+          "459 COMET",
+          "WRGBDT3"
+        ],
+        "epg_ids": [
+          "97051"
+        ]
+      },
+      {
+        "name": "Cozi Tv (WNBCDT2)",
+        "number": 460,
+        "aliases": [
+          "WNBCDT2",
+          "44936",
+          "44936244",
+          "COZI TV",
+          "460 WNBCDT2"
+        ],
+        "epg_ids": [
+          "44936"
+        ]
+      },
+      {
+        "name": "True Crmz (WNBCDT3)",
+        "number": 461,
+        "aliases": [
+          "WNBCDT3",
+          "114834",
+          "114834245",
+          "TRUE CRMZ",
+          "461 WNBCDT3"
+        ],
+        "epg_ids": [
+          "114834"
+        ]
+      },
+      {
+        "name": "Rewind Tv (WPIXDT4)",
+        "number": 462,
+        "aliases": [
+          "WPIXDT4",
+          "70260",
+          "70260246",
+          "REWIND TV",
+          "462 WPIXDT4",
+          "462 WPIX Rewind",
+          "WPIX Rewind"
+        ],
+        "epg_ids": [
+          "70260"
+        ]
+      },
+      {
+        "name": "Telexitos (WNJUDT2)",
+        "number": 464,
+        "aliases": [
+          "WNJUDT2",
+          "74578",
+          "74578247",
+          "TELEXITOS",
+          "464 WNJUDT2"
+        ],
+        "epg_ids": [
+          "74578"
+        ]
+      },
+      {
+        "name": "Antenna Tv (WPIXDT2)",
+        "number": 465,
+        "aliases": [
+          "US: ANTENNA TV",
+          "AntennaTV.us",
+          "WPIXDT2",
+          "50777",
+          "50777248",
+          "ANTENNA TV",
+          "465 WPIXDT2"
+        ],
+        "epg_ids": [
+          "50777"
+        ]
+      },
+      {
+        "name": "MEGAUS",
+        "number": 466,
+        "aliases": [
+          "MEGAUS",
+          "58698",
+          "58698249",
+          "466 MEGAUS"
+        ],
+        "epg_ids": [
+          "58698"
+        ]
+      },
+      {
+        "name": "Localish (WABC2SD)",
+        "number": 467,
+        "aliases": [
+          "WABC2SD",
+          "99330",
+          "99330250",
+          "LOCALISH",
+          "467 WABC2SD"
+        ],
+        "epg_ids": [
+          "99330"
+        ]
+      },
+      {
+        "name": "Metv+ (WZMEDT2)",
+        "number": 477,
+        "aliases": [
+          "WZMEDT2",
+          "74322",
+          "74322255",
+          "METV+",
+          "477 WZMEDT2"
+        ],
+        "epg_ids": [
+          "74322"
+        ]
+      },
+      {
+        "name": "NEWTANG",
+        "number": 478,
+        "aliases": [
+          "NEWTANG",
+          "47481",
+          "47481256",
+          "478 NEWTANG"
+        ],
+        "epg_ids": [
+          "47481"
+        ]
+      },
+      {
+        "name": "Roar (WNYWDT4)",
+        "number": 479,
+        "aliases": [
+          "WNYWDT4",
+          "97965",
+          "97965257",
+          "ROAR",
+          "479 WNYWDT4",
+          "ROARTV"
+        ],
+        "epg_ids": [
+          "97965"
+        ]
+      },
+      {
+        "name": "Start Tv Network (WCBSDT2)",
+        "number": 483,
+        "aliases": [
+          "US: START TV",
+          "StartTV.us",
+          "WCBSDT2",
+          "74916",
+          "74916258",
+          "START TV NETWORK",
+          "483 WCBSDT2"
+        ],
+        "epg_ids": [
+          "74916"
+        ]
+      },
+      {
+        "name": "Dabl Network (WCBSDT3)",
+        "number": 484,
+        "aliases": [
+          "WCBSDT3",
+          "112501",
+          "112501259",
+          "DABL NETWORK",
+          "484 WCBSDT3"
+        ],
+        "epg_ids": [
+          "112501"
+        ]
+      },
+      {
+        "name": "Court Tv (WPXNDT4)",
+        "number": 485,
+        "aliases": [
+          "US: COURT TV HD",
+          "CourtTV.us",
+          "WPXNDT4",
+          "55347",
+          "55347260",
+          "COURT TV",
+          "485 WPXNDT4",
+          "COURTTV",
+          "COURT"
+        ],
+        "epg_ids": [
+          "55347"
+        ]
+      },
+      {
+        "name": "Metv Toons (WJLPDT2)",
+        "number": 486,
+        "aliases": [
+          "US: METV TOONS HD",
+          "MeTvToons.us",
+          "WJLPDT2",
+          "92098",
+          "92098261",
+          "METV TOONS",
+          "486 WJLPDT2"
+        ],
+        "epg_ids": [
+          "92098"
+        ]
+      },
+      {
+        "name": "Buzzr (WWORDT3)",
+        "number": 487,
+        "aliases": [
+          "US: BUZZR",
+          "BuzzrTV.us",
+          "WWORDT3",
+          "75009",
+          "75009262",
+          "BUZZR",
+          "487 WWORDT3",
+          "WYBNLD"
+        ],
+        "epg_ids": [
+          "75009"
+        ]
+      },
+      {
+        "name": "Heroes & Icons Network (WWORDT4)",
+        "number": 488,
+        "aliases": [
+          "US: HEROES & ICONS",
+          "HeroesAndIconsTV.us",
+          "WWORDT4",
+          "81349",
+          "81349263",
+          "HEROES & ICONS NETWORK",
+          "488 WWORDT4"
+        ],
+        "epg_ids": [
+          "81349"
+        ]
+      },
+      {
+        "name": "Grit (WPXNDT3)",
+        "number": 489,
+        "aliases": [
+          "WPXNDT3",
+          "55285",
+          "55285264",
+          "GRIT",
+          "489 WPXNDT3"
+        ],
+        "epg_ids": [
+          "55285"
+        ]
+      },
+      {
+        "name": "Movies! (WNYWDT2)",
+        "number": 493,
+        "aliases": [
+          "WNYWDT2",
+          "30763",
+          "30763265",
+          "MOVIES!",
+          "493 WNYWDT2"
+        ],
+        "epg_ids": [
+          "30763"
+        ]
+      },
+      {
+        "name": "Bounce Tv (WPXNDT2)",
+        "number": 494,
+        "aliases": [
+          "US: BOUNCE TV HD",
+          "BounceTV.us",
+          "WPXNDT2",
+          "54618",
+          "54618266",
+          "BOUNCE TV",
+          "494 WPXNDT2"
+        ],
+        "epg_ids": [
+          "54618"
+        ]
+      },
+      {
+        "name": "Great (WFUTDT3)",
+        "number": 495,
+        "aliases": [
+          "WFUTDT3",
+          "85948",
+          "85948267",
+          "GREAT",
+          "495 WFUTDT3"
+        ],
+        "epg_ids": [
+          "85948"
+        ]
+      },
+      {
+        "name": "Catchy Comedy (WNYWDT5)",
+        "number": 496,
+        "aliases": [
+          "US: CATCHY COMEDY HD",
+          "US: COMEDY CENTRAL HD",
+          "ComedyCentral.us",
+          "WNYWDT5",
+          "112941",
+          "112941268",
+          "CATCHY COMEDY",
+          "496 WNYWDT5"
+        ],
+        "epg_ids": [
+          "112941"
+        ]
+      },
+      {
+        "name": "WLIW4SD",
+        "number": 497,
+        "aliases": [
+          "WLIW4SD",
+          "110517",
+          "110517269",
+          "497 WLIW4SD"
+        ],
+        "epg_ids": [
+          "110517"
+        ]
+      },
+      {
+        "name": "WLIWDT4",
+        "number": 498,
+        "aliases": [
+          "WLIWDT4",
+          "55296",
+          "55296270",
+          "498 WLIWDT4"
+        ],
+        "epg_ids": [
+          "55296"
+        ]
+      },
+      {
+        "name": "LEAC",
+        "number": 499,
+        "aliases": [
+          "LEAC",
+          "14789",
+          "14789271",
+          "499 LEAC"
+        ],
+        "epg_ids": [
+          "14789"
+        ]
+      },
+      {
+        "name": "Fios TV Information",
+        "number": 500,
+        "aliases": [
+          "FIOQUA",
+          "80816",
+          "80816272",
+          "500 FIOQUA"
+        ],
+        "epg_ids": [
+          "80816"
+        ]
+      },
+      {
+        "name": "CBS 2 New York",
+        "number": 502,
+        "aliases": [
+          "US: CBS 2 WCBS (NEW YORK) HD",
+          "US: CBS 2 (WCBS) NEW YORK HD",
+          "WCBS",
+          "WCBS-TV",
+          "WCBSDT",
+          "CBS 2 NEW YORK",
+          "CBS NEW YORK",
+          "16689",
+          "16689273",
+          "11331",
+          "113310",
+          "CBS TELEVISION NETWORK",
+          "502 WCBSDT",
+          "502 WCBS-DT",
+          "WCBS-DT"
+        ],
+        "epg_ids": [
+          "16689"
+        ]
+      },
+      {
+        "name": "MeTV New York",
+        "number": 503,
+        "aliases": [
+          "WJLPDT",
+          "75523",
+          "75523274",
+          "MEtv",
+          "WJLPSD",
+          "83094",
+          "830941",
+          "ME TV NETWORK",
+          "503 WJLPDT"
+        ],
+        "epg_ids": [
+          "75523"
+        ]
+      },
+      {
+        "name": "NBC 4 New York",
+        "number": 504,
+        "aliases": [
+          "NBC 4 (WNBC)",
+          "WNBC",
+          "WNBC-TV",
+          "WNBCDT",
+          "NBC 4",
+          "NBC 4 NEW YORK",
+          "20459",
+          "20459275",
+          "11705",
+          "117052",
+          "NATIONAL BROADCASTING COMPANY",
+          "504 WNBCDT",
+          "504 WNBC-DT",
+          "WNBC-DT"
+        ],
+        "epg_ids": [
+          "20459"
+        ]
+      },
+      {
+        "name": "FOX 5 New York",
+        "number": 505,
+        "aliases": [
+          "FOX 5 (WNYW)",
+          "WNYW",
+          "WNYW-TV",
+          "WNYWDT",
+          "FOX 5 NEW YORK",
+          "20360",
+          "20360276",
+          "11746",
+          "117463",
+          "FOX ENTERTAINMENT",
+          "505 WNYWDT",
+          "505 WNYW-DT",
+          "WNYW-DT"
+        ],
+        "epg_ids": [
+          "20360"
+        ]
+      },
+      {
+        "name": "RNN / Shop LC",
+        "number": 506,
+        "aliases": [
+          "US: SHOP LC 4K",
+          "WRNNDT",
+          "35855",
+          "35855277",
+          "WRNN",
+          "11933",
+          "119334",
+          "SHOP LC",
+          "506 WRNNDT"
+        ],
+        "epg_ids": [
+          "35855"
+        ]
+      },
+      {
+        "name": "ABC 7 New York",
+        "number": 507,
+        "aliases": [
+          "ABC 7 NEW YORK",
+          "WABC",
+          "WABC-TV",
+          "WABCDT",
+          "ABC 7 NEW YORK",
+          "20453",
+          "20453278",
+          "11259",
+          "112595",
+          "507 WABCDT",
+          "507 WABC-DT",
+          "WABC-DT"
+        ],
+        "epg_ids": [
+          "20453"
+        ]
+      },
+      {
+        "name": "My9 New York",
+        "number": 509,
+        "aliases": [
+          "WWOR",
+          "WWOR-TV",
+          "WWORDT",
+          "MY9",
+          "MY NETWORK TV NEW YORK",
+          "26566",
+          "26566279",
+          "11760",
+          "117606",
+          "MYNETWORKTV",
+          "509 WWORDT",
+          "509 WWOR-DT",
+          "WWOR-DT"
+        ],
+        "epg_ids": [
+          "26566"
+        ]
+      },
+      {
+        "name": "WLNY TV 10/55",
+        "number": 510,
+        "aliases": [
+          "WLNY",
+          "WLNY-TV",
+          "WLNYDT",
+          "TV 10/55",
+          "31225",
+          "31225280",
+          "WLNYSD",
+          "75363",
+          "753637",
+          "510 WLNYDT",
+          "510 WLNY HD",
+          "WLNY HD"
+        ],
+        "epg_ids": [
+          "31225"
+        ]
+      },
+      {
+        "name": "PIX11 New York",
+        "number": 511,
+        "aliases": [
+          "WPIX",
+          "WPIX-TV",
+          "WPIXDT",
+          "PIX11",
+          "CW 11 NEW YORK",
+          "20373",
+          "20373281",
+          "11779",
+          "117798",
+          "511 WPIXDT",
+          "511 CW WPIX-DT",
+          "CW WPIX-DT"
+        ],
+        "epg_ids": [
+          "20373"
+        ]
+      },
+      {
+        "name": "Telemundo 47 New York",
+        "number": 512,
+        "aliases": [
+          "US: TELEMUNDO ᴴᴰ",
+          "WNJU",
+          "WNJU-TV",
+          "WNJUDT",
+          "TELEMUNDO 47",
+          "TELEMUNDO NEW YORK",
+          "54437",
+          "54437282",
+          "11726",
+          "117269",
+          "TELEMUNDO",
+          "512 WNJUDT"
+        ],
+        "epg_ids": [
+          "54437"
+        ]
+      },
+      {
+        "name": "Thirteen PBS",
+        "number": 513,
+        "aliases": [
+          "WNET",
+          "WNET-TV",
+          "WNETDT",
+          "PBS 13 NEW YORK",
+          "THIRTEEN",
+          "26182",
+          "26182283",
+          "11715",
+          "1171510",
+          "PUBLIC BROADCASTING SERVICE",
+          "513 WNETDT"
+        ],
+        "epg_ids": [
+          "26182"
+        ]
+      },
+      {
+        "name": "UniMás 68",
+        "number": 517,
+        "aliases": [
+          "WFUT",
+          "WFUT-TV",
+          "WFUTDT",
+          "UNIMAS 68 NEW YORK",
+          "35364",
+          "35364284",
+          "11527",
+          "1152712",
+          "UNIMAS",
+          "517 WFUTDT"
+        ],
+        "epg_ids": [
+          "35364"
+        ]
+      },
+      {
+        "name": "Estrella TV New York",
+        "number": 518,
+        "aliases": [
+          "WMBCDT",
+          "35911",
+          "35911285",
+          "WMBC",
+          "12477",
+          "1247713",
+          "ESTRELLATV",
+          "518 WMBCDT"
+        ],
+        "epg_ids": [
+          "35911"
+        ]
+      },
+      {
+        "name": "Story Television",
+        "number": 519,
+        "aliases": [
+          "WZMEDT",
+          "64008",
+          "64008286",
+          "WZME",
+          "15715",
+          "1571514",
+          "STORY",
+          "519 WZMEDT"
+        ],
+        "epg_ids": [
+          "64008"
+        ]
+      },
+      {
+        "name": "WLIW21 PBS",
+        "number": 521,
+        "aliases": [
+          "WLIW",
+          "WLIW-TV",
+          "WLIWDT",
+          "WLIW 21",
+          "34325",
+          "34325287",
+          "11643",
+          "1164315",
+          "PUBLIC BROADCASTING SERVICE",
+          "521 WLIWDT"
+        ],
+        "epg_ids": [
+          "34325"
+        ]
+      },
+      {
+        "name": "NJ PBS",
+        "number": 523,
+        "aliases": [
+          "WNJN",
+          "WNJN-TV",
+          "WNJNDT",
+          "NJTV",
+          "29139",
+          "29139288",
+          "11723",
+          "1172316",
+          "PUBLIC BROADCASTING SERVICE",
+          "523 WNJNDT"
+        ],
+        "epg_ids": [
+          "29139"
+        ]
+      },
+      {
+        "name": "NYC Media",
+        "number": 525,
+        "aliases": [
+          "WNYE",
+          "WNYE-TV",
+          "WNYEDT",
+          "NYC LIFE",
+          "26196",
+          "26196289",
+          "11744",
+          "1174418",
+          "525 WNYEDT"
+        ],
+        "epg_ids": [
+          "26196"
+        ]
+      },
+      {
+        "name": "IN2TV",
+        "number": 528,
+        "aliases": [
+          "IN2TV",
+          "191939",
+          "191939290",
+          "PEG028",
+          "23904",
+          "2390421",
+          "528 IN2TV"
+        ],
+        "epg_ids": [
+          "191939"
+        ]
+      },
+      {
+        "name": "ION Television New York",
+        "number": 531,
+        "aliases": [
+          "WPXN",
+          "WPXN-TV",
+          "WPXNDT",
+          "ION NEW YORK",
+          "ION",
+          "ION EAST",
+          "43818",
+          "43818293",
+          "11743",
+          "1174324",
+          "ION: INDEPENDENT TELEVISION",
+          "531 WPXNDT",
+          "531 WPXN-DT30",
+          "WPXN-DT30"
+        ],
+        "epg_ids": [
+          "43818"
+        ]
+      },
+      {
+        "name": "Univision 41 New York",
+        "number": 541,
+        "aliases": [
+          "WXTV",
+          "WXTV-TV",
+          "WXTVDT",
+          "UNIVISION 41",
+          "UNIVISION NEW YORK",
+          "35361",
+          "35361294",
+          "12001",
+          "1200134",
+          "UNIVISION",
+          "541 WXTVDT"
+        ],
+        "epg_ids": [
+          "35361"
+        ]
+      },
+      {
+        "name": "NETTH",
+        "number": 548,
+        "aliases": [
+          "NETTH",
+          "130921",
+          "130921295",
+          "NETTV",
+          "11052",
+          "1105241",
+          "548 NETTH"
+        ],
+        "epg_ids": [
+          "130921"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 2160",
+        "number": 2160,
+        "aliases": [
+          "PEG060",
+          "23936",
+          "23936677",
+          "2160 PEG060"
+        ],
+        "epg_ids": [
+          "23936"
+        ]
+      }
+    ],
+    "News": [
+      {
+        "name": "HLN",
+        "number": 101,
+        "aliases": [
+          "US: HLN HD",
+          "HLN.us",
+          "HLN",
+          "10145",
+          "1014571",
+          "101 HLN"
+        ],
+        "epg_ids": [
+          "10145"
+        ]
+      },
+      {
+        "name": "News 12 Long Island",
+        "number": 529,
+        "aliases": [
+          "US: NEWS 12 LONG ISLAND 4K",
+          "N12",
+          "N12HD",
+          "NEWS 12 LI",
+          "NEWS12 LONG ISLAND",
+          "66077",
+          "66077291",
+          "46648",
+          "4664822",
+          "529 N12HD",
+          "529 News12 HD",
+          "News12 HD"
+        ],
+        "epg_ids": [
+          "66077"
+        ]
+      },
+      {
+        "name": "News 12 Traffic & Weather",
+        "number": 530,
+        "aliases": [
+          "N12TWHD",
+          "77772",
+          "77772292",
+          "PEG030",
+          "23906",
+          "2390623",
+          "530 N12TWHD",
+          "530 News12 Plus HD",
+          "News12 Plus HD"
+        ],
+        "epg_ids": [
+          "77772"
+        ]
+      },
+      {
+        "name": "CNN",
+        "number": 600,
+        "aliases": [
+          "US: CNN HD",
+          "cnn.us",
+          "US: CNN 4K",
+          "CNNHD",
+          "58646",
+          "58646328",
+          "600 CNNHD",
+          "600 CNN HD",
+          "CNN HD"
+        ],
+        "epg_ids": [
+          "58646"
+        ]
+      },
+      {
+        "name": "CNBC",
+        "number": 602,
+        "aliases": [
+          "US: CNBC HD",
+          "CNBC.us",
+          "CNBCHD",
+          "58780",
+          "58780329",
+          "602 CNBCHD",
+          "602 CNBC HD",
+          "CNBC HD"
+        ],
+        "epg_ids": [
+          "58780"
+        ]
+      },
+      {
+        "name": "MS NOW",
+        "number": 603,
+        "aliases": [
+          "US: NBC MS NOW ᴿᴬᵂ",
+          "MSNBC",
+          "MSNBC HD",
+          "MS NOW HD",
+          "MSNOWHD",
+          "64241",
+          "64241330",
+          "603 MSNOWHD",
+          "603 MS NOW HD"
+        ],
+        "epg_ids": [
+          "64241"
+        ]
+      },
+      {
+        "name": "NEWSNTN",
+        "number": 604,
+        "aliases": [
+          "NEWSNTN",
+          "91096",
+          "91096331",
+          "604 NEWSNTN",
+          "NEWSNATION"
+        ],
+        "epg_ids": [
+          "91096"
+        ]
+      },
+      {
+        "name": "Bloomberg Television",
+        "number": 605,
+        "aliases": [
+          "US: BLOOMBERG HD",
+          "BLOOMHD",
+          "71799",
+          "71799332",
+          "605 BLOOMHD",
+          "605 Bloomberg TV HD",
+          "Bloomberg TV HD",
+          "BLOOMBERG"
+        ],
+        "epg_ids": [
+          "71799"
+        ]
+      },
+      {
+        "name": "C-SPAN",
+        "number": 606,
+        "aliases": [
+          "US: C-SPAN 2 HD",
+          "US: C-SPAN 1 HD",
+          "US: C-SPAN 3 HD",
+          "CSPANHD",
+          "68344",
+          "68344333",
+          "606 CSPANHD",
+          "606 C-SPAN HD",
+          "C-SPAN HD",
+          "CSPAN"
+        ],
+        "epg_ids": [
+          "68344"
+        ]
+      },
+      {
+        "name": "C-SPAN2",
+        "number": 607,
+        "aliases": [
+          "CSPN2HD",
+          "68334",
+          "68334334",
+          "607 CSPN2HD",
+          "CSPAN2"
+        ],
+        "epg_ids": [
+          "68334"
+        ]
+      },
+      {
+        "name": "C-SPAN3",
+        "number": 608,
+        "aliases": [
+          "CSPN3HD",
+          "68332",
+          "68332335",
+          "608 CSPN3HD",
+          "CSPAN3"
+        ],
+        "epg_ids": [
+          "68332"
+        ]
+      },
+      {
+        "name": "BBC News",
+        "number": 609,
+        "aliases": [
+          "US: BBC WORLD NEWS",
+          "BBC WORLD NEWS",
+          "BBC WORLD NEWS HD",
+          "BBCNAHD",
+          "89690",
+          "89690336",
+          "609 BBCNAHD"
+        ],
+        "epg_ids": [
+          "89690"
+        ]
+      },
+      {
+        "name": "i24NEWS",
+        "number": 610,
+        "aliases": [
+          "I24NEHD",
+          "102309",
+          "102309337",
+          "610 I24NEHD"
+        ],
+        "epg_ids": [
+          "102309"
+        ]
+      },
+      {
+        "name": "The Weather Channel",
+        "number": 611,
+        "aliases": [
+          "US: THE WEATHER CHANNEL HD",
+          "TheWeatherNetwork.ca",
+          "WEATHER CHANNEL",
+          "TWC",
+          "WEATHHD",
+          "58812",
+          "58812338",
+          "611 WEATHHD",
+          "611 The Weather Cha",
+          "The Weather Cha"
+        ],
+        "epg_ids": [
+          "58812"
+        ]
+      },
+      {
+        "name": "FOX Weather",
+        "number": 613,
+        "aliases": [
+          "US: FOX WEATHER HD",
+          "FoxWeather.us",
+          "FOXWX",
+          "93141",
+          "93141339",
+          "613 FOXWX",
+          "613 Fox Weather HD",
+          "Fox Weather HD"
+        ],
+        "epg_ids": [
+          "93141"
+        ]
+      },
+      {
+        "name": "CHEDSTR",
+        "number": 614,
+        "aliases": [
+          "CHEDSTR",
+          "101103",
+          "101103340",
+          "614 CHEDSTR"
+        ],
+        "epg_ids": [
+          "101103"
+        ]
+      },
+      {
+        "name": "Newsmax",
+        "number": 616,
+        "aliases": [
+          "US: NEWSMAX HD",
+          "Newsmax.us",
+          "NEWSMXH",
+          "97163",
+          "97163341",
+          "616 NEWSMXH",
+          "616 Newsmax TV HD",
+          "Newsmax TV HD"
+        ],
+        "epg_ids": [
+          "97163"
+        ]
+      },
+      {
+        "name": "FOX Business Network",
+        "number": 617,
+        "aliases": [
+          "US: FOX BUSINESS NETWORK HD",
+          "FoxBusiness.us",
+          "foxbusiness.us",
+          "FBNHD",
+          "58718",
+          "58718342",
+          "617 FBNHD",
+          "617 Fox Business Ne",
+          "Fox Business Ne",
+          "FBN"
+        ],
+        "epg_ids": [
+          "58718"
+        ]
+      },
+      {
+        "name": "FOX News Channel",
+        "number": 618,
+        "aliases": [
+          "US: FOX NEWS HD",
+          "FoxNews.us",
+          "US: FOX NEWS. UHD",
+          "foxnews.us",
+          "US: FOX NEWS CHANNEL 4K",
+          "FNCHD",
+          "60179",
+          "60179343",
+          "618 FNCHD",
+          "618 Fox News HD",
+          "Fox News HD",
+          "FNC"
+        ],
+        "epg_ids": [
+          "60179"
+        ]
+      },
+      {
+        "name": "AWNYHD",
+        "number": 619,
+        "aliases": [
+          "AWNYHD",
+          "102910",
+          "102910344",
+          "619 AWNYHD",
+          "619 AccuWeather NY",
+          "AccuWeather NY"
+        ],
+        "epg_ids": [
+          "102910"
+        ]
+      }
+    ],
+    "Sports": [
+      {
+        "name": "ESPN",
+        "number": 570,
+        "aliases": [
+          "US: ESPN HD",
+          "ESPN.us",
+          "ESPNHD",
+          "32645",
+          "32645302",
+          "ESPN",
+          "10179",
+          "1017947",
+          "570 ESPNHD",
+          "570 ESPN HD",
+          "ESPN HD"
+        ],
+        "epg_ids": [
+          "32645"
+        ]
+      },
+      {
+        "name": "ACC Network",
+        "number": 571,
+        "aliases": [
+          "US: ACC NETWORK HD",
+          "ACCNetwork.us",
+          "ACC",
+          "111871",
+          "111871303",
+          "ACCSD",
+          "111905",
+          "11190548",
+          "571 ACC"
+        ],
+        "epg_ids": [
+          "111871"
+        ]
+      },
+      {
+        "name": "ESPNews",
+        "number": 572,
+        "aliases": [
+          "ESPNWHD",
+          "59976",
+          "59976304",
+          "ESPNEWS",
+          "16485",
+          "1648549",
+          "572 ESPNWHD",
+          "572 ESPNews HD",
+          "ESPNews HD"
+        ],
+        "epg_ids": [
+          "59976"
+        ]
+      },
+      {
+        "name": "ESPNU",
+        "number": 573,
+        "aliases": [
+          "ESPNUHD",
+          "60696",
+          "60696305",
+          "ESPNU",
+          "45654",
+          "4565450",
+          "573 ESPNUHD"
+        ],
+        "epg_ids": [
+          "60696"
+        ]
+      },
+      {
+        "name": "ESPN2",
+        "number": 574,
+        "aliases": [
+          "ESPN2HD",
+          "45507",
+          "45507306",
+          "ESPN2",
+          "12444",
+          "1244451",
+          "574 ESPN2HD",
+          "574 ESPN 2 HD",
+          "ESPN 2 HD"
+        ],
+        "epg_ids": [
+          "45507"
+        ]
+      },
+      {
+        "name": "SEC Network",
+        "number": 575,
+        "aliases": [
+          "US: SEC NETWORK HD",
+          "SECNetwork.us",
+          "SECH",
+          "89714",
+          "89714307",
+          "SEC",
+          "89535",
+          "8953552",
+          "575 SECH"
+        ],
+        "epg_ids": [
+          "89714"
+        ]
+      },
+      {
+        "name": "YES Network",
+        "number": 576,
+        "aliases": [
+          "US: FOX SPORTS YES NETWORK HD",
+          "US: YES NETWORK HD",
+          "YESNetwork.us",
+          "US: (GT) Yes Network ᴴᴰ",
+          "YES",
+          "YESHDNY",
+          "YES NETWORK NY",
+          "46275",
+          "46275308",
+          "30017",
+          "3001753",
+          "576 YESHDNY",
+          "576 YES-HD",
+          "YES-HD"
+        ],
+        "epg_ids": [
+          "46275"
+        ]
+      },
+      {
+        "name": "SportsNet New York",
+        "number": 577,
+        "aliases": [
+          "US: SPORTSNET NEW YORK HD",
+          "ComcastSportsnet.us",
+          "SNY",
+          "SNYHD",
+          "SPORTSNET NEW YORK",
+          "SNY NEW YORK",
+          "50038",
+          "50038309",
+          "49603",
+          "4960354",
+          "577 SNYHD",
+          "577 SportsNet NY HD",
+          "SportsNet NY HD"
+        ],
+        "epg_ids": [
+          "50038"
+        ]
+      },
+      {
+        "name": "MSG Network",
+        "number": 578,
+        "aliases": [
+          "MSG",
+          "MSGHD",
+          "MSG NETWORK NY",
+          "35402",
+          "35402310",
+          "10979",
+          "1097955",
+          "578 MSGHD",
+          "578 MSG HD",
+          "MSG HD"
+        ],
+        "epg_ids": [
+          "35402"
+        ]
+      },
+      {
+        "name": "MSG 2",
+        "number": 579,
+        "aliases": [
+          "US: MSG 2 HD",
+          "MadisonSquareGarden2.us",
+          "MSG2",
+          "MSG2HD",
+          "70283",
+          "70283311",
+          "10980",
+          "1098056",
+          "579 MSG2HD",
+          "579 MSG 2 HD",
+          "MSG 2 HD"
+        ],
+        "epg_ids": [
+          "70283"
+        ]
+      },
+      {
+        "name": "MSG Sportsnet",
+        "number": 580,
+        "aliases": [
+          "MSGSNZ1",
+          "MSGSNHD",
+          "MSG SPORTSNET NY",
+          "35383",
+          "35383312",
+          "11105",
+          "1110557",
+          "580 MSGSNHD",
+          "580 MSG Sportsnet H",
+          "MSG Sportsnet H"
+        ],
+        "epg_ids": [
+          "35383"
+        ]
+      },
+      {
+        "name": "MSG Sportsnet 2",
+        "number": 581,
+        "aliases": [
+          "US: MSG 2 HD",
+          "MadisonSquareGarden2.us",
+          "MSGSN21",
+          "MSG2SNH",
+          "70285",
+          "70285313",
+          "17798",
+          "1779858",
+          "581 MSG2SNH",
+          "581 MSG Sportsnet 2",
+          "MSG Sportsnet 2"
+        ],
+        "epg_ids": [
+          "70285"
+        ]
+      },
+      {
+        "name": "FOX Sports 1",
+        "number": 583,
+        "aliases": [
+          "US: FOX SPORTS 1 4K",
+          "FoxSports1.us",
+          "US: FOX SPORTS 1 HD",
+          "US: FOX SPORTS 1",
+          "US: FOX SPORTS WEST HD",
+          "US: FOX SPORTS WEST",
+          "FOXSports.us",
+          "FS1",
+          "FOX SPORTS 1 HD",
+          "FS1HD",
+          "82547",
+          "82547314",
+          "82541",
+          "8254159",
+          "583 FS1HD",
+          "583 Fox Sports 1 HD",
+          "Fox Sports 1 HD"
+        ],
+        "epg_ids": [
+          "82547"
+        ]
+      },
+      {
+        "name": "FOX Sports 2",
+        "number": 584,
+        "aliases": [
+          "US: FOX SPORTS 2 4K",
+          "FoxSports2.us",
+          "US: FOX SPORTS 2 HD",
+          "US: FOX SPORTS 2",
+          "US: FOX SPORTS WEST HD",
+          "US: FOX SPORTS WEST",
+          "FOXSports.us",
+          "FS2",
+          "FOX SPORTS 2 HD",
+          "FS2HD",
+          "59305",
+          "59305315",
+          "33178",
+          "3317860",
+          "584 FS2HD",
+          "584 Fox Sports 2 HD",
+          "Fox Sports 2 HD"
+        ],
+        "epg_ids": [
+          "59305"
+        ]
+      },
+      {
+        "name": "Big Ten Network",
+        "number": 585,
+        "aliases": [
+          "US: BIG TEN NETWORK HD",
+          "BigTenNetwork.us",
+          "BIG10VH",
+          "96885",
+          "96885316",
+          "BIG10V",
+          "96884",
+          "9688461",
+          "585 BIG10VH"
+        ],
+        "epg_ids": [
+          "96885"
+        ]
+      },
+      {
+        "name": "MLB Network",
+        "number": 586,
+        "aliases": [
+          "US: MLB NETWORK",
+          "MLBNetwork.us",
+          "MLBHD",
+          "62081",
+          "62081317",
+          "MLBN",
+          "62079",
+          "6207962",
+          "586 MLBHD",
+          "586 MLB Network HD",
+          "MLB Network HD"
+        ],
+        "epg_ids": [
+          "62081"
+        ]
+      },
+      {
+        "name": "NHL Network",
+        "number": 587,
+        "aliases": [
+          "NHLHD",
+          "58690",
+          "58690318",
+          "NHLNET",
+          "58570",
+          "5857063",
+          "587 NHLHD"
+        ],
+        "epg_ids": [
+          "58690"
+        ]
+      },
+      {
+        "name": "NFL Network",
+        "number": 588,
+        "aliases": [
+          "US: NFL NETWORK HD",
+          "NFLNetwork.us",
+          "NFLHD",
+          "45399",
+          "45399319",
+          "NFLNET",
+          "34710",
+          "3471064",
+          "588 NFLHD",
+          "588 NFL Network HD",
+          "NFL Network HD"
+        ],
+        "epg_ids": [
+          "45399"
+        ]
+      },
+      {
+        "name": "NBA TV",
+        "number": 589,
+        "aliases": [
+          "NBATVHD",
+          "45526",
+          "45526320",
+          "NBATV",
+          "32281",
+          "3228165",
+          "589 NBATVHD"
+        ],
+        "epg_ids": [
+          "45526"
+        ]
+      },
+      {
+        "name": "Tennis Channel",
+        "number": 592,
+        "aliases": [
+          "US: TENNIS HD",
+          "TennisChannel.us",
+          "US: TENNIS CHANNEL",
+          "US: TENNIS CHANNEL PLUS 1",
+          "US: TENNIS CHANNEL PLUS 2",
+          "US: TENNIS CHANNEL PLUS 3",
+          "US: TENNIS CHANNEL PLUS 4",
+          "US: TENNIS CHANNEL PLUS 5",
+          "US: TENNIS CHANNEL PLUS 6",
+          "US: TENNIS CHANNEL PLUS 7",
+          "US: TENNIS CHANNEL PLUS 8",
+          "US: TENNIS CHANNEL PLUS 9",
+          "US: TENNIS CHANNEL PLUS 10",
+          "US: TENNIS CHANNEL PLUS 11",
+          "US: TENNIS CHANNEL PLUS 12",
+          "TENISHD",
+          "60316",
+          "60316321",
+          "TENNIS",
+          "33395",
+          "3339566",
+          "592 TENISHD"
+        ],
+        "epg_ids": [
+          "60316"
+        ]
+      },
+      {
+        "name": "Golf Channel",
+        "number": 593,
+        "aliases": [
+          "US: NBC GOLF CHANNEL (H) ᴿᴬᵂ",
+          "US: GOLF CHANNEL HD",
+          "GolfChannel.us",
+          "GOLFHD",
+          "61854",
+          "61854322",
+          "GOLF",
+          "14899",
+          "1489967",
+          "593 GOLFHD"
+        ],
+        "epg_ids": [
+          "61854"
+        ]
+      },
+      {
+        "name": "CBS Sports Network",
+        "number": 594,
+        "aliases": [
+          "US: CBS SPORTS NETWORK HD",
+          "CBSSportsNetwork.us",
+          "CBSSNHD",
+          "59250",
+          "59250323",
+          "CBSSN",
+          "16365",
+          "1636568",
+          "594 CBSSNHD",
+          "594 CBS Sports Netw",
+          "CBS Sports Netw",
+          "CBSSPORTS"
+        ],
+        "epg_ids": [
+          "59250"
+        ]
+      },
+      {
+        "name": "beIN Sports",
+        "number": 596,
+        "aliases": [
+          "US: BEIN SPORTS HD",
+          "beINSports.us",
+          "BEIN1HD",
+          "76950",
+          "76950324",
+          "596 BEIN1HD"
+        ],
+        "epg_ids": [
+          "76950"
+        ]
+      },
+      {
+        "name": "Next Level Sports",
+        "number": 597,
+        "aliases": [
+          "NLSHD",
+          "87000",
+          "87000325",
+          "NESNAT",
+          "67516",
+          "6751669",
+          "597 NLSHD"
+        ],
+        "epg_ids": [
+          "87000"
+        ]
+      },
+      {
+        "name": "YES Network 2",
+        "number": 598,
+        "aliases": [
+          "Yes Network Overflow",
+          "YES2HD",
+          "82128",
+          "82128326",
+          "598 YES2HD",
+          "598 YES2 HD",
+          "YES2 HD"
+        ],
+        "epg_ids": [
+          "82128"
+        ]
+      },
+      {
+        "name": "CARSTVH",
+        "number": 599,
+        "aliases": [
+          "CARSTVH",
+          "81270",
+          "81270327",
+          "599 CARSTVH"
+        ],
+        "epg_ids": [
+          "81270"
+        ]
+      },
+      {
+        "name": "VZMBLHM",
+        "number": 800,
+        "addon": "Sports Pass",
+        "aliases": [
+          "VZMBLHM",
+          "83109",
+          "83109444",
+          "800 VZMBLHM"
+        ],
+        "epg_ids": [
+          "83109"
+        ]
+      },
+      {
+        "name": "Willow Cricket",
+        "number": 806,
+        "addon": "Sports Pass",
+        "aliases": [
+          "US: WILLOW CRICKET HD",
+          "WillowCricket.us",
+          "US: WILLOW CRICKET EXTRA HD",
+          "WILLX.us",
+          "WLLOHD",
+          "80621",
+          "80621445",
+          "806 WLLOHD"
+        ],
+        "epg_ids": [
+          "80621"
+        ]
+      },
+      {
+        "name": "MAVTV",
+        "number": 810,
+        "addon": "Sports Pass",
+        "aliases": [
+          "RACERHD",
+          "61036",
+          "61036446",
+          "810 RACERHD"
+        ],
+        "epg_ids": [
+          "61036"
+        ]
+      },
+      {
+        "name": "FanDuel TV",
+        "number": 815,
+        "addon": "Sports Pass",
+        "aliases": [
+          "FDUELTV",
+          "21345",
+          "21345447",
+          "815 FDUELTV"
+        ],
+        "epg_ids": [
+          "21345"
+        ]
+      },
+      {
+        "name": "Pursuit Channel",
+        "number": 818,
+        "addon": "Sports Pass",
+        "aliases": [
+          "US: PURSUIT CHANNEL HD",
+          "PursuitChannel.us",
+          "PURSTHD",
+          "84542",
+          "84542448",
+          "818 PURSTHD"
+        ],
+        "epg_ids": [
+          "84542"
+        ]
+      },
+      {
+        "name": "BTENOHD",
+        "number": 830,
+        "addon": "Sports Pass",
+        "aliases": [
+          "BTENOHD",
+          "61143",
+          "61143449",
+          "830 BTENOHD"
+        ],
+        "epg_ids": [
+          "61143"
+        ]
+      },
+      {
+        "name": "BG10O2H",
+        "number": 831,
+        "addon": "Sports Pass",
+        "aliases": [
+          "BG10O2H",
+          "73115",
+          "73115450",
+          "831 BG10O2H"
+        ],
+        "epg_ids": [
+          "73115"
+        ]
+      },
+      {
+        "name": "BGTN3HD",
+        "number": 833,
+        "addon": "Sports Pass",
+        "aliases": [
+          "BGTN3HD",
+          "82572",
+          "82572451",
+          "833 BGTN3HD"
+        ],
+        "epg_ids": [
+          "82572"
+        ]
+      },
+      {
+        "name": "MLB Network Strike Zone",
+        "number": 834,
+        "addon": "Sports Pass",
+        "aliases": [
+          "US: MLB STRIKE ZONE HD",
+          "MLBSZHD",
+          "75220",
+          "75220452",
+          "834 MLBSZHD"
+        ],
+        "epg_ids": [
+          "75220"
+        ]
+      },
+      {
+        "name": "NFL RedZone",
+        "number": 835,
+        "addon": "Sports Pass",
+        "aliases": [
+          "NFLNRZD",
+          "NFL REDZONE",
+          "65025",
+          "65025453",
+          "835 NFLNRZD"
+        ],
+        "epg_ids": [
+          "65025"
+        ]
+      },
+      {
+        "name": "FSP",
+        "number": 1009,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "FSP",
+          "66879",
+          "66879512",
+          "1009 FSP"
+        ],
+        "epg_ids": [
+          "66879"
+        ]
+      },
+      {
+        "name": "FSCPLHD",
+        "number": 1010,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "FSCPLHD",
+          "66880",
+          "66880513",
+          "1010 FSCPLHD"
+        ],
+        "epg_ids": [
+          "66880"
+        ]
+      },
+      {
+        "name": "NBA League Pass 1",
+        "number": 1450,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 2",
+        "number": 1451,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 3",
+        "number": 1452,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 4",
+        "number": 1453,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 5",
+        "number": 1454,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 6",
+        "number": 1455,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 7",
+        "number": 1456,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 8",
+        "number": 1457,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 9",
+        "number": 1458,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "NBA League Pass 10",
+        "number": 1459,
+        "addon": "NBA League Pass"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 1",
+        "number": 1461,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 2",
+        "number": 1462,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 3",
+        "number": 1463,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 4",
+        "number": 1464,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 5",
+        "number": 1465,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 6",
+        "number": 1466,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 7",
+        "number": 1467,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 8",
+        "number": 1468,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 9",
+        "number": 1469,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 10",
+        "number": 1470,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 11",
+        "number": 1471,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 12",
+        "number": 1472,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 13",
+        "number": 1473,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "MLB Extra Innings / NHL Center Ice 14",
+        "number": 1474,
+        "addon": "Seasonal Subscription Sports"
+      },
+      {
+        "name": "FIOS4K5",
+        "number": 1495,
+        "addon": "4K",
+        "aliases": [
+          "FIOS4K5",
+          "120903",
+          "120903514",
+          "1495 FIOS4K5",
+          "1495 Fios 4K5",
+          "Fios 4K5"
+        ],
+        "epg_ids": [
+          "120903"
+        ]
+      },
+      {
+        "name": "FIOS4K6",
+        "number": 1496,
+        "addon": "4K",
+        "aliases": [
+          "FIOS4K6",
+          "120904",
+          "120904515",
+          "1496 FIOS4K6",
+          "1496 Fios 4K6",
+          "Fios 4K6"
+        ],
+        "epg_ids": [
+          "120904"
+        ]
+      },
+      {
+        "name": "FIOS4K7",
+        "number": 1497,
+        "addon": "4K",
+        "aliases": [
+          "FIOS4K7",
+          "117273",
+          "117273516",
+          "1497 FIOS4K7"
+        ],
+        "epg_ids": [
+          "117273"
+        ]
+      },
+      {
+        "name": "FIOS4K8",
+        "number": 1498,
+        "addon": "4K",
+        "aliases": [
+          "FIOS4K8",
+          "117275",
+          "117275517",
+          "1498 FIOS4K8",
+          "1498 Fios 4K8",
+          "Fios 4K8"
+        ],
+        "epg_ids": [
+          "117275"
+        ]
+      },
+      {
+        "name": "FIOS4K9",
+        "number": 1499,
+        "addon": "4K",
+        "aliases": [
+          "FIOS4K9",
+          "117276",
+          "117276518",
+          "1499 FIOS4K9",
+          "1499 Fios 4K9",
+          "Fios 4K9"
+        ],
+        "epg_ids": [
+          "117276"
+        ]
+      }
+    ],
+    "Movies": [
+      {
+        "name": "STARZP",
+        "number": 341,
+        "addon": "Starz",
+        "aliases": [
+          "STARZP",
+          "12741",
+          "12741179",
+          "341 STARZP"
+        ],
+        "epg_ids": [
+          "12741"
+        ]
+      },
+      {
+        "name": "VZ32",
+        "number": 343,
+        "aliases": [
+          "VZ32",
+          "106432",
+          "106432181",
+          "343 VZ32"
+        ],
+        "epg_ids": [
+          "106432"
+        ]
+      },
+      {
+        "name": "STZENCP",
+        "number": 351,
+        "aliases": [
+          "STZENCP",
+          "17125",
+          "17125189",
+          "351 STZENCP"
+        ],
+        "epg_ids": [
+          "17125"
+        ]
+      },
+      {
+        "name": "VZ35",
+        "number": 353,
+        "aliases": [
+          "VZ35",
+          "106435",
+          "106435191",
+          "353 VZ35"
+        ],
+        "epg_ids": [
+          "106435"
+        ]
+      },
+      {
+        "name": "STZENWP",
+        "number": 355,
+        "aliases": [
+          "STZENWP",
+          "17132",
+          "17132193",
+          "355 STZENWP"
+        ],
+        "epg_ids": [
+          "17132"
+        ]
+      },
+      {
+        "name": "VZ36",
+        "number": 357,
+        "aliases": [
+          "VZ36",
+          "106436",
+          "106436195",
+          "357 VZ36"
+        ],
+        "epg_ids": [
+          "106436"
+        ]
+      },
+      {
+        "name": "VZ34",
+        "number": 359,
+        "aliases": [
+          "VZ34",
+          "106434",
+          "106434197",
+          "359 VZ34"
+        ],
+        "epg_ids": [
+          "106434"
+        ]
+      },
+      {
+        "name": "WOMEN",
+        "number": 375,
+        "aliases": [
+          "US: LIFETIME REAL WOMEN HD",
+          "US: SHOWTIME WOMEN HD",
+          "ShowtimeWomen.us",
+          "WOMEN",
+          "25272",
+          "25272209",
+          "375 WOMEN"
+        ],
+        "epg_ids": [
+          "25272"
+        ]
+      },
+      {
+        "name": "WOMENP",
+        "number": 376,
+        "aliases": [
+          "WOMENP",
+          "25273",
+          "25273210",
+          "376 WOMENP"
+        ],
+        "epg_ids": [
+          "25273"
+        ]
+      },
+      {
+        "name": "NEXT",
+        "number": 377,
+        "aliases": [
+          "NEXT",
+          "25270",
+          "25270211",
+          "377 NEXT"
+        ],
+        "epg_ids": [
+          "25270"
+        ]
+      },
+      {
+        "name": "NEXTP",
+        "number": 378,
+        "aliases": [
+          "NEXTP",
+          "25271",
+          "25271212",
+          "378 NEXTP"
+        ],
+        "epg_ids": [
+          "25271"
+        ]
+      },
+      {
+        "name": "FAMZ",
+        "number": 379,
+        "aliases": [
+          "FAMZ",
+          "25274",
+          "25274213",
+          "379 FAMZ"
+        ],
+        "epg_ids": [
+          "25274"
+        ]
+      },
+      {
+        "name": "FAMZP",
+        "number": 380,
+        "aliases": [
+          "FAMZP",
+          "25275",
+          "25275214",
+          "380 FAMZP"
+        ],
+        "epg_ids": [
+          "25275"
+        ]
+      },
+      {
+        "name": "TMCP",
+        "number": 386,
+        "aliases": [
+          "TMCP",
+          "12509",
+          "12509216",
+          "386 TMCP"
+        ],
+        "epg_ids": [
+          "12509"
+        ]
+      },
+      {
+        "name": "TMCXP",
+        "number": 388,
+        "aliases": [
+          "TMCXP",
+          "17687",
+          "17687218",
+          "388 TMCXP"
+        ],
+        "epg_ids": [
+          "17687"
+        ]
+      },
+      {
+        "name": "FLIX",
+        "number": 390,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "FLIX",
+          "10201",
+          "10201219",
+          "390 FLIX"
+        ],
+        "epg_ids": [
+          "10201"
+        ]
+      },
+      {
+        "name": "FLIXP",
+        "number": 391,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "FLIXP",
+          "16575",
+          "16575220",
+          "391 FLIXP"
+        ],
+        "epg_ids": [
+          "16575"
+        ]
+      },
+      {
+        "name": "CINACSP",
+        "number": 425,
+        "aliases": [
+          "CINACSP",
+          "18434",
+          "18434238",
+          "425 CINACSP"
+        ],
+        "epg_ids": [
+          "18434"
+        ]
+      },
+      {
+        "name": "HEREHD",
+        "number": 445,
+        "aliases": [
+          "HEREHD",
+          "141774",
+          "141774241",
+          "445 HEREHD"
+        ],
+        "epg_ids": [
+          "141774"
+        ]
+      },
+      {
+        "name": "Turner Classic Movies",
+        "number": 730,
+        "aliases": [
+          "US: TCM HD",
+          "TCM",
+          "TCM HD",
+          "TCMHD",
+          "64312",
+          "64312407",
+          "730 TCMHD",
+          "730 Turner Classics",
+          "Turner Classics"
+        ],
+        "epg_ids": [
+          "64312"
+        ]
+      },
+      {
+        "name": "AMC",
+        "number": 731,
+        "aliases": [
+          "US: AMC HD",
+          "AMC.us",
+          "AMCHD",
+          "59337",
+          "59337408",
+          "731 AMCHD",
+          "731 AMC HD",
+          "AMC HD",
+          "AMC"
+        ],
+        "epg_ids": [
+          "59337"
+        ]
+      },
+      {
+        "name": "FX Movie Channel",
+        "number": 732,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "FXM",
+          "FOX MOVIE CHANNEL",
+          "FXMHD",
+          "70253",
+          "70253409",
+          "732 FXMHD"
+        ],
+        "epg_ids": [
+          "70253"
+        ]
+      },
+      {
+        "name": "IFC",
+        "number": 734,
+        "aliases": [
+          "US: IFC HD",
+          "IndependentFilmChannel.us",
+          "IFCHD",
+          "59444",
+          "59444410",
+          "734 IFCHD",
+          "734 IFC (HD)",
+          "IFC (HD)",
+          "IFC",
+          "IFCSTR"
+        ],
+        "epg_ids": [
+          "59444"
+        ]
+      },
+      {
+        "name": "SundanceTV",
+        "number": 735,
+        "aliases": [
+          "SUNDHD",
+          "71280",
+          "71280411",
+          "735 SUNDHD",
+          "735 Sundance HD",
+          "Sundance HD"
+        ],
+        "epg_ids": [
+          "71280"
+        ]
+      },
+      {
+        "name": "HFM",
+        "number": 737,
+        "aliases": [
+          "HFM",
+          "105723",
+          "105723412",
+          "737 HFM"
+        ],
+        "epg_ids": [
+          "105723"
+        ]
+      },
+      {
+        "name": "UPtv",
+        "number": 738,
+        "aliases": [
+          "UPHD",
+          "66143",
+          "66143413",
+          "738 UPHD",
+          "738 UP HD (East)",
+          "UP HD (East)"
+        ],
+        "epg_ids": [
+          "66143"
+        ]
+      },
+      {
+        "name": "Hallmark Mystery",
+        "number": 739,
+        "aliases": [
+          "US: HALLMARK HD",
+          "Hallmark.us",
+          "HMYSHD",
+          "46710",
+          "46710414",
+          "739 HMYSHD"
+        ],
+        "epg_ids": [
+          "46710"
+        ]
+      },
+      {
+        "name": "Hallmark Channel",
+        "number": 740,
+        "aliases": [
+          "US: HALLMARK HD",
+          "Hallmark.us",
+          "HALLHD",
+          "66268",
+          "66268415",
+          "740 HALLHD",
+          "740 Hallmark Channe",
+          "Hallmark Channe"
+        ],
+        "epg_ids": [
+          "66268"
+        ]
+      },
+      {
+        "name": "TV Land",
+        "number": 741,
+        "aliases": [
+          "US: TV LAND HD",
+          "TVLand.us",
+          "TVLNDHD",
+          "73541",
+          "73541416",
+          "741 TVLNDHD",
+          "741 TV Land HD (Eas",
+          "TV Land HD (Eas"
+        ],
+        "epg_ids": [
+          "73541"
+        ]
+      },
+      {
+        "name": "Family Entertainment Television (FEENTTV)",
+        "number": 742,
+        "aliases": [
+          "FEENTTV",
+          "93195",
+          "93195417",
+          "FAMILY ENTERTAINMENT TELEVISION",
+          "742 FEENTTV"
+        ],
+        "epg_ids": [
+          "93195"
+        ]
+      },
+      {
+        "name": "GFAMHD",
+        "number": 743,
+        "aliases": [
+          "GFAMHD",
+          "82892",
+          "82892418",
+          "743 GFAMHD"
+        ],
+        "epg_ids": [
+          "82892"
+        ]
+      },
+      {
+        "name": "Cowboy Channel (COWBOYH)",
+        "number": 746,
+        "aliases": [
+          "US: COWBOY CHANNEL",
+          "TheCowboyChannel.us",
+          "COWBOYH",
+          "80597",
+          "80597419",
+          "COWBOY CHANNEL",
+          "746 COWBOYH"
+        ],
+        "epg_ids": [
+          "80597"
+        ]
+      },
+      {
+        "name": "Starz East",
+        "number": 840,
+        "addon": "Starz",
+        "aliases": [
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ BLACK HD",
+          "US: STARZ CINEMA HD",
+          "StarzCinema.us",
+          "US: STARZ CINEMA EAST HD",
+          "US: STARZ COMEDY HD",
+          "StarzComedy.us",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "US: STARZ EDGE HD",
+          "StarzEdge.us",
+          "US: STARZ FAMILY HD",
+          "StarzEncoreFamily.us",
+          "US: STARZ ENCORE HD",
+          "StarzEncore.us",
+          "US: STARZ ENCORE EAST HD",
+          "US: STARZ ENCORE ACTION HD",
+          "StarzEncoreAction.us",
+          "US: STARZ ENCORE BLACK HD",
+          "StarzEncoreBlack.us",
+          "US: STARZ ENCORE CLASSIC HD",
+          "StarzEncoreClassics.us",
+          "US: STARZ ENCORE FAMILY HD",
+          "US: STARZ KIDS & FAMILY HD",
+          "StarzKidsFamily.us",
+          "US: STARZ ENCORE WESTERNS HD",
+          "StarzEncoreWesterns.us",
+          "US: STARZ ENCORE WEST HD",
+          "STZHD",
+          "34941",
+          "34941454",
+          "840 STZHD"
+        ],
+        "epg_ids": [
+          "34941"
+        ]
+      },
+      {
+        "name": "Starz Edge",
+        "number": 842,
+        "addon": "Starz",
+        "aliases": [
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "US: STARZ EDGE HD",
+          "StarzEdge.us",
+          "STZEHD",
+          "57573",
+          "57573455",
+          "842 STZEHD"
+        ],
+        "epg_ids": [
+          "57573"
+        ]
+      },
+      {
+        "name": "Starz In Black",
+        "number": 844,
+        "addon": "Starz",
+        "aliases": [
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ BLACK HD",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "STRZIBH",
+          "67235",
+          "67235456",
+          "844 STRZIBH"
+        ],
+        "epg_ids": [
+          "67235"
+        ]
+      },
+      {
+        "name": "Starz Kids & Family",
+        "number": 845,
+        "addon": "Starz",
+        "aliases": [
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "US: STARZ FAMILY HD",
+          "StarzEncoreFamily.us",
+          "US: STARZ KIDS & FAMILY HD",
+          "StarzKidsFamily.us",
+          "STZKHD",
+          "57581",
+          "57581457",
+          "845 STZKHD"
+        ],
+        "epg_ids": [
+          "57581"
+        ]
+      },
+      {
+        "name": "STRZCIH",
+        "number": 846,
+        "aliases": [
+          "STRZCIH",
+          "67236",
+          "67236458",
+          "846 STRZCIH"
+        ],
+        "epg_ids": [
+          "67236"
+        ]
+      },
+      {
+        "name": "Starz Comedy",
+        "number": 847,
+        "addon": "Starz",
+        "aliases": [
+          "US: COMEDY CENTRAL HD",
+          "ComedyCentral.us",
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ COMEDY HD",
+          "StarzComedy.us",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "STZCHD",
+          "57569",
+          "57569459",
+          "847 STZCHD"
+        ],
+        "epg_ids": [
+          "57569"
+        ]
+      },
+      {
+        "name": "IndiePlex",
+        "number": 848,
+        "addon": "Starz",
+        "aliases": [
+          "US: INDIEPLEX HD",
+          "IndiePlex.us",
+          "INDIEHD",
+          "65795",
+          "65795460",
+          "848 INDIEHD"
+        ],
+        "epg_ids": [
+          "65795"
+        ]
+      },
+      {
+        "name": "RetroPlex",
+        "number": 849,
+        "addon": "Starz",
+        "aliases": [
+          "US: RETROPLEX HD",
+          "RetroPlex.us",
+          "RETROHD",
+          "65791",
+          "65791461",
+          "849 RETROHD"
+        ],
+        "epg_ids": [
+          "65791"
+        ]
+      },
+      {
+        "name": "Starz Encore",
+        "number": 850,
+        "addon": "Starz",
+        "aliases": [
+          "US: STARZ HD",
+          "Starz.us",
+          "US: STARZ EAST HD",
+          "US: STARZ WEST HD",
+          "US: STARZ ENCORE HD",
+          "StarzEncore.us",
+          "US: STARZ ENCORE EAST HD",
+          "US: STARZ ENCORE ACTION HD",
+          "StarzEncoreAction.us",
+          "US: STARZ ENCORE BLACK HD",
+          "StarzEncoreBlack.us",
+          "US: STARZ ENCORE CLASSIC HD",
+          "StarzEncoreClassics.us",
+          "US: STARZ ENCORE FAMILY HD",
+          "StarzEncoreFamily.us",
+          "US: STARZ ENCORE WESTERNS HD",
+          "StarzEncoreWesterns.us",
+          "US: STARZ ENCORE WEST HD",
+          "STZENHD",
+          "36225",
+          "36225462",
+          "850 STZENHD"
+        ],
+        "epg_ids": [
+          "36225"
+        ]
+      },
+      {
+        "name": "SZECLHD",
+        "number": 852,
+        "aliases": [
+          "SZECLHD",
+          "83404",
+          "83404463",
+          "852 SZECLHD"
+        ],
+        "epg_ids": [
+          "83404"
+        ]
+      },
+      {
+        "name": "STZENWS",
+        "number": 854,
+        "aliases": [
+          "STZENWS",
+          "14765",
+          "14765464",
+          "854 STZENWS"
+        ],
+        "epg_ids": [
+          "14765"
+        ]
+      },
+      {
+        "name": "SZESUHD",
+        "number": 856,
+        "aliases": [
+          "SZESUHD",
+          "83076",
+          "83076465",
+          "856 SZESUHD"
+        ],
+        "epg_ids": [
+          "83076"
+        ]
+      },
+      {
+        "name": "SZEBHD",
+        "number": 858,
+        "aliases": [
+          "SZEBHD",
+          "72014",
+          "72014466",
+          "858 SZEBHD"
+        ],
+        "epg_ids": [
+          "72014"
+        ]
+      },
+      {
+        "name": "SZEAHD",
+        "number": 861,
+        "aliases": [
+          "SZEAHD",
+          "72015",
+          "72015467",
+          "861 SZEAHD"
+        ],
+        "epg_ids": [
+          "72015"
+        ]
+      },
+      {
+        "name": "STZENFM",
+        "number": 862,
+        "aliases": [
+          "STZENFM",
+          "14886",
+          "14886468",
+          "862 STZENFM"
+        ],
+        "epg_ids": [
+          "14886"
+        ]
+      },
+      {
+        "name": "STZESP",
+        "number": 863,
+        "aliases": [
+          "STZESP",
+          "72016",
+          "72016469",
+          "863 STZESP"
+        ],
+        "epg_ids": [
+          "72016"
+        ]
+      },
+      {
+        "name": "Paramount+ with SHOWTIME East",
+        "number": 865,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: PARAMOUNT HD",
+          "ParamountNetwork.us",
+          "US: SHOWTIME HD",
+          "Showtime.us",
+          "US: SHOWTIME EAST HD",
+          "US: SHOWTIME WEST HD",
+          "SHOWTIME",
+          "SHOWTIME HD",
+          "SHOWTIME EAST",
+          "PARAMOUNT PLUS WITH SHOWTIME",
+          "PARSHOH",
+          "21868",
+          "21868470",
+          "865 PARSHOH",
+          "865 Paramount+ with",
+          "Paramount+ with"
+        ],
+        "epg_ids": [
+          "21868"
+        ]
+      },
+      {
+        "name": "Paramount+ with SHOWTIME West",
+        "number": 866,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: PARAMOUNT HD",
+          "ParamountNetwork.us",
+          "US: SHOWTIME HD",
+          "Showtime.us",
+          "US: SHOWTIME EAST HD",
+          "US: SHOWTIME WEST HD",
+          "SHOWTIME WEST",
+          "PARAMOUNT PLUS WITH SHOWTIME WEST",
+          "PASHOHW",
+          "22532",
+          "22532471",
+          "866 PASHOHW",
+          "866 Paramount+ with",
+          "Paramount+ with"
+        ],
+        "epg_ids": [
+          "22532"
+        ]
+      },
+      {
+        "name": "SHOWTIME Showcase",
+        "number": 867,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: SHOWTIME SHOWCASE HD",
+          "ShowtimeShowcase.us",
+          "SHOCSHD",
+          "61001",
+          "61001472",
+          "867 SHOCSHD",
+          "867 Showcase HD",
+          "Showcase HD"
+        ],
+        "epg_ids": [
+          "61001"
+        ]
+      },
+      {
+        "name": "SHOBETH",
+        "number": 868,
+        "aliases": [
+          "SHOBETH",
+          "68340",
+          "68340473",
+          "868 SHOBETH",
+          "868 SHO BET HD",
+          "SHO BET HD"
+        ],
+        "epg_ids": [
+          "68340"
+        ]
+      },
+      {
+        "name": "SHOWTIME 2 East",
+        "number": 869,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: SHOWTIME 2 HD",
+          "Showtime2.us",
+          "SHO2HD",
+          "58533",
+          "58533474",
+          "869 SHO2HD",
+          "869 Showtime 2 HD",
+          "Showtime 2 HD"
+        ],
+        "epg_ids": [
+          "58533"
+        ]
+      },
+      {
+        "name": "SHOWTIME 2 West",
+        "number": 870,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: SHOWTIME 2 HD",
+          "Showtime2.us",
+          "SHO2PHD",
+          "60953",
+          "60953475",
+          "870 SHO2PHD",
+          "870 Showtime 2 HD (",
+          "Showtime 2 HD ("
+        ],
+        "epg_ids": [
+          "60953"
+        ]
+      },
+      {
+        "name": "SHOWTIME Extreme East",
+        "number": 873,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: SHOWTIME EXTREME HD",
+          "ShowtimeExtreme.us",
+          "SHOWXHD",
+          "60947",
+          "60947476",
+          "873 SHOWXHD",
+          "873 Showtime Extrem",
+          "Showtime Extrem"
+        ],
+        "epg_ids": [
+          "60947"
+        ]
+      },
+      {
+        "name": "SHOWTIME Extreme West",
+        "number": 874,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: SHOWTIME EXTREME HD",
+          "ShowtimeExtreme.us",
+          "SHWXPHD",
+          "60945",
+          "60945477",
+          "874 SHWXPHD",
+          "874 Showtime Extrem",
+          "Showtime Extrem"
+        ],
+        "epg_ids": [
+          "60945"
+        ]
+      },
+      {
+        "name": "The Movie Channel East",
+        "number": 885,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: THE MOVIE CHANNEL HD",
+          "TMC.us",
+          "TMCHD",
+          "35329",
+          "35329478",
+          "885 TMCHD",
+          "885 TMC HD",
+          "TMC HD"
+        ],
+        "epg_ids": [
+          "35329"
+        ]
+      },
+      {
+        "name": "The Movie Channel Xtra",
+        "number": 887,
+        "addon": "Paramount+ with SHOWTIME",
+        "aliases": [
+          "US: THE MOVIE CHANNEL HD",
+          "TMC.us",
+          "TMCXHD",
+          "60951",
+          "60951479",
+          "887 TMCXHD",
+          "887 TMC Xtra HD",
+          "TMC Xtra HD"
+        ],
+        "epg_ids": [
+          "60951"
+        ]
+      },
+      {
+        "name": "MGM+",
+        "number": 895,
+        "addon": "MGM+",
+        "aliases": [
+          "US: EPIX HD",
+          "epix.us",
+          "US: EPIX 2",
+          "US: EPIX DRIVE IN",
+          "epixdrivein.us",
+          "US: EPIX HITS",
+          "EpixHits.us",
+          "EPIX",
+          "EPIX HD",
+          "EPIX 1",
+          "MGM PLUS",
+          "MGMHD",
+          "65687",
+          "65687480",
+          "895 MGMHD"
+        ],
+        "epg_ids": [
+          "65687"
+        ]
+      },
+      {
+        "name": "MGM+ Hits",
+        "number": 896,
+        "addon": "MGM+",
+        "aliases": [
+          "US: EPIX HD",
+          "epix.us",
+          "US: EPIX 2",
+          "US: EPIX HITS",
+          "EpixHits.us",
+          "EPIX HITS",
+          "EPIX 2",
+          "MGM PLUS HITS",
+          "MGMHTH",
+          "67929",
+          "67929481",
+          "896 MGMHTH"
+        ],
+        "epg_ids": [
+          "67929"
+        ]
+      },
+      {
+        "name": "HBO East",
+        "number": 899,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO HD",
+          "HBO.us",
+          "US: HBO WEST HD",
+          "HBOHD",
+          "19548",
+          "19548482",
+          "899 HBOHD",
+          "899 HBO HD",
+          "HBO HD"
+        ],
+        "epg_ids": [
+          "19548"
+        ]
+      },
+      {
+        "name": "Fios On Demand",
+        "number": 900,
+        "aliases": [
+          "FIOSOD",
+          "80826",
+          "80826483",
+          "900 FIOSOD"
+        ],
+        "epg_ids": [
+          "80826"
+        ]
+      },
+      {
+        "name": "HBO West",
+        "number": 901,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO HD",
+          "HBO.us",
+          "US: HBO WEST HD",
+          "HBOHDP",
+          "19566",
+          "19566484",
+          "901 HBOHDP",
+          "901 HBO HD West",
+          "HBO HD West"
+        ],
+        "epg_ids": [
+          "19566"
+        ]
+      },
+      {
+        "name": "HBO 2 East",
+        "number": 902,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO 2 HD",
+          "HBO2.us",
+          "HBOHTHD",
+          "59368",
+          "59368485",
+          "902 HBOHTHD",
+          "902 HBO Hits HD",
+          "HBO Hits HD"
+        ],
+        "epg_ids": [
+          "59368"
+        ]
+      },
+      {
+        "name": "HBO 2 West",
+        "number": 903,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO 2 HD",
+          "HBO2.us",
+          "HBOHHDP",
+          "59355",
+          "59355486",
+          "903 HBOHHDP",
+          "903 HBO Hits HD (We",
+          "HBO Hits HD (We"
+        ],
+        "epg_ids": [
+          "59355"
+        ]
+      },
+      {
+        "name": "HBO Signature East",
+        "number": 904,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO SIGNATURE HD",
+          "HBOSignature.us",
+          "HBODRHD",
+          "59363",
+          "59363487",
+          "904 HBODRHD",
+          "904 HBO Drama HD",
+          "HBO Drama HD"
+        ],
+        "epg_ids": [
+          "59363"
+        ]
+      },
+      {
+        "name": "HBO Signature West",
+        "number": 905,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO SIGNATURE HD",
+          "HBOSignature.us",
+          "HBODHDP",
+          "59366",
+          "59366488",
+          "905 HBODHDP",
+          "905 HBO Drama HD (W",
+          "HBO Drama HD (W"
+        ],
+        "epg_ids": [
+          "59366"
+        ]
+      },
+      {
+        "name": "HBO Comedy East",
+        "number": 908,
+        "addon": "HBO",
+        "aliases": [
+          "US: COMEDY CENTRAL HD",
+          "ComedyCentral.us",
+          "US: HBO COMEDY HD",
+          "HBOComedy.us",
+          "HBOCHD",
+          "59839",
+          "59839489",
+          "908 HBOCHD",
+          "908 HBO Comedy HD",
+          "HBO Comedy HD"
+        ],
+        "epg_ids": [
+          "59839"
+        ]
+      },
+      {
+        "name": "HBO Comedy West",
+        "number": 909,
+        "addon": "HBO",
+        "aliases": [
+          "US: COMEDY CENTRAL HD",
+          "ComedyCentral.us",
+          "US: HBO COMEDY HD",
+          "HBOComedy.us",
+          "HBOCPHD",
+          "59841",
+          "59841490",
+          "909 HBOCPHD",
+          "909 HBO Comedy HD (",
+          "HBO Comedy HD ("
+        ],
+        "epg_ids": [
+          "59841"
+        ]
+      },
+      {
+        "name": "HBO Zone East",
+        "number": 910,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO ZONE HD",
+          "HBOZone.us",
+          "HBOMVHD",
+          "59845",
+          "59845491",
+          "910 HBOMVHD",
+          "910 HBO Movies HD",
+          "HBO Movies HD"
+        ],
+        "epg_ids": [
+          "59845"
+        ]
+      },
+      {
+        "name": "HBO Zone West",
+        "number": 911,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO ZONE HD",
+          "HBOZone.us",
+          "HBOMHDP",
+          "59847",
+          "59847492",
+          "911 HBOMHDP",
+          "911 HBO Movies HD (",
+          "HBO Movies HD ("
+        ],
+        "epg_ids": [
+          "59847"
+        ]
+      },
+      {
+        "name": "HBO Latino",
+        "number": 912,
+        "addon": "HBO",
+        "aliases": [
+          "US: HBO LATINO HD",
+          "HBOLatino.us",
+          "HBOLAHD",
+          "59837",
+          "59837493",
+          "912 HBOLAHD"
+        ],
+        "epg_ids": [
+          "59837"
+        ]
+      },
+      {
+        "name": "Cinemax East",
+        "number": 920,
+        "addon": "Cinemax",
+        "aliases": [
+          "US: CINEMAX HD",
+          "Cinemax.us",
+          "US: CINEMAX EAST HD",
+          "US: CINEMAX ACTION EAST HD",
+          "US: CINEMAX MOREMAX HDAR",
+          "US: CINEMAX THRILLERMAX HD",
+          "US: CINEMAX WEST HD",
+          "US: CINEMAX 5 STAR MAX",
+          "US: CINEMAX 5 STARMAX 4K",
+          "MAXHD",
+          "34933",
+          "34933494",
+          "920 MAXHD"
+        ],
+        "epg_ids": [
+          "34933"
+        ]
+      },
+      {
+        "name": "Cinemax West",
+        "number": 921,
+        "addon": "Cinemax",
+        "aliases": [
+          "US: CINEMAX HD",
+          "Cinemax.us",
+          "US: CINEMAX EAST HD",
+          "US: CINEMAX ACTION EAST HD",
+          "US: CINEMAX MOREMAX HDAR",
+          "US: CINEMAX THRILLERMAX HD",
+          "US: CINEMAX WEST HD",
+          "US: CINEMAX 5 STAR MAX",
+          "US: CINEMAX 5 STARMAX 4K",
+          "MAXHDP",
+          "35975",
+          "35975495",
+          "921 MAXHDP"
+        ],
+        "epg_ids": [
+          "35975"
+        ]
+      },
+      {
+        "name": "MoreMax East",
+        "number": 922,
+        "addon": "Cinemax",
+        "aliases": [
+          "US: CINEMAX MOREMAX HDAR",
+          "Cinemax.us",
+          "US: MOREMAX HD",
+          "MoreMax.us",
+          "CINEHHD",
+          "59373",
+          "59373496",
+          "922 CINEHHD"
+        ],
+        "epg_ids": [
+          "59373"
+        ]
+      },
+      {
+        "name": "MoreMax West",
+        "number": 923,
+        "addon": "Cinemax",
+        "aliases": [
+          "US: CINEMAX MOREMAX HDAR",
+          "Cinemax.us",
+          "US: MOREMAX HD",
+          "MoreMax.us",
+          "CINHHDP",
+          "59375",
+          "59375497",
+          "923 CINHHDP"
+        ],
+        "epg_ids": [
+          "59375"
+        ]
+      },
+      {
+        "name": "ActionMax",
+        "number": 924,
+        "addon": "Cinemax",
+        "aliases": [
+          "CINACHD",
+          "59948",
+          "59948498",
+          "924 CINACHD"
+        ],
+        "epg_ids": [
+          "59948"
+        ]
+      },
+      {
+        "name": "Cinemáx",
+        "number": 929,
+        "addon": "Cinemax",
+        "aliases": [
+          "US: CINEMAX HD",
+          "Cinemax.us",
+          "US: CINEMAX EAST HD",
+          "US: CINEMAX ACTION EAST HD",
+          "US: CINEMAX MOREMAX HDAR",
+          "US: CINEMAX THRILLERMAX HD",
+          "US: CINEMAX WEST HD",
+          "US: CINEMAX 5 STAR MAX",
+          "US: CINEMAX 5 STARMAX 4K",
+          "CMAXHD",
+          "59965",
+          "59965499",
+          "929 CMAXHD"
+        ],
+        "epg_ids": [
+          "59965"
+        ]
+      },
+      {
+        "name": "5StarMax",
+        "number": 930,
+        "addon": "Cinemax",
+        "aliases": [
+          "CINCLHD",
+          "59961",
+          "59961500",
+          "930 CINCLHD"
+        ],
+        "epg_ids": [
+          "59961"
+        ]
+      }
+    ],
+    "Kids": [
+      {
+        "name": "Disney Channel",
+        "number": 250,
+        "aliases": [
+          "US: DISNEY CHANNEL HD",
+          "US: DISNEY CHANNEL WEST HD",
+          "DISN",
+          "10171",
+          "10171148",
+          "250 DISN"
+        ],
+        "epg_ids": [
+          "10171"
+        ]
+      },
+      {
+        "name": "Disney XD",
+        "number": 251,
+        "aliases": [
+          "US: DISNEY XD HD",
+          "DisneyXD.us",
+          "DXD",
+          "18279",
+          "18279149",
+          "251 DXD"
+        ],
+        "epg_ids": [
+          "18279"
+        ]
+      },
+      {
+        "name": "NICKTOO",
+        "number": 253,
+        "aliases": [
+          "NICKTOO",
+          "37551",
+          "37551151",
+          "253 NICKTOO"
+        ],
+        "epg_ids": [
+          "37551"
+        ]
+      },
+      {
+        "name": "BOOM",
+        "number": 258,
+        "aliases": [
+          "BOOM",
+          "21883",
+          "21883156",
+          "258 BOOM"
+        ],
+        "epg_ids": [
+          "21883"
+        ]
+      },
+      {
+        "name": "Discovery Family",
+        "number": 259,
+        "aliases": [
+          "US: DISCOVERY FAMILY HD",
+          "DiscoveryFamily.us",
+          "DISCOVERY FAMILY CHANNEL",
+          "DFC",
+          "16618",
+          "16618157",
+          "259 DFC"
+        ],
+        "epg_ids": [
+          "16618"
+        ]
+      },
+      {
+        "name": "DJCH",
+        "number": 260,
+        "aliases": [
+          "DJCH",
+          "74796",
+          "74796158",
+          "260 DJCH"
+        ],
+        "epg_ids": [
+          "74796"
+        ]
+      },
+      {
+        "name": "NORAFTV",
+        "number": 269,
+        "aliases": [
+          "NORAFTV",
+          "73426",
+          "73426159",
+          "269 NORAFTV"
+        ],
+        "epg_ids": [
+          "73426"
+        ]
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 752,
+        "aliases": [
+          "US: NICKELODEON HD",
+          "Nickelodeon.us",
+          "US: NICKELODEON WEST HD",
+          "NIKHD",
+          "59432",
+          "59432420",
+          "752 NIKHD",
+          "752 Nick HD (East)",
+          "Nick HD (East)"
+        ],
+        "epg_ids": [
+          "59432"
+        ]
+      },
+      {
+        "name": "Nicktoons",
+        "number": 754,
+        "aliases": [
+          "US: NICK TOONS HD",
+          "Nicktoons.us",
+          "NICK TOONS",
+          "NICKTOONS HD",
+          "NIKTNHD",
+          "82654",
+          "82654421",
+          "754 NIKTNHD"
+        ],
+        "epg_ids": [
+          "82654"
+        ]
+      },
+      {
+        "name": "TeenNick",
+        "number": 755,
+        "aliases": [
+          "TNCKHD",
+          "97047",
+          "97047422",
+          "755 TNCKHD"
+        ],
+        "epg_ids": [
+          "97047"
+        ]
+      },
+      {
+        "name": "Nick Jr.",
+        "number": 756,
+        "aliases": [
+          "US: Nick JR HD",
+          "NICJRHD",
+          "82649",
+          "82649423",
+          "756 NICJRHD"
+        ],
+        "epg_ids": [
+          "82649"
+        ]
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 757,
+        "aliases": [
+          "US: CARTOON NETWORK HD",
+          "CartoonNetwork.us",
+          "US: CARTOON NETWORK EAST HD",
+          "US: CARTOON NETWORK WEST HD",
+          "TOONHD",
+          "60048",
+          "60048424",
+          "757 TOONHD"
+        ],
+        "epg_ids": [
+          "60048"
+        ]
+      },
+      {
+        "name": "BABY1HD",
+        "number": 765,
+        "aliases": [
+          "BABY1HD",
+          "102180",
+          "102180425",
+          "765 BABY1HD"
+        ],
+        "epg_ids": [
+          "102180"
+        ]
+      },
+      {
+        "name": "BET",
+        "number": 770,
+        "aliases": [
+          "US: BET HD",
+          "BET.us",
+          "BETHD",
+          "63236",
+          "63236426",
+          "770 BETHD"
+        ],
+        "epg_ids": [
+          "63236"
+        ]
+      },
+      {
+        "name": "TV One",
+        "number": 771,
+        "aliases": [
+          "US: TV ONE HD",
+          "TVOne.us",
+          "TVONEHD",
+          "61960",
+          "61960427",
+          "771 TVONEHD"
+        ],
+        "epg_ids": [
+          "61960"
+        ]
+      },
+      {
+        "name": "ASPREHD",
+        "number": 772,
+        "aliases": [
+          "ASPREHD",
+          "97409",
+          "97409428",
+          "772 ASPREHD"
+        ],
+        "epg_ids": [
+          "97409"
+        ]
+      },
+      {
+        "name": "CLEOHD",
+        "number": 773,
+        "aliases": [
+          "CLEOHD",
+          "110289",
+          "110289429",
+          "773 CLEOHD"
+        ],
+        "epg_ids": [
+          "110289"
+        ]
+      },
+      {
+        "name": "HBCUGO",
+        "number": 774,
+        "aliases": [
+          "HBCUGO",
+          "128535",
+          "128535430",
+          "774 HBCUGO"
+        ],
+        "epg_ids": [
+          "128535"
+        ]
+      },
+      {
+        "name": "UNVSOHD",
+        "number": 775,
+        "aliases": [
+          "UNVSOHD",
+          "91588",
+          "91588431",
+          "775 UNVSOHD"
+        ],
+        "epg_ids": [
+          "91588"
+        ]
+      },
+      {
+        "name": "STELLAR",
+        "number": 776,
+        "aliases": [
+          "STELLAR",
+          "130088",
+          "130088432",
+          "776 STELLAR"
+        ],
+        "epg_ids": [
+          "130088"
+        ]
+      },
+      {
+        "name": "GRIOCH",
+        "number": 777,
+        "aliases": [
+          "GRIOCH",
+          "132272",
+          "132272433",
+          "777 GRIOCH"
+        ],
+        "epg_ids": [
+          "132272"
+        ]
+      },
+      {
+        "name": "Disney Channel",
+        "number": 780,
+        "aliases": [
+          "US: DISNEY CHANNEL HD",
+          "US: DISNEY CHANNEL WEST HD",
+          "DISNHD",
+          "59684",
+          "59684434",
+          "780 DISNHD"
+        ],
+        "epg_ids": [
+          "59684"
+        ]
+      },
+      {
+        "name": "Disney XD",
+        "number": 781,
+        "aliases": [
+          "US: DISNEY XD HD",
+          "DisneyXD.us",
+          "DXDHD",
+          "60006",
+          "60006435",
+          "781 DXDHD"
+        ],
+        "epg_ids": [
+          "60006"
+        ]
+      },
+      {
+        "name": "INSP",
+        "number": 786,
+        "aliases": [
+          "US: INSP HD",
+          "INSP.us",
+          "INSPHD",
+          "82773",
+          "82773436",
+          "786 INSPHD"
+        ],
+        "epg_ids": [
+          "82773"
+        ]
+      },
+      {
+        "name": "IMPACTV",
+        "number": 787,
+        "aliases": [
+          "IMPACTV",
+          "136901",
+          "136901437",
+          "787 IMPACTV"
+        ],
+        "epg_ids": [
+          "136901"
+        ]
+      },
+      {
+        "name": "Discovery Family",
+        "number": 789,
+        "aliases": [
+          "US: DISCOVERY FAMILY HD",
+          "DiscoveryFamily.us",
+          "DISCOVERY FAMILY CHANNEL",
+          "DFCHD",
+          "67749",
+          "67749438",
+          "789 DFCHD"
+        ],
+        "epg_ids": [
+          "67749"
+        ]
+      }
+    ],
+    "Entertainment": [
+      {
+        "name": "CIN",
+        "number": 182,
+        "aliases": [
+          "CIN",
+          "48543",
+          "48543115",
+          "182 CIN"
+        ],
+        "epg_ids": [
+          "48543"
+        ]
+      },
+      {
+        "name": "HITN",
+        "number": 279,
+        "aliases": [
+          "HITN",
+          "17142",
+          "17142166",
+          "279 HITN"
+        ],
+        "epg_ids": [
+          "17142"
+        ]
+      },
+      {
+        "name": "FXDEP",
+        "number": 311,
+        "aliases": [
+          "FXDEP",
+          "15377",
+          "15377174",
+          "311 FXDEP"
+        ],
+        "epg_ids": [
+          "15377"
+        ]
+      },
+      {
+        "name": "FDUELRC",
+        "number": 316,
+        "aliases": [
+          "FDUELRC",
+          "32258",
+          "32258176",
+          "316 FDUELRC"
+        ],
+        "epg_ids": [
+          "32258"
+        ]
+      },
+      {
+        "name": "USA Network",
+        "number": 550,
+        "aliases": [
+          "US: USA NETWORK 4K",
+          "USANetwork.us",
+          "US: USA NETWORK EAST HD",
+          "US: USA NETWORK HD",
+          "US: USA NETWORK WEST HD",
+          "US: NBC USA NETWORK (EAST) ᴿᴬᵂ",
+          "USAHD",
+          "58452",
+          "58452296",
+          "USA",
+          "11207",
+          "1120742",
+          "550 USAHD",
+          "550 USA HD",
+          "USA HD"
+        ],
+        "epg_ids": [
+          "58452"
+        ]
+      },
+      {
+        "name": "TNT",
+        "number": 551,
+        "aliases": [
+          "US: TNT HD",
+          "TNT.us",
+          "US: TNT SD",
+          "US: TNT 4K",
+          "US: TNT WEST 4K",
+          "US: TNT EAST 4K",
+          "TNTHD",
+          "42642",
+          "42642297",
+          "TNT",
+          "11164",
+          "1116443",
+          "551 TNTHD",
+          "551 TNT HD",
+          "TNT HD"
+        ],
+        "epg_ids": [
+          "42642"
+        ]
+      },
+      {
+        "name": "TBS",
+        "number": 552,
+        "aliases": [
+          "US: TBS WEST",
+          "US: TBS HD",
+          "TBSHD",
+          "58515",
+          "58515298",
+          "TBS",
+          "11867",
+          "1186744",
+          "552 TBSHD",
+          "552 TBS HD",
+          "TBS HD"
+        ],
+        "epg_ids": [
+          "58515"
+        ]
+      },
+      {
+        "name": "FX",
+        "number": 553,
+        "aliases": [
+          "US: FX WEST HD",
+          "FX.us",
+          "US: FX HD",
+          "FXHD",
+          "58574",
+          "58574299",
+          "FX",
+          "14321",
+          "1432145",
+          "553 FXHD",
+          "553 FX HD (EAST)",
+          "FX HD (EAST)"
+        ],
+        "epg_ids": [
+          "58574"
+        ]
+      },
+      {
+        "name": "Paramount Network",
+        "number": 554,
+        "aliases": [
+          "US: PARAMOUNT HD",
+          "ParamountNetwork.us",
+          "PARHD",
+          "59186",
+          "59186300",
+          "PAR",
+          "11163",
+          "1116346",
+          "554 PARHD",
+          "554 Paramount Netwo",
+          "Paramount Netwo"
+        ],
+        "epg_ids": [
+          "59186"
+        ]
+      },
+      {
+        "name": "ETSTVHD",
+        "number": 558,
+        "aliases": [
+          "ETSTVHD",
+          "82218",
+          "82218301",
+          "558 ETSTVHD"
+        ],
+        "epg_ids": [
+          "82218"
+        ]
+      },
+      {
+        "name": "Syfy",
+        "number": 680,
+        "aliases": [
+          "US: SYFY HD",
+          "Syfy.us",
+          "US: SYFY WEST HD",
+          "SYFYHD",
+          "58623",
+          "58623384",
+          "680 SYFYHD",
+          "680 SYFY HD",
+          "SYFY HD"
+        ],
+        "epg_ids": [
+          "58623"
+        ]
+      },
+      {
+        "name": "A&E",
+        "number": 681,
+        "aliases": [
+          "US: A&E HD",
+          "AandE.us",
+          "AETVHD",
+          "51529",
+          "51529385",
+          "681 AETVHD",
+          "681 A&E HD",
+          "A&E HD",
+          "AETV"
+        ],
+        "epg_ids": [
+          "51529"
+        ]
+      },
+      {
+        "name": "truTV",
+        "number": 683,
+        "aliases": [
+          "US: TRUTV 4K",
+          "truTV.us",
+          "US: TRUTV WEST 4K",
+          "TRUTVHD",
+          "64490",
+          "64490386",
+          "683 TRUTVHD",
+          "683 tru TV HD",
+          "tru TV HD"
+        ],
+        "epg_ids": [
+          "64490"
+        ]
+      },
+      {
+        "name": "Game Show Network",
+        "number": 684,
+        "aliases": [
+          "US: Game Show Central",
+          "GSNHD",
+          "68827",
+          "68827387",
+          "684 GSNHD"
+        ],
+        "epg_ids": [
+          "68827"
+        ]
+      },
+      {
+        "name": "Bravo",
+        "number": 685,
+        "aliases": [
+          "US: BRAVO HD",
+          "Bravo.us",
+          "US: BRAVO WEST HD",
+          "US: BRAVO EAST HD",
+          "US: NBC BRAVO (EAST) (D) ᴿᴬᵂ",
+          "US: NBC BRAVO (WEST) (D) ᴿᴬᵂ",
+          "BRAVOHD",
+          "58625",
+          "58625388",
+          "685 BRAVOHD",
+          "685 Bravo HD",
+          "Bravo HD"
+        ],
+        "epg_ids": [
+          "58625"
+        ]
+      },
+      {
+        "name": "Logo TV",
+        "number": 687,
+        "aliases": [
+          "LOGOHD",
+          "96971",
+          "96971389",
+          "687 LOGOHD",
+          "687 Logo HD (East)",
+          "Logo HD (East)"
+        ],
+        "epg_ids": [
+          "96971"
+        ]
+      },
+      {
+        "name": "OVATNHD",
+        "number": 688,
+        "aliases": [
+          "OVATNHD",
+          "69061",
+          "69061390",
+          "688 OVATNHD",
+          "688 Ovation HD",
+          "Ovation HD"
+        ],
+        "epg_ids": [
+          "69061"
+        ]
+      },
+      {
+        "name": "BBC America",
+        "number": 689,
+        "aliases": [
+          "US: BBC AMERICA HD",
+          "BBCAmerica.us",
+          "BBCAHD",
+          "64492",
+          "64492391",
+          "689 BBCAHD",
+          "689 BBC America HD",
+          "BBC America HD",
+          "BBCA"
+        ],
+        "epg_ids": [
+          "64492"
+        ]
+      },
+      {
+        "name": "Comedy Central",
+        "number": 690,
+        "aliases": [
+          "US: CATCHY COMEDY HD",
+          "US: COMEDY CENTRAL HD",
+          "ComedyCentral.us",
+          "US: COMEDY TV HD",
+          "US: HBO COMEDY HD",
+          "HBOComedy.us",
+          "US: STARZ COMEDY HD",
+          "StarzComedy.us",
+          "CCHD",
+          "62420",
+          "62420392",
+          "690 CCHD",
+          "690 Comedy Central",
+          "Comedy Central"
+        ],
+        "epg_ids": [
+          "62420"
+        ]
+      },
+      {
+        "name": "FXX",
+        "number": 691,
+        "aliases": [
+          "US: FXX HD",
+          "FXX.us",
+          "US: FXX WEST HD",
+          "FXXHD",
+          "66379",
+          "66379393",
+          "691 FXXHD",
+          "691 FXX HD",
+          "FXX HD"
+        ],
+        "epg_ids": [
+          "66379"
+        ]
+      },
+      {
+        "name": "REELZHD",
+        "number": 692,
+        "aliases": [
+          "REELZHD",
+          "68385",
+          "68385394",
+          "692 REELZHD",
+          "692 Reelz Channel H",
+          "Reelz Channel H",
+          "REELZ"
+        ],
+        "epg_ids": [
+          "68385"
+        ]
+      },
+      {
+        "name": "Pop TV",
+        "number": 694,
+        "aliases": [
+          "POPHD",
+          "68796",
+          "68796395",
+          "694 POPHD",
+          "694 POP HD (East)",
+          "POP HD (East)"
+        ],
+        "epg_ids": [
+          "68796"
+        ]
+      },
+      {
+        "name": "CMDTVHD",
+        "number": 695,
+        "aliases": [
+          "CMDTVHD",
+          "82470",
+          "82470396",
+          "695 CMDTVHD",
+          "695 Comedy.TV HD",
+          "Comedy.TV HD"
+        ],
+        "epg_ids": [
+          "82470"
+        ]
+      },
+      {
+        "name": "E! Entertainment",
+        "number": 696,
+        "aliases": [
+          "US: E! ENTERTAINMENT WEST HD",
+          "EEntertainment.us",
+          "US: E! ENTERTAINMENT HD",
+          "EHD",
+          "61812",
+          "61812397",
+          "696 EHD",
+          "696 E! TV HD",
+          "E! TV HD"
+        ],
+        "epg_ids": [
+          "61812"
+        ]
+      },
+      {
+        "name": "VICEHD",
+        "number": 697,
+        "aliases": [
+          "VICEHD",
+          "65732",
+          "65732398",
+          "697 VICEHD",
+          "697 VICE HD",
+          "VICE HD"
+        ],
+        "epg_ids": [
+          "65732"
+        ]
+      },
+      {
+        "name": "Freeform",
+        "number": 699,
+        "aliases": [
+          "US: FREEFORM WEST HD",
+          "Freeform.us",
+          "US: FREEFORM EAST HD",
+          "FREFMHD",
+          "59615",
+          "59615399",
+          "699 FREFMHD",
+          "699 Freeform HD",
+          "Freeform HD"
+        ],
+        "epg_ids": [
+          "59615"
+        ]
+      }
+    ],
+    "Reality & Lifestyle": [
+      {
+        "name": "LRW",
+        "number": 142,
+        "aliases": [
+          "LRW",
+          "29612",
+          "2961298",
+          "142 LRW"
+        ],
+        "epg_ids": [
+          "29612"
+        ]
+      },
+      {
+        "name": "DLC",
+        "number": 161,
+        "aliases": [
+          "DLC",
+          "16125",
+          "16125106",
+          "161 DLC"
+        ],
+        "epg_ids": [
+          "16125"
+        ]
+      },
+      {
+        "name": "Lifetime",
+        "number": 640,
+        "aliases": [
+          "US: LIFETIME HD",
+          "LifetimeNetwork.us",
+          "US: LIFETIME REAL WOMEN HD",
+          "LIFEHD",
+          "60150",
+          "60150360",
+          "640 LIFEHD",
+          "640 Lifetime HD",
+          "Lifetime HD",
+          "LIFETIME"
+        ],
+        "epg_ids": [
+          "60150"
+        ]
+      },
+      {
+        "name": "LMN",
+        "number": 641,
+        "aliases": [
+          "US: LIFETIME MOVIE NETWORK HD",
+          "LifetimeMovieNetwork.us",
+          "LIFETIME MOVIE NETWORK",
+          "LMNHD",
+          "55887",
+          "55887361",
+          "641 LMNHD",
+          "641 LMN HD",
+          "LMN HD"
+        ],
+        "epg_ids": [
+          "55887"
+        ]
+      },
+      {
+        "name": "Oxygen True Crime",
+        "number": 644,
+        "aliases": [
+          "US: OXYGEN HD",
+          "Oxygen.us",
+          "US: OXYGEN WEST HD",
+          "OXYGNHD",
+          "70522",
+          "70522362",
+          "644 OXYGNHD",
+          "644 Oxygen HD (East",
+          "Oxygen HD (East"
+        ],
+        "epg_ids": [
+          "70522"
+        ]
+      },
+      {
+        "name": "OWN",
+        "number": 645,
+        "aliases": [
+          "US: OWN HD",
+          "OPRAH WINFREY NETWORK",
+          "OWNHD",
+          "70388",
+          "70388363",
+          "645 OWNHD",
+          "645 OWN HD",
+          "OWN HD"
+        ],
+        "epg_ids": [
+          "70388"
+        ]
+      },
+      {
+        "name": "WE tv",
+        "number": 649,
+        "aliases": [
+          "US: WE TV HD",
+          "WeTV.us",
+          "WEHD",
+          "59296",
+          "59296364",
+          "649 WEHD",
+          "649 WE TV (HD)",
+          "WE TV (HD)"
+        ],
+        "epg_ids": [
+          "59296"
+        ]
+      },
+      {
+        "name": "QVC",
+        "number": 650,
+        "aliases": [
+          "US: QVC HD",
+          "QVC.us",
+          "QVCHD",
+          "60222",
+          "60222365",
+          "QVC",
+          "650 QVCHD"
+        ],
+        "epg_ids": [
+          "60222"
+        ]
+      },
+      {
+        "name": "HSN",
+        "number": 651,
+        "aliases": [
+          "US: HSN",
+          "HomeShoppingNetwork.us",
+          "HSNHD",
+          "62077",
+          "62077366",
+          "651 HSNHD",
+          "HSN"
+        ],
+        "epg_ids": [
+          "62077"
+        ]
+      },
+      {
+        "name": "Jewelry Television",
+        "number": 652,
+        "aliases": [
+          "JTVHD",
+          "65556",
+          "65556367",
+          "JEWELRY TV",
+          "652 JTVHD"
+        ],
+        "epg_ids": [
+          "65556"
+        ]
+      },
+      {
+        "name": "Qvc2 (QVC2HD)",
+        "number": 653,
+        "aliases": [
+          "QVC2HD",
+          "82696",
+          "82696368",
+          "QVC2",
+          "653 QVC2HD"
+        ],
+        "epg_ids": [
+          "82696"
+        ]
+      },
+      {
+        "name": "HSN2HD",
+        "number": 654,
+        "aliases": [
+          "HSN2HD",
+          "99450",
+          "99450369",
+          "654 HSN2HD",
+          "HSN2"
+        ],
+        "epg_ids": [
+          "99450"
+        ]
+      },
+      {
+        "name": "QVC3HD",
+        "number": 656,
+        "aliases": [
+          "QVC3HD",
+          "102337",
+          "102337370",
+          "656 QVC3HD",
+          "QVC3"
+        ],
+        "epg_ids": [
+          "102337"
+        ]
+      },
+      {
+        "name": "GEMSHD",
+        "number": 658,
+        "aliases": [
+          "GEMSHD",
+          "109264",
+          "109264371",
+          "658 GEMSHD"
+        ],
+        "epg_ids": [
+          "109264"
+        ]
+      },
+      {
+        "name": "SHOPLCH",
+        "number": 659,
+        "aliases": [
+          "SHOPLCH",
+          "93564",
+          "93564372",
+          "659 SHOPLCH"
+        ],
+        "epg_ids": [
+          "93564"
+        ]
+      },
+      {
+        "name": "Cooking Channel",
+        "number": 663,
+        "aliases": [
+          "US: COOKING CHANNEL HD",
+          "CookingChannel.us",
+          "COOKHD",
+          "68065",
+          "68065373",
+          "663 COOKHD",
+          "663 Cooking Channel",
+          "Cooking Channel"
+        ],
+        "epg_ids": [
+          "68065"
+        ]
+      },
+      {
+        "name": "Food Network",
+        "number": 664,
+        "aliases": [
+          "US: FOOD NETWORK HD",
+          "foodnetwork.us",
+          "US: FOOD NETWORK WEST HD",
+          "FOODHD",
+          "50747",
+          "50747374",
+          "664 FOODHD",
+          "664 Food Network HD",
+          "Food Network HD"
+        ],
+        "epg_ids": [
+          "50747"
+        ]
+      },
+      {
+        "name": "HGTV",
+        "number": 665,
+        "aliases": [
+          "US: HGTV HD",
+          "hgtv.us",
+          "US: HGTV WEST HD",
+          "HGTVD",
+          "49788",
+          "49788375",
+          "665 HGTVD",
+          "665 Home & Garden T",
+          "Home & Garden T"
+        ],
+        "epg_ids": [
+          "49788"
+        ]
+      },
+      {
+        "name": "Magnolia Network",
+        "number": 667,
+        "aliases": [
+          "US: Magnolia Network West (Y) HD",
+          "MagnoliaNetwork.us",
+          "MAGNHD",
+          "67375",
+          "67375376",
+          "667 MAGNHD"
+        ],
+        "epg_ids": [
+          "67375"
+        ]
+      },
+      {
+        "name": "Destination America",
+        "number": 668,
+        "aliases": [
+          "US: DESTINATION AMERICA HD",
+          "DestinationAmerica.us",
+          "DESTHD",
+          "60468",
+          "60468377",
+          "668 DESTHD"
+        ],
+        "epg_ids": [
+          "60468"
+        ]
+      },
+      {
+        "name": "Travel Channel",
+        "number": 670,
+        "aliases": [
+          "US: TRAVEL CHANNEL HD",
+          "TravelChannel.us",
+          "US: TRAVEL CHANNEL WEST HD",
+          "TRAVHD",
+          "59303",
+          "59303378",
+          "670 TRAVHD",
+          "670 Travel Channel",
+          "Travel Channel"
+        ],
+        "epg_ids": [
+          "59303"
+        ]
+      },
+      {
+        "name": "MYDESHD",
+        "number": 674,
+        "aliases": [
+          "MYDESHD",
+          "74559",
+          "74559379",
+          "674 MYDESHD"
+        ],
+        "epg_ids": [
+          "74559"
+        ]
+      },
+      {
+        "name": "RECIPEH",
+        "number": 676,
+        "aliases": [
+          "RECIPEH",
+          "81289",
+          "81289380",
+          "676 RECIPEH"
+        ],
+        "epg_ids": [
+          "81289"
+        ]
+      },
+      {
+        "name": "JUST",
+        "number": 677,
+        "aliases": [
+          "JUST",
+          "78850",
+          "78850381",
+          "677 JUST"
+        ],
+        "epg_ids": [
+          "78850"
+        ]
+      },
+      {
+        "name": "LCSTR",
+        "number": 678,
+        "aliases": [
+          "LCSTR",
+          "109553",
+          "109553382",
+          "678 LCSTR"
+        ],
+        "epg_ids": [
+          "109553"
+        ]
+      },
+      {
+        "name": "CINHD",
+        "number": 679,
+        "aliases": [
+          "CINHD",
+          "61469",
+          "61469383",
+          "679 CINHD"
+        ],
+        "epg_ids": [
+          "61469"
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "name": "MILH",
+        "number": 126,
+        "aliases": [
+          "MILH",
+          "48999",
+          "4899988",
+          "126 MILH",
+          "MILITARY HISTORY"
+        ],
+        "epg_ids": [
+          "48999"
+        ]
+      },
+      {
+        "name": "VICE",
+        "number": 127,
+        "aliases": [
+          "VICE",
+          "18822",
+          "1882289",
+          "127 VICE"
+        ],
+        "epg_ids": [
+          "18822"
+        ]
+      },
+      {
+        "name": "Discovery Channel",
+        "number": 620,
+        "aliases": [
+          "US: DISCOVERY HD",
+          "DiscoveryChannel.us",
+          "US: DISCOVERY WEST HD",
+          "US: DISCOVERY EAST HD",
+          "DSCHD",
+          "56905",
+          "56905345",
+          "620 DSCHD",
+          "620 Discovery HD",
+          "Discovery HD"
+        ],
+        "epg_ids": [
+          "56905"
+        ]
+      },
+      {
+        "name": "National Geographic",
+        "number": 621,
+        "aliases": [
+          "US: : NATIONAL GEOGRAPHIC HD",
+          "NatGeo.us",
+          "US: : NATIONAL GEOGRAPHIC WILD HD",
+          "NatGeoWild.us",
+          "NGCHD",
+          "49438",
+          "49438346",
+          "621 NGCHD",
+          "621 National Geo HD",
+          "National Geo HD"
+        ],
+        "epg_ids": [
+          "49438"
+        ]
+      },
+      {
+        "name": "Science Channel",
+        "number": 622,
+        "aliases": [
+          "SCIHD",
+          "57390",
+          "57390347",
+          "622 SCIHD"
+        ],
+        "epg_ids": [
+          "57390"
+        ]
+      },
+      {
+        "name": "Investigation Discovery",
+        "number": 623,
+        "aliases": [
+          "US: ID INVESTIGATION DISCOVERY HD",
+          "investigationdiscovery.us",
+          "IDHD",
+          "65342",
+          "65342348",
+          "623 IDHD"
+        ],
+        "epg_ids": [
+          "65342"
+        ]
+      },
+      {
+        "name": "DLCHD",
+        "number": 624,
+        "aliases": [
+          "DLCHD",
+          "92204",
+          "92204349",
+          "624 DLCHD",
+          "DISCOVERY LIFE"
+        ],
+        "epg_ids": [
+          "92204"
+        ]
+      },
+      {
+        "name": "American Heroes Channel",
+        "number": 625,
+        "aliases": [
+          "US: AMERICA HEROES HD",
+          "AHC",
+          "AMERICA HEROES HD",
+          "AHCHD",
+          "78808",
+          "78808350",
+          "625 AHCHD"
+        ],
+        "epg_ids": [
+          "78808"
+        ]
+      },
+      {
+        "name": "History Channel",
+        "number": 628,
+        "aliases": [
+          "US: HISTORY HD",
+          "HistoryChannel.us",
+          "HSTRYHD",
+          "57708",
+          "57708351",
+          "628 HSTRYHD",
+          "HISTORY"
+        ],
+        "epg_ids": [
+          "57708"
+        ]
+      },
+      {
+        "name": "FYIHD",
+        "number": 629,
+        "aliases": [
+          "FYIHD",
+          "58988",
+          "58988352",
+          "629 FYIHD",
+          "FYI"
+        ],
+        "epg_ids": [
+          "58988"
+        ]
+      },
+      {
+        "name": "Animal Planet",
+        "number": 630,
+        "aliases": [
+          "US: ANIMAL PLANET HD",
+          "animalplanet.us",
+          "US: ANIMAL PLANET WEST HD",
+          "APLHD",
+          "57394",
+          "57394353",
+          "630 APLHD"
+        ],
+        "epg_ids": [
+          "57394"
+        ]
+      },
+      {
+        "name": "MTHD",
+        "number": 631,
+        "aliases": [
+          "MTHD",
+          "31046",
+          "31046354",
+          "631 MTHD"
+        ],
+        "epg_ids": [
+          "31046"
+        ]
+      },
+      {
+        "name": "Nat Geo WILD",
+        "number": 632,
+        "aliases": [
+          "NGWIHD",
+          "67331",
+          "67331355",
+          "632 NGWIHD"
+        ],
+        "epg_ids": [
+          "67331"
+        ]
+      },
+      {
+        "name": "PETSTVH",
+        "number": 633,
+        "aliases": [
+          "PETSTVH",
+          "81283",
+          "81283356",
+          "633 PETSTVH"
+        ],
+        "epg_ids": [
+          "81283"
+        ]
+      },
+      {
+        "name": "Smithsonian Channel",
+        "number": 634,
+        "aliases": [
+          "US: SMITHSONIAN CHANNEL HD",
+          "SmithsonianChannel.us",
+          "US: SMITHSONIAN CHANNEL WEST HD",
+          "SMTHHD",
+          "58532",
+          "58532357",
+          "634 SMTHHD"
+        ],
+        "epg_ids": [
+          "58532"
+        ]
+      },
+      {
+        "name": "GLIVHD",
+        "number": 635,
+        "aliases": [
+          "GLIVHD",
+          "90858",
+          "90858358",
+          "635 GLIVHD"
+        ],
+        "epg_ids": [
+          "90858"
+        ]
+      },
+      {
+        "name": "TLC",
+        "number": 639,
+        "aliases": [
+          "US: TLC HD",
+          "US: TLC WEST",
+          "TLCHD",
+          "57391",
+          "57391359",
+          "639 TLCHD",
+          "639 TLC HD",
+          "TLC HD"
+        ],
+        "epg_ids": [
+          "57391"
+        ]
+      }
+    ],
+    "Faith": [
+      {
+        "name": "EWTN",
+        "number": 285,
+        "aliases": [
+          "EWTN",
+          "10183",
+          "10183167",
+          "285 EWTN"
+        ],
+        "epg_ids": [
+          "10183"
+        ]
+      },
+      {
+        "name": "3ANGELS",
+        "number": 291,
+        "aliases": [
+          "3ANGELS",
+          "10002",
+          "10002170",
+          "291 3ANGELS"
+        ],
+        "epg_ids": [
+          "10002"
+        ]
+      },
+      {
+        "name": "CFNTV",
+        "number": 296,
+        "aliases": [
+          "CFNTV",
+          "62900",
+          "62900173",
+          "296 CFNTV"
+        ],
+        "epg_ids": [
+          "62900"
+        ]
+      },
+      {
+        "name": "LFN",
+        "number": 792,
+        "aliases": [
+          "LFN",
+          "181416",
+          "181416439",
+          "792 LFN"
+        ],
+        "epg_ids": [
+          "181416"
+        ]
+      },
+      {
+        "name": "Daystar Television Network (DYSTRHD)",
+        "number": 793,
+        "aliases": [
+          "US: DAYSTAR HD",
+          "Daystar.us",
+          "DYSTRHD",
+          "87001",
+          "87001440",
+          "DAYSTAR TELEVISION NETWORK",
+          "793 DYSTRHD"
+        ],
+        "epg_ids": [
+          "87001"
+        ]
+      },
+      {
+        "name": "PTL",
+        "number": 795,
+        "aliases": [
+          "PTL",
+          "115357",
+          "115357441",
+          "795 PTL"
+        ],
+        "epg_ids": [
+          "115357"
+        ]
+      },
+      {
+        "name": "Sonlife Broadcasting Network (SONLFHD)",
+        "number": 797,
+        "aliases": [
+          "SONLFHD",
+          "91314",
+          "91314442",
+          "SONLIFE BROADCASTING NETWORK",
+          "797 SONLFHD"
+        ],
+        "epg_ids": [
+          "91314"
+        ]
+      },
+      {
+        "name": "JBSHD",
+        "number": 798,
+        "aliases": [
+          "JBSHD",
+          "80834",
+          "80834443",
+          "798 JBSHD"
+        ],
+        "epg_ids": [
+          "80834"
+        ]
+      }
+    ],
+    "Music": [
+      {
+        "name": "MTVU",
+        "number": 212,
+        "aliases": [
+          "MTVU",
+          "44228",
+          "44228129",
+          "212 MTVU"
+        ],
+        "epg_ids": [
+          "44228"
+        ]
+      },
+      {
+        "name": "BETJ",
+        "number": 213,
+        "aliases": [
+          "BETJ",
+          "30419",
+          "30419130",
+          "213 BETJ"
+        ],
+        "epg_ids": [
+          "30419"
+        ]
+      },
+      {
+        "name": "NMZK",
+        "number": 214,
+        "aliases": [
+          "NMZK",
+          "30418",
+          "30418131",
+          "214 NMZK"
+        ],
+        "epg_ids": [
+          "30418"
+        ]
+      },
+      {
+        "name": "MTVCLAS",
+        "number": 218,
+        "aliases": [
+          "MTVCLAS",
+          "22561",
+          "22561133",
+          "218 MTVCLAS"
+        ],
+        "epg_ids": [
+          "22561"
+        ]
+      },
+      {
+        "name": "BETSOUL",
+        "number": 219,
+        "aliases": [
+          "BETSOUL",
+          "18718",
+          "18718134",
+          "219 BETSOUL"
+        ],
+        "epg_ids": [
+          "18718"
+        ]
+      },
+      {
+        "name": "CMTMUS",
+        "number": 222,
+        "aliases": [
+          "CMTMUS",
+          "18717",
+          "18717137",
+          "222 CMTMUS"
+        ],
+        "epg_ids": [
+          "18717"
+        ]
+      },
+      {
+        "name": "GSPLSD",
+        "number": 225,
+        "aliases": [
+          "GSPLSD",
+          "99918",
+          "99918138",
+          "225 GSPLSD"
+        ],
+        "epg_ids": [
+          "99918"
+        ]
+      },
+      {
+        "name": "MTV",
+        "number": 710,
+        "aliases": [
+          "US: MTV HD",
+          "MTV.us",
+          "MTVHD",
+          "60964",
+          "60964400",
+          "710 MTVHD",
+          "710 MTV HD (East)",
+          "MTV HD (East)"
+        ],
+        "epg_ids": [
+          "60964"
+        ]
+      },
+      {
+        "name": "MTV2",
+        "number": 711,
+        "aliases": [
+          "MTV2HD",
+          "75077",
+          "75077401",
+          "711 MTV2HD",
+          "711 MTV2 HD (East)",
+          "MTV2 HD (East)"
+        ],
+        "epg_ids": [
+          "75077"
+        ]
+      },
+      {
+        "name": "MTVLIVE",
+        "number": 715,
+        "aliases": [
+          "MTVLIVE",
+          "49141",
+          "49141402",
+          "715 MTVLIVE"
+        ],
+        "epg_ids": [
+          "49141"
+        ]
+      },
+      {
+        "name": "VH1",
+        "number": 717,
+        "aliases": [
+          "VH1HD",
+          "60046",
+          "60046403",
+          "717 VH1HD",
+          "717 VH1 HD (East)",
+          "VH1 HD (East)",
+          "VH1"
+        ],
+        "epg_ids": [
+          "60046"
+        ]
+      },
+      {
+        "name": "BHERHD",
+        "number": 720,
+        "aliases": [
+          "BHERHD",
+          "63220",
+          "63220404",
+          "720 BHERHD",
+          "720 BET Her HD",
+          "BET Her HD"
+        ],
+        "epg_ids": [
+          "63220"
+        ]
+      },
+      {
+        "name": "CMT",
+        "number": 721,
+        "aliases": [
+          "US: CMT HD",
+          "CMT.us",
+          "CMTVHD",
+          "59440",
+          "59440405",
+          "721 CMTVHD",
+          "721 CMT HD (East)",
+          "CMT HD (East)"
+        ],
+        "epg_ids": [
+          "59440"
+        ]
+      },
+      {
+        "name": "RVLTHD",
+        "number": 726,
+        "aliases": [
+          "RVLTHD",
+          "83098",
+          "83098406",
+          "726 RVLTHD"
+        ],
+        "epg_ids": [
+          "83098"
+        ]
+      },
+      {
+        "name": "Music Choice 1800",
+        "number": 1800,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1801",
+        "number": 1801,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1802",
+        "number": 1802,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1803",
+        "number": 1803,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1804",
+        "number": 1804,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1805",
+        "number": 1805,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1806",
+        "number": 1806,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1807",
+        "number": 1807,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1808",
+        "number": 1808,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1809",
+        "number": 1809,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1810",
+        "number": 1810,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1811",
+        "number": 1811,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1812",
+        "number": 1812,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1813",
+        "number": 1813,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1814",
+        "number": 1814,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1815",
+        "number": 1815,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1816",
+        "number": 1816,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1817",
+        "number": 1817,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1818",
+        "number": 1818,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1819",
+        "number": 1819,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1820",
+        "number": 1820,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1821",
+        "number": 1821,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1822",
+        "number": 1822,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1823",
+        "number": 1823,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1824",
+        "number": 1824,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1825",
+        "number": 1825,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1826",
+        "number": 1826,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1827",
+        "number": 1827,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1828",
+        "number": 1828,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1829",
+        "number": 1829,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1830",
+        "number": 1830,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1831",
+        "number": 1831,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1832",
+        "number": 1832,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1833",
+        "number": 1833,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1834",
+        "number": 1834,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1835",
+        "number": 1835,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1836",
+        "number": 1836,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1837",
+        "number": 1837,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1838",
+        "number": 1838,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1839",
+        "number": 1839,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1840",
+        "number": 1840,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1841",
+        "number": 1841,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1842",
+        "number": 1842,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1843",
+        "number": 1843,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1844",
+        "number": 1844,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1845",
+        "number": 1845,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1846",
+        "number": 1846,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1847",
+        "number": 1847,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1848",
+        "number": 1848,
+        "addon": "Music Choice"
+      },
+      {
+        "name": "Music Choice 1849",
+        "number": 1849,
+        "addon": "Music Choice"
+      }
+    ],
+    "Spanish": [
+      {
+        "name": "DOMINHD",
+        "number": 1506,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DOMINHD",
+          "155160",
+          "155160525",
+          "1506 DOMINHD"
+        ],
+        "epg_ids": [
+          "155160"
+        ]
+      },
+      {
+        "name": "SUPCAHD",
+        "number": 1507,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "SUPCAHD",
+          "90322",
+          "90322526",
+          "1507 SUPCAHD"
+        ],
+        "epg_ids": [
+          "90322"
+        ]
+      },
+      {
+        "name": "WAPAUS",
+        "number": 1508,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "WAPAUS",
+          "44322",
+          "44322527",
+          "1508 WAPAUS"
+        ],
+        "epg_ids": [
+          "44322"
+        ]
+      },
+      {
+        "name": "TELSAHD",
+        "number": 1509,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TELSAHD",
+          "90319",
+          "90319528",
+          "1509 TELSAHD"
+        ],
+        "epg_ids": [
+          "90319"
+        ]
+      },
+      {
+        "name": "SURPERU",
+        "number": 1510,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "SURPERU",
+          "46753",
+          "46753529",
+          "1510 SURPERU"
+        ],
+        "epg_ids": [
+          "46753"
+        ]
+      },
+      {
+        "name": "Multimedios Tv Hd (XHAW)",
+        "number": 1511,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "XHAW",
+          "32752",
+          "32752530",
+          "MULTIMEDIOS TV HD",
+          "1511 XHAW"
+        ],
+        "epg_ids": [
+          "32752"
+        ]
+      },
+      {
+        "name": "ECUAVI",
+        "number": 1512,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ECUAVI",
+          "44644",
+          "44644531",
+          "1512 ECUAVI"
+        ],
+        "epg_ids": [
+          "44644"
+        ]
+      },
+      {
+        "name": "TMICROH",
+        "number": 1513,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TMICROH",
+          "127822",
+          "127822532",
+          "1513 TMICROH"
+        ],
+        "epg_ids": [
+          "127822"
+        ]
+      },
+      {
+        "name": "ANT3IHD",
+        "number": 1515,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ANT3IHD",
+          "83230",
+          "83230533",
+          "1515 ANT3IHD"
+        ],
+        "epg_ids": [
+          "83230"
+        ]
+      },
+      {
+        "name": "Multimedios Tv Hd (XHAWTDT)",
+        "number": 1516,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "XHAWTDT",
+          "54300",
+          "54300534",
+          "MULTIMEDIOS TV HD",
+          "1516 XHAWTDT"
+        ],
+        "epg_ids": [
+          "54300"
+        ]
+      },
+      {
+        "name": "TVVHD",
+        "number": 1517,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TVVHD",
+          "120623",
+          "120623535",
+          "1517 TVVHD"
+        ],
+        "epg_ids": [
+          "120623"
+        ]
+      },
+      {
+        "name": "ESPND",
+        "number": 1520,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ESPND",
+          "25595",
+          "25595536",
+          "1520 ESPND"
+        ],
+        "epg_ids": [
+          "25595"
+        ]
+      },
+      {
+        "name": "TUDNU",
+        "number": 1524,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TUDNU",
+          "75176",
+          "75176539",
+          "1524 TUDNU"
+        ],
+        "epg_ids": [
+          "75176"
+        ]
+      },
+      {
+        "name": "ZONFUT",
+        "number": 1533,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ZONFUT",
+          "111945",
+          "111945545",
+          "1533 ZONFUT"
+        ],
+        "epg_ids": [
+          "111945"
+        ]
+      },
+      {
+        "name": "FXDEPHD",
+        "number": 1534,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "FXDEPHD",
+          "72189",
+          "72189546",
+          "1534 FXDEPHD"
+        ],
+        "epg_ids": [
+          "72189"
+        ]
+      },
+      {
+        "name": "AYM",
+        "number": 1535,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "AYM",
+          "34863",
+          "34863547",
+          "1535 AYM"
+        ],
+        "epg_ids": [
+          "34863"
+        ]
+      },
+      {
+        "name": "TYCINTL",
+        "number": 1536,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TYCINTL",
+          "62043",
+          "62043548",
+          "1536 TYCINTL"
+        ],
+        "epg_ids": [
+          "62043"
+        ]
+      },
+      {
+        "name": "ESPNDHD",
+        "number": 1537,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ESPNDHD",
+          "71914",
+          "71914549",
+          "1537 ESPNDHD"
+        ],
+        "epg_ids": [
+          "71914"
+        ]
+      },
+      {
+        "name": "BEIN2HD",
+        "number": 1538,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "BEIN2HD",
+          "76955",
+          "76955550",
+          "1538 BEIN2HD"
+        ],
+        "epg_ids": [
+          "76955"
+        ]
+      },
+      {
+        "name": "TUDNUH",
+        "number": 1539,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TUDNUH",
+          "77033",
+          "77033551",
+          "1539 TUDNUH"
+        ],
+        "epg_ids": [
+          "77033"
+        ]
+      },
+      {
+        "name": "CNNE",
+        "number": 1540,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CNNE",
+          "58631",
+          "58631552",
+          "1540 CNNE"
+        ],
+        "epg_ids": [
+          "58631"
+        ]
+      },
+      {
+        "name": "DOMVWHD",
+        "number": 1548,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DOMVWHD",
+          "105733",
+          "105733559",
+          "1548 DOMVWHD"
+        ],
+        "epg_ids": [
+          "105733"
+        ]
+      },
+      {
+        "name": "SUR",
+        "number": 1549,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "SUR",
+          "12750",
+          "12750560",
+          "1549 SUR"
+        ],
+        "epg_ids": [
+          "12750"
+        ]
+      },
+      {
+        "name": "MILENIO",
+        "number": 1550,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "MILENIO",
+          "61719",
+          "61719561",
+          "1550 MILENIO"
+        ],
+        "epg_ids": [
+          "61719"
+        ]
+      },
+      {
+        "name": "NMASFOR",
+        "number": 1551,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "NMASFOR",
+          "76964",
+          "76964562",
+          "1551 NMASFOR"
+        ],
+        "epg_ids": [
+          "76964"
+        ]
+      },
+      {
+        "name": "DSCE",
+        "number": 1558,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DSCE",
+          "19247",
+          "19247563",
+          "1558 DSCE"
+        ],
+        "epg_ids": [
+          "19247"
+        ]
+      },
+      {
+        "name": "TVEIH",
+        "number": 1560,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TVEIH",
+          "116082",
+          "116082564",
+          "1560 TVEIH"
+        ],
+        "epg_ids": [
+          "116082"
+        ]
+      },
+      {
+        "name": "HISTE",
+        "number": 1561,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "HISTE",
+          "43362",
+          "43362565",
+          "1561 HISTE"
+        ],
+        "epg_ids": [
+          "43362"
+        ]
+      },
+      {
+        "name": "DSCESD",
+        "number": 1563,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DSCESD",
+          "99629",
+          "99629567",
+          "1563 DSCESD"
+        ],
+        "epg_ids": [
+          "99629"
+        ]
+      },
+      {
+        "name": "NGMUNDO",
+        "number": 1564,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "NGMUNDO",
+          "72449",
+          "72449568",
+          "1564 NGMUNDO"
+        ],
+        "epg_ids": [
+          "72449"
+        ]
+      },
+      {
+        "name": "CANAL11",
+        "number": 1567,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CANAL11",
+          "36139",
+          "36139571",
+          "1567 CANAL11"
+        ],
+        "epg_ids": [
+          "36139"
+        ]
+      },
+      {
+        "name": "HOLAHD",
+        "number": 1579,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "HOLAHD",
+          "90018",
+          "90018572",
+          "1579 HOLAHD"
+        ],
+        "epg_ids": [
+          "90018"
+        ]
+      },
+      {
+        "name": "PASNUHD",
+        "number": 1583,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "PASNUHD",
+          "118405",
+          "118405575",
+          "1583 PASNUHD"
+        ],
+        "epg_ids": [
+          "118405"
+        ]
+      },
+      {
+        "name": "UNITLNO",
+        "number": 1584,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "UNITLNO",
+          "74550",
+          "74550576",
+          "1584 UNITLNO"
+        ],
+        "epg_ids": [
+          "74550"
+        ]
+      },
+      {
+        "name": "ULUNAHD",
+        "number": 1585,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ULUNAHD",
+          "94136",
+          "94136577",
+          "1585 ULUNAHD"
+        ],
+        "epg_ids": [
+          "94136"
+        ]
+      },
+      {
+        "name": "KANALDL",
+        "number": 1586,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "KANALDL",
+          "112558",
+          "112558578",
+          "1586 KANALDL"
+        ],
+        "epg_ids": [
+          "112558"
+        ]
+      },
+      {
+        "name": "STARHD",
+        "number": 1587,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "STARHD",
+          "106724",
+          "106724579",
+          "1587 STARHD"
+        ],
+        "epg_ids": [
+          "106724"
+        ]
+      },
+      {
+        "name": "ATRES",
+        "number": 1588,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ATRES",
+          "90898",
+          "90898580",
+          "1588 ATRES"
+        ],
+        "epg_ids": [
+          "90898"
+        ]
+      },
+      {
+        "name": "TELEN",
+        "number": 1590,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TELEN",
+          "48523",
+          "48523581",
+          "1590 TELEN"
+        ],
+        "epg_ids": [
+          "48523"
+        ]
+      },
+      {
+        "name": "HOGARHD",
+        "number": 1624,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "HOGARHD",
+          "114881",
+          "114881588",
+          "1624 HOGARHD"
+        ],
+        "epg_ids": [
+          "114881"
+        ]
+      },
+      {
+        "name": "CNL22",
+        "number": 1646,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CNL22",
+          "91060",
+          "91060595",
+          "1646 CNL22"
+        ],
+        "epg_ids": [
+          "91060"
+        ]
+      },
+      {
+        "name": "THITUSD",
+        "number": 1662,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "THITUSD",
+          "100500",
+          "100500599",
+          "1662 THITUSD"
+        ],
+        "epg_ids": [
+          "100500"
+        ]
+      },
+      {
+        "name": "BANDAUS",
+        "number": 1663,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "BANDAUS",
+          "54867",
+          "54867600",
+          "1663 BANDAUS"
+        ],
+        "epg_ids": [
+          "54867"
+        ]
+      },
+      {
+        "name": "THMUS",
+        "number": 1664,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "THMUS",
+          "34394",
+          "34394601",
+          "1664 THMUS"
+        ],
+        "epg_ids": [
+          "34394"
+        ]
+      },
+      {
+        "name": "TRIT",
+        "number": 1666,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TRIT",
+          "32749",
+          "32749603",
+          "1666 TRIT"
+        ],
+        "epg_ids": [
+          "32749"
+        ]
+      },
+      {
+        "name": "UFEST",
+        "number": 1670,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "UFEST",
+          "79607",
+          "79607604",
+          "1670 UFEST"
+        ],
+        "epg_ids": [
+          "79607"
+        ]
+      },
+      {
+        "name": "DPLUSSD",
+        "number": 1680,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DPLUSSD",
+          "100502",
+          "100502605",
+          "1680 DPLUSSD"
+        ],
+        "epg_ids": [
+          "100502"
+        ]
+      },
+      {
+        "name": "DEPELC",
+        "number": 1681,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DEPELC",
+          "33628",
+          "33628606",
+          "1681 DEPELC"
+        ],
+        "epg_ids": [
+          "33628"
+        ]
+      },
+      {
+        "name": "GRNCINE",
+        "number": 1683,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "GRNCINE",
+          "63703",
+          "63703607",
+          "1683 GRNCINE"
+        ],
+        "epg_ids": [
+          "63703"
+        ]
+      },
+      {
+        "name": "CINLUHD",
+        "number": 1685,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CINLUHD",
+          "118018",
+          "118018608",
+          "1685 CINLUHD"
+        ],
+        "epg_ids": [
+          "118018"
+        ]
+      },
+      {
+        "name": "CMEX",
+        "number": 1686,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CMEX",
+          "44714",
+          "44714609",
+          "1686 CMEX"
+        ],
+        "epg_ids": [
+          "44714"
+        ]
+      },
+      {
+        "name": "CINENOS",
+        "number": 1687,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CINENOS",
+          "60631",
+          "60631610",
+          "1687 CINENOS"
+        ],
+        "epg_ids": [
+          "60631"
+        ]
+      },
+      {
+        "name": "CINESTE",
+        "number": 1688,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CINESTE",
+          "62125",
+          "62125611",
+          "1688 CINESTE"
+        ],
+        "epg_ids": [
+          "62125"
+        ]
+      },
+      {
+        "name": "VMOVHD",
+        "number": 1689,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "VMOVHD",
+          "102336",
+          "102336612",
+          "1689 VMOVHD"
+        ],
+        "epg_ids": [
+          "102336"
+        ]
+      },
+      {
+        "name": "UCINE",
+        "number": 1690,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "UCINE",
+          "79680",
+          "79680613",
+          "1690 UCINE"
+        ],
+        "epg_ids": [
+          "79680"
+        ]
+      },
+      {
+        "name": "UFILMHD",
+        "number": 1691,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "UFILMHD",
+          "98720",
+          "98720614",
+          "1691 UFILMHD"
+        ],
+        "epg_ids": [
+          "98720"
+        ]
+      },
+      {
+        "name": "ULTMEX",
+        "number": 1692,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "ULTMEX",
+          "79692",
+          "79692615",
+          "1692 ULTMEX"
+        ],
+        "epg_ids": [
+          "79692"
+        ]
+      },
+      {
+        "name": "UCLAS",
+        "number": 1693,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "UCLAS",
+          "79695",
+          "79695616",
+          "1693 UCLAS"
+        ],
+        "epg_ids": [
+          "79695"
+        ]
+      },
+      {
+        "name": "DFAMHD",
+        "number": 1701,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DFAMHD",
+          "99630",
+          "99630618",
+          "1701 DFAMHD"
+        ],
+        "epg_ids": [
+          "99630"
+        ]
+      },
+      {
+        "name": "DFAM",
+        "number": 1702,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DFAM",
+          "58428",
+          "58428619",
+          "1702 DFAM"
+        ],
+        "epg_ids": [
+          "58428"
+        ]
+      },
+      {
+        "name": "CENTHD",
+        "number": 1703,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CENTHD",
+          "154385",
+          "154385620",
+          "1703 CENTHD"
+        ],
+        "epg_ids": [
+          "154385"
+        ]
+      },
+      {
+        "name": "TVNI",
+        "number": 1704,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "TVNI",
+          "16046",
+          "16046621",
+          "1704 TVNI"
+        ],
+        "epg_ids": [
+          "16046"
+        ]
+      },
+      {
+        "name": "NUESTRT",
+        "number": 1705,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "NUESTRT",
+          "33431",
+          "33431622",
+          "1705 NUESTRT"
+        ],
+        "epg_ids": [
+          "33431"
+        ]
+      },
+      {
+        "name": "CNINTHD",
+        "number": 1710,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CNINTHD",
+          "88920",
+          "88920624",
+          "1710 CNINTHD"
+        ],
+        "epg_ids": [
+          "88920"
+        ]
+      },
+      {
+        "name": "CARAIHD",
+        "number": 1711,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CARAIHD",
+          "104904",
+          "104904625",
+          "1711 CARAIHD"
+        ],
+        "epg_ids": [
+          "104904"
+        ]
+      },
+      {
+        "name": "SMLLTSH",
+        "number": 1721,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "SMLLTSH",
+          "102599",
+          "102599627",
+          "1721 SMLLTSH"
+        ],
+        "epg_ids": [
+          "102599"
+        ]
+      },
+      {
+        "name": "CLAN",
+        "number": 1724,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "CLAN",
+          "110045",
+          "110045629",
+          "1724 CLAN"
+        ],
+        "epg_ids": [
+          "110045"
+        ]
+      },
+      {
+        "name": "DSTRESPH",
+        "number": 1739,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "DSTRESPH",
+          "154611",
+          "154611634",
+          "1739 DSTRESPH"
+        ],
+        "epg_ids": [
+          "154611"
+        ]
+      },
+      {
+        "name": "EWTNES",
+        "number": 1741,
+        "addon": "Spanish / Latino Package",
+        "aliases": [
+          "EWTNES",
+          "52649",
+          "52649635",
+          "1741 EWTNES"
+        ],
+        "epg_ids": [
+          "52649"
+        ]
+      }
+    ],
+    "International": [
+      {
+        "name": "CLRS",
+        "number": 1750,
+        "addon": "International Package",
+        "aliases": [
+          "CLRS",
+          "65128",
+          "65128636",
+          "1750 CLRS"
+        ],
+        "epg_ids": [
+          "65128"
+        ]
+      },
+      {
+        "name": "ASIA",
+        "number": 1752,
+        "addon": "International Package",
+        "aliases": [
+          "ASIA",
+          "14763",
+          "14763637",
+          "1752 ASIA"
+        ],
+        "epg_ids": [
+          "14763"
+        ]
+      },
+      {
+        "name": "ZEETV",
+        "number": 1753,
+        "addon": "International Package",
+        "aliases": [
+          "ZEETV",
+          "19283",
+          "19283638",
+          "1753 ZEETV"
+        ],
+        "epg_ids": [
+          "19283"
+        ]
+      },
+      {
+        "name": "SET",
+        "number": 1754,
+        "addon": "International Package",
+        "aliases": [
+          "SET",
+          "18644",
+          "18644639",
+          "1754 SET"
+        ],
+        "epg_ids": [
+          "18644"
+        ]
+      },
+      {
+        "name": "FILPEHD",
+        "number": 1755,
+        "addon": "International Package",
+        "aliases": [
+          "FILPEHD",
+          "114048",
+          "114048640",
+          "1755 FILPEHD"
+        ],
+        "epg_ids": [
+          "114048"
+        ]
+      },
+      {
+        "name": "GMAPNY",
+        "number": 1756,
+        "addon": "International Package",
+        "aliases": [
+          "GMAPNY",
+          "46463",
+          "46463641",
+          "1756 GMAPNY"
+        ],
+        "epg_ids": [
+          "46463"
+        ]
+      },
+      {
+        "name": "JUSPUNJ",
+        "number": 1757,
+        "addon": "International Package",
+        "aliases": [
+          "JUSPUNJ",
+          "55373",
+          "55373642",
+          "1757 JUSPUNJ"
+        ],
+        "epg_ids": [
+          "55373"
+        ]
+      },
+      {
+        "name": "KBSAMHD",
+        "number": 1758,
+        "addon": "International Package",
+        "aliases": [
+          "KBSAMHD",
+          "118558",
+          "118558643",
+          "1758 KBSAMHD"
+        ],
+        "epg_ids": [
+          "118558"
+        ]
+      },
+      {
+        "name": "MBCDRHD",
+        "number": 1759,
+        "addon": "International Package",
+        "aliases": [
+          "MBCDRHD",
+          "83267",
+          "83267644",
+          "1759 MBCDRHD"
+        ],
+        "epg_ids": [
+          "83267"
+        ]
+      },
+      {
+        "name": "MBCKOR",
+        "number": 1760,
+        "addon": "International Package",
+        "aliases": [
+          "MBCKOR",
+          "50270",
+          "50270645",
+          "1760 MBCKOR"
+        ],
+        "epg_ids": [
+          "50270"
+        ]
+      },
+      {
+        "name": "YTN",
+        "number": 1761,
+        "addon": "International Package",
+        "aliases": [
+          "YTN",
+          "48970",
+          "48970646",
+          "1761 YTN"
+        ],
+        "epg_ids": [
+          "48970"
+        ]
+      },
+      {
+        "name": "SBS",
+        "number": 1762,
+        "addon": "International Package",
+        "aliases": [
+          "SBS",
+          "34085",
+          "34085647",
+          "1762 SBS"
+        ],
+        "epg_ids": [
+          "34085"
+        ]
+      },
+      {
+        "name": "SICHD",
+        "number": 1763,
+        "addon": "International Package",
+        "aliases": [
+          "SICHD",
+          "141396",
+          "141396648",
+          "1763 SICHD"
+        ],
+        "epg_ids": [
+          "141396"
+        ]
+      },
+      {
+        "name": "RTPI",
+        "number": 1764,
+        "addon": "International Package",
+        "aliases": [
+          "RTPI",
+          "15717",
+          "15717649",
+          "1764 RTPI"
+        ],
+        "epg_ids": [
+          "15717"
+        ]
+      },
+      {
+        "name": "SBN",
+        "number": 1765,
+        "addon": "International Package",
+        "aliases": [
+          "SBN",
+          "30324",
+          "30324650",
+          "1765 SBN"
+        ],
+        "epg_ids": [
+          "30324"
+        ]
+      },
+      {
+        "name": "Globo (RGTI)",
+        "number": 1768,
+        "addon": "International Package",
+        "aliases": [
+          "RGTI",
+          "21065",
+          "21065651",
+          "GLOBO",
+          "1768 RGTI"
+        ],
+        "epg_ids": [
+          "21065"
+        ]
+      },
+      {
+        "name": "TV5MOHD",
+        "number": 1771,
+        "addon": "International Package",
+        "aliases": [
+          "TV5MOHD",
+          "89507",
+          "89507652",
+          "1771 TV5MOHD"
+        ],
+        "epg_ids": [
+          "89507"
+        ]
+      },
+      {
+        "name": "RTVIHD",
+        "number": 1776,
+        "addon": "International Package",
+        "aliases": [
+          "RTVIHD",
+          "118421",
+          "118421653",
+          "1776 RTVIHD"
+        ],
+        "epg_ids": [
+          "118421"
+        ]
+      },
+      {
+        "name": "BNTV",
+        "number": 1777,
+        "addon": "International Package",
+        "aliases": [
+          "BNTV",
+          "62723",
+          "62723654",
+          "1777 BNTV"
+        ],
+        "epg_ids": [
+          "62723"
+        ]
+      },
+      {
+        "name": "TVBN",
+        "number": 1778,
+        "addon": "International Package",
+        "aliases": [
+          "TVBN",
+          "82421",
+          "82421655",
+          "1778 TVBN"
+        ],
+        "epg_ids": [
+          "82421"
+        ]
+      },
+      {
+        "name": "ARMENPC",
+        "number": 1779,
+        "addon": "International Package",
+        "aliases": [
+          "ARMENPC",
+          "62735",
+          "62735656",
+          "1779 ARMENPC"
+        ],
+        "epg_ids": [
+          "62735"
+        ]
+      },
+      {
+        "name": "ARTL",
+        "number": 1780,
+        "addon": "International Package",
+        "aliases": [
+          "ARTL",
+          "18741",
+          "18741657",
+          "1780 ARTL"
+        ],
+        "epg_ids": [
+          "18741"
+        ]
+      },
+      {
+        "name": "KUWAIT",
+        "number": 1781,
+        "addon": "International Package",
+        "aliases": [
+          "KUWAIT",
+          "44091",
+          "44091658",
+          "1781 KUWAIT"
+        ],
+        "epg_ids": [
+          "44091"
+        ]
+      },
+      {
+        "name": "ISRAEL",
+        "number": 1782,
+        "addon": "International Package",
+        "aliases": [
+          "ISRAEL",
+          "27549",
+          "27549659",
+          "1782 ISRAEL"
+        ],
+        "epg_ids": [
+          "27549"
+        ]
+      },
+      {
+        "name": "PROTVI",
+        "number": 1783,
+        "addon": "International Package",
+        "aliases": [
+          "PROTVI",
+          "73664",
+          "73664660",
+          "1783 PROTVI"
+        ],
+        "epg_ids": [
+          "73664"
+        ]
+      },
+      {
+        "name": "TVRI",
+        "number": 1784,
+        "addon": "International Package",
+        "aliases": [
+          "TVRI",
+          "73588",
+          "73588661",
+          "1784 TVRI"
+        ],
+        "epg_ids": [
+          "73588"
+        ]
+      },
+      {
+        "name": "ANTEN",
+        "number": 1789,
+        "addon": "International Package",
+        "aliases": [
+          "ANTEN",
+          "16372",
+          "16372662",
+          "1789 ANTEN"
+        ],
+        "epg_ids": [
+          "16372"
+        ]
+      },
+      {
+        "name": "RAIIHD",
+        "number": 1790,
+        "addon": "International Package",
+        "aliases": [
+          "RAIIHD",
+          "109462",
+          "109462663",
+          "1790 RAIIHD"
+        ],
+        "epg_ids": [
+          "109462"
+        ]
+      },
+      {
+        "name": "MITALIA",
+        "number": 1791,
+        "addon": "International Package",
+        "aliases": [
+          "MITALIA",
+          "69529",
+          "69529664",
+          "1791 MITALIA"
+        ],
+        "epg_ids": [
+          "69529"
+        ]
+      },
+      {
+        "name": "TVB1",
+        "number": 1792,
+        "addon": "International Package",
+        "aliases": [
+          "TVB1",
+          "16333",
+          "16333665",
+          "1792 TVB1"
+        ],
+        "epg_ids": [
+          "16333"
+        ]
+      },
+      {
+        "name": "TVBDC",
+        "number": 1793,
+        "addon": "International Package",
+        "aliases": [
+          "TVBDC",
+          "32145",
+          "32145666",
+          "1793 TVBDC"
+        ],
+        "epg_ids": [
+          "32145"
+        ]
+      },
+      {
+        "name": "TVBE",
+        "number": 1794,
+        "addon": "International Package",
+        "aliases": [
+          "TVBE",
+          "21187",
+          "21187667",
+          "1794 TVBE"
+        ],
+        "epg_ids": [
+          "21187"
+        ]
+      },
+      {
+        "name": "CCTV4",
+        "number": 1795,
+        "addon": "International Package",
+        "aliases": [
+          "CCTV4",
+          "24248",
+          "24248668",
+          "1795 CCTV4"
+        ],
+        "epg_ids": [
+          "24248"
+        ]
+      },
+      {
+        "name": "CTIZTC",
+        "number": 1796,
+        "addon": "International Package",
+        "aliases": [
+          "CTIZTC",
+          "20655",
+          "20655669",
+          "1796 CTIZTC"
+        ],
+        "epg_ids": [
+          "20655"
+        ]
+      },
+      {
+        "name": "PNAXHD",
+        "number": 1798,
+        "addon": "International Package",
+        "aliases": [
+          "PNAXHD",
+          "150615",
+          "150615670",
+          "1798 PNAXHD"
+        ],
+        "epg_ids": [
+          "150615"
+        ]
+      }
+    ],
+    "Adult & PPV": [
+      {
+        "name": "HOA",
+        "number": 970,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA",
+          "80772",
+          "80772501",
+          "970 HOA"
+        ],
+        "epg_ids": [
+          "80772"
+        ]
+      },
+      {
+        "name": "HOA1",
+        "number": 971,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA1",
+          "106471",
+          "106471502",
+          "971 HOA1"
+        ],
+        "epg_ids": [
+          "106471"
+        ]
+      },
+      {
+        "name": "HOA2",
+        "number": 972,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA2",
+          "106472",
+          "106472503",
+          "972 HOA2"
+        ],
+        "epg_ids": [
+          "106472"
+        ]
+      },
+      {
+        "name": "HOA3",
+        "number": 973,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA3",
+          "106473",
+          "106473504",
+          "973 HOA3"
+        ],
+        "epg_ids": [
+          "106473"
+        ]
+      },
+      {
+        "name": "HOA4",
+        "number": 974,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA4",
+          "106474",
+          "106474505",
+          "974 HOA4"
+        ],
+        "epg_ids": [
+          "106474"
+        ]
+      },
+      {
+        "name": "HOA5",
+        "number": 975,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "HOA5",
+          "106475",
+          "106475506",
+          "975 HOA5"
+        ],
+        "epg_ids": [
+          "106475"
+        ]
+      },
+      {
+        "name": "Public/Educational/Government Access 982",
+        "number": 982,
+        "addon": "PPV / Optional",
+        "aliases": [
+          "PEG082",
+          "23958",
+          "23958511",
+          "982 PEG082"
+        ],
+        "epg_ids": [
+          "23958"
+        ]
+      }
+    ]
+  },
+  "alias_sources": [
+    "Strong8K live stream metadata",
+    "Gracenote FiOS ZIP 11743 channel metadata",
+    "Gracenote affiliateName and affiliateCallSign matched by exact FiOS channel number and local SD/HD twin number",
+    "xmlguide.xmltv: exact <channel> display-name values matched by FiOS channel number",
+    "hdhr-lineup.m3u and channels.m3u: stream display names and tvg-name values matched to the FiOS lineup"
+  ],
+  "xmltv_epg_matching": {
+    "source_file": "xmlguide.xmltv",
+    "matching_key": "exact FiOS channel number",
+    "matched_lineup_channels": 438,
+    "unmatched_lineup_channels": 74,
+    "xmltv_display_name_aliases_added": 438,
+    "xmltv_channel_ids_recorded": 438,
+    "excluded_display_names": [
+      "numeric-only channel numbers",
+      "INDEPENDENT",
+      "UNKNOWN",
+      "N/A",
+      "NULL",
+      "empty values"
+    ]
+  },
+  "m3u_alias_matching": {
+    "hdhomerun_entries": 106,
+    "tv_everywhere_entries": 76,
+    "matched_entries": 134,
+    "unmatched_entries": 48,
+    "channels_updated": 119,
+    "aliases_added": 238,
+    "matching_policy": "HDHomeRun entries matched by exact FiOS channel number. TV Everywhere entries matched by exact normalized name, with only REELZ and ROARTV added as manually reviewed brand matches."
+  }
+}
