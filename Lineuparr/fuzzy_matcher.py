@@ -227,6 +227,41 @@ def detect_stream_country(name):
     return None
 
 
+def detect_name_country_prefix(channel_name):
+    """Split a "CC_" country prefix off a lineup channel name.
+
+    A lineup channel may declare its own country by name: "UK_CNN" inside a US
+    lineup means match this channel against UK streams. Returns
+    (country_code, stripped_name), or (None, channel_name) unchanged when there
+    is no recognized prefix.
+
+    Only the curated _KNOWN_COUNTRY_CODES are accepted, so an ordinary name that
+    happens to contain an underscore ("MTV_Live", "My_Channel") is left alone.
+    The two letters must be followed by an underscore and by something other
+    than whitespace, so a name ending at the prefix is not turned into an empty
+    channel name.
+
+    This lives beside detect_category_country because both answer the same
+    question from a different string, and both need the country vocabulary that
+    is private to this module.
+    """
+    if not channel_name:
+        return None, channel_name
+
+    m = re.match(r'^([A-Za-z]{2})_(.+)$', channel_name)
+    if not m:
+        return None, channel_name
+
+    code = m.group(1).upper()
+    if code not in _KNOWN_COUNTRY_CODES:
+        return None, channel_name
+
+    stripped = m.group(2).strip()
+    if not stripped:
+        return None, channel_name
+    return code, stripped
+
+
 def detect_category_country(category_name):
     """Detect an ISO-2 country code from a lineup category-name prefix.
 
