@@ -888,21 +888,52 @@ class Plugin:
         logger.info(f"{LOG_PREFIX} Loaded {len(streams)} streams" + (f" from {len(valid_ids)} M3U sources" if valid_ids else ""))
         return streams
 
-    def _build_alias_map(self, settings, logger):
+    def _alias_map_provider(self, settings, logger):
+        """Return a callable mapping a country code to that country's alias map.
+
+        A lineup can carry channels from several countries (a category named
+        "UK| Sports" inside a mixed lineup), and each needs the alias table for
+        ITS country, not for the lineup filename's country.
+
+        Memoized for the life of ONE run and no longer. The map depends on the
+        custom_aliases setting and on the selected lineup's embedded aliases,
+        both of which change between runs while the plugin object survives in a
+        long-lived worker process. Instance-level caching would serve a stale
+        map after a settings edit, and would carry one lineup's embedded aliases
+        into another lineup of the same country.
+        """
+        cache = {}
+
+        def alias_map_for(country):
+            key = (country or "").upper()
+            if key not in cache:
+                cache[key] = self._build_alias_map(settings, logger, country=key or None)
+            return cache[key]
+
+        return alias_map_for
+
+    def _build_alias_map(self, settings, logger, country=None):
         """Merge built-in aliases with user custom aliases.
 
         Built-in aliases are global (keyed by channel name). Country-scoped
-        overrides from COUNTRY_ALIASES are merged on top for THIS lineup's
-        country only, so a name that exists in multiple markets (e.g. "TLC",
-        "MTV") doesn't leak one country's stream-name variants into another
-        (bug-063). Custom user aliases are merged last and win.
+        overrides from COUNTRY_ALIASES are merged on top for ONE country only, so
+        a name that exists in multiple markets (e.g. "TLC", "MTV") does not leak
+        one country's stream-name variants into another (bug-063). Custom user
+        aliases are merged last and win.
+
+        The country defaults to the one in the lineup filename. Callers that know
+        a channel's own country (from its category name or its name prefix) pass
+        it explicitly, so a UK channel inside a US lineup gets UK aliases.
         """
         alias_map = dict(CHANNEL_ALIASES)
 
-        try:
-            lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
-        except Exception:
-            lineup_cc = None
+        if country:
+            lineup_cc = country
+        else:
+            try:
+                lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
+            except Exception:
+                lineup_cc = None
         if lineup_cc:
             for k, v in COUNTRY_ALIASES.get(lineup_cc.upper(), {}).items():
                 alias_map[k] = list(dict.fromkeys(alias_map.get(k, []) + list(v)))
@@ -1714,7 +1745,7 @@ class Plugin:
             if lineup.get("status") == "error":
                 return lineup
             matcher = self._init_fuzzy_matcher(settings, logger)
-            alias_map = self._build_alias_map(settings, logger)
+            alias_map_for = self._alias_map_provider(settings, logger)
             upgrade_twin_set = self._get_upgrade_twin_set(settings, lineup, matcher)
             streams = self._get_all_streams(settings, logger)
             assigner = self._init_assigner_state(settings)
@@ -1761,7 +1792,7 @@ class Plugin:
                     boost_number = self._parse_channel_number(entry.get("number")) if use_number_boost else None
 
                     matches = matcher.match_all_streams(
-                        ch_name, unique_stream_names, alias_map,
+                        ch_name, unique_stream_names, alias_map_for(cat_cc),
                         channel_number=boost_number,
                         lineup_country=cat_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
@@ -2384,7 +2415,7 @@ class Plugin:
                 return lineup
             prefix = self._get_group_prefix(settings, lineup)
             matcher = self._init_fuzzy_matcher(settings, logger)
-            alias_map = self._build_alias_map(settings, logger)
+            alias_map_for = self._alias_map_provider(settings, logger)
             rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
             lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
             if lineup_cc:
@@ -2454,7 +2485,7 @@ class Plugin:
 
                     # Match streams using deduplicated names
                     matches = matcher.match_all_streams(
-                        ch_name, unique_stream_names, alias_map,
+                        ch_name, unique_stream_names, alias_map_for(cat_cc),
                         channel_number=ch_number,
                         lineup_country=cat_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
@@ -2693,7 +2724,7 @@ class Plugin:
                 return lineup
             prefix = self._get_group_prefix(settings, lineup)
             matcher = self._init_fuzzy_matcher(settings, logger)
-            alias_map = self._build_alias_map(settings, logger)
+            alias_map_for = self._alias_map_provider(settings, logger)
             rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
 
             # Extract lineup country code for EPG country matching
@@ -2818,7 +2849,7 @@ class Plugin:
                             if not pool:
                                 continue
                             ms = matcher.match_all_streams(
-                                ch_name, pool, alias_map,
+                                ch_name, pool, alias_map_for(cat_cc),
                                 channel_number=ch_number,
                                 lineup_country=country,
                             )
