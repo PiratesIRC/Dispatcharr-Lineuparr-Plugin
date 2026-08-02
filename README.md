@@ -229,6 +229,35 @@ Create your own lineup JSON files following this format:
 
 Place the file in the plugin directory and it will appear in the **Lineup File** dropdown.
 
+### Per-channel aliases
+
+A channel entry may carry its own `aliases` array. These are merged with the built-in alias table for that lineup only, which is the right place for stream-name variants that are specific to one provider:
+
+```json
+{ "name": "My9 New York", "number": 509, "aliases": ["WWOR", "WWOR-TV", "MY9"] }
+```
+
+When an alias is a US broadcast callsign, a stream carrying that callsign anywhere in its name matches, so `WWOR` reaches `US: MY 9 WWOR NEW YORK` and `CITY: MNT WWOR NEW YORK`. Ordinary words that look like callsigns (KIDS, WORLD, WOMEN, WEST) are excluded, so they never pull in unrelated streams.
+
+### Foreign channels inside a single-country lineup
+
+Matching is normally restricted to the lineup's own country, which is what stops a Canadian feed attaching to a US channel. Two ways to mark a channel that belongs to a different country:
+
+**A country prefix on the channel name.** Name the channel `{CC}_{Name}` and it is matched against that country instead, wherever it sits in the lineup:
+
+```json
+"International": [
+  { "name": "UK_CNN", "number": 501 },
+  { "name": "FR_TF1", "number": 502 }
+]
+```
+
+The prefix is stripped before anything else sees it, so Dispatcharr creates the channel as `CNN`, not `UK_CNN`. Only recognized country codes count, so an ordinary name containing an underscore is left alone. Each marked channel also gets that country's aliases.
+
+**A country prefix on the category name.** A whole category can be marked instead, using `UK| International`, `UK: International` or `UK International`. Use this when the foreign channels are already grouped together.
+
+A channel's own prefix wins over its category's, which wins over the lineup filename.
+
 ## Custom Aliases
 
 Override or extend the built-in alias table using the **Custom Channel Aliases (JSON)** setting. Paste a JSON object where keys are the **exact lineup channel name** (as it appears in the lineup JSON) and values are arrays of alternate names your IPTV provider uses for that channel (a single alias may also be given as a plain string instead of a one-item array):
