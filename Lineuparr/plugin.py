@@ -907,6 +907,8 @@ class Plugin:
             for k, v in COUNTRY_ALIASES.get(lineup_cc.upper(), {}).items():
                 alias_map[k] = list(dict.fromkeys(alias_map.get(k, []) + list(v)))
 
+        self._merge_embedded_aliases(alias_map, settings, logger)
+
         custom_str = _clean_json_text(settings.get("custom_aliases") or "")
         if custom_str:
             try:
@@ -957,6 +959,76 @@ class Plugin:
                 )
 
         return alias_map
+
+    def _merge_embedded_aliases(self, alias_map, settings, logger):
+        """Merge per-channel "aliases" arrays carried inside the lineup JSON.
+
+        A lineup channel entry may declare its own aliases:
+
+            {"name": "My9 New York", "number": 509,
+             "aliases": ["WWOR", "WWOR-TV", "MY9"]}
+
+        This lets a lineup ship the stream-name variants that are specific to it
+        (provider callsigns, HDHomeRun and XMLTV display names) without adding
+        them to the global built-in table, where a name that exists in several
+        markets would leak across countries.
+
+        Merged after the built-in and country-scoped tables and before the user's
+        custom aliases, so the user setting still has the last word. A lineup
+        that cannot be read leaves the alias map untouched: aliases are an
+        enhancement, and failing the whole matching run over them would trade a
+        missing alias for no matches at all.
+        """
+        try:
+            lineup = self._load_lineup(settings, logger)
+        except Exception as e:
+            logger.warning(f"{LOG_PREFIX} Could not read embedded lineup aliases: {e}")
+            return
+
+        categories = lineup.get("categories") if isinstance(lineup, dict) else None
+        if not isinstance(categories, dict):
+            return
+
+        merged = 0
+        for channels in categories.values():
+            if not isinstance(channels, list):
+                continue
+            for channel in channels:
+                if not isinstance(channel, dict):
+                    continue
+
+                name = str(channel.get("name") or "").strip()
+                raw = channel.get("aliases")
+                if not name or not raw:
+                    continue
+
+                # Same shapes the custom_aliases setting accepts: a list, or a
+                # bare string for a single alias. Anything else is a mistake in
+                # the lineup file and is reported rather than dropped silently.
+                if isinstance(raw, str):
+                    candidates = [raw]
+                elif isinstance(raw, list):
+                    candidates = raw
+                else:
+                    logger.warning(
+                        f"{LOG_PREFIX} Lineup aliases for '{name}' must be a string "
+                        f"or list, got {type(raw).__name__} - ignored"
+                    )
+                    continue
+
+                clean = [a.strip() for a in candidates
+                         if isinstance(a, str) and a.strip()]
+                if not clean:
+                    continue
+
+                alias_map[name] = list(dict.fromkeys(alias_map.get(name, []) + clean))
+                merged += 1
+
+        if merged:
+            logger.info(
+                f"{LOG_PREFIX} Merged embedded aliases from {merged} lineup "
+                f"{'channel' if merged == 1 else 'channels'}"
+            )
 
     def _build_upgrade_twin_set(self, lineup, matcher):
         """Return lineup channel names (both tiers) that have a twin in the other tier.
