@@ -104,6 +104,7 @@ class PluginConfig:
 
     TV_LOGOS_REPO = "tv-logo/tv-logos"
     TV_LOGOS_BRANCH = "main"
+    CUSTOM_LOGO_MATCH_THRESHOLD = 90
 
     DATA_DIR = "/data"
     EXPORTS_DIR = "/data/exports"
@@ -501,6 +502,28 @@ class Plugin:
                 "placeholder": "{\"Channel Name\": [\"alias 1\", \"alias 2\"]}",
                 "help_text": "JSON object mapping a lineup channel name to extra alias names (a bare string is accepted as a single alias). Leave blank to use built-in aliases only.",
             },
+            # --- Section: Custom Logos ---
+            {
+                "id": "_sec_custom_logos",
+                "type": "info",
+                "label": "Custom Logo Repository",
+                "help_text": "Assign logos from an optional public GitHub directory directly to existing Dispatcharr channels. This does not require a lineup sync.",
+            },
+            {
+                "id": "custom_logo_source",
+                "label": "GitHub Logo Source",
+                "type": "string",
+                "default": "",
+                "placeholder": "owner/repository@main:path/to/logos",
+                "help_text": "Public GitHub directory in owner/repository@branch:path format. Example: example/media@main:logos/channels. Leave blank to disable custom repository matching.",
+            },
+            {
+                "id": "custom_logo_replace_existing",
+                "label": "Replace Existing Logos When Matched",
+                "type": "boolean",
+                "default": False,
+                "help_text": "When on, a custom repository match replaces the channel's current logo. Existing logos are preserved when the custom repository has no match.",
+            },
             # --- Section: Notifications ---
             {
                 "id": "_sec_notify",
@@ -574,6 +597,7 @@ class Plugin:
                 "sync_channels": self._sync_channels,
                 "apply_stream_match": self._apply_stream_match,
                 "apply_epg_match": self._apply_epg_match,
+                "assign_custom_logos": self._assign_custom_logos,
                 "apply_logo_match": self._apply_logo_match,
                 "resort_streams": self._resort_streams,
                 "clear_csv_exports": self._clear_csv_exports,
@@ -2369,6 +2393,167 @@ class Plugin:
             "message": f"Logo assignment started for {total_channels} channels. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
             "background": True,
         }
+
+    def _assign_custom_logos(self, settings, logger):
+        """Assign repository logos to all existing Dispatcharr channels."""
+        if not _LOGO_AVAILABLE:
+            return {"status": "error", "message": "Logo model not available in this Dispatcharr installation."}
+
+        source, source_error = self._parse_custom_logo_source(settings)
+        if source_error:
+            return {"status": "error", "message": source_error}
+
+        total_channels = Channel.objects.count()
+        eta_seconds = total_channels * PluginConfig.ESTIMATED_SECONDS_PER_LOGO_MATCH
+        eta_str = ProgressTracker._format_eta_static(eta_seconds)
+        if not self._try_start_thread(
+            self._do_assign_custom_logos_bg, (dict(settings), logger)
+        ):
+            return {"status": "error", "message": "An operation is already running. Please wait for it to finish."}
+        return {
+            "status": "ok",
+            "message": (
+                f"Custom logo assignment started for {total_channels} existing channels. "
+                f"ETA: ~{eta_str}. Click 📊 Status to watch progress."
+            ),
+            "background": True,
+        }
+
+    @staticmethod
+    def _parse_custom_logo_source(settings):
+        """Parse owner/repository@branch:path/to/logos from plugin settings."""
+        raw = str(settings.get("custom_logo_source", "") or "").strip()
+        if not raw:
+            return None, "GitHub Logo Source is blank. Configure a source before running this action."
+        match = re.fullmatch(
+            r"([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([^:]+):(.+)", raw
+        )
+        if not match:
+            return None, (
+                "Invalid GitHub Logo Source. Use "
+                "owner/repository@branch:path/to/logos."
+            )
+        repo, branch, directory = (part.strip().strip("/") for part in match.groups())
+        if not repo or not branch or not directory:
+            return None, "GitHub Logo Source contains an empty repository, branch, or path."
+        return (repo, branch, directory), None
+
+    def _custom_logo_country(self, channel, settings):
+        """Infer the two-letter logo suffix from channel/group prefixes."""
+        group_name = channel.channel_group.name if channel.channel_group else ""
+        for value in (group_name, channel.name):
+            match = re.match(r"^([A-Z]{2})\s*[|:]", value, flags=re.IGNORECASE)
+            if match:
+                return match.group(1).lower()
+        try:
+            lineup_cc, _ = self._parse_lineup_filename(settings.get("lineup_file", ""))
+        except Exception:
+            lineup_cc = None
+        return lineup_cc.lower() if lineup_cc else "us"
+
+    def _do_assign_custom_logos_bg(self, settings, logger):
+        """Background wrapper for standalone custom logo assignment."""
+        try:
+            result = self._do_assign_custom_logos(settings, logger)
+            msg = result.get("message", "Custom logo assignment complete.")
+            logger.info(f"{LOG_PREFIX} CUSTOM LOGO MATCH COMPLETED: {msg}")
+            send_websocket_update('updates', 'update', {
+                "type": "plugin", "plugin": "Lineuparr", "message": msg
+            })
+        except Exception as e:
+            logger.exception(f"{LOG_PREFIX} Custom logo assignment error: {e}")
+            send_websocket_update('updates', 'update', {
+                "type": "plugin", "plugin": "Lineuparr",
+                "message": f"Custom logo assignment error: {e}"
+            })
+
+    def _do_assign_custom_logos(self, settings, logger):
+        """Assign custom logos without changing lineups, streams, or EPG data."""
+        if not self._acquire_lock(logger):
+            return {"status": "error", "message": "Another operation is in progress. Try again later."}
+
+        try:
+            from .logo_matcher import (
+                fetch_logo_filelist, match_channel_to_repository_logo,
+                build_repository_logo_url,
+            )
+
+            source, source_error = self._parse_custom_logo_source(settings)
+            if source_error:
+                return {"status": "error", "message": source_error}
+            repo, branch, directory = source
+            files = fetch_logo_filelist(repo, branch, directory)
+            if not files:
+                return {
+                    "status": "error",
+                    "message": f"No logo files found at {repo}@{branch}/{directory}.",
+                }
+
+            channels = list(Channel.objects.select_related('channel_group', 'logo').all())
+            progress = ProgressTracker(len(channels), "assign_custom_logos", logger)
+            replace_existing = bool(settings.get("custom_logo_replace_existing", False))
+            logos_by_url = {logo.url: logo for logo in Logo.objects.all()}
+
+            assigned = 0
+            unchanged = 0
+            skipped_existing = 0
+            no_match = 0
+            channels_to_update = []
+
+            for channel in channels:
+                if self._stop_event.is_set():
+                    return {"status": "ok", "message": "Custom logo assignment cancelled by user."}
+
+                if channel.logo_id is not None and not replace_existing:
+                    skipped_existing += 1
+                    progress.update()
+                    continue
+
+                country_suffix = self._custom_logo_country(channel, settings)
+                match_name = re.sub(
+                    r"^[A-Z]{2}\s*[|:]\s*", "", channel.name,
+                    flags=re.IGNORECASE,
+                )
+                matched_file = match_channel_to_repository_logo(
+                    match_name, files, country_suffix,
+                    threshold=PluginConfig.CUSTOM_LOGO_MATCH_THRESHOLD,
+                )
+                if not matched_file:
+                    no_match += 1
+                    progress.update()
+                    continue
+
+                raw_url = build_repository_logo_url(
+                    repo, branch, directory, matched_file
+                )
+                logo = logos_by_url.get(raw_url)
+                if not logo:
+                    logo = Logo.objects.create(name=match_name, url=raw_url)
+                    logos_by_url[raw_url] = logo
+
+                if channel.logo_id == logo.id:
+                    unchanged += 1
+                else:
+                    channel.logo = logo
+                    channels_to_update.append(channel)
+                    assigned += 1
+                progress.update()
+
+            if channels_to_update:
+                with transaction.atomic():
+                    Channel.objects.bulk_update(channels_to_update, ['logo_id'])
+
+            progress.finish()
+            self._trigger_frontend_refresh(logger)
+            msg = (
+                f"Custom logo assignment complete: {assigned} changed, "
+                f"{unchanged} already current, {skipped_existing} existing preserved, "
+                f"{no_match} no custom match"
+            )
+            logger.info(f"{LOG_PREFIX} {msg}")
+            return {"status": "ok", "message": msg}
+        finally:
+            self._release_lock(logger)
 
     def _do_apply_logo_match_bg(self, settings, logger):
         """Background wrapper for logo assignment."""

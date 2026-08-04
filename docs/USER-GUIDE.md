@@ -60,6 +60,8 @@ tells you whether your match sensitivity is set sensibly for your source.
 | Rate Limiting | select | `None` | Throttles between operations: None, Low, Medium or High. Use it if a large sync makes Dispatcharr sluggish. |
 | Custom Channel Aliases (JSON) | string | *(empty)* | Your own alias overrides. See [Custom aliases](#custom-aliases). |
 | EPG Sources | select | `All EPG sources` | Which EPG source or sources to match against. "All" uses every source in the priority order configured in Dispatcharr. |
+| GitHub Logo Source | string | *(empty)* | Optional public logo directory in `owner/repository@branch:path/to/logos` format. Used only by Assign Custom Logos. |
+| Replace Existing Logos When Matched | boolean | `false` | Allows a successful custom repository match to replace a channel's current logo. Channels with no match keep their current logo. |
 
 ---
 
@@ -137,12 +139,39 @@ live on the Actions tab of the plugin panel:
 | **Apply Stream Match Only** | Attaches matched streams to channels that already exist, in quality order. |
 | **Apply EPG Match** | Matches EPG entries to channels and assigns the programme guides. |
 | **Assign Logos** | Assigns channel logos from EPG icons, the Logo Manager, or the tv-logos repository on GitHub. |
+| **Assign Custom Logos** | Matches the configured public GitHub logo directory against every existing Dispatcharr channel. It does not run a lineup sync or alter streams or EPG assignments. |
 | **Re-sort Streams by Quality** | Re-orders already-attached streams using the newest quality data. See [IPTV Checker integration](#iptv-checker-integration). |
 | **Clear CSV Exports** | Deletes the plugin's CSV exports. |
 
 **Single Channel Match** scopes Preview Stream Match, Apply Stream Match Only,
 Apply EPG Match and Assign Logos to one channel. Full Sync always runs the whole
 lineup regardless of that setting.
+
+---
+
+## Custom logo repository
+
+Set **GitHub Logo Source** to a public directory using this format:
+
+```text
+owner/repository@branch:path/to/logos
+```
+
+For example, `example/media@main:logos/channels` reads image files from the
+`logos/channels` directory on the `main` branch. The field is empty by default,
+and the plugin does not include or prefer any particular repository.
+
+Logo filenames should describe the channel with words separated by hyphens or
+underscores. An optional two-letter country suffix limits a file to that
+country, such as `example-news-us.png` or `example-sports-gb.png`. Supported
+extensions are PNG, SVG, JPG, JPEG, GIF and WebP. East is treated as the
+standard feed, while Pacific remains a distinct filename term.
+
+Run **Assign Custom Logos** independently from the other actions. It examines
+all existing Dispatcharr channels and changes only their logo reference. With
+**Replace Existing Logos When Matched** off, channels that already have a logo
+are skipped. With it on, an existing logo is replaced only when the repository
+contains a match. A channel with no match is never cleared.
 
 ---
 

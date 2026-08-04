@@ -7,8 +7,10 @@ comparing clean channel names against structured filenames.
 
 import re
 import urllib.request
+import urllib.parse
 import json
 import logging
+import unicodedata
 
 try:
     from rapidfuzz import fuzz
@@ -130,3 +132,104 @@ def fetch_tv_logos_filelist(repo, branch, country_dir):
 def build_logo_url(repo, branch, country_dir, filename):
     """Build a raw GitHub URL for a logo file."""
     return f"https://raw.githubusercontent.com/{repo}/{branch}/countries/{country_dir}/{filename}"
+
+
+# The helpers below are used only by the standalone custom-logo action. The
+# original tv-logos matching functions above intentionally remain unchanged.
+def _normalize_repository_logo_name(name, country_suffix=None):
+    """Normalize a custom repository filename or Dispatcharr channel name."""
+    name = unicodedata.normalize('NFC', str(name)).lower().strip()
+    name = re.sub(r'\.(png|svg|jpg|jpeg|gif|webp)$', '', name, flags=re.IGNORECASE)
+    if country_suffix:
+        name = re.sub(
+            rf'[-._]{re.escape(country_suffix)}$', '', name, flags=re.IGNORECASE
+        )
+    name = name.replace('-', ' ').replace('_', ' ')
+    name = name.replace('&', ' and ').replace('+', ' plus ')
+    name = re.sub(r'[^\w\s]', '', name)
+    # East is treated as the standard feed; Pacific remains a distinct name.
+    name = re.sub(r'\s+east\s*$', '', name)
+    name = re.sub(r'\s+(hd|sd|uhd|4k|fhd)\s*$', '', name)
+    return re.sub(r'\s+', ' ', name).strip()
+
+
+def match_channel_to_repository_logo(
+    channel_name, logo_filenames, country_suffix, threshold=90
+):
+    """Match a channel only against the standalone repository logo library."""
+    normalized_channel = _normalize_repository_logo_name(channel_name)
+    if not normalized_channel:
+        return None
+
+    country_pattern = re.compile(
+        rf'[-._]{re.escape(country_suffix)}\.(png|svg|jpg|jpeg|gif|webp)$',
+        flags=re.IGNORECASE,
+    )
+    country_files = [name for name in logo_filenames if country_pattern.search(name)]
+    candidates = country_files or logo_filenames
+    best_score = 0
+    best_file = None
+    for filename in candidates:
+        normalized_logo = _normalize_repository_logo_name(filename, country_suffix)
+        if not normalized_logo:
+            continue
+        score = fuzz.ratio(normalized_channel, normalized_logo)
+        if score > best_score:
+            best_score = score
+            best_file = filename
+            if best_score == 100:
+                break
+    return best_file if best_score >= threshold else None
+
+
+def fetch_logo_filelist(repo, branch, directory):
+    """Fetch image filenames from an arbitrary public GitHub directory."""
+    repo = (repo or "").strip().strip("/")
+    branch = (branch or "").strip().strip("/")
+    directory = (directory or "").strip().strip("/")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
+        LOGGER.warning("Invalid GitHub repository name: %r", repo)
+        return []
+    if not branch or not directory or any(
+        part in ("", ".", "..") for part in directory.split("/")
+    ):
+        LOGGER.warning("Invalid GitHub branch or logo directory")
+        return []
+
+    encoded_dir = urllib.parse.quote(directory, safe="/")
+    query = urllib.parse.urlencode({"ref": branch})
+    url = f"https://api.github.com/repos/{repo}/contents/{encoded_dir}?{query}"
+    try:
+        req = urllib.request.Request(
+            url, headers={"Accept": "application/vnd.github.v3+json"}
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+        if not isinstance(data, list):
+            LOGGER.warning("Unexpected GitHub API response for %s", directory)
+            return []
+        if len(data) >= 1000:
+            LOGGER.warning(
+                "GitHub API returned %s entries for %s; results may be truncated",
+                len(data), directory,
+            )
+        image_exts = ('.png', '.svg', '.jpg', '.jpeg', '.gif', '.webp')
+        return [
+            item['name'] for item in data
+            if item.get('type') == 'file'
+            and item.get('name', '').lower().endswith(image_exts)
+        ]
+    except Exception as e:
+        LOGGER.warning("Failed to fetch custom logo list for %s: %s", directory, e)
+        return []
+
+
+def build_repository_logo_url(repo, branch, directory, filename):
+    """Build a raw GitHub URL for an image in a repository directory."""
+    path = "/".join(
+        urllib.parse.quote(part, safe="")
+        for part in (
+            branch.strip("/") + "/" + directory.strip("/") + "/" + filename
+        ).split("/")
+    )
+    return f"https://raw.githubusercontent.com/{repo.strip().strip('/')}/{path}"
