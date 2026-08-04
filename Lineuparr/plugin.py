@@ -514,8 +514,8 @@ class Plugin:
                 "label": "GitHub Logo Source",
                 "type": "string",
                 "default": "",
-                "placeholder": "owner/repository@main:path/to/logos",
-                "help_text": "Public GitHub directory in owner/repository@branch:path format. Example: example/media@main:logos/channels. Leave blank to disable custom repository matching.",
+                "placeholder": "owner/repository:path/to/logos",
+                "help_text": "Public GitHub repository, optionally followed by :path/to/logos. The default branch is used automatically. Advanced: owner/repository@branch:path. Leave blank to disable.",
             },
             {
                 "id": "custom_logo_replace_existing",
@@ -2421,21 +2421,24 @@ class Plugin:
 
     @staticmethod
     def _parse_custom_logo_source(settings):
-        """Parse owner/repository@branch:path/to/logos from plugin settings."""
+        """Parse owner/repository with optional branch and directory."""
         raw = str(settings.get("custom_logo_source", "") or "").strip()
         if not raw:
             return None, "GitHub Logo Source is blank. Configure a source before running this action."
         match = re.fullmatch(
-            r"([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([^:]+):(.+)", raw
+            r"([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"
+            r"(?:@([^:]+))?(?::(.+))?",
+            raw,
         )
         if not match:
             return None, (
                 "Invalid GitHub Logo Source. Use "
+                "owner/repository, owner/repository:path/to/logos, or "
                 "owner/repository@branch:path/to/logos."
             )
-        repo, branch, directory = (part.strip().strip("/") for part in match.groups())
-        if not repo or not branch or not directory:
-            return None, "GitHub Logo Source contains an empty repository, branch, or path."
+        repo = match.group(1).strip().strip("/")
+        branch = (match.group(2) or "").strip().strip("/")
+        directory = (match.group(3) or "").strip().strip("/")
         return (repo, branch, directory), None
 
     def _custom_logo_country(self, channel, settings):
@@ -2475,18 +2478,24 @@ class Plugin:
         try:
             from .logo_matcher import (
                 fetch_logo_filelist, match_channel_to_repository_logo,
-                build_repository_logo_url,
+                build_repository_logo_url, resolve_repository_branch,
             )
 
             source, source_error = self._parse_custom_logo_source(settings)
             if source_error:
                 return {"status": "error", "message": source_error}
             repo, branch, directory = source
+            branch = resolve_repository_branch(repo, branch)
+            if not branch:
+                return {
+                    "status": "error",
+                    "message": f"Could not determine the default branch for {repo}.",
+                }
             files = fetch_logo_filelist(repo, branch, directory)
             if not files:
                 return {
                     "status": "error",
-                    "message": f"No logo files found at {repo}@{branch}/{directory}.",
+                    "message": f"No logo files found in the configured directory for {repo}.",
                 }
 
             channels = list(Channel.objects.select_related('channel_group', 'logo').all())

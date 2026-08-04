@@ -60,7 +60,7 @@ tells you whether your match sensitivity is set sensibly for your source.
 | Rate Limiting | select | `None` | Throttles between operations: None, Low, Medium or High. Use it if a large sync makes Dispatcharr sluggish. |
 | Custom Channel Aliases (JSON) | string | *(empty)* | Your own alias overrides. See [Custom aliases](#custom-aliases). |
 | EPG Sources | select | `All EPG sources` | Which EPG source or sources to match against. "All" uses every source in the priority order configured in Dispatcharr. |
-| GitHub Logo Source | string | *(empty)* | Optional public logo directory in `owner/repository@branch:path/to/logos` format. Used only by Assign Custom Logos. |
+| GitHub Logo Source | string | *(empty)* | Public repository with an optional logo directory, such as `owner/repository:path/to/logos`. The default branch is automatic. Used only by Assign Custom Logos. |
 | Replace Existing Logos When Matched | boolean | `false` | Allows a successful custom repository match to replace a channel's current logo. Channels with no match keep their current logo. |
 
 ---
@@ -151,15 +151,24 @@ lineup regardless of that setting.
 
 ## Custom logo repository
 
-Set **GitHub Logo Source** to a public directory using this format:
+Set **GitHub Logo Source** to a public repository. If its logos are in the
+repository root, only the owner and repository are needed:
 
 ```text
-owner/repository@branch:path/to/logos
+owner/repository
 ```
 
-For example, `example/media@main:logos/channels` reads image files from the
-`logos/channels` directory on the `main` branch. The field is empty by default,
-and the plugin does not include or prefer any particular repository.
+Add a colon and directory when the logo files are in a subdirectory:
+
+```text
+owner/repository:path/to/logos
+```
+
+For example, `example/media:logos/channels` reads image files from the
+`logos/channels` directory on the repository's default branch. A non-default
+branch can be selected with the advanced form
+`owner/repository@branch:path/to/logos`. The field is empty by default, and the
+plugin does not include or prefer any particular repository.
 
 Logo filenames should describe the channel with words separated by hyphens or
 underscores. An optional two-letter country suffix limits a file to that

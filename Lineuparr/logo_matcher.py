@@ -190,15 +190,16 @@ def fetch_logo_filelist(repo, branch, directory):
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
         LOGGER.warning("Invalid GitHub repository name: %r", repo)
         return []
-    if not branch or not directory or any(
+    if not branch or (directory and any(
         part in ("", ".", "..") for part in directory.split("/")
-    ):
+    )):
         LOGGER.warning("Invalid GitHub branch or logo directory")
         return []
 
     encoded_dir = urllib.parse.quote(directory, safe="/")
     query = urllib.parse.urlencode({"ref": branch})
-    url = f"https://api.github.com/repos/{repo}/contents/{encoded_dir}?{query}"
+    contents_path = f"/contents/{encoded_dir}" if encoded_dir else "/contents"
+    url = f"https://api.github.com/repos/{repo}{contents_path}?{query}"
     try:
         req = urllib.request.Request(
             url, headers={"Accept": "application/vnd.github.v3+json"}
@@ -224,12 +225,36 @@ def fetch_logo_filelist(repo, branch, directory):
         return []
 
 
+def resolve_repository_branch(repo, branch=""):
+    """Return an explicit branch or discover the repository's default branch."""
+    branch = (branch or "").strip().strip("/")
+    if branch:
+        return branch
+    repo = (repo or "").strip().strip("/")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
+        return None
+    url = f"https://api.github.com/repos/{repo}"
+    try:
+        req = urllib.request.Request(
+            url, headers={"Accept": "application/vnd.github.v3+json"}
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+        default_branch = str(data.get("default_branch", "")).strip()
+        return default_branch or None
+    except Exception as e:
+        LOGGER.warning("Failed to resolve default branch for %s: %s", repo, e)
+        return None
+
+
 def build_repository_logo_url(repo, branch, directory, filename):
     """Build a raw GitHub URL for an image in a repository directory."""
+    raw_path = "/".join(
+        part for part in (branch.strip("/"), directory.strip("/"), filename)
+        if part
+    )
     path = "/".join(
         urllib.parse.quote(part, safe="")
-        for part in (
-            branch.strip("/") + "/" + directory.strip("/") + "/" + filename
-        ).split("/")
+        for part in raw_path.split("/")
     )
     return f"https://raw.githubusercontent.com/{repo.strip().strip('/')}/{path}"
