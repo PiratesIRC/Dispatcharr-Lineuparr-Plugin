@@ -33,6 +33,7 @@ Before installing or using this plugin, it is **highly recommended** that you cr
 - **Single-Channel Targeting:** Optionally scope stream, EPG, and logo matching to one named lineup channel instead of the whole lineup
 - **EPG Assignment:** Fuzzy-match EPG data to channels and assign program guides from any configured EPG source
 - **Logo Assignment:** Auto-assign channel logos from EPG icons, Logo Manager, or the [tv-logos](https://github.com/tv-logo/tv-logos) GitHub repository
+- **Custom Logo Repository:** Match all existing Dispatcharr channels against an optional public GitHub logo directory without running a lineup sync
 - **Quality Ordering:** Automatically sort matched streams by quality (4K > UHD > FHD > HD > SD) using name-based detection or [IPTV Checker](https://github.com/PiratesIRC/Dispatcharr-IPTV-Checker-Plugin) metadata
 - **Channel Number Preservation:** Lineup channel numbers are stored and used for tiebreaking during matching
 - **East/West/Pacific Filtering:** Regional channel variants are matched to the correct regional streams

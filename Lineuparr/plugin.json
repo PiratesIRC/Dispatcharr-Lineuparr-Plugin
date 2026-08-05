@@ -90,6 +90,17 @@
       }
     },
     {
+      "id": "assign_custom_logos",
+      "label": "Assign Custom Logos",
+      "button_label": "🖼️ Assign Custom Logos",
+      "description": "Assign logos from the configured public GitHub directory directly to all existing Dispatcharr channels; no lineup sync required",
+      "button_variant": "filled",
+      "button_color": "blue",
+      "confirm": {
+        "message": "Match custom repository logos against all existing Dispatcharr channels?"
+      }
+    },
+    {
       "id": "resort_streams",
       "label": "Re-sort Streams by Quality",
       "button_label": "⭐ Re-sort",
