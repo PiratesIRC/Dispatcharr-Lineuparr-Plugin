@@ -540,7 +540,7 @@
         ]
       },
       {
-        "name": "Movies! (WNYWDT2)",
+        "name": "Movies! - WNYWDT2",
         "number": 493,
         "aliases": [
           "WNYWDT2",
@@ -1302,7 +1302,6 @@
         "number": 611,
         "aliases": [
           "US: THE WEATHER CHANNEL HD",
-          "TheWeatherNetwork.ca",
           "WEATHER CHANNEL",
           "TWC",
           "WEATHHD",
@@ -3511,7 +3510,7 @@
         ]
       },
       {
-        "name": "Cinemáx",
+        "name": "Cinemáx - CMAXHD",
         "number": 929,
         "addon": "Cinemax",
         "aliases": [
@@ -4149,7 +4148,7 @@
         ]
       },
       {
-        "name": "Game Show Network",
+        "name": "Game Show Network - GSNHD",
         "number": 684,
         "aliases": [
           "GSNHD",
