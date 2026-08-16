@@ -881,7 +881,7 @@
         ]
       },
       {
-        "name": "UniMás 68",
+        "name": "UniMás 68 - WFUTDT",
         "number": 517,
         "aliases": [
           "WFUT",
@@ -892,7 +892,6 @@
           "35364284",
           "11527",
           "1152712",
-          "UNIMAS",
           "517 WFUTDT"
         ],
         "epg_ids": [
@@ -2319,7 +2318,7 @@
         "addon": "Starz"
       },
       {
-        "name": "Starz Encore Westerns West",
+        "name": "Starz Encore Westerns West - STZENWP",
         "number": 355,
         "aliases": [
           "STZENWP",
