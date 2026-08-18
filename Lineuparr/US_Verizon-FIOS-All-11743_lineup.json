@@ -540,7 +540,7 @@
         ]
       },
       {
-        "name": "Movies! (WNYWDT2)",
+        "name": "Movies! - WNYWDT2",
         "number": 493,
         "aliases": [
           "WNYWDT2",
@@ -588,8 +588,6 @@
         "number": 496,
         "aliases": [
           "US: CATCHY COMEDY HD",
-          "US: COMEDY CENTRAL HD",
-          "ComedyCentral.us",
           "WNYWDT5",
           "112941",
           "112941268",
@@ -876,7 +874,6 @@
           "26182283",
           "11715",
           "1171510",
-          "PUBLIC BROADCASTING SERVICE",
           "513 WNETDT"
         ],
         "epg_ids": [
@@ -884,7 +881,7 @@
         ]
       },
       {
-        "name": "UniMás 68",
+        "name": "UniMás 68 - WFUTDT",
         "number": 517,
         "aliases": [
           "WFUT",
@@ -895,7 +892,6 @@
           "35364284",
           "11527",
           "1152712",
-          "UNIMAS",
           "517 WFUTDT"
         ],
         "epg_ids": [
@@ -948,7 +944,6 @@
           "34325287",
           "11643",
           "1164315",
-          "PUBLIC BROADCASTING SERVICE",
           "521 WLIWDT"
         ],
         "epg_ids": [
@@ -967,7 +962,6 @@
           "29139288",
           "11723",
           "1172316",
-          "PUBLIC BROADCASTING SERVICE",
           "523 WNJNDT"
         ],
         "epg_ids": [
@@ -1190,14 +1184,16 @@
         ]
       },
       {
-        "name": "NEWSNTN",
+        "name": "NewsNation",
         "number": 604,
         "aliases": [
           "NEWSNTN",
           "91096",
           "91096331",
           "604 NEWSNTN",
-          "NEWSNATION"
+          "NEWSNATION",
+          "NEWS NATION",
+          "WGN AMERICA"
         ],
         "epg_ids": [
           "91096"
@@ -1224,16 +1220,16 @@
         "name": "C-SPAN",
         "number": 606,
         "aliases": [
-          "US: C-SPAN 2 HD",
           "US: C-SPAN 1 HD",
-          "US: C-SPAN 3 HD",
           "CSPANHD",
           "68344",
           "68344333",
           "606 CSPANHD",
           "606 C-SPAN HD",
           "C-SPAN HD",
-          "CSPAN"
+          "CSPAN",
+          "US: C-SPAN HD",
+          "C-SPAN"
         ],
         "epg_ids": [
           "68344"
@@ -1247,7 +1243,9 @@
           "68334",
           "68334334",
           "607 CSPN2HD",
-          "CSPAN2"
+          "CSPAN2",
+          "US: C-SPAN 2 HD",
+          "C-SPAN 2"
         ],
         "epg_ids": [
           "68334"
@@ -1261,7 +1259,9 @@
           "68332",
           "68332335",
           "608 CSPN3HD",
-          "CSPAN3"
+          "CSPAN3",
+          "US: C-SPAN 3 HD",
+          "C-SPAN 3"
         ],
         "epg_ids": [
           "68332"
@@ -1301,7 +1301,6 @@
         "number": 611,
         "aliases": [
           "US: THE WEATHER CHANNEL HD",
-          "TheWeatherNetwork.ca",
           "WEATHER CHANNEL",
           "TWC",
           "WEATHHD",
@@ -1333,13 +1332,15 @@
         ]
       },
       {
-        "name": "CHEDSTR",
+        "name": "Cheddar News",
         "number": 614,
         "aliases": [
           "CHEDSTR",
           "101103",
           "101103340",
-          "614 CHEDSTR"
+          "614 CHEDSTR",
+          "CHEDDAR NEWS",
+          "CHEDDAR"
         ],
         "epg_ids": [
           "101103"
@@ -1403,7 +1404,7 @@
         ]
       },
       {
-        "name": "AWNYHD",
+        "name": "AccuWeather Network",
         "number": 619,
         "aliases": [
           "AWNYHD",
@@ -1411,7 +1412,10 @@
           "102910344",
           "619 AWNYHD",
           "619 AccuWeather NY",
-          "AccuWeather NY"
+          "AccuWeather NY",
+          "ACCUWEATHER NETWORK",
+          "ACCUWEATHER NY",
+          "ACCUWEATHER"
         ],
         "epg_ids": [
           "102910"
@@ -1634,8 +1638,6 @@
         "name": "MSG Sportsnet 2",
         "number": 581,
         "aliases": [
-          "US: MSG 2 HD",
-          "MadisonSquareGarden2.us",
           "MSGSN21",
           "MSG2SNH",
           "70285",
@@ -1658,9 +1660,6 @@
           "FoxSports1.us",
           "US: FOX SPORTS 1 HD",
           "US: FOX SPORTS 1",
-          "US: FOX SPORTS WEST HD",
-          "US: FOX SPORTS WEST",
-          "FOXSports.us",
           "FS1",
           "FOX SPORTS 1 HD",
           "FS1HD",
@@ -1684,9 +1683,6 @@
           "FoxSports2.us",
           "US: FOX SPORTS 2 HD",
           "US: FOX SPORTS 2",
-          "US: FOX SPORTS WEST HD",
-          "US: FOX SPORTS WEST",
-          "FOXSports.us",
           "FS2",
           "FOX SPORTS 2 HD",
           "FS2HD",
@@ -1799,25 +1795,16 @@
           "US: TENNIS HD",
           "TennisChannel.us",
           "US: TENNIS CHANNEL",
-          "US: TENNIS CHANNEL PLUS 1",
-          "US: TENNIS CHANNEL PLUS 2",
-          "US: TENNIS CHANNEL PLUS 3",
-          "US: TENNIS CHANNEL PLUS 4",
-          "US: TENNIS CHANNEL PLUS 5",
-          "US: TENNIS CHANNEL PLUS 6",
-          "US: TENNIS CHANNEL PLUS 7",
-          "US: TENNIS CHANNEL PLUS 8",
-          "US: TENNIS CHANNEL PLUS 9",
-          "US: TENNIS CHANNEL PLUS 10",
-          "US: TENNIS CHANNEL PLUS 11",
-          "US: TENNIS CHANNEL PLUS 12",
           "TENISHD",
           "60316",
           "60316321",
           "TENNIS",
           "33395",
           "3339566",
-          "592 TENISHD"
+          "592 TENISHD",
+          "US: TENNIS CHANNEL HD",
+          "TENNIS CHANNEL",
+          "TENNIS CHANNEL HD"
         ],
         "epg_ids": [
           "60316"
@@ -1944,8 +1931,6 @@
         "aliases": [
           "US: WILLOW CRICKET HD",
           "WillowCricket.us",
-          "US: WILLOW CRICKET EXTRA HD",
-          "WILLX.us",
           "WLLOHD",
           "80621",
           "80621445",
@@ -1956,14 +1941,17 @@
         ]
       },
       {
-        "name": "MAVTV",
+        "name": "RACER Network",
         "number": 810,
         "addon": "Sports Pass",
         "aliases": [
           "RACERHD",
           "61036",
           "61036446",
-          "810 RACERHD"
+          "810 RACERHD",
+          "MAVTV",
+          "RACER NETWORK",
+          "RACER"
         ],
         "epg_ids": [
           "61036"
@@ -1977,7 +1965,9 @@
           "FDUELTV",
           "21345",
           "21345447",
-          "815 FDUELTV"
+          "815 FDUELTV",
+          "FANDUEL TV",
+          "TVG"
         ],
         "epg_ids": [
           "21345"
@@ -2300,7 +2290,7 @@
     ],
     "Movies": [
       {
-        "name": "STARZP",
+        "name": "Starz West",
         "number": 341,
         "addon": "Starz",
         "aliases": [
@@ -2314,20 +2304,7 @@
         ]
       },
       {
-        "name": "VZ32",
-        "number": 343,
-        "aliases": [
-          "VZ32",
-          "106432",
-          "106432181",
-          "343 VZ32"
-        ],
-        "epg_ids": [
-          "106432"
-        ]
-      },
-      {
-        "name": "STZENCP",
+        "name": "Starz Encore West",
         "number": 351,
         "aliases": [
           "STZENCP",
@@ -2337,23 +2314,11 @@
         ],
         "epg_ids": [
           "17125"
-        ]
-      },
-      {
-        "name": "VZ35",
-        "number": 353,
-        "aliases": [
-          "VZ35",
-          "106435",
-          "106435191",
-          "353 VZ35"
         ],
-        "epg_ids": [
-          "106435"
-        ]
+        "addon": "Starz"
       },
       {
-        "name": "STZENWP",
+        "name": "Starz Encore Westerns West - STZENWP",
         "number": 355,
         "aliases": [
           "STZENWP",
@@ -2363,36 +2328,11 @@
         ],
         "epg_ids": [
           "17132"
-        ]
-      },
-      {
-        "name": "VZ36",
-        "number": 357,
-        "aliases": [
-          "VZ36",
-          "106436",
-          "106436195",
-          "357 VZ36"
         ],
-        "epg_ids": [
-          "106436"
-        ]
+        "addon": "Starz"
       },
       {
-        "name": "VZ34",
-        "number": 359,
-        "aliases": [
-          "VZ34",
-          "106434",
-          "106434197",
-          "359 VZ34"
-        ],
-        "epg_ids": [
-          "106434"
-        ]
-      },
-      {
-        "name": "WOMEN",
+        "name": "Showtime Women East",
         "number": 375,
         "aliases": [
           "US: LIFETIME REAL WOMEN HD",
@@ -2405,10 +2345,11 @@
         ],
         "epg_ids": [
           "25272"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "WOMENP",
+        "name": "Showtime Women West",
         "number": 376,
         "aliases": [
           "WOMENP",
@@ -2418,10 +2359,11 @@
         ],
         "epg_ids": [
           "25273"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "NEXT",
+        "name": "Showtime Next East",
         "number": 377,
         "aliases": [
           "NEXT",
@@ -2431,10 +2373,11 @@
         ],
         "epg_ids": [
           "25270"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "NEXTP",
+        "name": "Showtime Next West",
         "number": 378,
         "aliases": [
           "NEXTP",
@@ -2444,10 +2387,11 @@
         ],
         "epg_ids": [
           "25271"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "FAMZ",
+        "name": "Showtime Family Zone East",
         "number": 379,
         "aliases": [
           "FAMZ",
@@ -2457,10 +2401,11 @@
         ],
         "epg_ids": [
           "25274"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "FAMZP",
+        "name": "Showtime Family Zone West",
         "number": 380,
         "aliases": [
           "FAMZP",
@@ -2470,10 +2415,11 @@
         ],
         "epg_ids": [
           "25275"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "TMCP",
+        "name": "The Movie Channel West",
         "number": 386,
         "aliases": [
           "TMCP",
@@ -2483,10 +2429,11 @@
         ],
         "epg_ids": [
           "12509"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "TMCXP",
+        "name": "The Movie Channel Xtra West",
         "number": 388,
         "aliases": [
           "TMCXP",
@@ -2496,10 +2443,11 @@
         ],
         "epg_ids": [
           "17687"
-        ]
+        ],
+        "addon": "Paramount+ with SHOWTIME"
       },
       {
-        "name": "FLIX",
+        "name": "Flix East",
         "number": 390,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
@@ -2513,7 +2461,7 @@
         ]
       },
       {
-        "name": "FLIXP",
+        "name": "Flix West",
         "number": 391,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
@@ -2527,20 +2475,24 @@
         ]
       },
       {
-        "name": "CINACSP",
+        "name": "Cinemax Action West",
         "number": 425,
         "aliases": [
           "CINACSP",
           "18434",
           "18434238",
-          "425 CINACSP"
+          "425 CINACSP",
+          "CINEMAX ACTION WEST",
+          "ACTIONMAX WEST",
+          "ACTION MAX WEST"
         ],
         "epg_ids": [
           "18434"
-        ]
+        ],
+        "addon": "Cinemax"
       },
       {
-        "name": "HEREHD",
+        "name": "Here TV",
         "number": 445,
         "aliases": [
           "HEREHD",
@@ -2591,7 +2543,6 @@
       {
         "name": "FX Movie Channel",
         "number": 732,
-        "addon": "Paramount+ with SHOWTIME",
         "aliases": [
           "FXM",
           "FOX MOVIE CHANNEL",
@@ -2639,13 +2590,17 @@
         ]
       },
       {
-        "name": "HFM",
+        "name": "Hallmark Family",
         "number": 737,
         "aliases": [
           "HFM",
           "105723",
           "105723412",
-          "737 HFM"
+          "737 HFM",
+          "HALLMARK FAMILY",
+          "HALLMARK FAMILY HD",
+          "HALLMARK DRAMA",
+          "HALLMARK DRAMA HD"
         ],
         "epg_ids": [
           "105723"
@@ -2670,12 +2625,14 @@
         "name": "Hallmark Mystery",
         "number": 739,
         "aliases": [
-          "US: HALLMARK HD",
-          "Hallmark.us",
           "HMYSHD",
           "46710",
           "46710414",
-          "739 HMYSHD"
+          "739 HMYSHD",
+          "HALLMARK MYSTERY",
+          "HALLMARK MYSTERY HD",
+          "HALLMARK MOVIES & MYSTERIES",
+          "HALLMARK MOVIES AND MYSTERIES"
         ],
         "epg_ids": [
           "46710"
@@ -2716,27 +2673,32 @@
         ]
       },
       {
-        "name": "Family Entertainment Television (FEENTTV)",
+        "name": "FETV",
         "number": 742,
         "aliases": [
           "FEENTTV",
           "93195",
           "93195417",
           "FAMILY ENTERTAINMENT TELEVISION",
-          "742 FEENTTV"
+          "742 FEENTTV",
+          "Family Entertainment Television (FEENTTV)"
         ],
         "epg_ids": [
           "93195"
         ]
       },
       {
-        "name": "GFAMHD",
+        "name": "Great American Family",
         "number": 743,
         "aliases": [
           "GFAMHD",
           "82892",
           "82892418",
-          "743 GFAMHD"
+          "743 GFAMHD",
+          "GREAT AMERICAN FAMILY",
+          "GREAT AMERICAN FAMILY HD",
+          "GAC FAMILY",
+          "GREAT AMERICAN COUNTRY"
         ],
         "epg_ids": [
           "82892"
@@ -2765,37 +2727,13 @@
         "aliases": [
           "US: STARZ HD",
           "Starz.us",
-          "US: STARZ BLACK HD",
-          "US: STARZ CINEMA HD",
-          "StarzCinema.us",
-          "US: STARZ CINEMA EAST HD",
-          "US: STARZ COMEDY HD",
-          "StarzComedy.us",
           "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
-          "US: STARZ EDGE HD",
-          "StarzEdge.us",
-          "US: STARZ FAMILY HD",
-          "StarzEncoreFamily.us",
-          "US: STARZ ENCORE HD",
-          "StarzEncore.us",
-          "US: STARZ ENCORE EAST HD",
-          "US: STARZ ENCORE ACTION HD",
-          "StarzEncoreAction.us",
-          "US: STARZ ENCORE BLACK HD",
-          "StarzEncoreBlack.us",
-          "US: STARZ ENCORE CLASSIC HD",
-          "StarzEncoreClassics.us",
-          "US: STARZ ENCORE FAMILY HD",
-          "US: STARZ KIDS & FAMILY HD",
-          "StarzKidsFamily.us",
-          "US: STARZ ENCORE WESTERNS HD",
-          "StarzEncoreWesterns.us",
-          "US: STARZ ENCORE WEST HD",
           "STZHD",
           "34941",
           "34941454",
-          "840 STZHD"
+          "840 STZHD",
+          "STARZ",
+          "STARZ EAST"
         ],
         "epg_ids": [
           "34941"
@@ -2806,16 +2744,14 @@
         "number": 842,
         "addon": "Starz",
         "aliases": [
-          "US: STARZ HD",
-          "Starz.us",
-          "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
           "US: STARZ EDGE HD",
           "StarzEdge.us",
           "STZEHD",
           "57573",
           "57573455",
-          "842 STZEHD"
+          "842 STZEHD",
+          "STARZ EDGE",
+          "STARZ EDGE EAST"
         ],
         "epg_ids": [
           "57573"
@@ -2826,15 +2762,12 @@
         "number": 844,
         "addon": "Starz",
         "aliases": [
-          "US: STARZ HD",
-          "Starz.us",
           "US: STARZ BLACK HD",
-          "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
           "STRZIBH",
           "67235",
           "67235456",
-          "844 STRZIBH"
+          "844 STRZIBH",
+          "STARZ IN BLACK"
         ],
         "epg_ids": [
           "67235"
@@ -2845,31 +2778,29 @@
         "number": 845,
         "addon": "Starz",
         "aliases": [
-          "US: STARZ HD",
-          "Starz.us",
-          "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
-          "US: STARZ FAMILY HD",
-          "StarzEncoreFamily.us",
           "US: STARZ KIDS & FAMILY HD",
           "StarzKidsFamily.us",
           "STZKHD",
           "57581",
           "57581457",
-          "845 STZKHD"
+          "845 STZKHD",
+          "STARZ KIDS & FAMILY"
         ],
         "epg_ids": [
           "57581"
         ]
       },
       {
-        "name": "STRZCIH",
+        "name": "Starz Cinema",
         "number": 846,
         "aliases": [
           "STRZCIH",
           "67236",
           "67236458",
-          "846 STRZCIH"
+          "846 STRZCIH",
+          "STARZ CINEMA",
+          "US: STARZ CINEMA HD",
+          "US: STARZ CINEMA EAST HD"
         ],
         "epg_ids": [
           "67236"
@@ -2880,18 +2811,13 @@
         "number": 847,
         "addon": "Starz",
         "aliases": [
-          "US: COMEDY CENTRAL HD",
-          "ComedyCentral.us",
-          "US: STARZ HD",
-          "Starz.us",
           "US: STARZ COMEDY HD",
           "StarzComedy.us",
-          "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
           "STZCHD",
           "57569",
           "57569459",
-          "847 STZCHD"
+          "847 STZCHD",
+          "STARZ COMEDY"
         ],
         "epg_ids": [
           "57569"
@@ -2930,39 +2856,27 @@
         ]
       },
       {
-        "name": "Starz Encore",
+        "name": "Starz Encore East",
         "number": 850,
         "addon": "Starz",
         "aliases": [
-          "US: STARZ HD",
-          "Starz.us",
-          "US: STARZ EAST HD",
-          "US: STARZ WEST HD",
           "US: STARZ ENCORE HD",
           "StarzEncore.us",
           "US: STARZ ENCORE EAST HD",
-          "US: STARZ ENCORE ACTION HD",
-          "StarzEncoreAction.us",
-          "US: STARZ ENCORE BLACK HD",
-          "StarzEncoreBlack.us",
-          "US: STARZ ENCORE CLASSIC HD",
-          "StarzEncoreClassics.us",
-          "US: STARZ ENCORE FAMILY HD",
-          "StarzEncoreFamily.us",
-          "US: STARZ ENCORE WESTERNS HD",
-          "StarzEncoreWesterns.us",
-          "US: STARZ ENCORE WEST HD",
           "STZENHD",
           "36225",
           "36225462",
-          "850 STZENHD"
+          "850 STZENHD",
+          "Starz Encore",
+          "STARZ ENCORE",
+          "STARZ ENCORE EAST"
         ],
         "epg_ids": [
           "36225"
         ]
       },
       {
-        "name": "SZECLHD",
+        "name": "Starz Encore Classic East",
         "number": 852,
         "aliases": [
           "SZECLHD",
@@ -2975,7 +2889,7 @@
         ]
       },
       {
-        "name": "STZENWS",
+        "name": "Starz Encore Westerns East",
         "number": 854,
         "aliases": [
           "STZENWS",
@@ -2988,7 +2902,7 @@
         ]
       },
       {
-        "name": "SZESUHD",
+        "name": "Starz Encore Suspense East",
         "number": 856,
         "aliases": [
           "SZESUHD",
@@ -3001,7 +2915,7 @@
         ]
       },
       {
-        "name": "SZEBHD",
+        "name": "Starz Encore Black East",
         "number": 858,
         "aliases": [
           "SZEBHD",
@@ -3014,7 +2928,7 @@
         ]
       },
       {
-        "name": "SZEAHD",
+        "name": "Starz Encore Action East",
         "number": 861,
         "aliases": [
           "SZEAHD",
@@ -3027,7 +2941,7 @@
         ]
       },
       {
-        "name": "STZENFM",
+        "name": "Starz Encore Family",
         "number": 862,
         "aliases": [
           "STZENFM",
@@ -3040,7 +2954,7 @@
         ]
       },
       {
-        "name": "STZESP",
+        "name": "Starz Encore Español",
         "number": 863,
         "aliases": [
           "STZESP",
@@ -3057,12 +2971,9 @@
         "number": 865,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
-          "US: PARAMOUNT HD",
-          "ParamountNetwork.us",
           "US: SHOWTIME HD",
           "Showtime.us",
           "US: SHOWTIME EAST HD",
-          "US: SHOWTIME WEST HD",
           "SHOWTIME",
           "SHOWTIME HD",
           "SHOWTIME EAST",
@@ -3072,7 +2983,7 @@
           "21868470",
           "865 PARSHOH",
           "865 Paramount+ with",
-          "Paramount+ with"
+          "PARAMOUNT+ WITH SHOWTIME"
         ],
         "epg_ids": [
           "21868"
@@ -3083,11 +2994,6 @@
         "number": 866,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
-          "US: PARAMOUNT HD",
-          "ParamountNetwork.us",
-          "US: SHOWTIME HD",
-          "Showtime.us",
-          "US: SHOWTIME EAST HD",
           "US: SHOWTIME WEST HD",
           "SHOWTIME WEST",
           "PARAMOUNT PLUS WITH SHOWTIME WEST",
@@ -3096,7 +3002,7 @@
           "22532471",
           "866 PASHOHW",
           "866 Paramount+ with",
-          "Paramount+ with"
+          "PARAMOUNT+ WITH SHOWTIME WEST"
         ],
         "epg_ids": [
           "22532"
@@ -3121,7 +3027,7 @@
         ]
       },
       {
-        "name": "SHOBETH",
+        "name": "SHOxBET",
         "number": 868,
         "aliases": [
           "SHOBETH",
@@ -3158,8 +3064,6 @@
         "number": 870,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
-          "US: SHOWTIME 2 HD",
-          "Showtime2.us",
           "SHO2PHD",
           "60953",
           "60953475",
@@ -3182,8 +3086,7 @@
           "60947",
           "60947476",
           "873 SHOWXHD",
-          "873 Showtime Extrem",
-          "Showtime Extrem"
+          "873 Showtime Extrem"
         ],
         "epg_ids": [
           "60947"
@@ -3194,14 +3097,11 @@
         "number": 874,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
-          "US: SHOWTIME EXTREME HD",
-          "ShowtimeExtreme.us",
           "SHWXPHD",
           "60945",
           "60945477",
           "874 SHWXPHD",
-          "874 Showtime Extrem",
-          "Showtime Extrem"
+          "874 Showtime Extrem"
         ],
         "epg_ids": [
           "60945"
@@ -3230,8 +3130,6 @@
         "number": 887,
         "addon": "Paramount+ with SHOWTIME",
         "aliases": [
-          "US: THE MOVIE CHANNEL HD",
-          "TMC.us",
           "TMCXHD",
           "60951",
           "60951479",
@@ -3250,11 +3148,6 @@
         "aliases": [
           "US: EPIX HD",
           "epix.us",
-          "US: EPIX 2",
-          "US: EPIX DRIVE IN",
-          "epixdrivein.us",
-          "US: EPIX HITS",
-          "EpixHits.us",
           "EPIX",
           "EPIX HD",
           "EPIX 1",
@@ -3262,7 +3155,9 @@
           "MGMHD",
           "65687",
           "65687480",
-          "895 MGMHD"
+          "895 MGMHD",
+          "MGM+",
+          "MGM+ HD"
         ],
         "epg_ids": [
           "65687"
@@ -3273,18 +3168,14 @@
         "number": 896,
         "addon": "MGM+",
         "aliases": [
-          "US: EPIX HD",
-          "epix.us",
           "US: EPIX 2",
-          "US: EPIX HITS",
-          "EpixHits.us",
-          "EPIX HITS",
           "EPIX 2",
           "MGM PLUS HITS",
           "MGMHTH",
           "67929",
           "67929481",
-          "896 MGMHTH"
+          "896 MGMHTH",
+          "MGM+ HITS"
         ],
         "epg_ids": [
           "67929"
@@ -3297,13 +3188,14 @@
         "aliases": [
           "US: HBO HD",
           "HBO.us",
-          "US: HBO WEST HD",
           "HBOHD",
           "19548",
           "19548482",
           "899 HBOHD",
           "899 HBO HD",
-          "HBO HD"
+          "HBO HD",
+          "HBO",
+          "HBO EAST"
         ],
         "epg_ids": [
           "19548"
@@ -3327,22 +3219,21 @@
         "number": 901,
         "addon": "HBO",
         "aliases": [
-          "US: HBO HD",
-          "HBO.us",
           "US: HBO WEST HD",
           "HBOHDP",
           "19566",
           "19566484",
           "901 HBOHDP",
           "901 HBO HD West",
-          "HBO HD West"
+          "HBO HD West",
+          "HBO WEST"
         ],
         "epg_ids": [
           "19566"
         ]
       },
       {
-        "name": "HBO 2 East",
+        "name": "HBO Hits East",
         "number": 902,
         "addon": "HBO",
         "aliases": [
@@ -3353,32 +3244,39 @@
           "59368485",
           "902 HBOHTHD",
           "902 HBO Hits HD",
-          "HBO Hits HD"
+          "HBO Hits HD",
+          "HBO 2 East",
+          "HBO HITS",
+          "HBO HITS EAST",
+          "HBO 2",
+          "HBO 2 EAST"
         ],
         "epg_ids": [
           "59368"
         ]
       },
       {
-        "name": "HBO 2 West",
+        "name": "HBO Hits West",
         "number": 903,
         "addon": "HBO",
         "aliases": [
-          "US: HBO 2 HD",
-          "HBO2.us",
           "HBOHHDP",
           "59355",
           "59355486",
           "903 HBOHHDP",
           "903 HBO Hits HD (We",
-          "HBO Hits HD (We"
+          "HBO Hits HD (We",
+          "HBO 2 West",
+          "HBO HITS WEST",
+          "HBO 2 WEST",
+          "US: HBO 2 WEST HD"
         ],
         "epg_ids": [
           "59355"
         ]
       },
       {
-        "name": "HBO Signature East",
+        "name": "HBO Drama East",
         "number": 904,
         "addon": "HBO",
         "aliases": [
@@ -3389,25 +3287,32 @@
           "59363487",
           "904 HBODRHD",
           "904 HBO Drama HD",
-          "HBO Drama HD"
+          "HBO Drama HD",
+          "HBO Signature East",
+          "HBO DRAMA",
+          "HBO DRAMA EAST",
+          "HBO SIGNATURE",
+          "HBO SIGNATURE EAST"
         ],
         "epg_ids": [
           "59363"
         ]
       },
       {
-        "name": "HBO Signature West",
+        "name": "HBO Drama West",
         "number": 905,
         "addon": "HBO",
         "aliases": [
-          "US: HBO SIGNATURE HD",
-          "HBOSignature.us",
           "HBODHDP",
           "59366",
           "59366488",
           "905 HBODHDP",
           "905 HBO Drama HD (W",
-          "HBO Drama HD (W"
+          "HBO Drama HD (W",
+          "HBO Signature West",
+          "HBO DRAMA WEST",
+          "HBO SIGNATURE WEST",
+          "US: HBO SIGNATURE WEST HD"
         ],
         "epg_ids": [
           "59366"
@@ -3418,8 +3323,6 @@
         "number": 908,
         "addon": "HBO",
         "aliases": [
-          "US: COMEDY CENTRAL HD",
-          "ComedyCentral.us",
           "US: HBO COMEDY HD",
           "HBOComedy.us",
           "HBOCHD",
@@ -3427,7 +3330,9 @@
           "59839489",
           "908 HBOCHD",
           "908 HBO Comedy HD",
-          "HBO Comedy HD"
+          "HBO Comedy HD",
+          "HBO COMEDY",
+          "HBO COMEDY EAST"
         ],
         "epg_ids": [
           "59839"
@@ -3438,23 +3343,21 @@
         "number": 909,
         "addon": "HBO",
         "aliases": [
-          "US: COMEDY CENTRAL HD",
-          "ComedyCentral.us",
-          "US: HBO COMEDY HD",
-          "HBOComedy.us",
           "HBOCPHD",
           "59841",
           "59841490",
           "909 HBOCPHD",
           "909 HBO Comedy HD (",
-          "HBO Comedy HD ("
+          "HBO Comedy HD (",
+          "HBO COMEDY WEST",
+          "US: HBO COMEDY WEST HD"
         ],
         "epg_ids": [
           "59841"
         ]
       },
       {
-        "name": "HBO Zone East",
+        "name": "HBO Movies East",
         "number": 910,
         "addon": "HBO",
         "aliases": [
@@ -3465,25 +3368,32 @@
           "59845491",
           "910 HBOMVHD",
           "910 HBO Movies HD",
-          "HBO Movies HD"
+          "HBO Movies HD",
+          "HBO Zone East",
+          "HBO MOVIES",
+          "HBO MOVIES EAST",
+          "HBO ZONE",
+          "HBO ZONE EAST"
         ],
         "epg_ids": [
           "59845"
         ]
       },
       {
-        "name": "HBO Zone West",
+        "name": "HBO Movies West",
         "number": 911,
         "addon": "HBO",
         "aliases": [
-          "US: HBO ZONE HD",
-          "HBOZone.us",
           "HBOMHDP",
           "59847",
           "59847492",
           "911 HBOMHDP",
           "911 HBO Movies HD (",
-          "HBO Movies HD ("
+          "HBO Movies HD (",
+          "HBO Zone West",
+          "HBO MOVIES WEST",
+          "HBO ZONE WEST",
+          "US: HBO ZONE WEST HD"
         ],
         "epg_ids": [
           "59847"
@@ -3513,16 +3423,12 @@
           "US: CINEMAX HD",
           "Cinemax.us",
           "US: CINEMAX EAST HD",
-          "US: CINEMAX ACTION EAST HD",
-          "US: CINEMAX MOREMAX HDAR",
-          "US: CINEMAX THRILLERMAX HD",
-          "US: CINEMAX WEST HD",
-          "US: CINEMAX 5 STAR MAX",
-          "US: CINEMAX 5 STARMAX 4K",
           "MAXHD",
           "34933",
           "34933494",
-          "920 MAXHD"
+          "920 MAXHD",
+          "CINEMAX",
+          "CINEMAX EAST"
         ],
         "epg_ids": [
           "34933"
@@ -3533,88 +3439,80 @@
         "number": 921,
         "addon": "Cinemax",
         "aliases": [
-          "US: CINEMAX HD",
-          "Cinemax.us",
-          "US: CINEMAX EAST HD",
-          "US: CINEMAX ACTION EAST HD",
-          "US: CINEMAX MOREMAX HDAR",
-          "US: CINEMAX THRILLERMAX HD",
           "US: CINEMAX WEST HD",
-          "US: CINEMAX 5 STAR MAX",
-          "US: CINEMAX 5 STARMAX 4K",
           "MAXHDP",
           "35975",
           "35975495",
-          "921 MAXHDP"
+          "921 MAXHDP",
+          "CINEMAX WEST"
         ],
         "epg_ids": [
           "35975"
         ]
       },
       {
-        "name": "MoreMax East",
+        "name": "Cinemax Hits East",
         "number": 922,
         "addon": "Cinemax",
         "aliases": [
           "US: CINEMAX MOREMAX HDAR",
-          "Cinemax.us",
           "US: MOREMAX HD",
           "MoreMax.us",
           "CINEHHD",
           "59373",
           "59373496",
-          "922 CINEHHD"
+          "922 CINEHHD",
+          "MoreMax East",
+          "CINEMAX HITS",
+          "CINEMAX HITS EAST",
+          "MOREMAX",
+          "MOREMAX EAST"
         ],
         "epg_ids": [
           "59373"
         ]
       },
       {
-        "name": "MoreMax West",
+        "name": "Cinemax Hits West",
         "number": 923,
         "addon": "Cinemax",
         "aliases": [
-          "US: CINEMAX MOREMAX HDAR",
-          "Cinemax.us",
-          "US: MOREMAX HD",
-          "MoreMax.us",
           "CINHHDP",
           "59375",
           "59375497",
-          "923 CINHHDP"
+          "923 CINHHDP",
+          "MoreMax West",
+          "CINEMAX HITS WEST",
+          "MOREMAX WEST"
         ],
         "epg_ids": [
           "59375"
         ]
       },
       {
-        "name": "ActionMax",
+        "name": "Cinemax Action East",
         "number": 924,
         "addon": "Cinemax",
         "aliases": [
           "CINACHD",
           "59948",
           "59948498",
-          "924 CINACHD"
+          "924 CINACHD",
+          "ActionMax",
+          "CINEMAX ACTION",
+          "CINEMAX ACTION EAST",
+          "ACTIONMAX",
+          "ACTION MAX"
         ],
         "epg_ids": [
           "59948"
         ]
       },
       {
-        "name": "Cinemáx",
+        "name": "Cinemáx - CMAXHD",
         "number": 929,
         "addon": "Cinemax",
         "aliases": [
-          "US: CINEMAX HD",
-          "Cinemax.us",
-          "US: CINEMAX EAST HD",
-          "US: CINEMAX ACTION EAST HD",
-          "US: CINEMAX MOREMAX HDAR",
-          "US: CINEMAX THRILLERMAX HD",
-          "US: CINEMAX WEST HD",
-          "US: CINEMAX 5 STAR MAX",
-          "US: CINEMAX 5 STARMAX 4K",
           "CMAXHD",
           "59965",
           "59965499",
@@ -3625,14 +3523,18 @@
         ]
       },
       {
-        "name": "5StarMax",
+        "name": "Cinemax Classics",
         "number": 930,
         "addon": "Cinemax",
         "aliases": [
           "CINCLHD",
           "59961",
           "59961500",
-          "930 CINCLHD"
+          "930 CINCLHD",
+          "5StarMax",
+          "CINEMAX CLASSICS",
+          "5STARMAX",
+          "5 STAR MAX"
         ],
         "epg_ids": [
           "59961"
@@ -3671,7 +3573,7 @@
         ]
       },
       {
-        "name": "NICKTOO",
+        "name": "Nickelodeon / Nick at Nite West",
         "number": 253,
         "aliases": [
           "NICKTOO",
@@ -3684,7 +3586,7 @@
         ]
       },
       {
-        "name": "BOOM",
+        "name": "Boomerang",
         "number": 258,
         "aliases": [
           "BOOM",
@@ -3713,7 +3615,7 @@
         ]
       },
       {
-        "name": "DJCH",
+        "name": "Disney Jr.",
         "number": 260,
         "aliases": [
           "DJCH",
@@ -3726,7 +3628,7 @@
         ]
       },
       {
-        "name": "NORAFTV",
+        "name": "NoireTV",
         "number": 269,
         "aliases": [
           "NORAFTV",
@@ -3818,7 +3720,7 @@
         ]
       },
       {
-        "name": "BABY1HD",
+        "name": "BabyFirst",
         "number": 765,
         "aliases": [
           "BABY1HD",
@@ -3861,7 +3763,7 @@
         ]
       },
       {
-        "name": "ASPREHD",
+        "name": "Aspire",
         "number": 772,
         "aliases": [
           "ASPREHD",
@@ -3874,7 +3776,7 @@
         ]
       },
       {
-        "name": "CLEOHD",
+        "name": "Cleo TV",
         "number": 773,
         "aliases": [
           "CLEOHD",
@@ -3900,7 +3802,7 @@
         ]
       },
       {
-        "name": "UNVSOHD",
+        "name": "Universo",
         "number": 775,
         "aliases": [
           "UNVSOHD",
@@ -3913,7 +3815,7 @@
         ]
       },
       {
-        "name": "STELLAR",
+        "name": "Stellar TV",
         "number": 776,
         "aliases": [
           "STELLAR",
@@ -3926,7 +3828,7 @@
         ]
       },
       {
-        "name": "GRIOCH",
+        "name": "TheGrio",
         "number": 777,
         "aliases": [
           "GRIOCH",
@@ -3984,7 +3886,7 @@
         ]
       },
       {
-        "name": "IMPACTV",
+        "name": "The Impact Network",
         "number": 787,
         "aliases": [
           "IMPACTV",
@@ -4054,13 +3956,15 @@
         ]
       },
       {
-        "name": "FDUELRC",
+        "name": "FanDuel Racing",
         "number": 316,
         "aliases": [
           "FDUELRC",
           "32258",
           "32258176",
-          "316 FDUELRC"
+          "316 FDUELRC",
+          "FANDUEL RACING",
+          "TVG2"
         ],
         "epg_ids": [
           "32258"
@@ -4243,10 +4147,9 @@
         ]
       },
       {
-        "name": "Game Show Network",
+        "name": "Game Show Network - GSNHD",
         "number": 684,
         "aliases": [
-          "US: Game Show Central",
           "GSNHD",
           "68827",
           "68827387",
@@ -4293,7 +4196,7 @@
         ]
       },
       {
-        "name": "OVATNHD",
+        "name": "Ovation",
         "number": 688,
         "aliases": [
           "OVATNHD",
@@ -4329,14 +4232,8 @@
         "name": "Comedy Central",
         "number": 690,
         "aliases": [
-          "US: CATCHY COMEDY HD",
           "US: COMEDY CENTRAL HD",
           "ComedyCentral.us",
-          "US: COMEDY TV HD",
-          "US: HBO COMEDY HD",
-          "HBOComedy.us",
-          "US: STARZ COMEDY HD",
-          "StarzComedy.us",
           "CCHD",
           "62420",
           "62420392",
@@ -4367,7 +4264,7 @@
         ]
       },
       {
-        "name": "REELZHD",
+        "name": "Reelz",
         "number": 692,
         "aliases": [
           "REELZHD",
@@ -4398,7 +4295,7 @@
         ]
       },
       {
-        "name": "CMDTVHD",
+        "name": "Comedy.TV",
         "number": 695,
         "aliases": [
           "CMDTVHD",
@@ -4431,7 +4328,7 @@
         ]
       },
       {
-        "name": "VICEHD",
+        "name": "VICE TV",
         "number": 697,
         "aliases": [
           "VICEHD",
@@ -4497,7 +4394,6 @@
         "aliases": [
           "US: LIFETIME HD",
           "LifetimeNetwork.us",
-          "US: LIFETIME REAL WOMEN HD",
           "LIFEHD",
           "60150",
           "60150360",
@@ -4669,7 +4565,7 @@
         ]
       },
       {
-        "name": "GEMSHD",
+        "name": "Gems",
         "number": 658,
         "aliases": [
           "GEMSHD",
@@ -4682,7 +4578,7 @@
         ]
       },
       {
-        "name": "SHOPLCH",
+        "name": "Shop LC",
         "number": 659,
         "aliases": [
           "SHOPLCH",
@@ -4756,7 +4652,11 @@
           "MAGNHD",
           "67375",
           "67375376",
-          "667 MAGNHD"
+          "667 MAGNHD",
+          "DIY NETWORK",
+          "DIY NETWORK HD",
+          "MAGNOLIA NETWORK",
+          "MAGNOLIA NETWORK HD"
         ],
         "epg_ids": [
           "67375"
@@ -4796,7 +4696,7 @@
         ]
       },
       {
-        "name": "MYDESHD",
+        "name": "MyDestination.TV",
         "number": 674,
         "aliases": [
           "MYDESHD",
@@ -4809,7 +4709,7 @@
         ]
       },
       {
-        "name": "RECIPEH",
+        "name": "Recipe.TV",
         "number": 676,
         "aliases": [
           "RECIPEH",
@@ -4822,7 +4722,7 @@
         ]
       },
       {
-        "name": "JUST",
+        "name": "Justice Central.TV",
         "number": 677,
         "aliases": [
           "JUST",
@@ -4835,7 +4735,7 @@
         ]
       },
       {
-        "name": "LCSTR",
+        "name": "Law&Crime Network",
         "number": 678,
         "aliases": [
           "LCSTR",
@@ -4848,7 +4748,7 @@
         ]
       },
       {
-        "name": "CINHD",
+        "name": "Crime & Investigation",
         "number": 679,
         "aliases": [
           "CINHD",
@@ -4914,8 +4814,6 @@
         "aliases": [
           "US: : NATIONAL GEOGRAPHIC HD",
           "NatGeo.us",
-          "US: : NATIONAL GEOGRAPHIC WILD HD",
-          "NatGeoWild.us",
           "NGCHD",
           "49438",
           "49438346",
@@ -4956,14 +4854,15 @@
         ]
       },
       {
-        "name": "DLCHD",
+        "name": "Discovery Life",
         "number": 624,
         "aliases": [
           "DLCHD",
           "92204",
           "92204349",
           "624 DLCHD",
-          "DISCOVERY LIFE"
+          "DISCOVERY LIFE",
+          "DISCOVERY LIFE HD"
         ],
         "epg_ids": [
           "92204"
@@ -5002,14 +4901,15 @@
         ]
       },
       {
-        "name": "FYIHD",
+        "name": "FYI",
         "number": 629,
         "aliases": [
           "FYIHD",
           "58988",
           "58988352",
           "629 FYIHD",
-          "FYI"
+          "FYI",
+          "FYI HD"
         ],
         "epg_ids": [
           "58988"
@@ -5032,13 +4932,18 @@
         ]
       },
       {
-        "name": "MTHD",
+        "name": "Discovery Turbo",
         "number": 631,
         "aliases": [
           "MTHD",
           "31046",
           "31046354",
-          "631 MTHD"
+          "631 MTHD",
+          "DISCOVERY TURBO",
+          "DISCOVERY TURBO HD",
+          "MOTOR TREND",
+          "MOTORTREND",
+          "VELOCITY"
         ],
         "epg_ids": [
           "31046"
@@ -5051,20 +4956,25 @@
           "NGWIHD",
           "67331",
           "67331355",
-          "632 NGWIHD"
+          "632 NGWIHD",
+          "US: NAT GEO WILD HD",
+          "NAT GEO WILD",
+          "NAT GEO WILD HD"
         ],
         "epg_ids": [
           "67331"
         ]
       },
       {
-        "name": "PETSTVH",
+        "name": "Pets.TV",
         "number": 633,
         "aliases": [
           "PETSTVH",
           "81283",
           "81283356",
-          "633 PETSTVH"
+          "633 PETSTVH",
+          "PETS.TV",
+          "PETS TV"
         ],
         "epg_ids": [
           "81283"
@@ -5087,13 +4997,17 @@
         ]
       },
       {
-        "name": "GLIVHD",
+        "name": "Great American Faith & Living",
         "number": 635,
         "aliases": [
           "GLIVHD",
           "90858",
           "90858358",
-          "635 GLIVHD"
+          "635 GLIVHD",
+          "GREAT AMERICAN FAITH & LIVING",
+          "GREAT AMERICAN LIVING",
+          "GAC LIVING",
+          "RIDE TV"
         ],
         "epg_ids": [
           "90858"
@@ -5132,7 +5046,7 @@
         ]
       },
       {
-        "name": "3ANGELS",
+        "name": "3ABN",
         "number": 291,
         "aliases": [
           "3ANGELS",
@@ -5158,7 +5072,7 @@
         ]
       },
       {
-        "name": "LFN",
+        "name": "Faith TV USA",
         "number": 792,
         "aliases": [
           "LFN",
@@ -5171,7 +5085,7 @@
         ]
       },
       {
-        "name": "Daystar Television Network (DYSTRHD)",
+        "name": "Daystar",
         "number": 793,
         "aliases": [
           "US: DAYSTAR HD",
@@ -5180,14 +5094,15 @@
           "87001",
           "87001440",
           "DAYSTAR TELEVISION NETWORK",
-          "793 DYSTRHD"
+          "793 DYSTRHD",
+          "Daystar Television Network (DYSTRHD)"
         ],
         "epg_ids": [
           "87001"
         ]
       },
       {
-        "name": "PTL",
+        "name": "PTL Television Network",
         "number": 795,
         "aliases": [
           "PTL",
@@ -5200,21 +5115,22 @@
         ]
       },
       {
-        "name": "Sonlife Broadcasting Network (SONLFHD)",
+        "name": "SonLife Broadcasting Network",
         "number": 797,
         "aliases": [
           "SONLFHD",
           "91314",
           "91314442",
           "SONLIFE BROADCASTING NETWORK",
-          "797 SONLFHD"
+          "797 SONLFHD",
+          "Sonlife Broadcasting Network (SONLFHD)"
         ],
         "epg_ids": [
           "91314"
         ]
       },
       {
-        "name": "JBSHD",
+        "name": "Jewish Broadcasting Service",
         "number": 798,
         "aliases": [
           "JBSHD",
@@ -5229,7 +5145,7 @@
     ],
     "Music": [
       {
-        "name": "MTVU",
+        "name": "mtvU",
         "number": 212,
         "aliases": [
           "MTVU",
@@ -5242,7 +5158,7 @@
         ]
       },
       {
-        "name": "BETJ",
+        "name": "BET Jams",
         "number": 213,
         "aliases": [
           "BETJ",
@@ -5255,7 +5171,7 @@
         ]
       },
       {
-        "name": "NMZK",
+        "name": "NickMusic",
         "number": 214,
         "aliases": [
           "NMZK",
@@ -5268,7 +5184,7 @@
         ]
       },
       {
-        "name": "MTVCLAS",
+        "name": "MTV Classic",
         "number": 218,
         "aliases": [
           "MTVCLAS",
@@ -5294,7 +5210,7 @@
         ]
       },
       {
-        "name": "CMTMUS",
+        "name": "CMT Music",
         "number": 222,
         "aliases": [
           "CMTMUS",
@@ -5307,7 +5223,7 @@
         ]
       },
       {
-        "name": "GSPLSD",
+        "name": "BET Gospel",
         "number": 225,
         "aliases": [
           "GSPLSD",
@@ -5352,7 +5268,7 @@
         ]
       },
       {
-        "name": "MTVLIVE",
+        "name": "MTV Live",
         "number": 715,
         "aliases": [
           "MTVLIVE",
@@ -5381,7 +5297,7 @@
         ]
       },
       {
-        "name": "BHERHD",
+        "name": "BET Her",
         "number": 720,
         "aliases": [
           "BHERHD",
@@ -5413,7 +5329,7 @@
         ]
       },
       {
-        "name": "RVLTHD",
+        "name": "REVOLT",
         "number": 726,
         "aliases": [
           "RVLTHD",
@@ -5755,7 +5671,6 @@
           "XHAW",
           "32752",
           "32752530",
-          "MULTIMEDIOS TV HD",
           "1511 XHAW"
         ],
         "epg_ids": [
@@ -5812,7 +5727,6 @@
           "XHAWTDT",
           "54300",
           "54300534",
-          "MULTIMEDIOS TV HD",
           "1516 XHAWTDT"
         ],
         "epg_ids": [
