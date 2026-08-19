@@ -1,0 +1,3276 @@
+{
+  "package": "Spectrum Tampa Bay - No Spanish IPTV Clean",
+  "date": "2026-08-18",
+  "description": "Curated Spectrum Tampa Bay logical-channel lineup optimized for IPTV/Lineuparr, excluding Spanish-language channels.",
+  "source": "Spectrum Tampa Bay source lineup, cross-checked against the supplied TV Passport guide and curated for IPTV/Lineuparr use.",
+  "categories": {
+    "Local": [
+      {
+        "name": "WCLF",
+        "number": 2,
+        "aliases": [
+          "WCLFDT",
+          "WCLF-TV",
+          "11351",
+          "42627",
+          "2 WCLF"
+        ]
+      },
+      {
+        "name": "WEDU",
+        "number": 3,
+        "aliases": [
+          "WEDUDT",
+          "WEDU-TV",
+          "11407",
+          "35193",
+          "3 WEDU"
+        ]
+      },
+      {
+        "name": "WTOG",
+        "number": 4,
+        "aliases": [
+          "WTOGDT",
+          "WTOG-TV",
+          "11894",
+          "30617",
+          "4 WTOG"
+        ]
+      },
+      {
+        "name": "WFTT",
+        "number": 5,
+        "aliases": [
+          "WFTTDT",
+          "WFTT-TV",
+          "11249",
+          "50307",
+          "5 WFTT"
+        ]
+      },
+      {
+        "name": "WTTA",
+        "number": 6,
+        "aliases": [
+          "WTTADT",
+          "WTTA-TV",
+          "11903",
+          "36145",
+          "6 WTTA"
+        ]
+      },
+      {
+        "name": "WFLA-TV",
+        "number": 8,
+        "aliases": [
+          "WFLA",
+          "WFLADT",
+          "11437",
+          "21222",
+          "8 WFLA"
+        ]
+      },
+      {
+        "name": "Bay News 9",
+        "number": 9,
+        "aliases": [
+          "BAY9",
+          "BAY9DT",
+          "19997",
+          "70271",
+          "9 BAY9"
+        ]
+      },
+      {
+        "name": "WTSP",
+        "number": 10,
+        "aliases": [
+          "WTSPDT",
+          "WTSP-TV",
+          "11902",
+          "20495",
+          "10 WTSP"
+        ]
+      },
+      {
+        "name": "WFTS-TV",
+        "number": 11,
+        "aliases": [
+          "WFTS",
+          "WFTSDT",
+          "11447",
+          "21224",
+          "11 WFTS"
+        ]
+      },
+      {
+        "name": "WMOR",
+        "number": 12,
+        "aliases": [
+          "WMORDT",
+          "WMOR-TV",
+          "11891",
+          "33689",
+          "12 WMOR"
+        ]
+      },
+      {
+        "name": "WTVT",
+        "number": 13,
+        "aliases": [
+          "WTVTDT",
+          "WTVT-TV",
+          "11922",
+          "21223",
+          "13 WTVT"
+        ]
+      },
+      {
+        "name": "WXPX-TV",
+        "number": 17,
+        "aliases": [
+          "WXPX",
+          "WXPXDT",
+          "15034",
+          "34842",
+          "17 WXPX"
+        ]
+      },
+      {
+        "name": "WTVTDT3",
+        "number": 603,
+        "aliases": [
+          "WTVTDT3 BUZZR",
+          "WTVTDT3-TV",
+          "94323",
+          "603 WTVTDT3"
+        ]
+      },
+      {
+        "name": "WEDUDT3",
+        "number": 604,
+        "aliases": [
+          "WEDUDT3 NHKWRLD",
+          "WEDUDT3-TV",
+          "56655",
+          "604 WEDUDT3"
+        ]
+      },
+      {
+        "name": "WEDUDT2",
+        "number": 606,
+        "aliases": [
+          "WEDUDT2 WORLD",
+          "WEDUDT2-TV",
+          "35223",
+          "606 WEDUDT2"
+        ]
+      },
+      {
+        "name": "WFLADT2",
+        "number": 607,
+        "aliases": [
+          "WFLADT2 CHARGE",
+          "WFLADT2-TV",
+          "43841",
+          "607 WFLADT2"
+        ]
+      },
+      {
+        "name": "WFTSDT3",
+        "number": 608,
+        "aliases": [
+          "WFTSDT3 GRIT",
+          "WFTSDT3-TV",
+          "91890",
+          "608 WFTSDT3"
+        ]
+      },
+      {
+        "name": "WTTA2",
+        "number": 609,
+        "aliases": [
+          "WTTADT2",
+          "WTTADT2 COZITV",
+          "WTTADT2-TV",
+          "50311",
+          "609 WTTADT2"
+        ]
+      },
+      {
+        "name": "WTSP3",
+        "number": 611,
+        "aliases": [
+          "WTSPDT3",
+          "WTSPDT3 CRIME",
+          "WTSPDT3-TV",
+          "91455",
+          "611 WTSPDT3"
+        ]
+      },
+      {
+        "name": "WTVT2",
+        "number": 613,
+        "aliases": [
+          "WTVTDT2",
+          "WTVTDT2 MVIES",
+          "WTVTDT2-TV",
+          "62802",
+          "613 WTVTDT2"
+        ]
+      },
+      {
+        "name": "HEROICN",
+        "number": 614,
+        "aliases": [
+          "90401",
+          "614 HEROICN"
+        ]
+      },
+      {
+        "name": "WXPXDT2",
+        "number": 615,
+        "aliases": [
+          "WXPXDT2 ION",
+          "WXPXDT2-TV",
+          "43324",
+          "615 WXPXDT2"
+        ]
+      },
+      {
+        "name": "WXPXDT4",
+        "number": 616,
+        "aliases": [
+          "WXPXDT4 LAFF",
+          "WXPXDT4-TV",
+          "43330",
+          "616 WXPXDT4"
+        ]
+      },
+      {
+        "name": "WEDQDT5",
+        "number": 617,
+        "aliases": [
+          "WEDQDT5 HD06",
+          "WEDQDT5-TV",
+          "35226",
+          "617 WEDQDT5"
+        ]
+      },
+      {
+        "name": "WEDUDT6",
+        "number": 618,
+        "aliases": [
+          "WEDUDT6 CREATE",
+          "WEDUDT6-TV",
+          "105774",
+          "618 WEDUDT6"
+        ]
+      },
+      {
+        "name": "WFLADT3",
+        "number": 619,
+        "aliases": [
+          "WFLADT3 ANTENNA",
+          "WFLADT3-TV",
+          "43843",
+          "619 WFLADT3"
+        ]
+      },
+      {
+        "name": "WTSPDT4",
+        "number": 620,
+        "aliases": [
+          "WTSPDT4 THENEST",
+          "WTSPDT4-TV",
+          "107046",
+          "620 WTSPDT4"
+        ]
+      },
+      {
+        "name": "FLACHAN",
+        "number": 623,
+        "aliases": [
+          "35219",
+          "623 FLACHAN"
+        ]
+      },
+      {
+        "name": "WFTSDT2",
+        "number": 629,
+        "aliases": [
+          "WFTSDT2 BOUNCE",
+          "WFTSDT2-TV",
+          "50359",
+          "629 WFTSDT2"
+        ]
+      },
+      {
+        "name": "WMORDT2",
+        "number": 630,
+        "aliases": [
+          "WMORDT2 METVN",
+          "WMORDT2-TV",
+          "62896",
+          "630 WMORDT2"
+        ]
+      },
+      {
+        "name": "MYX",
+        "number": 633,
+        "aliases": [
+          "55451",
+          "633 MYX"
+        ]
+      },
+      {
+        "name": "WEDQDT4",
+        "number": 1016,
+        "aliases": [
+          "WEDQDT4-TV",
+          "56744",
+          "1016 WEDQDT4"
+        ]
+      },
+      {
+        "name": "WSNNLD",
+        "number": 1020,
+        "aliases": [
+          "WSNNLD MNT",
+          "WSNNLD-TV",
+          "75548",
+          "1020 WSNNLD"
+        ]
+      }
+    ],
+    "News": [
+      {
+        "name": "CNN",
+        "number": 29,
+        "aliases": [
+          "CNNHD",
+          "10142",
+          "58646",
+          "29 CNN",
+          "US: CNN HD",
+          "cnn.us",
+          "US: CNN 4K",
+          "CNN HD"
+        ]
+      },
+      {
+        "name": "HLN",
+        "number": 30,
+        "aliases": [
+          "HLNHD",
+          "10145",
+          "64549",
+          "30 HLN"
+        ]
+      },
+      {
+        "name": "CNBC",
+        "number": 42,
+        "aliases": [
+          "CNBCFL",
+          "92081",
+          "42 CNBCFL",
+          "US: CNBC HD",
+          "CNBC.us",
+          "CNBCHD",
+          "CNBC HD",
+          "CNBCFHD",
+          "92082",
+          "1219 CNBCFHD"
+        ]
+      },
+      {
+        "name": "The Weather Channel",
+        "number": 63,
+        "aliases": [
+          "WEATH",
+          "WEA",
+          "WEATHHD",
+          "WEATH-TV",
+          "11187",
+          "58812",
+          "63 WEATH"
+        ]
+      },
+      {
+        "name": "Bloomberg Television",
+        "number": 127,
+        "aliases": [
+          "BLOOM",
+          "BLOOMHD",
+          "14755",
+          "71799",
+          "127 BLOOM"
+        ]
+      },
+      {
+        "name": "i24NEWS",
+        "number": 128,
+        "aliases": [
+          "I24NWEN",
+          "87376",
+          "128 I24NWEN",
+          "102309",
+          "1224 I24NEHD",
+          "I24NEHD"
+        ]
+      },
+      {
+        "name": "OANHD",
+        "number": 129,
+        "aliases": [
+          "83953",
+          "129 OANHD"
+        ]
+      },
+      {
+        "name": "CNBC World",
+        "number": 141,
+        "aliases": [
+          "CNBCWLD",
+          "CNBCW",
+          "26849",
+          "141 CNBCWLD"
+        ]
+      },
+      {
+        "name": "FOX Business Network",
+        "number": 149,
+        "aliases": [
+          "FBNHD",
+          "FBN",
+          "58649",
+          "58718",
+          "149 FBN",
+          "US: FOX BUSINESS NETWORK HD",
+          "FoxBusiness.us",
+          "foxbusiness.us"
+        ]
+      },
+      {
+        "name": "CSPAN",
+        "number": 175,
+        "aliases": [
+          "CSPANHD",
+          "10161",
+          "68344",
+          "175 CSPAN"
+        ]
+      },
+      {
+        "name": "CSPAN2",
+        "number": 176,
+        "aliases": [
+          "10162",
+          "176 CSPAN2",
+          "68334",
+          "1227 CSPN2HD",
+          "CSPN2HD"
+        ]
+      },
+      {
+        "name": "CSPAN3",
+        "number": 177,
+        "aliases": [
+          "17665",
+          "177 CSPAN3",
+          "68332",
+          "1228 CSPN3HD",
+          "CSPN3HD"
+        ]
+      },
+      {
+        "name": "NEWSNTN",
+        "number": 1018,
+        "aliases": [
+          "91096",
+          "1018 NEWSNTN"
+        ]
+      },
+      {
+        "name": "NEWSMX",
+        "number": 1217,
+        "aliases": [
+          "87925",
+          "1217 NEWSMX"
+        ]
+      }
+    ],
+    "Sports": [
+      {
+        "name": "ESPN",
+        "number": 27,
+        "aliases": [
+          "ESPNTPA",
+          "77570",
+          "27 ESPNTPA",
+          "US: ESPN HD",
+          "ESPN.us",
+          "ESPNHD",
+          "ESPN HD",
+          "77572",
+          "1127 ESPNHTP",
+          "ESPNHTP"
+        ]
+      },
+      {
+        "name": "GOLF",
+        "number": 67,
+        "aliases": [
+          "GOLFHD",
+          "14899",
+          "61854",
+          "67 GOLF"
+        ]
+      },
+      {
+        "name": "SEC Network",
+        "number": 72,
+        "aliases": [
+          "SEC",
+          "89535",
+          "72 SEC",
+          "SECH",
+          "89714",
+          "1150 SECH"
+        ]
+      },
+      {
+        "name": "FOX Sports 1",
+        "number": 112,
+        "aliases": [
+          "FS1HD",
+          "FS1",
+          "82541",
+          "82547",
+          "112 FS1",
+          "US: FOX SPORTS 1 HD",
+          "US: FOX SPORTS 1",
+          "FoxSports1.us",
+          "FOX SPORTS 1 HD",
+          "Fox Sports 1 HD"
+        ]
+      },
+      {
+        "name": "ESPNews",
+        "number": 150,
+        "aliases": [
+          "ESPNEWS",
+          "16485",
+          "150 ESPNEWS",
+          "ESPNWHD",
+          "ESPNews HD",
+          "59976",
+          "1129 ESPNWHD"
+        ]
+      },
+      {
+        "name": "ESPNU",
+        "number": 151,
+        "aliases": [
+          "ESPNUHD",
+          "45654",
+          "60696",
+          "151 ESPNU"
+        ]
+      },
+      {
+        "name": "NBA TV",
+        "number": 803,
+        "aliases": [
+          "NBAFL",
+          "NBA",
+          "77636",
+          "803 NBAFL",
+          "77637",
+          "1140 NBAHFL",
+          "NBAHFL"
+        ]
+      },
+      {
+        "name": "Tennis Channel",
+        "number": 804,
+        "aliases": [
+          "TENNIS",
+          "TENN",
+          "33395",
+          "804 TENNIS",
+          "TENISHD",
+          "60316",
+          "1155 TENISHD"
+        ]
+      },
+      {
+        "name": "Outdoor Channel",
+        "number": 805,
+        "aliases": [
+          "OUTD",
+          "OUT",
+          "14776",
+          "805 OUTD"
+        ]
+      },
+      {
+        "name": "FOX Sports 2",
+        "number": 806,
+        "aliases": [
+          "FS2HD",
+          "FS2",
+          "33178",
+          "59305",
+          "806 FS2",
+          "US: FOX SPORTS 2 HD",
+          "US: FOX SPORTS 2",
+          "FoxSports2.us",
+          "FOX SPORTS 2 HD",
+          "Fox Sports 2 HD"
+        ]
+      },
+      {
+        "name": "CBS Sports Network",
+        "number": 807,
+        "aliases": [
+          "CBSSN",
+          "CBSSNHD",
+          "16365",
+          "59250",
+          "807 CBSSN"
+        ]
+      },
+      {
+        "name": "NHL Network",
+        "number": 808,
+        "aliases": [
+          "NHLFL",
+          "NHL",
+          "NHLHDFL",
+          "77587",
+          "77588",
+          "808 NHLFL"
+        ]
+      },
+      {
+        "name": "Big Ten Network",
+        "number": 809,
+        "aliases": [
+          "BIGFLA",
+          "61160",
+          "809 BIGFLA",
+          "79660",
+          "1138 BIGFLAH",
+          "BIGFLAH"
+        ]
+      },
+      {
+        "name": "MLB Network",
+        "number": 815,
+        "aliases": [
+          "MLBFL",
+          "MLBFLHD",
+          "77574",
+          "77573",
+          "815 MLBFL"
+        ]
+      },
+      {
+        "name": "NFL Network",
+        "number": 825,
+        "aliases": [
+          "NFLNET",
+          "34710",
+          "825 NFLNET",
+          "45399",
+          "1145 NFLHD",
+          "NFLHD"
+        ]
+      },
+      {
+        "name": "NFL RedZone",
+        "number": 826,
+        "aliases": [
+          "NFLNRZ",
+          "NFLN",
+          "65024",
+          "826 NFLNRZ",
+          "65025",
+          "1146 NFLNRZD",
+          "NFLNRZD"
+        ]
+      },
+      {
+        "name": "World Fishing Network",
+        "number": 827,
+        "aliases": [
+          "WFNUS",
+          "WFNUSHD",
+          "WFNUS-TV",
+          "63234",
+          "64046",
+          "827 WFNUS"
+        ]
+      },
+      {
+        "name": "FSP",
+        "number": 829,
+        "aliases": [
+          "66879",
+          "829 FSP"
+        ]
+      },
+      {
+        "name": "beIN Sports",
+        "number": 831,
+        "aliases": [
+          "BEINS1",
+          "beINS",
+          "76942",
+          "831 BEINS1",
+          "BEIN1HD",
+          "76950",
+          "1163 BEIN1HD"
+        ]
+      },
+      {
+        "name": "Willow",
+        "number": 835,
+        "aliases": [
+          "WILLOW",
+          "WILLOW-TV",
+          "68605",
+          "835 WILLOW"
+        ]
+      },
+      {
+        "name": "RACER Network",
+        "number": 837,
+        "aliases": [
+          "RACER",
+          "RACERHD",
+          "45169",
+          "61036",
+          "837 RACER"
+        ]
+      },
+      {
+        "name": "FanDuel TV",
+        "number": 838,
+        "aliases": [
+          "FDUELTV",
+          "21345",
+          "838 FDUELTV"
+        ]
+      },
+      {
+        "name": "ACC Network",
+        "number": 1205,
+        "aliases": [
+          "ACC",
+          "111871",
+          "1205 ACC"
+        ]
+      }
+    ],
+    "Entertainment": [
+      {
+        "name": "NWSNTSD",
+        "number": 18,
+        "aliases": [
+          "91097",
+          "18 NWSNTSD"
+        ]
+      },
+      {
+        "name": "TBS",
+        "number": 23,
+        "aliases": [
+          "TBSTPA",
+          "77582",
+          "23 TBSTPA",
+          "US: TBS HD",
+          "TBSHD",
+          "TBS HD"
+        ]
+      },
+      {
+        "name": "ESPN2",
+        "number": 28,
+        "aliases": [
+          "ESP2TPA",
+          "77577",
+          "28 ESP2TPA",
+          "ESPN2HD",
+          "ESPN 2 HD",
+          "77579",
+          "1128 ESP2HTP",
+          "ESP2HTP"
+        ]
+      },
+      {
+        "name": "USA Network",
+        "number": 32,
+        "aliases": [
+          "USAFL",
+          "USA",
+          "USAFLHD",
+          "92084",
+          "92086",
+          "32 USAFL",
+          "US: USA NETWORK HD",
+          "USANetwork.us",
+          "USAHD",
+          "USA HD"
+        ]
+      },
+      {
+        "name": "TNT",
+        "number": 33,
+        "aliases": [
+          "TNTHD",
+          "11164",
+          "42642",
+          "33 TNT",
+          "US: TNT HD",
+          "TNT.us",
+          "US: TNT SD",
+          "TNT HD"
+        ]
+      },
+      {
+        "name": "Fox News Channel",
+        "number": 37,
+        "aliases": [
+          "FNC",
+          "FNCHD",
+          "16374",
+          "60179",
+          "37 FNC",
+          "US: FOX NEWS HD",
+          "FoxNews.us",
+          "foxnews.us",
+          "US: FOX NEWS CHANNEL 4K",
+          "Fox News HD"
+        ]
+      },
+      {
+        "name": "MSNOW",
+        "number": 41,
+        "aliases": [
+          "MSNOWHD",
+          "16300",
+          "64241",
+          "41 MSNOW"
+        ]
+      },
+      {
+        "name": "Paramount Network",
+        "number": 43,
+        "aliases": [
+          "PAR",
+          "PARHD",
+          "11163",
+          "59186",
+          "43 PAR",
+          "US: PARAMOUNT HD",
+          "PARAMOUNT NETWORK"
+        ]
+      },
+      {
+        "name": "CMT",
+        "number": 45,
+        "aliases": [
+          "CMTV",
+          "CMTVHD",
+          "10138",
+          "59440",
+          "45 CMTV"
+        ]
+      },
+      {
+        "name": "A&E",
+        "number": 48,
+        "aliases": [
+          "AETV",
+          "AETVHD",
+          "10035",
+          "51529",
+          "48 AETV"
+        ]
+      },
+      {
+        "name": "TV Land",
+        "number": 49,
+        "aliases": [
+          "TVLAND",
+          "16123",
+          "49 TVLAND",
+          "TVLNDHD",
+          "73541",
+          "1281 TVLNDHD"
+        ]
+      },
+      {
+        "name": "TRUTV",
+        "number": 55,
+        "aliases": [
+          "TRUTVHD",
+          "truTV",
+          "10153",
+          "64490",
+          "55 TRUTV"
+        ]
+      },
+      {
+        "name": "SYFY",
+        "number": 59,
+        "aliases": [
+          "SYFYHD",
+          "Syfy",
+          "11097",
+          "58623",
+          "59 SYFY"
+        ]
+      },
+      {
+        "name": "Comedy Central",
+        "number": 61,
+        "aliases": [
+          "COMEDY",
+          "10149",
+          "61 COMEDY",
+          "CCHD",
+          "62420",
+          "1292 CCHD"
+        ]
+      },
+      {
+        "name": "VH1",
+        "number": 62,
+        "aliases": [
+          "VH1HD",
+          "11218",
+          "60046",
+          "62 VH1"
+        ]
+      },
+      {
+        "name": "MTV",
+        "number": 66,
+        "aliases": [
+          "MTVHD",
+          "10986",
+          "60964",
+          "66 MTV"
+        ]
+      },
+      {
+        "name": "WE tv",
+        "number": 69,
+        "aliases": [
+          "WE",
+          "16409",
+          "69 WE",
+          "WEHD-TV",
+          "59296",
+          "1272 WEHD",
+          "WEHD"
+        ]
+      },
+      {
+        "name": "E!",
+        "number": 70,
+        "aliases": [
+          "E",
+          "10989",
+          "70 E",
+          "EHD",
+          "61812",
+          "1293 EHD"
+        ]
+      },
+      {
+        "name": "BET",
+        "number": 71,
+        "aliases": [
+          "BETHD",
+          "10051",
+          "63236",
+          "71 BET"
+        ]
+      },
+      {
+        "name": "BBC America",
+        "number": 75,
+        "aliases": [
+          "BBCA",
+          "BBC",
+          "BBCAHD",
+          "18332",
+          "64492",
+          "75 BBCA"
+        ]
+      },
+      {
+        "name": "BET Soul",
+        "number": 96,
+        "aliases": [
+          "BETSOUL",
+          "Soul",
+          "18718",
+          "96 BETSOUL"
+        ]
+      },
+      {
+        "name": "REVOLT",
+        "number": 97,
+        "aliases": [
+          "RVLT",
+          "RVLTHD",
+          "83097",
+          "83098",
+          "97 RVLT"
+        ]
+      },
+      {
+        "name": "Discovery Family",
+        "number": 102,
+        "aliases": [
+          "DFC",
+          "DFCHD",
+          "16618",
+          "67749",
+          "102 DFC"
+        ]
+      },
+      {
+        "name": "TWCTRV",
+        "number": 106,
+        "aliases": [
+          "87180",
+          "106 TWCTRV"
+        ]
+      },
+      {
+        "name": "BET Her",
+        "number": 107,
+        "aliases": [
+          "BHER",
+          "BETHer",
+          "BHERHD",
+          "14897",
+          "63220",
+          "107 BHER"
+        ]
+      },
+      {
+        "name": "FUSE",
+        "number": 109,
+        "aliases": [
+          "FUSEHD",
+          "14929",
+          "59116",
+          "109 FUSE"
+        ]
+      },
+      {
+        "name": "GSN",
+        "number": 116,
+        "aliases": [
+          "GSNHD",
+          "14909",
+          "68827",
+          "116 GSN"
+        ]
+      },
+      {
+        "name": "FX",
+        "number": 119,
+        "aliases": [
+          "14321",
+          "119 FX",
+          "FX.us",
+          "US: FX HD",
+          "FXHD",
+          "FX HD (EAST)",
+          "58574",
+          "1283 FXHD"
+        ]
+      },
+      {
+        "name": "BBC World News",
+        "number": 123,
+        "aliases": [
+          "BBCWDNA",
+          "89542",
+          "123 BBCWDNA",
+          "89690",
+          "1222 BBCNAHD",
+          "BBCNAHD"
+        ]
+      },
+      {
+        "name": "MTV2",
+        "number": 126,
+        "aliases": [
+          "MTV2HD",
+          "16361",
+          "75077",
+          "126 MTV2"
+        ]
+      },
+      {
+        "name": "FM",
+        "number": 132,
+        "aliases": [
+          "18262",
+          "132 FM"
+        ]
+      },
+      {
+        "name": "Great American Family",
+        "number": 133,
+        "aliases": [
+          "GFAM",
+          "GFAMHD",
+          "16062",
+          "82892",
+          "133 GFAM"
+        ]
+      },
+      {
+        "name": "YTA",
+        "number": 134,
+        "aliases": [
+          "10982",
+          "134 YTA"
+        ]
+      },
+      {
+        "name": "MTV Classic",
+        "number": 138,
+        "aliases": [
+          "MTVCLAS",
+          "MTV-C",
+          "22561",
+          "138 MTVCLAS"
+        ]
+      },
+      {
+        "name": "Lifetime Real Women",
+        "number": 143,
+        "aliases": [
+          "LRW",
+          "29612",
+          "143 LRW"
+        ]
+      },
+      {
+        "name": "UPtv",
+        "number": 145,
+        "aliases": [
+          "UP",
+          "44940",
+          "145 UP",
+          "UPHD",
+          "66143",
+          "1317 UPHD"
+        ]
+      },
+      {
+        "name": "TV One",
+        "number": 146,
+        "aliases": [
+          "TVONE",
+          "TVONEHD",
+          "35513",
+          "61960",
+          "146 TVONE"
+        ]
+      },
+      {
+        "name": "LOGO",
+        "number": 147,
+        "aliases": [
+          "LOGOHD",
+          "46762",
+          "96971",
+          "147 LOGO"
+        ]
+      },
+      {
+        "name": "VICE",
+        "number": 152,
+        "aliases": [
+          "VICEHD",
+          "18822",
+          "65732",
+          "152 VICE"
+        ]
+      },
+      {
+        "name": "BET Jams",
+        "number": 154,
+        "aliases": [
+          "BETJ",
+          "30419",
+          "154 BETJ"
+        ]
+      },
+      {
+        "name": "NMZK",
+        "number": 163,
+        "aliases": [
+          "30418",
+          "163 NMZK"
+        ]
+      },
+      {
+        "name": "CLEO",
+        "number": 167,
+        "aliases": [
+          "CLEOHD",
+          "110288",
+          "110289",
+          "167 CLEO"
+        ]
+      },
+      {
+        "name": "TheGrio",
+        "number": 168,
+        "aliases": [
+          "GRIOE",
+          "GRIO",
+          "116533",
+          "168 GRIOE"
+        ]
+      },
+      {
+        "name": "MILH",
+        "number": 169,
+        "aliases": [
+          "48999",
+          "169 MILH"
+        ]
+      },
+      {
+        "name": "CIN",
+        "number": 170,
+        "aliases": [
+          "CINHD",
+          "48543",
+          "61469",
+          "170 CIN"
+        ]
+      },
+      {
+        "name": "DYSTR",
+        "number": 171,
+        "aliases": [
+          "DYSTRHD",
+          "19026",
+          "87001",
+          "171 DYSTR"
+        ]
+      },
+      {
+        "name": "WORD",
+        "number": 173,
+        "aliases": [
+          "WORD-TV",
+          "21781",
+          "173 WORD"
+        ]
+      },
+      {
+        "name": "Pop",
+        "number": 178,
+        "aliases": [
+          "POPSD",
+          "POP",
+          "POPHD",
+          "16715",
+          "68796",
+          "178 POPSD"
+        ]
+      },
+      {
+        "name": "AspireTV",
+        "number": 180,
+        "aliases": [
+          "ASPRE",
+          "ASPiRE",
+          "ASPREHD",
+          "76126",
+          "97409",
+          "180 ASPRE"
+        ]
+      },
+      {
+        "name": "FOXWXSD",
+        "number": 181,
+        "aliases": [
+          "FOXWX",
+          "123194",
+          "93141",
+          "181 FOXWXSD"
+        ]
+      },
+      {
+        "name": "LOVE",
+        "number": 187,
+        "aliases": [
+          "71533",
+          "187 LOVE"
+        ]
+      },
+      {
+        "name": "FETV",
+        "number": 192,
+        "aliases": [
+          "73413",
+          "192 FETV"
+        ]
+      },
+      {
+        "name": "INSP",
+        "number": 196,
+        "aliases": [
+          "INSPHD",
+          "11066",
+          "82773",
+          "196 INSP"
+        ]
+      },
+      {
+        "name": "The Cowboy Channel",
+        "number": 198,
+        "aliases": [
+          "COWBOY",
+          "10188",
+          "198 COWBOY"
+        ]
+      },
+      {
+        "name": "JEWISH",
+        "number": 330,
+        "aliases": [
+          "58400",
+          "330 JEWISH"
+        ]
+      },
+      {
+        "name": "CARSTV",
+        "number": 334,
+        "aliases": [
+          "71302",
+          "334 CARSTV"
+        ]
+      },
+      {
+        "name": "PETSTV",
+        "number": 336,
+        "aliases": [
+          "71297",
+          "336 PETSTV"
+        ]
+      },
+      {
+        "name": "RECIPE",
+        "number": 337,
+        "aliases": [
+          "71294",
+          "337 RECIPE"
+        ]
+      },
+      {
+        "name": "AFRCA",
+        "number": 369,
+        "aliases": [
+          "AFRCAHD",
+          "47472",
+          "68576",
+          "369 AFRCA"
+        ]
+      },
+      {
+        "name": "AWEHD",
+        "number": 376,
+        "aliases": [
+          "45438",
+          "376 AWEHD"
+        ]
+      },
+      {
+        "name": "HERETV",
+        "number": 398,
+        "aliases": [
+          "45210",
+          "398 HERETV"
+        ]
+      },
+      {
+        "name": "IMPACSD",
+        "number": 474,
+        "aliases": [
+          "138982",
+          "474 IMPACSD"
+        ]
+      },
+      {
+        "name": "FREFMHD",
+        "number": 1112,
+        "aliases": [
+          "59615",
+          "1112 FREFMHD"
+        ]
+      },
+      {
+        "name": "SONLFHD",
+        "number": 1116,
+        "aliases": [
+          "91314",
+          "1116 SONLFHD"
+        ]
+      },
+      {
+        "name": "COWBOYH",
+        "number": 1120,
+        "aliases": [
+          "80597",
+          "1120 COWBOYH"
+        ]
+      },
+      {
+        "name": "HFM",
+        "number": 1124,
+        "aliases": [
+          "105723",
+          "1124 HFM"
+        ]
+      },
+      {
+        "name": "LNLC",
+        "number": 1126,
+        "aliases": [
+          "183475",
+          "1126 LNLC"
+        ]
+      },
+      {
+        "name": "SPCTSN",
+        "number": 1134,
+        "aliases": [
+          "77423",
+          "1134 SPCTSN"
+        ]
+      },
+      {
+        "name": "YESNATD",
+        "number": 1142,
+        "aliases": [
+          "63558",
+          "1142 YESNATD"
+        ]
+      },
+      {
+        "name": "SUNNHD",
+        "number": 1148,
+        "aliases": [
+          "54994",
+          "1148 SUNNHD"
+        ]
+      },
+      {
+        "name": "FDFL1HD",
+        "number": 1149,
+        "aliases": [
+          "65773",
+          "1149 FDFL1HD"
+        ]
+      },
+      {
+        "name": "OUTHD",
+        "number": 1156,
+        "aliases": [
+          "46737",
+          "1156 OUTHD"
+        ]
+      },
+      {
+        "name": "FSCPLHD",
+        "number": 1160,
+        "aliases": [
+          "66880",
+          "1160 FSCPLHD"
+        ]
+      },
+      {
+        "name": "NESNATH",
+        "number": 1162,
+        "aliases": [
+          "67518",
+          "1162 NESNATH"
+        ]
+      },
+      {
+        "name": "WLLOHD",
+        "number": 1165,
+        "aliases": [
+          "WLLOHD-TV",
+          "80621",
+          "1165 WLLOHD"
+        ]
+      },
+      {
+        "name": "SPTSNLA",
+        "number": 1179,
+        "aliases": [
+          "87107",
+          "1179 SPTSNLA"
+        ]
+      },
+      {
+        "name": "ACUWTHH",
+        "number": 1208,
+        "aliases": [
+          "91994",
+          "1208 ACUWTHH"
+        ]
+      },
+      {
+        "name": "NY1HD",
+        "number": 1210,
+        "aliases": [
+          "60159",
+          "1210 NY1HD"
+        ]
+      },
+      {
+        "name": "CHDDRHD",
+        "number": 1212,
+        "aliases": [
+          "109332",
+          "1212 CHDDRHD"
+        ]
+      },
+      {
+        "name": "CFLNHD",
+        "number": 1213,
+        "aliases": [
+          "70273",
+          "1213 CFLNHD"
+        ]
+      },
+      {
+        "name": "STELLAR",
+        "number": 1229,
+        "aliases": [
+          "130088",
+          "1229 STELLAR"
+        ]
+      },
+      {
+        "name": "MTHD",
+        "number": 1235,
+        "aliases": [
+          "31046",
+          "1235 MTHD"
+        ]
+      },
+      {
+        "name": "TBSHTPA",
+        "number": 1236,
+        "aliases": [
+          "77583",
+          "1236 TBSHTPA"
+        ]
+      },
+      {
+        "name": "HERICNS",
+        "number": 1243,
+        "aliases": [
+          "110477",
+          "1243 HERICNS"
+        ]
+      },
+      {
+        "name": "EARTHX",
+        "number": 1258,
+        "aliases": [
+          "126128",
+          "1258 EARTHX"
+        ]
+      },
+      {
+        "name": "NGWIHD",
+        "number": 1262,
+        "aliases": [
+          "67331",
+          "1262 NGWIHD"
+        ]
+      },
+      {
+        "name": "TWCTRVH",
+        "number": 1267,
+        "aliases": [
+          "87182",
+          "1267 TWCTRVH"
+        ]
+      },
+      {
+        "name": "STRY",
+        "number": 1274,
+        "aliases": [
+          "122968",
+          "1274 STRY"
+        ]
+      },
+      {
+        "name": "STARTTV",
+        "number": 1275,
+        "aliases": [
+          "109454",
+          "1275 STARTTV"
+        ]
+      },
+      {
+        "name": "CHIMETV",
+        "number": 1276,
+        "aliases": [
+          "131889",
+          "1276 CHIMETV"
+        ]
+      },
+      {
+        "name": "ENVOYTV",
+        "number": 1279,
+        "aliases": [
+          "192894",
+          "1279 ENVOYTV"
+        ]
+      },
+      {
+        "name": "FXX",
+        "number": 1284,
+        "aliases": [
+          "FXXHD",
+          "66379",
+          "1284 FXXHD"
+        ]
+      },
+      {
+        "name": "MTVL",
+        "number": 1300,
+        "aliases": [
+          "MTVLIVE",
+          "49141",
+          "1300 MTVLIVE"
+        ]
+      },
+      {
+        "name": "AXSTV",
+        "number": 1303,
+        "aliases": [
+          "28506",
+          "1303 AXSTV"
+        ]
+      },
+      {
+        "name": "FMHD",
+        "number": 1311,
+        "aliases": [
+          "72094",
+          "1311 FMHD"
+        ]
+      },
+      {
+        "name": "CARSTVH",
+        "number": 1334,
+        "aliases": [
+          "81270",
+          "1334 CARSTVH"
+        ]
+      },
+      {
+        "name": "JUST",
+        "number": 1335,
+        "aliases": [
+          "78850",
+          "1335 JUST"
+        ]
+      },
+      {
+        "name": "PETSTVH",
+        "number": 1336,
+        "aliases": [
+          "81283",
+          "1336 PETSTVH"
+        ]
+      },
+      {
+        "name": "RECIPEH",
+        "number": 1337,
+        "aliases": [
+          "81289",
+          "1337 RECIPEH"
+        ]
+      },
+      {
+        "name": "SMTHHD",
+        "number": 1370,
+        "aliases": [
+          "58532",
+          "1370 SMTHHD"
+        ]
+      },
+      {
+        "name": "HDNETMV",
+        "number": 1375,
+        "aliases": [
+          "33668",
+          "1375 HDNETMV"
+        ]
+      },
+      {
+        "name": "SZECLHD",
+        "number": 1379,
+        "aliases": [
+          "83404",
+          "1379 SZECLHD"
+        ]
+      },
+      {
+        "name": "SZESUHD",
+        "number": 1381,
+        "aliases": [
+          "83076",
+          "1381 SZESUHD"
+        ]
+      },
+      {
+        "name": "SZEAHD",
+        "number": 1382,
+        "aliases": [
+          "72015",
+          "1382 SZEAHD"
+        ]
+      },
+      {
+        "name": "SZEBHD",
+        "number": 1383,
+        "aliases": [
+          "72014",
+          "1383 SZEBHD"
+        ]
+      },
+      {
+        "name": "SZENHP",
+        "number": 1388,
+        "aliases": [
+          "67237",
+          "1388 SZENHP"
+        ]
+      },
+      {
+        "name": "SETHHD",
+        "number": 1561,
+        "aliases": [
+          "79610",
+          "1561 SETHHD"
+        ]
+      }
+    ],
+    "Lifestyle": [
+      {
+        "name": "OWN",
+        "number": 24,
+        "aliases": [
+          "OWNHD",
+          "70387",
+          "70388",
+          "24 OWN"
+        ]
+      },
+      {
+        "name": "Discovery Channel",
+        "number": 34,
+        "aliases": [
+          "DSC",
+          "DISC",
+          "DSCHD",
+          "11150",
+          "56905",
+          "34 DSC"
+        ]
+      },
+      {
+        "name": "Animal Planet",
+        "number": 35,
+        "aliases": [
+          "APL",
+          "ANPL",
+          "APLHD",
+          "16331",
+          "57394",
+          "35 APL"
+        ]
+      },
+      {
+        "name": "Lifetime",
+        "number": 38,
+        "aliases": [
+          "LIFE",
+          "LIFEHD",
+          "10918",
+          "60150",
+          "38 LIFE"
+        ]
+      },
+      {
+        "name": "Oxygen",
+        "number": 44,
+        "aliases": [
+          "OXYGEN",
+          "OXY",
+          "21484",
+          "44 OXYGEN",
+          "70522",
+          "1271 OXYGNHD",
+          "OXYGNHD"
+        ]
+      },
+      {
+        "name": "TLC",
+        "number": 46,
+        "aliases": [
+          "TLCHD",
+          "11158",
+          "57391",
+          "46 TLC"
+        ]
+      },
+      {
+        "name": "Lifetime Movie Network",
+        "number": 50,
+        "aliases": [
+          "LMN",
+          "LMNHD",
+          "18480",
+          "55887",
+          "50 LMN"
+        ]
+      },
+      {
+        "name": "BRAVO",
+        "number": 51,
+        "aliases": [
+          "BRAVOHD",
+          "Bravo",
+          "10057",
+          "58625",
+          "51 BRAVO"
+        ]
+      },
+      {
+        "name": "History",
+        "number": 54,
+        "aliases": [
+          "HISTORY",
+          "HIST",
+          "14771",
+          "54 HISTORY",
+          "HSTRYHD",
+          "57708",
+          "1242 HSTRYHD"
+        ]
+      },
+      {
+        "name": "FOOD",
+        "number": 56,
+        "aliases": [
+          "FOODHD",
+          "12574",
+          "50747",
+          "56 FOOD"
+        ]
+      },
+      {
+        "name": "HGTV",
+        "number": 57,
+        "aliases": [
+          "14902",
+          "57 HGTV",
+          "49788",
+          "1250 HGTVD",
+          "HGTVD"
+        ]
+      },
+      {
+        "name": "National Geographic",
+        "number": 65,
+        "aliases": [
+          "NGC",
+          "NGCHD",
+          "24959",
+          "49438",
+          "65 NGC"
+        ]
+      },
+      {
+        "name": "Hallmark Channel",
+        "number": 68,
+        "aliases": [
+          "HALL",
+          "HALLHD",
+          "11221",
+          "66268",
+          "68 HALL"
+        ]
+      },
+      {
+        "name": "Travel Channel",
+        "number": 90,
+        "aliases": [
+          "TRAV",
+          "TRAVEL",
+          "11180",
+          "90 TRAV"
+        ]
+      },
+      {
+        "name": "RFD-TV",
+        "number": 98,
+        "aliases": [
+          "RFDTV",
+          "RFD",
+          "25148",
+          "98 RFDTV"
+        ]
+      },
+      {
+        "name": "Science Channel",
+        "number": 100,
+        "aliases": [
+          "SCIENCE",
+          "SCI",
+          "16616",
+          "100 SCIENCE",
+          "SCIHD",
+          "57390",
+          "1265 SCIHD"
+        ]
+      },
+      {
+        "name": "American Heroes Channel",
+        "number": 103,
+        "aliases": [
+          "AHC",
+          "AHCHD",
+          "18284",
+          "78808",
+          "103 AHC"
+        ]
+      },
+      {
+        "name": "FYI",
+        "number": 104,
+        "aliases": [
+          "FYISD",
+          "FYIHD",
+          "16834",
+          "58988",
+          "104 FYISD"
+        ]
+      },
+      {
+        "name": "Destination America",
+        "number": 108,
+        "aliases": [
+          "DEST",
+          "DESTHD",
+          "16617",
+          "60468",
+          "108 DEST"
+        ]
+      },
+      {
+        "name": "Discovery Life",
+        "number": 114,
+        "aliases": [
+          "DLC",
+          "DLCHD",
+          "16125",
+          "92204",
+          "114 DLC"
+        ]
+      },
+      {
+        "name": "Investigation Discovery",
+        "number": 135,
+        "aliases": [
+          "ID",
+          "16615",
+          "135 ID",
+          "IDHD",
+          "65342",
+          "1246 IDHD"
+        ]
+      },
+      {
+        "name": "Magnolia Network",
+        "number": 136,
+        "aliases": [
+          "MAGN",
+          "MAGNHD",
+          "18544",
+          "67375",
+          "136 MAGN"
+        ]
+      },
+      {
+        "name": "Cooking Channel",
+        "number": 142,
+        "aliases": [
+          "COOK",
+          "COOKHD",
+          "30156",
+          "68065",
+          "142 COOK"
+        ]
+      },
+      {
+        "name": "Ovation",
+        "number": 164,
+        "aliases": [
+          "OVATION",
+          "OVA",
+          "15807",
+          "164 OVATION",
+          "69061",
+          "1277 OVATNHD",
+          "OVATNHD"
+        ]
+      },
+      {
+        "name": "Smithsonian Channel",
+        "number": 370,
+        "aliases": [
+          "SMITH",
+          "65799",
+          "370 SMITH"
+        ]
+      },
+      {
+        "name": "RFDHD",
+        "number": 1305,
+        "aliases": [
+          "63717",
+          "1305 RFDHD"
+        ]
+      }
+    ],
+    "Movies": [
+      {
+        "name": "TCM",
+        "number": 53,
+        "aliases": [
+          "TCMHD",
+          "12852",
+          "64312",
+          "53 TCM"
+        ]
+      },
+      {
+        "name": "AMC",
+        "number": 64,
+        "aliases": [
+          "AMCHD",
+          "10021",
+          "59337",
+          "64 AMC"
+        ]
+      },
+      {
+        "name": "REELZ",
+        "number": 354,
+        "aliases": [
+          "REELZHD",
+          "52199",
+          "68385",
+          "354 REELZ"
+        ]
+      },
+      {
+        "name": "SundanceTV",
+        "number": 374,
+        "aliases": [
+          "SUNDANC",
+          "16108",
+          "374 SUNDANC"
+        ]
+      },
+      {
+        "name": "IFC",
+        "number": 384,
+        "aliases": [
+          "IFCHD",
+          "14873",
+          "59444",
+          "384 IFC"
+        ]
+      },
+      {
+        "name": "Hallmark Mystery",
+        "number": 385,
+        "aliases": [
+          "HMYS",
+          "HMYSHD",
+          "61522",
+          "46710",
+          "385 HMYS"
+        ]
+      },
+      {
+        "name": "SUNDHD",
+        "number": 1356,
+        "aliases": [
+          "71280",
+          "1356 SUNDHD"
+        ]
+      },
+      {
+        "name": "FXMHD",
+        "number": 1389,
+        "aliases": [
+          "70253",
+          "1389 FXMHD"
+        ]
+      }
+    ],
+    "Kids": [
+      {
+        "name": "Nickelodeon",
+        "number": 36,
+        "aliases": [
+          "NIK",
+          "NICK",
+          "NIKHD",
+          "11006",
+          "59432",
+          "36 NIK"
+        ]
+      },
+      {
+        "name": "DISN",
+        "number": 40,
+        "aliases": [
+          "DISNHD",
+          "10171",
+          "59684",
+          "40 DISN"
+        ]
+      },
+      {
+        "name": "TOON",
+        "number": 58,
+        "aliases": [
+          "TOONHD",
+          "12131",
+          "60048",
+          "58 TOON"
+        ]
+      },
+      {
+        "name": "Boomerang",
+        "number": 124,
+        "aliases": [
+          "BOOM",
+          "21883",
+          "124 BOOM"
+        ]
+      },
+      {
+        "name": "Nick Jr.",
+        "number": 125,
+        "aliases": [
+          "NICJR",
+          "NICKJ",
+          "NICJRHD",
+          "19211",
+          "82649",
+          "125 NICJR"
+        ]
+      },
+      {
+        "name": "TeenNick",
+        "number": 140,
+        "aliases": [
+          "TNCK",
+          "TNICK",
+          "TNCKHD",
+          "59036",
+          "97047",
+          "140 TNCK"
+        ]
+      },
+      {
+        "name": "Nicktoons",
+        "number": 144,
+        "aliases": [
+          "NIKTON",
+          "30420",
+          "144 NIKTON"
+        ]
+      },
+      {
+        "name": "BabyFirst",
+        "number": 174,
+        "aliases": [
+          "BABY1",
+          "50338",
+          "174 BABY1"
+        ]
+      },
+      {
+        "name": "DJCHHD",
+        "number": 1106,
+        "aliases": [
+          "74885",
+          "1106 DJCHHD"
+        ]
+      },
+      {
+        "name": "DXDHD",
+        "number": 1107,
+        "aliases": [
+          "60006",
+          "1107 DXDHD"
+        ]
+      },
+      {
+        "name": "NIKTNHD",
+        "number": 1111,
+        "aliases": [
+          "82654",
+          "1111 NIKTNHD"
+        ]
+      }
+    ],
+    "Premium": [
+      {
+        "name": "HBO",
+        "number": 201,
+        "aliases": [
+          "HBOHD",
+          "10240",
+          "19548",
+          "201 HBO",
+          "HBOP",
+          "10244",
+          "208 HBOP",
+          "HBOHDP",
+          "19566",
+          "1408 HBOHDP"
+        ]
+      },
+      {
+        "name": "HBOHIT",
+        "number": 202,
+        "aliases": [
+          "HBOHTS",
+          "10241",
+          "202 HBOHTS",
+          "HBOHTP",
+          "10242",
+          "209 HBOHTP",
+          "HBOHTHD",
+          "59368",
+          "1402 HBOHTHD"
+        ]
+      },
+      {
+        "name": "HBODRMA",
+        "number": 203,
+        "aliases": [
+          "10243",
+          "203 HBODRMA",
+          "HBODRP",
+          "16576",
+          "210 HBODRP",
+          "HBODRHD",
+          "59363",
+          "1403 HBODRHD"
+        ]
+      },
+      {
+        "name": "HBOC",
+        "number": 205,
+        "aliases": [
+          "HBOCHD",
+          "18429",
+          "59839",
+          "205 HBOC",
+          "HBOCP",
+          "18430",
+          "212 HBOCP"
+        ]
+      },
+      {
+        "name": "HBOMOV",
+        "number": 206,
+        "aliases": [
+          "18431",
+          "206 HBOMOV",
+          "HBOMVP",
+          "18432",
+          "213 HBOMVP",
+          "HBOMVHD",
+          "59845",
+          "1406 HBOMVHD"
+        ]
+      },
+      {
+        "name": "Cinemax",
+        "number": 221,
+        "aliases": [
+          "MAX",
+          "MAX1",
+          "MAXHD",
+          "10120",
+          "34933",
+          "221 MAX",
+          "MAXP",
+          "12508",
+          "229 MAXP",
+          "MAXHDP",
+          "35975",
+          "1429 MAXHDP"
+        ]
+      },
+      {
+        "name": "CINEHIT",
+        "number": 222,
+        "aliases": [
+          "10121",
+          "222 CINEHIT",
+          "CINEHP",
+          "16620",
+          "230 CINEHP",
+          "CINEHHD",
+          "59373",
+          "1422 CINEHHD"
+        ]
+      },
+      {
+        "name": "CINACT",
+        "number": 223,
+        "aliases": [
+          "18433",
+          "223 CINACT",
+          "CINACSP",
+          "18434",
+          "231 CINACSP",
+          "CINACHD",
+          "59948",
+          "1423 CINACHD"
+        ]
+      },
+      {
+        "name": "CINECLS",
+        "number": 227,
+        "aliases": [
+          "25620",
+          "227 CINECLS",
+          "CINCLHD",
+          "59961",
+          "1427 CINCLHD"
+        ]
+      },
+      {
+        "name": "Paramount+ with SHOWTIME",
+        "number": 241,
+        "aliases": [
+          "PARSHO",
+          "11115",
+          "241 PARSHO",
+          "PARSHOW",
+          "11117",
+          "249 PARSHOW",
+          "PARSHOH",
+          "21868",
+          "1441 PARSHOH",
+          "PASHOHW",
+          "22532",
+          "1449 PASHOHW"
+        ]
+      },
+      {
+        "name": "SHO2",
+        "number": 242,
+        "aliases": [
+          "SHO2HD",
+          "11116",
+          "58533",
+          "242 SHO2",
+          "SHO2P",
+          "16444",
+          "250 SHO2P"
+        ]
+      },
+      {
+        "name": "SHOCSE",
+        "number": 243,
+        "aliases": [
+          "16153",
+          "243 SHOCSE",
+          "SHOCSEP",
+          "16584",
+          "251 SHOCSEP",
+          "SHOCSHD",
+          "61001",
+          "1443 SHOCSHD"
+        ]
+      },
+      {
+        "name": "WOMEN",
+        "number": 244,
+        "aliases": [
+          "WOMENHD",
+          "WOMEN-TV",
+          "25272",
+          "68338",
+          "244 WOMEN",
+          "WOMENP",
+          "WOMENP-TV",
+          "25273",
+          "252 WOMENP"
+        ]
+      },
+      {
+        "name": "SHOBET",
+        "number": 245,
+        "aliases": [
+          "20622",
+          "245 SHOBET",
+          "SHOBETP",
+          "20625",
+          "253 SHOBETP",
+          "SHOBETH",
+          "68340",
+          "1445 SHOBETH"
+        ]
+      },
+      {
+        "name": "NEXT",
+        "number": 246,
+        "aliases": [
+          "NEXTHD",
+          "25270",
+          "68342",
+          "246 NEXT",
+          "NEXTP",
+          "25271",
+          "254 NEXTP"
+        ]
+      },
+      {
+        "name": "SHOWX",
+        "number": 247,
+        "aliases": [
+          "SHOWXHD",
+          "18086",
+          "60947",
+          "247 SHOWX",
+          "SHOWXP",
+          "18164",
+          "255 SHOWXP"
+        ]
+      },
+      {
+        "name": "FAMZ",
+        "number": 248,
+        "aliases": [
+          "25274",
+          "248 FAMZ",
+          "FAMZP",
+          "25275",
+          "256 FAMZP"
+        ]
+      },
+      {
+        "name": "The Movie Channel",
+        "number": 261,
+        "aliases": [
+          "TMC",
+          "TMCHD",
+          "11160",
+          "35329",
+          "261 TMC",
+          "TMCP",
+          "12509",
+          "263 TMCP"
+        ]
+      },
+      {
+        "name": "TMCX",
+        "number": 262,
+        "aliases": [
+          "TMCXHD",
+          "17663",
+          "60951",
+          "262 TMCX",
+          "TMCXP",
+          "TMCXPHD",
+          "17687",
+          "60949",
+          "264 TMCXP"
+        ]
+      },
+      {
+        "name": "STARZ",
+        "number": 271,
+        "aliases": [
+          "12719",
+          "271 STARZ",
+          "STZHD",
+          "34941",
+          "1466 STZHD"
+        ]
+      },
+      {
+        "name": "STZE",
+        "number": 272,
+        "aliases": [
+          "STZEHD",
+          "16311",
+          "57573",
+          "272 STZE"
+        ]
+      },
+      {
+        "name": "STZIB",
+        "number": 273,
+        "aliases": [
+          "16833",
+          "273 STZIB",
+          "STRZIBH",
+          "67235",
+          "1469 STRZIBH"
+        ]
+      },
+      {
+        "name": "SRZK",
+        "number": 274,
+        "aliases": [
+          "STZK",
+          "STZKHD",
+          "19635",
+          "57581",
+          "274 STZK"
+        ]
+      },
+      {
+        "name": "STZCI",
+        "number": 275,
+        "aliases": [
+          "19634",
+          "275 STZCI",
+          "STRZCIH",
+          "67236",
+          "1471 STRZCIH"
+        ]
+      },
+      {
+        "name": "SRZC",
+        "number": 276,
+        "aliases": [
+          "STZC",
+          "STZCHD",
+          "34901",
+          "57569",
+          "276 STZC"
+        ]
+      },
+      {
+        "name": "MGM+",
+        "number": 364,
+        "aliases": [
+          "MGM",
+          "MGMHD",
+          "65669",
+          "65687",
+          "364 MGM"
+        ]
+      },
+      {
+        "name": "MGMHIT",
+        "number": 365,
+        "aliases": [
+          "73075",
+          "365 MGMHIT",
+          "MGMHTH",
+          "67929",
+          "1365 MGMHTH",
+          "MGM+ Hits HD"
+        ]
+      },
+      {
+        "name": "MGM+ Drive-In",
+        "number": 367,
+        "aliases": [
+          "MGMDRV",
+          "68409",
+          "367 MGMDRV"
+        ]
+      },
+      {
+        "name": "Flix",
+        "number": 371,
+        "aliases": [
+          "FLIX",
+          "10201",
+          "371 FLIX",
+          "FLIXP",
+          "16575",
+          "372 FLIXP"
+        ]
+      },
+      {
+        "name": "STZENC",
+        "number": 377,
+        "aliases": [
+          "10178",
+          "377 STZENC",
+          "STZENHD",
+          "36225",
+          "1377 STZENHD"
+        ]
+      },
+      {
+        "name": "STZEFM",
+        "number": 378,
+        "aliases": [
+          "STZENFS",
+          "102903",
+          "378 STZENFS"
+        ]
+      },
+      {
+        "name": "STZECL",
+        "number": 379,
+        "aliases": [
+          "STZENCL",
+          "14764",
+          "379 STZENCL"
+        ]
+      },
+      {
+        "name": "STZEWSS",
+        "number": 380,
+        "aliases": [
+          "102906",
+          "380 STZEWSS"
+        ]
+      },
+      {
+        "name": "STZESU",
+        "number": 381,
+        "aliases": [
+          "STZENSU",
+          "14766",
+          "381 STZENSU"
+        ]
+      },
+      {
+        "name": "STZEAC",
+        "number": 382,
+        "aliases": [
+          "STZENAC",
+          "14871",
+          "382 STZENAC"
+        ]
+      },
+      {
+        "name": "STZEBK",
+        "number": 383,
+        "aliases": [
+          "STZENBK",
+          "14870",
+          "383 STZENBK"
+        ]
+      },
+      {
+        "name": "RetroPlex",
+        "number": 386,
+        "aliases": [
+          "RETRO",
+          "RETROHD",
+          "49767",
+          "65791",
+          "386 RETRO"
+        ]
+      },
+      {
+        "name": "IndiePlex",
+        "number": 387,
+        "aliases": [
+          "INDIE",
+          "INDIE-E",
+          "INDIEHD",
+          "49751",
+          "65795",
+          "387 INDIE"
+        ]
+      },
+      {
+        "name": "STZENCP",
+        "number": 388,
+        "aliases": [
+          "17125",
+          "388 STZENCP"
+        ]
+      },
+      {
+        "name": "STZENFP",
+        "number": 389,
+        "aliases": [
+          "17131",
+          "389 STZENFP"
+        ]
+      },
+      {
+        "name": "STZESP",
+        "number": 390,
+        "aliases": [
+          "72016",
+          "390 STZESP"
+        ]
+      },
+      {
+        "name": "MoviePlex",
+        "number": 391,
+        "aliases": [
+          "MPLEX",
+          "PLEX",
+          "MPLEXHD",
+          "15295",
+          "83075",
+          "391 MPLEX"
+        ]
+      },
+      {
+        "name": "MGM+ Marquee",
+        "number": 1366,
+        "aliases": [
+          "74073",
+          "1366 MGMMRHD",
+          "MGMMRHD",
+          "MGM+ Marquee HD"
+        ]
+      }
+    ],
+    "Faith": [
+      {
+        "name": "EWTN",
+        "number": 111,
+        "aliases": [
+          "EWTNHD",
+          "10183",
+          "67164",
+          "111 EWTN"
+        ]
+      },
+      {
+        "name": "TBN",
+        "number": 131,
+        "aliases": [
+          "14767",
+          "131 TBN"
+        ]
+      },
+      {
+        "name": "JLT",
+        "number": 172,
+        "aliases": [
+          "JLTV",
+          "60165",
+          "172 JLTV"
+        ]
+      },
+      {
+        "name": "BYUtv",
+        "number": 197,
+        "aliases": [
+          "BYUTV",
+          "BYU",
+          "BYUTVHD",
+          "21855",
+          "71764",
+          "197 BYUTV"
+        ]
+      },
+      {
+        "name": "SonLife Broadcasting Network",
+        "number": 199,
+        "aliases": [
+          "SBND",
+          "SBN",
+          "67676",
+          "30324",
+          "199 SBND"
+        ]
+      },
+      {
+        "name": "JBS",
+        "number": 1223,
+        "aliases": [
+          "74978",
+          "1223 JBS"
+        ]
+      }
+    ],
+    "Shopping": [
+      {
+        "name": "HSN",
+        "number": 101,
+        "aliases": [
+          "HSNHD",
+          "10269",
+          "62077",
+          "101 HSN"
+        ]
+      },
+      {
+        "name": "QVC",
+        "number": 130,
+        "aliases": [
+          "QVCHD",
+          "11069",
+          "60222",
+          "130 QVC"
+        ]
+      },
+      {
+        "name": "HSN2",
+        "number": 161,
+        "aliases": [
+          "10270",
+          "161 HSN2"
+        ]
+      },
+      {
+        "name": "QVC2",
+        "number": 162,
+        "aliases": [
+          "QVC2HD",
+          "82682",
+          "82696",
+          "162 QVC2"
+        ]
+      },
+      {
+        "name": "GEMSSD",
+        "number": 184,
+        "aliases": [
+          "GEMSHD",
+          "26643",
+          "109264",
+          "184 GEMSSD"
+        ]
+      },
+      {
+        "name": "SHOPLC",
+        "number": 185,
+        "aliases": [
+          "56032",
+          "185 SHOPLC"
+        ]
+      },
+      {
+        "name": "JTV",
+        "number": 1328,
+        "aliases": [
+          "JTVHD",
+          "65556",
+          "1328 JTVHD"
+        ]
+      },
+      {
+        "name": "SHOPLCH",
+        "number": 1330,
+        "aliases": [
+          "93564",
+          "1330 SHOPLCH"
+        ]
+      },
+      {
+        "name": "QVC3",
+        "number": 1332,
+        "aliases": [
+          "101260",
+          "1332 QVC3"
+        ]
+      }
+    ],
+    "International": [
+      {
+        "name": "ART America",
+        "number": 501,
+        "aliases": [
+          "ARTAMER",
+          "19979",
+          "501 ARTAMER"
+        ]
+      },
+      {
+        "name": "The Arabic Channel",
+        "number": 502,
+        "aliases": [
+          "ARABCH",
+          "23775",
+          "502 ARABCH"
+        ]
+      },
+      {
+        "name": "SBN",
+        "number": 505,
+        "aliases": [
+          "30324",
+          "505 SBN"
+        ]
+      },
+      {
+        "name": "TVBV",
+        "number": 506,
+        "aliases": [
+          "53070",
+          "506 TVBV"
+        ]
+      },
+      {
+        "name": "RGTI",
+        "number": 510,
+        "aliases": [
+          "21065",
+          "510 RGTI"
+        ]
+      },
+      {
+        "name": "RTP Internacional",
+        "number": 512,
+        "aliases": [
+          "RTPI",
+          "15717",
+          "512 RTPI"
+        ]
+      },
+      {
+        "name": "TVB1",
+        "number": 515,
+        "aliases": [
+          "16333",
+          "515 TVB1"
+        ]
+      },
+      {
+        "name": "TVBDC",
+        "number": 516,
+        "aliases": [
+          "32145",
+          "516 TVBDC"
+        ]
+      },
+      {
+        "name": "TVBE",
+        "number": 517,
+        "aliases": [
+          "21187",
+          "517 TVBE"
+        ]
+      },
+      {
+        "name": "TVBNW",
+        "number": 518,
+        "aliases": [
+          "32147",
+          "518 TVBNW"
+        ]
+      },
+      {
+        "name": "FILPEHD",
+        "number": 520,
+        "aliases": [
+          "114048",
+          "520 FILPEHD"
+        ]
+      },
+      {
+        "name": "GMAPNY",
+        "number": 521,
+        "aliases": [
+          "46463",
+          "521 GMAPNY"
+        ]
+      },
+      {
+        "name": "GMALIFE",
+        "number": 522,
+        "aliases": [
+          "60152",
+          "522 GMALIFE"
+        ]
+      },
+      {
+        "name": "LSNET",
+        "number": 523,
+        "aliases": [
+          "80214",
+          "523 LSNET"
+        ]
+      },
+      {
+        "name": "DWLSRA",
+        "number": 524,
+        "aliases": [
+          "67374",
+          "524 DWLSRA"
+        ]
+      },
+      {
+        "name": "DZBBRA",
+        "number": 525,
+        "aliases": [
+          "67373",
+          "525 DZBBRA"
+        ]
+      },
+      {
+        "name": "RT",
+        "number": 530,
+        "aliases": [
+          "RTN",
+          "18424",
+          "530 RTN"
+        ]
+      },
+      {
+        "name": "RUSKINO",
+        "number": 531,
+        "aliases": [
+          "61399",
+          "531 RUSKINO"
+        ]
+      },
+      {
+        "name": "RTVi",
+        "number": 536,
+        "aliases": [
+          "RTVINT",
+          "21063",
+          "536 RTVINT"
+        ]
+      },
+      {
+        "name": "ANTEN",
+        "number": 557,
+        "aliases": [
+          "16372",
+          "557 ANTEN"
+        ]
+      },
+      {
+        "name": "ASIA",
+        "number": 560,
+        "aliases": [
+          "14763",
+          "560 ASIA"
+        ]
+      },
+      {
+        "name": "Zee TV",
+        "number": 562,
+        "aliases": [
+          "ZEETVH",
+          "ZEE",
+          "77032",
+          "562 ZEETVH"
+        ]
+      },
+      {
+        "name": "FILMY",
+        "number": 564,
+        "aliases": [
+          "52285",
+          "564 FILMY"
+        ]
+      },
+      {
+        "name": "ABPN",
+        "number": 567,
+        "aliases": [
+          "ABPNWS",
+          "44851",
+          "567 ABPNWS"
+        ]
+      },
+      {
+        "name": "ITVG",
+        "number": 569,
+        "aliases": [
+          "ITVGHD",
+          "21858",
+          "114663",
+          "569 ITVG"
+        ]
+      },
+      {
+        "name": "NDTV2",
+        "number": 570,
+        "aliases": [
+          "49172",
+          "570 NDTV2"
+        ]
+      },
+      {
+        "name": "Rai Italia",
+        "number": 574,
+        "aliases": [
+          "RAII",
+          "17250",
+          "574 RAII"
+        ]
+      },
+      {
+        "name": "MITALIA",
+        "number": 575,
+        "aliases": [
+          "69529",
+          "575 MITALIA"
+        ]
+      },
+      {
+        "name": "TV5MONDE",
+        "number": 577,
+        "aliases": [
+          "TV5MOND",
+          "19059",
+          "577 TV5MOND"
+        ]
+      },
+      {
+        "name": "TVK1",
+        "number": 580,
+        "aliases": [
+          "46384",
+          "580 TVK1"
+        ]
+      },
+      {
+        "name": "TVK2",
+        "number": 581,
+        "aliases": [
+          "66157",
+          "581 TVK2"
+        ]
+      },
+      {
+        "name": "KBS World",
+        "number": 583,
+        "aliases": [
+          "KBSAM",
+          "KBSAM-TV",
+          "34164",
+          "583 KBSAM"
+        ]
+      },
+      {
+        "name": "MBCD",
+        "number": 584,
+        "aliases": [
+          "70622",
+          "584 MBCD"
+        ]
+      },
+      {
+        "name": "CCTV-4",
+        "number": 590,
+        "aliases": [
+          "CCTV4",
+          "24248",
+          "590 CCTV4"
+        ]
+      },
+      {
+        "name": "CITZTC",
+        "number": 591,
+        "aliases": [
+          "CTIZTC",
+          "20655",
+          "591 CTIZTC"
+        ]
+      },
+      {
+        "name": "ETTV",
+        "number": 592,
+        "aliases": [
+          "57753",
+          "592 ETTV"
+        ]
+      },
+      {
+        "name": "ETDRA",
+        "number": 593,
+        "aliases": [
+          "35271",
+          "593 ETDRA"
+        ]
+      },
+      {
+        "name": "ETCHI",
+        "number": 594,
+        "aliases": [
+          "35272",
+          "594 ETCHI"
+        ]
+      },
+      {
+        "name": "ETFINWS",
+        "number": 595,
+        "aliases": [
+          "66487",
+          "595 ETFINWS"
+        ]
+      },
+      {
+        "name": "YOYO",
+        "number": 596,
+        "aliases": [
+          "35270",
+          "596 YOYO"
+        ]
+      },
+      {
+        "name": "Phoenix InfoNews",
+        "number": 597,
+        "aliases": [
+          "PHNIN",
+          "44617",
+          "597 PHNIN"
+        ]
+      },
+      {
+        "name": "PNAX",
+        "number": 598,
+        "aliases": [
+          "24935",
+          "598 PNAX"
+        ]
+      }
+    ]
+  }
+}

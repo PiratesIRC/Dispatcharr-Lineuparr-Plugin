@@ -1,0 +1,771 @@
+{
+  "package": "Spectrum Tampa Bay - Spanish IPTV Clean",
+  "date": "2026-08-18",
+  "description": "Curated Spanish-language Spectrum Tampa Bay logical-channel lineup optimized for IPTV/Lineuparr.",
+  "source": "Spectrum Tampa Bay source lineup, cross-checked against the supplied TV Passport guide and curated for IPTV/Lineuparr use.",
+  "categories": {
+    "Spanish": [
+      {
+        "name": "WVEA-TV",
+        "number": 901,
+        "aliases": [
+          "WVEA",
+          "WVEADT",
+          "15444",
+          "44560",
+          "901 WVEA"
+        ]
+      },
+      {
+        "name": "WRMD-CD",
+        "number": 902,
+        "aliases": [
+          "WRMDCA",
+          "WRMDCA-TV",
+          "11247",
+          "902 WRMDCA"
+        ]
+      },
+      {
+        "name": "WVEA6SD",
+        "number": 903,
+        "aliases": [
+          "WVEA6SD-TV",
+          "122157",
+          "903 WVEA6SD"
+        ]
+      },
+      {
+        "name": "CNN en Español",
+        "number": 904,
+        "aliases": [
+          "CNNE",
+          "58631",
+          "904 CNNE"
+        ]
+      },
+      {
+        "name": "CNL24",
+        "number": 905,
+        "aliases": [
+          "92651",
+          "905 CNL24"
+        ]
+      },
+      {
+        "name": "SUR",
+        "number": 906,
+        "aliases": [
+          "12750",
+          "906 SUR"
+        ]
+      },
+      {
+        "name": "CENTROA",
+        "number": 907,
+        "aliases": [
+          "44448",
+          "907 CENTROA"
+        ]
+      },
+      {
+        "name": "WMORDT3",
+        "number": 910,
+        "aliases": [
+          "WMORDT3 ESTRLLA",
+          "WMORDT3-TV",
+          "65069",
+          "910 WMORDT3"
+        ]
+      },
+      {
+        "name": "CM",
+        "number": 912,
+        "aliases": [
+          "CMEX",
+          "44714",
+          "912 CMEX"
+        ]
+      },
+      {
+        "name": "beIN Sports en Español",
+        "number": 913,
+        "aliases": [
+          "BEINSES",
+          "beINS",
+          "76943",
+          "913 BEINSES"
+        ]
+      },
+      {
+        "name": "ESPN Deportes",
+        "number": 914,
+        "aliases": [
+          "ESPND",
+          "ESPNDHD",
+          "25595",
+          "71914",
+          "914 ESPND"
+        ]
+      },
+      {
+        "name": "FOX Deportes",
+        "number": 915,
+        "aliases": [
+          "FXDEP",
+          "FXDEPHD",
+          "15377",
+          "72189",
+          "915 FXDEP"
+        ]
+      },
+      {
+        "name": "Galavisión",
+        "number": 917,
+        "aliases": [
+          "GALA",
+          "GALAHD",
+          "10222",
+          "68367",
+          "917 GALA"
+        ]
+      },
+      {
+        "name": "WAPAUS",
+        "number": 918,
+        "aliases": [
+          "WAPAUS-TV",
+          "44322",
+          "918 WAPAUS"
+        ]
+      },
+      {
+        "name": "TVE",
+        "number": 919,
+        "aliases": [
+          "TVEI",
+          "16217",
+          "919 TVEI"
+        ]
+      },
+      {
+        "name": "SNNOTFL",
+        "number": 920,
+        "aliases": [
+          "174022",
+          "920 SNNOTFL"
+        ]
+      },
+      {
+        "name": "SORPRESA",
+        "number": 921,
+        "aliases": [
+          "25347",
+          "921 SORPRESA"
+        ]
+      },
+      {
+        "name": "DFAM",
+        "number": 922,
+        "aliases": [
+          "58428",
+          "922 DFAM"
+        ]
+      },
+      {
+        "name": "EWTN Español",
+        "number": 924,
+        "aliases": [
+          "EWTNES",
+          "EWTNE",
+          "52649",
+          "924 EWTNES"
+        ]
+      },
+      {
+        "name": "History en Español",
+        "number": 926,
+        "aliases": [
+          "HISTE",
+          "43362",
+          "926 HISTE"
+        ]
+      },
+      {
+        "name": "COMERTVH",
+        "number": 927,
+        "aliases": [
+          "166714",
+          "927 COMERTVH"
+        ]
+      },
+      {
+        "name": "CINLUS",
+        "number": 928,
+        "aliases": [
+          "62401",
+          "928 CINLUS"
+        ]
+      },
+      {
+        "name": "Universo",
+        "number": 929,
+        "aliases": [
+          "UNVSO",
+          "UNVSOHD",
+          "14791",
+          "91588",
+          "929 UNVSO"
+        ]
+      },
+      {
+        "name": "MTV Tr3s",
+        "number": 930,
+        "aliases": [
+          "TR3S",
+          "18715",
+          "930 TR3S"
+        ]
+      },
+      {
+        "name": "UNI-T",
+        "number": 931,
+        "aliases": [
+          "UNITLNO",
+          "74550",
+          "931 UNITLNO"
+        ]
+      },
+      {
+        "name": "TeleN",
+        "number": 932,
+        "aliases": [
+          "TELEN",
+          "48523",
+          "932 TELEN"
+        ]
+      },
+      {
+        "name": "TVV",
+        "number": 934,
+        "aliases": [
+          "49262",
+          "934 TVV"
+        ]
+      },
+      {
+        "name": "ECUAVI",
+        "number": 935,
+        "aliases": [
+          "44644",
+          "935 ECUAVI"
+        ]
+      },
+      {
+        "name": "CARAI",
+        "number": 936,
+        "aliases": [
+          "39719",
+          "936 CARAI"
+        ]
+      },
+      {
+        "name": "NUESTRT",
+        "number": 937,
+        "aliases": [
+          "33431",
+          "937 NUESTRT"
+        ]
+      },
+      {
+        "name": "DOMIN",
+        "number": 938,
+        "aliases": [
+          "49022",
+          "938 DOMIN"
+        ]
+      },
+      {
+        "name": "CANAL11",
+        "number": 939,
+        "aliases": [
+          "36139",
+          "939 CANAL11"
+        ]
+      },
+      {
+        "name": "NMASFOR",
+        "number": 941,
+        "aliases": [
+          "76964",
+          "941 NMASFOR"
+        ]
+      },
+      {
+        "name": "TUDN",
+        "number": 942,
+        "aliases": [
+          "TUDNU",
+          "75176",
+          "942 TUDNU"
+        ]
+      },
+      {
+        "name": "HBO Latino",
+        "number": 944,
+        "aliases": [
+          "HBOLAT",
+          "24553",
+          "944 HBOLAT"
+        ]
+      },
+      {
+        "name": "HBOLATP",
+        "number": 945,
+        "aliases": [
+          "24575",
+          "945 HBOLATP"
+        ]
+      },
+      {
+        "name": "CMAX",
+        "number": 946,
+        "aliases": [
+          "CMAXHD",
+          "25623",
+          "59965",
+          "946 CMAX"
+        ]
+      },
+      {
+        "name": "VM",
+        "number": 947,
+        "aliases": [
+          "VMOV",
+          "VMOVHD",
+          "52208",
+          "102336",
+          "947 VMOV"
+        ]
+      },
+      {
+        "name": "WZRACA",
+        "number": 948,
+        "aliases": [
+          "WZRACA-TV",
+          "31947",
+          "948 WZRACA"
+        ]
+      },
+      {
+        "name": "Cuba",
+        "number": 949,
+        "aliases": [
+          "CUBAPLY",
+          "73318",
+          "949 CUBAPLY"
+        ]
+      },
+      {
+        "name": "XEIMT",
+        "number": 950,
+        "aliases": [
+          "15232",
+          "950 XEIMT"
+        ]
+      },
+      {
+        "name": "ESTUD5",
+        "number": 951,
+        "aliases": [
+          "88506",
+          "951 ESTUD5"
+        ]
+      },
+      {
+        "name": "MULT",
+        "number": 952,
+        "aliases": [
+          "MULTV",
+          "MULTVHD",
+          "50500",
+          "91505",
+          "952 MULTV"
+        ]
+      },
+      {
+        "name": "FORM",
+        "number": 953,
+        "aliases": [
+          "TFORM",
+          "TFORMHD",
+          "34344",
+          "87167",
+          "953 TFORM"
+        ]
+      },
+      {
+        "name": "SURPERU",
+        "number": 955,
+        "aliases": [
+          "46753",
+          "955 SURPERU"
+        ]
+      },
+      {
+        "name": "TVNI",
+        "number": 956,
+        "aliases": [
+          "16046",
+          "956 TVNI"
+        ]
+      },
+      {
+        "name": "TELS",
+        "number": 957,
+        "aliases": [
+          "TELSALV",
+          "65809",
+          "957 TELSALV"
+        ]
+      },
+      {
+        "name": "SUPCAN",
+        "number": 958,
+        "aliases": [
+          "24515",
+          "958 SUPCAN"
+        ]
+      },
+      {
+        "name": "MICRO",
+        "number": 959,
+        "aliases": [
+          "TMICRO",
+          "45243",
+          "959 TMICRO"
+        ]
+      },
+      {
+        "name": "ANT3",
+        "number": 960,
+        "aliases": [
+          "ANT3I",
+          "16800",
+          "960 ANT3I"
+        ]
+      },
+      {
+        "name": "BAND",
+        "number": 961,
+        "aliases": [
+          "BANDAUS",
+          "54867",
+          "961 BANDAUS"
+        ]
+      },
+      {
+        "name": "THMUS",
+        "number": 962,
+        "aliases": [
+          "34394",
+          "962 THMUS"
+        ]
+      },
+      {
+        "name": "THIT",
+        "number": 963,
+        "aliases": [
+          "THITUS",
+          "34393",
+          "963 THITUS"
+        ]
+      },
+      {
+        "name": "KIDSSHD",
+        "number": 967,
+        "aliases": [
+          "KIDSSHD-TV",
+          "102442",
+          "967 KIDSSHD"
+        ]
+      },
+      {
+        "name": "HOGARHD",
+        "number": 969,
+        "aliases": [
+          "114881",
+          "969 HOGARHD"
+        ]
+      },
+      {
+        "name": "TOON",
+        "number": 970,
+        "aliases": [
+          "STOON",
+          "38279",
+          "970 STOON"
+        ]
+      },
+      {
+        "name": "ATRESSD",
+        "number": 972,
+        "aliases": [
+          "ATRES",
+          "90917",
+          "90898",
+          "972 ATRESSD"
+        ]
+      },
+      {
+        "name": "BABY1AS",
+        "number": 974,
+        "aliases": [
+          "78831",
+          "974 BABY1AS"
+        ]
+      },
+      {
+        "name": "BABY",
+        "number": 975,
+        "aliases": [
+          "BABYUS",
+          "70337",
+          "975 BABYUS"
+        ]
+      },
+      {
+        "name": "NGM",
+        "number": 976,
+        "aliases": [
+          "NGMUNDH",
+          "117788",
+          "976 NGMUNDH"
+        ]
+      },
+      {
+        "name": "HITN",
+        "number": 977,
+        "aliases": [
+          "17142",
+          "977 HITN"
+        ]
+      },
+      {
+        "name": "MEXCAN",
+        "number": 978,
+        "aliases": [
+          "47499",
+          "978 MEXCAN"
+        ]
+      },
+      {
+        "name": "DPLUSSD",
+        "number": 979,
+        "aliases": [
+          "100502",
+          "979 DPLUSSD"
+        ]
+      },
+      {
+        "name": "PELIC",
+        "number": 980,
+        "aliases": [
+          "DEPELC",
+          "33628",
+          "980 DEPELC"
+        ]
+      },
+      {
+        "name": "APLAUSD",
+        "number": 981,
+        "aliases": [
+          "109111",
+          "981 APLAUSD"
+        ]
+      },
+      {
+        "name": "VMEHD",
+        "number": 982,
+        "aliases": [
+          "122713",
+          "982 VMEHD"
+        ]
+      },
+      {
+        "name": "SUPCAHD",
+        "number": 1853,
+        "aliases": [
+          "90322",
+          "1853 SUPCAHD"
+        ]
+      },
+      {
+        "name": "APLAUSO",
+        "number": 1854,
+        "aliases": [
+          "80559",
+          "1854 APLAUSO"
+        ]
+      },
+      {
+        "name": "DOCU",
+        "number": 1859,
+        "aliases": [
+          "UDOCU",
+          "79605",
+          "1859 UDOCU"
+        ]
+      },
+      {
+        "name": "UFAMIL",
+        "number": 1866,
+        "aliases": [
+          "80149",
+          "1866 UFAMIL"
+        ]
+      },
+      {
+        "name": "SOCINH",
+        "number": 1868,
+        "aliases": [
+          "76408",
+          "1868 SOCINH"
+        ]
+      },
+      {
+        "name": "PAS",
+        "number": 1870,
+        "aliases": [
+          "PASNUS",
+          "61776",
+          "1870 PASNUS"
+        ]
+      },
+      {
+        "name": "DSCE",
+        "number": 1874,
+        "aliases": [
+          "19247",
+          "1874 DSCE"
+        ]
+      },
+      {
+        "name": "CINE",
+        "number": 1893,
+        "aliases": [
+          "UCINE",
+          "79680",
+          "1893 UCINE"
+        ]
+      },
+      {
+        "name": "UCLAS",
+        "number": 1894,
+        "aliases": [
+          "79695",
+          "1894 UCLAS"
+        ]
+      },
+      {
+        "name": "FIESTA",
+        "number": 1895,
+        "aliases": [
+          "UFEST",
+          "79607",
+          "1895 UFEST"
+        ]
+      },
+      {
+        "name": "UKIDZ",
+        "number": 1896,
+        "aliases": [
+          "79606",
+          "1896 UKIDZ"
+        ]
+      },
+      {
+        "name": "UMACHO",
+        "number": 1897,
+        "aliases": [
+          "79696",
+          "1897 UMACHO"
+        ]
+      },
+      {
+        "name": "ULTMEX",
+        "number": 1898,
+        "aliases": [
+          "79692",
+          "1898 ULTMEX"
+        ]
+      },
+      {
+        "name": "WVEADT6",
+        "number": 1903,
+        "aliases": [
+          "WVEADT6-TV",
+          "122148",
+          "1903 WVEADT6"
+        ]
+      },
+      {
+        "name": "SPCMDEP",
+        "number": 1913,
+        "aliases": [
+          "77428",
+          "1913 SPCMDEP"
+        ]
+      },
+      {
+        "name": "GOLTVIH",
+        "number": 1916,
+        "aliases": [
+          "68608",
+          "1916 GOLTVIH"
+        ]
+      },
+      {
+        "name": "WRMDCD",
+        "number": 1918,
+        "aliases": [
+          "WRMDCD-TV",
+          "84545",
+          "1918 WRMDCD"
+        ]
+      },
+      {
+        "name": "BEIN2HD",
+        "number": 1919,
+        "aliases": [
+          "76955",
+          "1919 BEIN2HD"
+        ]
+      },
+      {
+        "name": "EWTNEHD",
+        "number": 1920,
+        "aliases": [
+          "72123",
+          "1920 EWTNEHD"
+        ]
+      },
+      {
+        "name": "TUDNUH",
+        "number": 1942,
+        "aliases": [
+          "77033",
+          "1942 TUDNUH"
+        ]
+      },
+      {
+        "name": "HBOLAHD",
+        "number": 1944,
+        "aliases": [
+          "59837",
+          "1944 HBOLAHD"
+        ]
+      }
+    ]
+  }
+}
