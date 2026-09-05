@@ -525,6 +525,7 @@ deletes every `lineuparr_*.csv` file, however new.
 | CSV exports | `/data/exports/lineuparr_*.csv`, kept across container restarts unless you set a retention in days |
 | Reports | `/data/lineuparr_reports/lineuparr_report_*.html` and `*.csv`, eight of each kept |
 | Report count | `/data/lineuparr/report_count.json`, read by Newsflasharr |
+| Channels-created tally | `/data/lineuparr_channel_counts.jsonl`, one line per finished sync, summed by the Channels Created badge on the README |
 | Plugin directory | `/data/plugins/lineuparr/` inside the Dispatcharr data volume |
 | Lineup files | the same plugin directory, named `{CC}_{Provider}_lineup.json` |
 | Logs | `docker logs dispatcharr \| grep "Lineuparr"` |

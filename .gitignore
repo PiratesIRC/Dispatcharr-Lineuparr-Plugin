@@ -70,6 +70,15 @@ reference_*.md
 bump_version.py
 conftest.py
 *smoke*.py
+# Badge tooling: refreshes the README "Channels Created" badge by summing the
+# plugin's tally inside the container and writing a Shields endpoint document to
+# an unlisted gist. Operator tooling for one machine, not part of the shipped
+# plugin, so it is kept local under the rule above. NOTE: that means these files
+# have no version control AND no coverage from the workspace notes backup, which
+# sweeps CLAUDE.md, docs/CLAUDE-*, .claude/skills/** and four .wolf files only.
+scripts/update_channels_created_badge.py
+scripts/update_channels_created_badge.ps1
+scripts/.channels_created_badge_gist
 
 # OpenWolf local context (AI memory — not part of the plugin)
 .wolf/

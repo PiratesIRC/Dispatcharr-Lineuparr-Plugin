@@ -148,7 +148,7 @@ def _clean_json_text(s):
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.2481620"
+    PLUGIN_VERSION = "1.26.2481702"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -196,6 +196,13 @@ class PluginConfig:
     CSV_EXPORT_PREFIX = "lineuparr_"
     CSV_EXPORT_SUFFIX = ".csv"
     SECONDS_PER_DAY = 86400.0
+    # Append-only tally of channels this plugin has created, one JSON object per
+    # run. Nothing else can be added up into a lifetime total: the channels it
+    # creates are ordinary Dispatcharr rows, indistinguishable afterwards from
+    # ones made by hand or by another plugin, and the unmatched-channel cleanup
+    # deletes some of them again. A cumulative number has to be recorded as it
+    # happens or it cannot be recovered.
+    CHANNEL_COUNT_LEDGER_FILE = "/data/lineuparr_channel_counts.jsonl"
     STATE_FILE = "/data/lineuparr_state.json"
     PROGRESS_FILE = "/data/lineuparr_progress.json"
     OPERATION_LOCK_FILE = "/data/lineuparr_operation.lock"
@@ -2098,6 +2105,48 @@ class Plugin:
         # comment lines would read the remainder as the header row.
         return [_one_line(line) for line in lines]
 
+    def _record_channels_created(self, count, mode, logger=None):
+        """Append one line recording how many channels a finished run created.
+
+        APPEND, NOT READ-MODIFY-WRITE. Several Dispatcharr processes hold this
+        module, and a read-then-write total would lose an increment whenever two
+        of them raced. An append of one short line does not.
+
+        IT NEVER RAISES. A tally is worth strictly less than the sync that
+        produced it, so a tally that cannot be written is logged and the run
+        carries on reporting whatever it was already reporting.
+
+        A count of zero IS written: a run that created nothing is a fact about
+        the run, and dropping it would make the tally silently sparse.
+
+        The count is creations performed, not channels that still exist. The
+        unmatched-channel cleanup deleting one later does not subtract, so the
+        published total cannot go down. That was an explicit operator decision.
+
+        Only integers and a short mode string are recorded. No channel name, no
+        group name, no lineup filename. The summed total is published publicly.
+        """
+        log = logger or LOGGER
+        # bool before int: bool subclasses int in Python, so True would
+        # otherwise be recorded as one channel created.
+        if isinstance(count, bool) or not isinstance(count, int):
+            log.warning(f"{LOG_PREFIX} Channel tally skipped: the count was "
+                        f"{count!r}, which is not a whole number")
+            return False
+        if count < 0:
+            log.warning(f"{LOG_PREFIX} Channel tally skipped: the count was "
+                        f"negative ({count})")
+            return False
+        line = json.dumps({"ts": int(time.time()), "channels": count, "mode": mode})
+        try:
+            with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
+                      encoding="utf-8") as handle:
+                handle.write(line + "\n")
+            return True
+        except Exception as exc:
+            log.warning(f"{LOG_PREFIX} Could not record the channel tally: {exc}")
+            return False
+
     def _export_csv(self, filename, rows, fieldnames, logger, settings=None,
                     action_name="Unknown", summary=None):
         """Export data to CSV in the exports directory, under a commented preamble.
@@ -2843,6 +2892,11 @@ class Plugin:
             self._enable_channels_in_profiles(synced_channel_ids, settings, logger)
 
         if not dry_run:
+            # Record what this run actually created, for the lifetime tally the
+            # public badge sums. Guarded by dry_run because the preview branch
+            # increments the same counter for channels it WOULD have made, so
+            # recording unconditionally would inflate the badge on every Preview.
+            self._record_channels_created(created, "sync_channels", logger)
             self._trigger_frontend_refresh(logger)
 
         prefix_str = " (dry run)" if dry_run else ""

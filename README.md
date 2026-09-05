@@ -14,6 +14,7 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/PiratesIRC/Dispatcharr-Lineuparr-Plugin?include_prereleases&logo=github)](https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/releases)
 [![Downloads](https://img.shields.io/github/downloads/PiratesIRC/Dispatcharr-Lineuparr-Plugin/total?color=success&label=Downloads&logo=github)](https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/releases)
+[![Channels Created](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/PiratesIRC/3e4e74f2ef4b1fcadaae7e4aa4dc5f46/raw/lineuparr-channels-created.json)](#what-it-does)
 
 ![Top Language](https://img.shields.io/github/languages/top/PiratesIRC/Dispatcharr-Lineuparr-Plugin)
 ![Repo Size](https://img.shields.io/github/repo-size/PiratesIRC/Dispatcharr-Lineuparr-Plugin)
@@ -41,6 +42,8 @@ You pick a real provider lineup, such as Sky TV or DIRECTV Premier, and the plug
 - **Replaces by default, appends on request.** A stream match normally replaces each channel's whole stream list and then deletes channels left with no streams. Turn on **Preserve Existing Streams** and it appends instead, skipping duplicates and deleting nothing, so a second M3U source can be layered on safely.
 - **Colours its buttons by consequence.** Red can remove a stream or a channel and always asks first, orange writes but removes nothing, blue only reads and reports.
 - **Runs inside Dispatcharr** with direct database access, so no API credentials are needed.
+
+The **Channels Created** badge above is this installation's own running total, recorded by the plugin each time Sync Channels Only or Full Sync finishes. It counts creations performed rather than channels that still exist, so a channel later removed by the unmatched-channel cleanup does not subtract from it and the number never falls. It is a floor: it started when the counter shipped, and earlier runs were not recorded because nothing in the database distinguishes a channel this plugin made from one made by hand.
 
 Over 200 built-in channel aliases, plus your own in JSON. Every setting and action is covered in the [user guide](docs/USER-GUIDE.md).
 
