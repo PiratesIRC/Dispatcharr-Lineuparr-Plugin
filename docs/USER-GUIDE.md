@@ -25,6 +25,8 @@ it does and how to install it.
 - [Troubleshooting](#troubleshooting)
 - [How matching works](#how-matching-works)
 - [Reports](#reports)
+- [Reading a CSV export](#reading-a-csv-export)
+- [Tidying up old CSV exports](#tidying-up-old-csv-exports)
 - [File locations](#file-locations)
 
 ---
@@ -45,36 +47,70 @@ tells you whether your match sensitivity is set sensibly for your source.
 
 ## Settings reference
 
+The settings form is divided into five sections. This table follows the same
+order, so a setting is listed where you will find it on screen.
+
+### Lineup and Sources
+
 | Setting | Type | Default | What it does |
 |---------|------|---------|--------------|
-| Lineup File | select | `US_DirecTV-Premier_lineup.json` | The provider lineup to mirror. The list is built from the `*_lineup.json` files in the plugin directory. |
-| M3U Source | select | *(empty)* | Which M3U account's streams to match against. Leave unset to use every active source. |
-| Channel Profile | select | *(empty)* | Channel profile that synced channels are enabled in. |
-| Channel Group Prefix | string | *(empty)* | Prefix added to the channel group names the plugin creates. |
-| Category Detail | select | `Normal` | How lineup categories are grouped: None, Refined, Simple or Normal. |
-| Match Sensitivity | select | `Normal` | Matching strictness. See [Match sensitivity](#match-sensitivity). |
-| Channel Numbering | select | `Use Channel Database Numbers` | Database numbers, auto-assign next, auto-assign after highest, or start from a specific number. |
-| Starting Channel Number | string | *(empty)* | Only used by the "specific number" mode. |
+| Lineup File | select | `DirecTV Premier (US)` | The provider lineup to mirror. The list is built from the `*_lineup.json` files in the plugin directory. The two-letter country code at the front of the filename is also what the country filter compares a stream against. |
+| M3U Source | select | `All sources` | Which M3U account's streams to match against. Leave it on All to use every active source. |
+| EPG Sources for Matching | string | *(blank)* | Which guide sources to match against. Blank means all of them, in the priority order configured in Dispatcharr. Otherwise give one or more source names separated by commas; `*` and `?` wildcards work, so `UK*` takes every source whose name starts with UK. Earlier names win. |
+| Channel Profile | select | `None` | Channel profile that synced channels are enabled in. |
+
+### Channel Groups and Numbering
+
+| Setting | Type | Default | What it does |
+|---------|------|---------|--------------|
+| Channel Group Prefix | string | *(blank)* | Prefix added to the channel group names the plugin creates. Blank derives one from the lineup name; the word `none` suppresses it entirely. |
+| Category Detail | select | `Normal` | How lineup categories become groups: None (one group), Refined (6), Simple (7) or Normal (every category the lineup names). |
+| Channel Numbering | select | `Use the lineup file's own numbers` | Where each new channel's number comes from. The default reads the number recorded in the lineup file and sets no number when the file has none. The two auto modes ignore the file and fill free slots, from 1 upwards or above your highest existing channel. |
+| Starting Channel Number (Specific mode only) | string | *(blank)* | The first number for the `Use specific number` mode. Every other mode ignores it. |
+
+### Stream and EPG Matching
+
+| Setting | Type | Default | What it does |
+|---------|------|---------|--------------|
+| Match Sensitivity | select | `Normal (80)` | The score out of 100 a name must reach to count as a match: Relaxed 70, Normal 80, Strict 90, Exact 95. Higher is stricter. Applies to stream and guide matching alike. See [Match sensitivity](#match-sensitivity). |
+| Refresh EPG After Matching | boolean | `true` | After guide matching, asks Dispatcharr to refresh the sources that were actually matched, so the newly matched channels pick up programme data. |
 | Order Matched Streams by Quality | boolean | `true` | Sorts the streams attached to a channel, 4K before HD before SD. Changes ordering only, never which streams attach. |
-| Preserve Existing Streams | boolean | `false` | Appends newly matched streams instead of replacing them, skips duplicates, and keeps channels that matched nothing. Use this when a second source already populates the same channels. |
-| Single Channel Match | string | *(empty)* | Scopes Preview Stream Match, Apply Stream Match, Apply EPG Match and Assign Logos to the one lineup channel with this exact name, case-insensitive. Full Sync ignores it. |
-| Rate Limiting | select | `None` | Throttles between operations: None, Low, Medium or High. Use it if a large sync makes Dispatcharr sluggish. |
-| Custom Channel Aliases (JSON) | string | *(empty)* | Your own alias overrides. See [Custom aliases](#custom-aliases). |
-| EPG Sources | select | `All EPG sources` | Which EPG source or sources to match against. "All" uses every source in the priority order configured in Dispatcharr. |
+| Quality-Aware Stream Matching | boolean | `false` | When the lineup holds both a channel and its upgrade twin, such as TF1 and TF1 UHD, each is restricted to streams of its own quality tier. Channels with no twin are unaffected, and a stream named in a channel's aliases bypasses the restriction. |
+| Preserve Existing Streams | boolean | `false` | The setting with the largest consequence here. When off, a stream match replaces each channel's whole stream list and then deletes channels left with no streams. Turn it on to append instead: duplicates are skipped and nothing is deleted. |
+| Single Channel Match | string | *(blank)* | Scopes Preview Stream Match, Apply Stream Match, Apply EPG Match and Assign Logos to the one lineup channel with this exact name, case-insensitive. Full Sync ignores it. |
+| Custom Channel Aliases (advanced) | text | *(blank)* | Your own alias overrides. See [Custom aliases](#custom-aliases). |
+
+### Report delivery
+
+| Setting | Type | Default | What it does |
+|---------|------|---------|--------------|
 | Send reports to Newsflasharr | boolean | `false` | Master switch for emailing reports. When off, reports are still written to disk and nothing is sent. See [Reports](#reports). |
 | When to send | select | `Never` | Never, or after every run that produces a report. |
 | What to attach | select | `Both the HTML page and the CSV` | Which report files are emailed. Both means two emails, because one notification carries one attachment. |
+
+### Advanced
+
+| Setting | Type | Default | What it does |
+|---------|------|---------|--------------|
+| Rate Limiting | select | `None` | Pauses after each channel a run processes, to leave the database free for the rest of Dispatcharr: None, Low (0.1s), Medium (0.5s) or High (2s). The pause is between database writes, not between requests to your provider, so it does nothing for a slow M3U source. |
+| Delete CSV Exports Older Than (Days) | number | `0` | Housekeeping for `/data/exports/`. After each export, this plugin's own exports older than this many days are deleted. `0` keeps every file. See [Tidying up old CSV exports](#tidying-up-old-csv-exports). |
 
 ---
 
 ## Match sensitivity
 
-| Level | Best for |
-|-------|----------|
-| Relaxed | Maximum coverage. Cast a wide net, then review the CSV for false positives. |
-| Normal | General use. Good accuracy with reasonable coverage. |
-| Strict | High-confidence matches only. Fewer results, fewer mistakes. |
-| Exact | Near-exact matches only. Minimal false positives, will miss some valid matches. |
+The setting is a score out of 100 that a name has to reach before it counts as a
+match, so a higher number is stricter.
+
+| Level | Score | Best for |
+|-------|-------|----------|
+| Relaxed | 70 | Maximum coverage. Cast a wide net, then review the CSV for false positives. |
+| Normal | 80 | General use. Good accuracy with reasonable coverage. |
+| Strict | 90 | High-confidence matches only. Fewer results, fewer mistakes. |
+| Exact | 95 | Near-exact matches only. Minimal false positives, will miss some valid matches. |
+
+The score each run used is recorded in the preamble at the top of its CSV
+export, so two exports that disagree can be compared.
 
 ### Noisy or multi-country sources
 
@@ -133,19 +169,28 @@ live on the Actions tab of the plugin panel:
 
 ![The rest of the Actions tab, showing Apply Stream Match Only, Apply EPG Match, Assign Logos, Re-sort Streams by Quality, Clear CSV Exports and Email Report Now](screenshots/actions-panel-bottom.jpg)
 
-| Action | What it does |
+The button colour says what the action can do to your data.
+
+| Colour | Meaning |
 |---|---|
-| **Show Status** | Live progress of the running operation, or the result of the last one, without opening the container logs. |
-| **Validate Settings** | Checks the lineup file and M3U source and summarizes the lineup. |
-| **Preview Stream Match** | Dry run with a CSV export. Changes nothing. |
-| **Full Sync** | The whole pipeline in one click. |
-| **Sync Channels Only** | Creates and updates groups and channels from the lineup. No stream matching. |
-| **Apply Stream Match Only** | Attaches matched streams to channels that already exist, in quality order. |
-| **Apply EPG Match** | Matches EPG entries to channels and assigns the programme guides. |
-| **Assign Logos** | Assigns channel logos from EPG icons, the Logo Manager, or the tv-logos repository on GitHub. |
-| **Re-sort Streams by Quality** | Re-orders already-attached streams using the newest quality data. See [IPTV Checker integration](#iptv-checker-integration). |
-| **Clear CSV Exports** | Deletes the plugin's CSV exports. |
-| **Email Report Now** | Sends the newest report already on disk. It does not run a match. See [Reports](#reports). |
+| Red | Can remove something: a stream, or a whole channel. Always asks first. |
+| Orange | Writes data or clears state, but removes no stream and no channel. |
+| Cyan | Sends something out of Dispatcharr, to your inbox. |
+| Blue | Reads and reports. Changes nothing. |
+
+| Action | Colour | What it does |
+|---|---|---|
+| **Show Status** | Blue | Live progress of the running operation, or the result of the last one, without opening the container logs. |
+| **Validate Settings** | Blue | Checks the lineup file and M3U source and summarizes the lineup. |
+| **Preview Stream Match** | Blue | Dry run. Writes a CSV export and an HTML report and changes nothing. |
+| **Full Sync** | Red | The whole pipeline in one click. Its stream matching step carries the same removals as Apply Stream Match Only, below. |
+| **Sync Channels Only** | Orange | Creates and updates groups and channels from the lineup. No stream matching, and it deletes nothing. |
+| **Apply Stream Match Only** | Red | Attaches matched streams to channels that already exist, in quality order. Unless Preserve Existing Streams is on, it replaces each channel's whole stream list rather than adding to it, and then deletes any channel left with no streams. See [Unmatched channel cleanup](#unmatched-channel-cleanup). |
+| **Apply EPG Match** | Orange | Matches guide entries to channels and assigns the programme guides. A channel that already has a guide is skipped, so this adds and never replaces. |
+| **Assign Logos** | Orange | Assigns channel logos from EPG icons, the Logo Manager, or the tv-logos repository on GitHub. |
+| **Re-sort Streams by Quality** | Orange | Re-orders the streams a channel already has, using the newest quality data. No stream is added or removed. See [IPTV Checker integration](#iptv-checker-integration). |
+| **Clear CSV Exports** | Orange | Deletes every `lineuparr_*.csv` file in `/data/exports`, however new. It touches no channel, stream or guide, and ignores Delete CSV Exports Older Than. |
+| **Email Report Now** | Cyan | Sends the newest report already on disk. It does not run a match. See [Reports](#reports). |
 
 **Single Channel Match** scopes Preview Stream Match, Apply Stream Match Only,
 Apply EPG Match and Assign Logos to one channel. Full Sync always runs the whole
@@ -401,11 +446,83 @@ least one report through Newsflasharr, whatever the count file says.
 
 ---
 
+## Reading a CSV export
+
+Every run that matches something writes a CSV to `/data/exports/`, named
+`lineuparr_<what>_<timestamp>.csv`.
+
+The file opens with a preamble: a block of lines each starting with `#`. Those
+lines are explanation, not data. The table starts at the first line without a
+`#`, so **tell your spreadsheet to skip comment lines when importing, or delete
+them before you open the file.** In LibreOffice Calc and Excel the import dialog
+calls this "comment" or "skip lines".
+
+The preamble is in two parts.
+
+**What this run did** comes first: which action wrote the file, how many rows the
+table below holds, and the counts that action produced, such as how many channels
+were matched and how many streams were attached.
+
+**Settings this run used** comes second, and records the settings as they were at
+the moment of the run rather than as they are saved now. That is what makes two
+exports comparable: if last week's results differed from today's, these lines say
+whether the configuration changed. Match Sensitivity is written with its score,
+Preserve Existing Streams is written with what its value caused, and every
+on-or-off setting reads as Yes or No.
+
+Nothing in the preamble contains a provider URL or a login.
+
+---
+
+## Tidying up old CSV exports
+
+Every run that exports a CSV writes a new file to `/data/exports/`, and nothing
+removes them, so the directory grows for as long as you keep using the plugin.
+
+Set **Delete CSV Exports Older Than (Days)** to a number of days and each export
+deletes this plugin's older exports as it finishes. The default is `0`, which
+keeps every file, so upgrading changes nothing until you ask for it.
+
+Four things this will not do.
+
+- **It never touches another plugin's files.** `/data/exports/` is shared. On the
+  system this was tested against it also held files written by Stream-Mapparr,
+  EPG-Janitor, Event-Channel-Managarr, IPTV Checker and Channel-Maparr. Only
+  files named `lineuparr_*.csv` are considered.
+- **It never deletes the file the run just wrote**, whatever the age says.
+- **It always leaves at least one of this plugin's exports in place**, so a small
+  number cannot empty the directory.
+- **It never turns a successful export into a failure.** If a file cannot be
+  deleted the export still reports success and the reason is logged.
+
+Age comes from the file's modification time, not from the timestamp in its name,
+and the comparison is strict: with a setting of 7, a file exactly seven days old
+is kept.
+
+One thing it does do, which is easy to miss. When an HTML report holds more rows
+than it shows, it prints a line telling the reader that the complete file is
+`lineuparr_..._.csv` in `/data/exports`. That named file is protected only during
+the run that wrote it. A later export can delete it once it is older than the
+retention window, and if the report was emailed the reader then has a report
+pointing at a file that is gone. The reports directory keeps its own last eight
+copies and is not coordinated with this setting. If you email reports and want
+the CSV they name to stay available, either leave this setting at `0` or set it
+comfortably longer than the age of the oldest report you expect anyone to open.
+
+If you set it and nothing is deleted, check the container log. A value that is
+not a whole number of days, such as `7.5`, keeps every file and says so in the
+log: `docker logs dispatcharr | grep Lineuparr`.
+
+The **Clear CSV Exports** action is unchanged and ignores this setting. It still
+deletes every `lineuparr_*.csv` file, however new.
+
+---
+
 ## File locations
 
 | What | Where |
 |---|---|
-| CSV exports | `/data/exports/lineuparr_*.csv`, kept across container restarts |
+| CSV exports | `/data/exports/lineuparr_*.csv`, kept across container restarts unless you set a retention in days |
 | Reports | `/data/lineuparr_reports/lineuparr_report_*.html` and `*.csv`, eight of each kept |
 | Report count | `/data/lineuparr/report_count.json`, read by Newsflasharr |
 | Plugin directory | `/data/plugins/lineuparr/` inside the Dispatcharr data volume |

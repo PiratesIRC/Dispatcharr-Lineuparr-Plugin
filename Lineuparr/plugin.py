@@ -84,6 +84,55 @@ def action_result(status, text, **extra):
     return {"status": status, key: text, **extra}
 
 
+def _yes_no(value, default=False):
+    """Render a setting as Yes or No for a person, not as a Python boolean.
+
+    Dispatcharr stores some booleans as the strings "true" and "false", so the
+    same setting can arrive as either type. Both have to read the same way in a
+    report, and neither should reach the reader as True or False.
+    """
+    if value is None:
+        value = default
+    if isinstance(value, str):
+        value = value.strip().lower() in ("true", "yes", "1", "on")
+    return "Yes" if value else "No"
+
+
+def _setting_yes_no(settings, key, default):
+    """Render a setting the way the RUN resolved it, not the way it was declared.
+
+    The runtime reads `settings.get(key, default)`, and a dict default applies
+    only to an ABSENT key. A setting stored as None therefore reaches the run as
+    None and is falsy, so the feature is off. Passing that None to `_yes_no`
+    substituted the declared default instead and reported the feature as on, so
+    the record disagreed with the run in exactly the case a reader is trying to
+    explain. Resolving here with the same call the runtime makes, against the
+    same default constant, removes both that gap and the chance of the two
+    copies of a default drifting apart.
+    """
+    return _yes_no((settings or {}).get(key, default), default=False)
+
+
+# Characters that end a line for something reading this file. str.splitlines
+# also breaks on U+2028 and U+2029, so a value carrying one would escape the
+# comment block even though it is not a newline. They are built from codepoints
+# rather than typed, because a literal one is invisible in review.
+_LINE_BREAKS = ("\r\n", "\n", "\r", chr(0x2028), chr(0x2029), chr(0x0085))
+
+
+def _one_line(text):
+    """Flatten a value so it cannot end a commented preamble line early.
+
+    A stored setting is free text. A line break inside one produced a line with
+    no leading hash, which a spreadsheet told to skip comment lines reads as the
+    header row, misaligning every column of the import.
+    """
+    text = str(text)
+    for ch in _LINE_BREAKS:
+        text = text.replace(ch, " ")
+    return text
+
+
 # BOM + zero-width characters that sneak in from rich-text paste (editors,
 # Slack/Discord, web docs). Python's str.strip() treats none of these as
 # whitespace, so they survive `.strip()` and trip json.loads with
@@ -99,7 +148,7 @@ def _clean_json_text(s):
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.2421451"
+    PLUGIN_VERSION = "1.26.2481620"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
@@ -140,6 +189,13 @@ class PluginConfig:
 
     DATA_DIR = "/data"
     EXPORTS_DIR = "/data/exports"
+    # The exports directory is SHARED with at least six other plugins, so
+    # anything that deletes from it selects on this plugin's own filename
+    # prefix AND the .csv suffix. Every CSV this plugin writes is named
+    # lineuparr_<what>_<timestamp>.csv.
+    CSV_EXPORT_PREFIX = "lineuparr_"
+    CSV_EXPORT_SUFFIX = ".csv"
+    SECONDS_PER_DAY = 86400.0
     STATE_FILE = "/data/lineuparr_state.json"
     PROGRESS_FILE = "/data/lineuparr_progress.json"
     OPERATION_LOCK_FILE = "/data/lineuparr_operation.lock"
@@ -375,7 +431,7 @@ class Plugin:
                 "id": "_sec_sources",
                 "type": "info",
                 "label": "Lineup & Sources",
-                "help_text": "Choose the lineup to mirror and where streams and EPG data come from.",
+                "help_text": "The provider lineup this plugin mirrors, and where the streams and guide data come from. The lineup file decides more than which channels get created: the two-letter country code at the start of its filename is what the country filter compares a stream against, so picking a lineup from another country also changes which of your streams are eligible to match at all.",
             },
             {
                 "id": "lineup_file",
@@ -420,7 +476,7 @@ class Plugin:
                 "id": "_sec_groups",
                 "type": "info",
                 "label": "Channel Groups & Numbering",
-                "help_text": "How channels are grouped and numbered when they are created.",
+                "help_text": "The names of the channel groups this plugin creates, and the number each new channel gets. The default numbering takes each number from the lineup file itself, which is why two lineups can disagree about what channel 206 is; the two auto modes ignore the file's numbers and fill the first free slots instead. Starting Channel Number is read only by the Use specific number mode and is ignored by every other one, including the two auto modes.",
             },
             {
                 "id": "group_prefix",
@@ -448,13 +504,11 @@ class Plugin:
                 "label": "Channel Numbering",
                 "type": "select",
                 "default": "lineup",
-                "options": [
-                    {"value": "lineup", "label": "Use Channel Database Numbers"},
-                    {"value": "auto_next", "label": "Auto-Assign Next Available"},
-                    {"value": "auto_highest", "label": "Auto-Assign After Highest"},
-                    {"value": "specific", "label": "Use Specific Number"},
-                ],
-                "help_text": "How to assign channel numbers. Database uses tvg-chno/channel-number from stream metadata with auto-assign fallback. Auto modes find open slots. Specific starts from your chosen number.",
+                # Built from NUMBERING_LABELS so the form, the CSV preamble
+                # and Validate Settings cannot name the same mode differently.
+                "options": [{"value": value, "label": label}
+                            for value, label in self.NUMBERING_LABELS.items()],
+                "help_text": "How each new channel gets its number. The default takes the number recorded in the lineup file, which is the provider's own number, and sets no number at all when the file has none for that channel. The two auto modes ignore the file and fill free slots, either from 1 upwards or starting above your highest existing channel. Use specific number counts up from Starting Channel Number below.",
             },
             {
                 "id": "starting_channel_number",
@@ -462,14 +516,14 @@ class Plugin:
                 "type": "string",
                 "default": "",
                 "placeholder": "e.g. 1000",
-                "help_text": "Starting channel number for 'Use Specific Number' mode. Channels are numbered sequentially from this value.",
+                "help_text": "The first number to use when Channel Numbering is set to 'Use specific number'. Channels are numbered up from this value, skipping any number already taken by an existing channel. Every other numbering mode ignores this setting.",
             },
             # --- Section: Stream & EPG Matching ---
             {
                 "id": "_sec_matching",
                 "type": "info",
                 "label": "Stream & EPG Matching",
-                "help_text": "Controls how streams and EPG entries are matched to lineup channels.",
+                "help_text": "How closely a stream or guide name has to resemble a lineup channel before it counts as a match, and what happens to the streams a channel already has. Preserve Existing Streams is the setting with the largest consequence here: with it off, Apply Stream Match and Full Sync replace each channel's whole stream list rather than adding to it, and then delete any channel in this plugin's groups that finished the run with no streams. Turn it on to add a second source without losing anything.",
             },
             {
                 "id": "match_sensitivity",
@@ -477,12 +531,12 @@ class Plugin:
                 "type": "select",
                 "default": "normal",
                 "options": [
-                    {"value": "relaxed", "label": "Relaxed - more matches, more false positives"},
-                    {"value": "normal", "label": "Normal - balanced"},
-                    {"value": "strict", "label": "Strict - fewer matches, high confidence"},
-                    {"value": "exact", "label": "Exact - near-exact matches only"},
+                    {"value": "relaxed", "label": "Relaxed (70) - more matches, more false positives"},
+                    {"value": "normal", "label": "Normal (80) - balanced"},
+                    {"value": "strict", "label": "Strict (90) - fewer matches, high confidence"},
+                    {"value": "exact", "label": "Exact (95) - near-exact matches only"},
                 ],
-                "help_text": "How closely stream and EPG names must match channel names. Lower = more matches but more errors.",
+                "help_text": "How closely a stream or guide name must resemble a lineup channel name before it counts as a match. The number in each option is the score out of 100 a name has to reach, so a higher setting is stricter: fewer channels get a match, and fewer get the wrong one. This applies to stream matching and EPG matching alike.",
             },
             {
                 "id": "refresh_epg_after_match",
@@ -576,7 +630,7 @@ class Plugin:
                 "id": "_sec_advanced",
                 "type": "info",
                 "label": "Advanced",
-                "help_text": "Performance tuning - most setups can leave this at the default.",
+                "help_text": "How fast a run is allowed to write to the database, and how long its CSV exports are kept. Most setups can leave both alone. Rate Limiting pauses between database writes rather than between network calls, so it helps when a large sync makes the rest of Dispatcharr sluggish and does nothing for a slow provider. The export cleanup only ever deletes this plugin's own lineuparr_*.csv files, because /data/exports is shared with several other plugins.",
             },
             {
                 "id": "rate_limiting",
@@ -584,12 +638,24 @@ class Plugin:
                 "type": "select",
                 "default": "none",
                 "options": [
-                    {"value": "none", "label": "None - fastest"},
-                    {"value": "low", "label": "Low - slight delay"},
-                    {"value": "medium", "label": "Medium - moderate delay"},
-                    {"value": "high", "label": "High - slowest, gentlest on API"},
+                    {"value": "none", "label": "None - no pause, fastest"},
+                    {"value": "low", "label": "Low - pause 0.1s per channel"},
+                    {"value": "medium", "label": "Medium - pause 0.5s per channel"},
+                    {"value": "high", "label": "High - pause 2s per channel, slowest"},
                 ],
-                "help_text": "Add delays between API calls during sync. Use if Dispatcharr becomes unresponsive during operations.",
+                "help_text": "Pauses for this long after each channel a run processes, to leave the database free for the rest of Dispatcharr. Use it only if a large sync makes the interface unresponsive. The pause is between database writes, not between requests to your provider, so it does nothing for a slow M3U source. At High, a 500 channel lineup takes about 17 minutes longer.",
+            },
+            {
+                "id": "csv_retention_days",
+                "label": "Delete CSV Exports Older Than (Days)",
+                "type": "number",
+                "default": 0,
+                # A negative value silently means the same as 0, so do not offer
+                # one. A fractional value cannot be read as days at all and is
+                # reported in the log rather than passing unnoticed.
+                "min": 0,
+                "step": 1,
+                "help_text": "Housekeeping for the CSV files this plugin writes to /data/exports/. After each export, its own exports older than this many days are deleted. 0 keeps every file, which is the default, so nothing is removed unless you ask for it. The file just written is never deleted, and at least one file always survives. Only files named lineuparr_*.csv are touched, because that directory is shared with other plugins. A whole number of days is required; anything else keeps every file and says so in the container log. Note that an HTML report which had to drop rows names its full CSV by filename, so setting this shorter than the age of the reports people still open leaves those reports pointing at a deleted file. Clear CSV Exports still clears everything and ignores this setting.",
             },
         ]
 
@@ -1384,16 +1450,30 @@ class Plugin:
         "exact": 95,
     }
 
+    @classmethod
+    def _resolve_match_threshold(cls, settings):
+        """The score a name must reach, resolved exactly as a run resolves it.
+
+        Shared with the CSV preamble so the export cannot report a different
+        number from the one the matcher used. The legacy numeric field is still
+        read because Dispatcharr never prunes a setting whose field was removed,
+        so an installation upgraded from before the four presets can still carry
+        one, and a run then matches at that number.
+        """
+        settings = settings or {}
+        threshold = cls.SENSITIVITY_MAP.get(settings.get("match_sensitivity", "normal"))
+        if threshold is None:
+            try:
+                threshold = int(settings.get("fuzzy_match_threshold",
+                                             PluginConfig.DEFAULT_FUZZY_MATCH_THRESHOLD))
+            except (TypeError, ValueError):
+                threshold = PluginConfig.DEFAULT_FUZZY_MATCH_THRESHOLD
+        return max(0, min(100, threshold))
+
     def _init_fuzzy_matcher(self, settings, logger):
         """Create a configured FuzzyMatcher instance."""
-        # Support both new select-based sensitivity and legacy numeric threshold
-        sensitivity = settings.get("match_sensitivity", "normal")
-        threshold = self.SENSITIVITY_MAP.get(sensitivity)
-        if threshold is None:
-            # Fallback: try legacy numeric field
-            threshold = int(settings.get("fuzzy_match_threshold", PluginConfig.DEFAULT_FUZZY_MATCH_THRESHOLD))
-        threshold = max(0, min(100, threshold))
-        return FuzzyMatcher(match_threshold=threshold, logger=logger)
+        return FuzzyMatcher(match_threshold=self._resolve_match_threshold(settings),
+                            logger=logger)
 
     def _resolve_channel_profiles(self, settings, logger):
         """Resolve comma-separated profile names to profile objects.
@@ -1715,53 +1795,340 @@ class Plugin:
                 "message": f"Queued {result['sent']} notification(s) with Newsflasharr: {names}",
                 "file": entries[0] or entries[1]}
 
-    def _export_csv(self, filename, rows, fieldnames, logger, settings=None):
-        """Export data to CSV in the exports directory with settings header."""
+    @staticmethod
+    def _csv_exports_to_delete(entries, retention_days, now, protect=None):
+        """Which of this plugin's CSV exports are old enough to remove.
+
+        entries is a sequence of (filename, modification time) pairs, normally
+        the whole export directory. Returns the names to delete, sorted. This is
+        pure: it touches no filesystem, which is where its tests live.
+
+        Nothing is deleted unless a positive number of days is configured, so an
+        installation that never asked for this keeps every file. The file just
+        written is never deleted. At least one of this plugin's files always
+        survives, so a small number cannot empty the directory.
+        """
+        # Resolved through the same helper the wrapper uses, so the two cannot
+        # disagree about what a value means. This guard stays even though the
+        # wrapper already returns early: this function deletes nothing itself,
+        # but it names the files something else will delete.
+        days, _problem = Plugin._resolve_retention_days(retention_days)
+        if days <= 0:
+            return []
+
+        mine = []
+        for name, mtime in entries:
+            if not (name.startswith(PluginConfig.CSV_EXPORT_PREFIX)
+                    and name.endswith(PluginConfig.CSV_EXPORT_SUFFIX)):
+                continue
+            try:
+                stamp = float(mtime)
+            except (TypeError, ValueError):
+                continue
+            if stamp != stamp:  # not a number, so its age is unknown
+                # Keeping it would be worse than skipping it: comparisons
+                # against it are all false, so it would win the "which is
+                # newest" test, become the survivor, and every real file would
+                # be deleted instead of one being kept.
+                continue
+            mine.append((name, stamp))
+        if not mine:
+            return []
+
+        # One file is guaranteed to survive. The file just written is the
+        # natural choice when it is here, otherwise the most recent one.
+        survivor = protect if any(name == protect for name, _ in mine) else None
+        if survivor is None:
+            survivor = max(mine, key=lambda pair: (pair[1], pair[0]))[0]
+
+        cutoff = float(now) - days * PluginConfig.SECONDS_PER_DAY
+        return sorted(name for name, stamp in mine
+                      if stamp < cutoff and name != survivor)
+
+    @staticmethod
+    def _resolve_retention_days(value):
+        """Read the retention setting once, for everything that needs it.
+
+        Returns (days, problem). days is 0 whenever nothing should be deleted,
+        and problem is a sentence to log, or None when there is nothing to say.
+
+        Blank, absent and any number at or below zero all mean "keep every
+        file". That is the default and is not a mistake, so they report no
+        problem. Anything that is not a whole number of days is a mistake: it
+        must not quietly become a shorter window. A plain int() would turn 3.7
+        into a three day window, and the field is declared as a number, so a
+        float is exactly what the form hands back.
+
+        Both the pure planner and the wrapper resolve through this, so they
+        cannot disagree about what a value means.
+        """
+        if value is None:
+            return 0, None
+        if isinstance(value, str):
+            text = value.strip()
+            if not text:
+                return 0, None
+        elif isinstance(value, bool):
+            return (1, None) if value else (0, None)
+        else:
+            text = value
+        try:
+            number = float(text)
+        except (TypeError, ValueError):
+            return 0, ("is not a number of days, so every export was kept. "
+                       "Set a whole number, or 0 to keep every file.")
+        if number != int(number):
+            return 0, ("is not a WHOLE number of days, so every export was "
+                       "kept rather than rounded to a shorter window. Set a "
+                       "whole number, or 0 to keep every file.")
+        days = int(number)
+        return (days, None) if days > 0 else (0, None)
+
+    def _prune_csv_exports(self, retention_days, protect=None, logger=None):
+        """Delete this plugin's CSV exports older than retention_days.
+
+        Returns how many were removed. NEVER raises: this runs immediately after
+        a successful export, and a failure to tidy up must not turn a successful
+        export into a reported error.
+
+        `logger` is the run's own logger, so everything one export has to say
+        lands in one place. Without it the warning from a delete that failed
+        went to the module logger while the export's other messages went to the
+        run's, which is how a retention setting that never works stays invisible.
+        """
+        log = logger or LOGGER
+        days, problem = self._resolve_retention_days(retention_days)
+        if problem:
+            log.warning(f"{LOG_PREFIX} 'Delete CSV Exports Older Than (Days)' is "
+                        f"set to {retention_days!r}, which {problem}")
+        if days <= 0:
+            # Nothing can be deleted, so do not touch the filesystem at all.
+            # This is the shipped default, and /data/exports is shared: measured
+            # at 124 files, of which 10 were this plugin's, so the old code cost
+            # a listing plus 124 modification-time reads on every export for a
+            # result that was always empty.
+            return 0
+
+        directory = PluginConfig.EXPORTS_DIR
+        entries = []
+        try:
+            names = os.listdir(directory)
+        except OSError:
+            return 0
+        for name in names:
+            # Filter by name BEFORE asking the filesystem anything. Only about
+            # one file in twelve here belongs to this plugin.
+            if not (name.startswith(PluginConfig.CSV_EXPORT_PREFIX)
+                    and name.endswith(PluginConfig.CSV_EXPORT_SUFFIX)):
+                continue
+            try:
+                entries.append((name, os.path.getmtime(os.path.join(directory, name))))
+            except OSError:
+                # It vanished between listing and asking, so there is nothing
+                # left to delete.
+                continue
+
+        removed = 0
+        for name in self._csv_exports_to_delete(entries, retention_days,
+                                                time.time(), protect):
+            try:
+                os.remove(os.path.join(directory, name))
+                removed += 1
+                log.info(f"{LOG_PREFIX} Deleted CSV export older than "
+                         f"{retention_days} days: {name}")
+            except OSError as exc:
+                log.warning(f"{LOG_PREFIX} Could not delete old CSV export "
+                            f"{name}: {exc}")
+        return removed
+
+    # The label each preset carries in the settings form, and what it is worth.
+    # A preamble that prints the bare word "normal" tells the reader neither the
+    # number nor which direction is stricter.
+    SENSITIVITY_LABELS = {
+        "relaxed": "Relaxed",
+        "normal": "Normal",
+        "strict": "Strict",
+        "exact": "Exact",
+    }
+
+    CATEGORY_DETAIL_LABELS = {
+        "none": "None, one group for the whole lineup",
+        "refined": "Refined, 6 broad categories",
+        "simple": "Simple, 7 merged categories",
+        "normal": "Normal, every category the lineup names",
+    }
+
+    NUMBERING_LABELS = {
+        "lineup": "Use the lineup file's own numbers",
+        "auto_next": "Auto-assign next available",
+        "auto_highest": "Auto-assign after highest",
+        "specific": "Use specific number",
+    }
+
+    def _describe_m3u_sources(self, settings, logger=None):
+        """The M3U source names this run used, never a URL.
+
+        Reads through `_m3u_account_names`, which returns None for a lookup that
+        FAILED and an empty list for an installation that genuinely has no
+        active account. Collapsing those two into one sentence would let a
+        database error read as a true statement about the run.
+        """
+        value = settings.get('m3u_sources') or '_all'
+        if value != '_all':
+            return str(value)
+        names = self._m3u_account_names(logger or LOGGER)
+        if names is None:
+            return "(all active sources; the list could not be read)"
+        if not names:
+            return "(all active sources, of which there are none)"
+        return f"{', '.join(names)} (all active sources)"
+
+    def _describe_epg_sources(self, settings):
+        """The EPG source names this run matched against."""
+        value = settings.get('epg_sources') or ''
+        if not _EPG_AVAILABLE:
+            return "(EPG models unavailable in this Dispatcharr build)"
+        try:
+            _, matches_all = self._parse_source_filter(value)
+            if not matches_all:
+                return str(value)
+            names = [src['name'] for src in EPGSource.objects.all().values('name')]
+            if not names:
+                return "(all sources, of which there are none)"
+            return f"{', '.join(names)} (all sources)"
+        except Exception:
+            return str(value) or "(all sources)"
+
+    def _generate_csv_header_comments(self, settings, action_name="Unknown",
+                                      summary=None, row_count=0, logger=None):
+        """The commented preamble written above the table in every CSV export.
+
+        Returns a list of lines, each already starting with a hash and carrying
+        no newline of its own, so the writer controls the line ending.
+
+        The order is deliberate. A reader opening this in a spreadsheet is told
+        first what the file is and that the hash lines are not data, then what
+        the run produced, and only then how it was configured. Counts come
+        before configuration because they are what somebody comparing two
+        exports looks for first.
+
+        `summary` is a sequence of (label, value) pairs supplied by whichever
+        action wrote the file, because only that action knows what it counted.
+        """
+        settings = settings or {}
+        sensitivity = str(settings.get('match_sensitivity') or 'normal')
+        # The same number the matcher was built with, including the legacy
+        # numeric field, so the export cannot name a threshold the run did not use.
+        threshold = self._resolve_match_threshold(settings)
+        known_preset = sensitivity in self.SENSITIVITY_MAP
+        sensitivity_label = self.SENSITIVITY_LABELS.get(sensitivity, sensitivity)
+        preserve_on = settings.get('preserve_existing_streams', False)
+        single = (settings.get('single_channel_name') or '').strip()
+        # Through the shared resolver, so the legacy ignore_channel_numbers
+        # override the run honours is honoured here too.
+        numbering = str(self._resolve_numbering_mode(settings))
+        detail = str(settings.get('category_detail') or 'normal')
+
+        lines = [
+            f"# Lineuparr Export v{PluginConfig.PLUGIN_VERSION}",
+            f"# Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            "#",
+            "# WHAT THIS FILE IS",
+            "# A report written by the Lineuparr plugin for Dispatcharr. Every line",
+            "# that starts with a hash is explanation rather than data. The table",
+            "# begins at the first line without one, so tell your spreadsheet to skip",
+            "# comment lines when importing, or delete them first.",
+            "#",
+            "# The settings listed further down are the ones THIS run used, not the",
+            "# ones saved now. That is the point of recording them: two exports that",
+            "# disagree can be compared by reading these lines.",
+            "#",
+            "# === What This Run Did ===",
+            f"# Action: {action_name}",
+            f"# Rows in this table: {row_count}",
+        ]
+        for label, value in (summary or []):
+            lines.append(f"# {label}: {value}")
+        lines += [
+            "#",
+            "# === Settings This Run Used ===",
+            f"# Lineup File: {settings.get('lineup_file') or '(none selected)'}",
+            f"# M3U Source: {self._describe_m3u_sources(settings, logger)}",
+            f"# EPG Sources for Matching: {self._describe_epg_sources(settings)}",
+            f"# Channel Profile: {settings.get('channel_profiles') or '_none'}",
+            f"# Channel Group Prefix: {settings.get('group_prefix') or '(auto, from the lineup name)'}",
+            f"# Category Detail: {self.CATEGORY_DETAIL_LABELS.get(detail, detail)}",
+            f"# Channel Numbering: {self.NUMBERING_LABELS.get(numbering, numbering)}",
+        ]
+        if known_preset:
+            sensitivity_note = ("higher is stricter; a name must score at least "
+                                "this to count as a match")
+        else:
+            sensitivity_note = ("not one of the four presets, so the score came "
+                                "from the older numeric setting this installation "
+                                "still carries; higher is stricter")
+        lines.append(f"# Match Sensitivity: {sensitivity_label}, {threshold} "
+                     f"out of 100 ({sensitivity_note})")
+        if preserve_on:
+            preserve_note = ("matched streams were added to each channel and "
+                             "nothing was deleted")
+        else:
+            preserve_note = ("a stream match replaced each channel's whole "
+                             "stream list, and channels left with no streams "
+                             "were deleted")
+        lines += [
+            f"# Preserve Existing Streams: "
+            f"{_setting_yes_no(settings, 'preserve_existing_streams', False)} "
+            f"({preserve_note})",
+            f"# Order Matched Streams by Quality: "
+            f"{_setting_yes_no(settings, 'prioritize_quality', PluginConfig.DEFAULT_PRIORITIZE_QUALITY)}",
+            f"# Quality-Aware Stream Matching: "
+            f"{_setting_yes_no(settings, 'quality_aware_stream_matching', PluginConfig.DEFAULT_QUALITY_AWARE_STREAM_MATCHING)}",
+            f"# Refresh EPG After Matching: "
+            f"{_setting_yes_no(settings, 'refresh_epg_after_match', True)}",
+            f"# Single Channel Match: {single or '(blank, so the whole lineup ran)'}",
+            f"# Custom Channel Aliases: "
+            f"{'set' if (settings.get('custom_aliases') or '').strip() else '(none)'}",
+            f"# Rate Limiting: {settings.get('rate_limiting') or 'none'}",
+            "#",
+        ]
+        # Flatten in ONE place rather than per line. Every value above is free
+        # text a user or a provider chose, and a line break inside any of them
+        # would end the comment block early, so a spreadsheet told to skip
+        # comment lines would read the remainder as the header row.
+        return [_one_line(line) for line in lines]
+
+    def _export_csv(self, filename, rows, fieldnames, logger, settings=None,
+                    action_name="Unknown", summary=None):
+        """Export data to CSV in the exports directory, under a commented preamble.
+
+        `action_name` and `summary` describe what the run did, and are written
+        above the settings. Only the calling action knows those counts, so it
+        supplies them as (label, value) pairs.
+        """
         try:
             os.makedirs(PluginConfig.EXPORTS_DIR, exist_ok=True)
             filepath = os.path.join(PluginConfig.EXPORTS_DIR, filename)
             with open(filepath, 'w', newline='', encoding='utf-8') as f:
-                # Write settings header as comment lines
-                if settings:
-                    f.write(f"# Lineuparr v{PluginConfig.PLUGIN_VERSION}\n")
-                    f.write(f"# Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                    f.write(f"# Lineup: {settings.get('lineup_file', '')}\n")
-                    f.write(f"# Category Detail: {settings.get('category_detail', 'normal')}\n")
-                    f.write(f"# Group Prefix: {settings.get('group_prefix', '') or '(auto)'}\n")
-                    f.write(f"# Match Sensitivity: {settings.get('match_sensitivity', 'normal')}\n")
-                    f.write(f"# Quality Ordering: {settings.get('prioritize_quality', True)}\n")
-                    f.write(f"# Rate Limiting: {settings.get('rate_limiting', 'none')}\n")
-                    # M3U source names (not URLs)
-                    m3u_val = settings.get('m3u_sources', '_all')
-                    try:
-                        if m3u_val == '_all':
-                            m3u_names = [acc['name'] for acc in M3UAccount.objects.filter(is_active=True).values('name')]
-                            f.write(f"# M3U Sources: {', '.join(m3u_names) or '(none)'} (all)\n")
-                        else:
-                            f.write(f"# M3U Sources: {m3u_val}\n")
-                    except Exception:
-                        f.write(f"# M3U Sources: {m3u_val}\n")
-                    # EPG source names
-                    epg_val = settings.get('epg_sources', '_all')
-                    try:
-                        if _EPG_AVAILABLE:
-                            _, _epg_all = self._parse_source_filter(epg_val)
-                            if _epg_all:
-                                epg_names = [src['name'] for src in EPGSource.objects.all().values('name')]
-                                f.write(f"# EPG Sources: {', '.join(epg_names) or '(none)'} (all)\n")
-                            else:
-                                f.write(f"# EPG Sources: {epg_val}\n")
-                        else:
-                            f.write(f"# EPG Sources: (unavailable)\n")
-                    except Exception:
-                        f.write(f"# EPG Sources: {epg_val}\n")
-                    # Profile
-                    f.write(f"# Channel Profile: {settings.get('channel_profiles', '_none')}\n")
-                    f.write(f"#\n")
+                # CRLF, matching csv.DictWriter's own default line terminator.
+                # The file was previously written with LF comment lines above
+                # CRLF data rows, and the user guide now tells people to import
+                # it, so one terminator throughout is the safer shape.
+                for line in self._generate_csv_header_comments(
+                        settings, action_name=action_name, summary=summary,
+                        row_count=len(rows), logger=logger):
+                    f.write(line + "\r\n")
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(rows)
             logger.info(f"{LOG_PREFIX} Exported CSV: {filepath} ({len(rows)} rows)")
+            # Tidy up here rather than on a schedule: files only accumulate when
+            # one is written, so pruning at that moment keeps the directory
+            # bounded at all times, and every export path, manual or scheduled,
+            # goes through this function. The file just written is protected by
+            # name, whatever the age arithmetic says.
+            self._prune_csv_exports((settings or {}).get('csv_retention_days'),
+                                    protect=filename, logger=logger)
             return filepath
         except Exception as e:
             logger.error(f"{LOG_PREFIX} CSV export failed: {e}")
@@ -1847,8 +2214,7 @@ class Plugin:
 
         # Check channel numbering
         numbering = self._resolve_numbering_mode(settings)
-        labels = {"lineup": "Use Channel Database Numbers", "auto_next": "Auto-Assign Next Available",
-                  "auto_highest": "Auto-Assign After Highest", "specific": "Use Specific Number"}
+        labels = self.NUMBERING_LABELS
         label = labels.get(numbering, numbering)
         if numbering == "specific":
             raw = (settings.get("starting_channel_number") or "").strip()
@@ -2112,7 +2478,14 @@ class Plugin:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         csv_name = f"lineuparr_preview_channels_{ts}.csv"
         self._export_csv(csv_name, results,
-                         ["Channel", "Number", "Category", "Group", "Status"], logger, settings)
+                         ["Channel", "Number", "Category", "Group", "Status"], logger, settings,
+                         action_name="Preview Channels (dry run, nothing was written)",
+                         summary=[
+                             ("Channels that would be created", new_count),
+                             ("Channels that would be renumbered", update_count),
+                             ("Channels already correct",
+                              len(results) - new_count - update_count),
+                         ])
         self._write_html_report(
             "Channel sync preview",
             [("Channel", "Channel"), ("Number", "Number"), ("Category", "Category"),
@@ -2260,7 +2633,15 @@ class Plugin:
             csv_name = f"lineuparr_preview_match_{ts}.csv"
             self._export_csv(csv_name, results,
                              ["Channel", "Number", "Category", "Best Match", "Score", "Match Type", "Total Matches", "Top Matches"],
-                             logger, settings)
+                             logger, settings,
+                             action_name="Preview Stream Match (dry run, no stream was attached)",
+                             summary=[
+                                 ("Channels matched", matched_count),
+                                 ("Channels with no match", unmatched_count),
+                                 ("Matches scoring 100", perfect_count),
+                                 ("Cross-country candidates rejected",
+                                  matcher.country_filter_drops),
+                             ])
             report_path = self._write_html_report(
                 "Preview stream match",
                 [("Channel", "Channel"), ("Number", "Number"), ("Category", "Category"),
@@ -3027,10 +3408,22 @@ class Plugin:
             ts = datetime.now().strftime("%Y%m%d_%H%M%S")
             mode = "dryrun" if dry_run else "applied"
             csv_name = f"lineuparr_match_{mode}_{ts}.csv"
+            # The unmatched-channel cleanup runs after this export is written,
+            # so its count is not known here and is deliberately not claimed.
+            # The Preserve Existing Streams line in the preamble says whether
+            # that cleanup can happen at all.
             self._export_csv(
                 csv_name, csv_rows,
                 ["Channel", "Number", "Category", "Streams Attached", "Best Match", "Best Score", "Match Type"],
-                logger, settings
+                logger, settings,
+                action_name=("Apply Stream Match (dry run, nothing was written)"
+                             if dry_run else "Apply Stream Match"),
+                summary=[
+                    ("Channels matched", channels_matched),
+                    ("Channels with no match", channels_unmatched),
+                    ("Streams attached", total_streams_attached),
+                    ("Cross-country candidates rejected", matcher.country_filter_drops),
+                ]
             )
             self._write_html_report(
                 "Stream match (dry run)" if dry_run else "Stream match applied",
@@ -3381,6 +3774,13 @@ class Plugin:
                     ["channel_name", "channel_number", "channel_group", "matched_epg_name",
                      "epg_source", "confidence_score", "has_program_data", "match_method", "status"],
                     logger, settings,
+                    action_name="Apply EPG Match",
+                    summary=[
+                        ("Channels given a guide", matched),
+                        ("Channels with no match", skipped_no_match),
+                        ("Channels skipped, already had a guide", skipped_existing),
+                        ("Matched without programme data yet", matched_fallback),
+                    ],
                 )
                 self._write_html_report(
                     "EPG match",
@@ -3604,14 +4004,19 @@ class Plugin:
             self._suppress_refresh = False
 
     def _clear_csv_exports(self, settings, logger):
-        """Delete all Lineuparr CSV export files."""
+        """Delete all Lineuparr CSV export files.
+
+        This deliberately ignores 'Delete CSV Exports Older Than (Days)':
+        somebody pressing this button expects everything cleared.
+        """
         export_dir = PluginConfig.EXPORTS_DIR
         if not os.path.exists(export_dir):
             return {"status": "ok", "message": "No exports directory found."}
 
         removed = 0
         for f in os.listdir(export_dir):
-            if f.startswith("lineuparr_") and f.endswith(".csv"):
+            if (f.startswith(PluginConfig.CSV_EXPORT_PREFIX)
+                    and f.endswith(PluginConfig.CSV_EXPORT_SUFFIX)):
                 try:
                     os.remove(os.path.join(export_dir, f))
                     removed += 1

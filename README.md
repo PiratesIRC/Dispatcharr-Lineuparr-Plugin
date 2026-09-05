@@ -22,7 +22,7 @@
 
 ## Warning: Backup Your Database
 
-Before installing or using this plugin, it is **highly recommended** that you create a backup of your Dispatcharr database. This plugin creates and modifies channel groups, channels, and stream assignments.
+Before installing or using this plugin, it is **highly recommended** that you create a backup of your Dispatcharr database. This plugin creates and modifies channel groups, channels, and stream assignments, and unless you turn on **Preserve Existing Streams** it also replaces a channel's whole stream list and deletes channels that end a run with no streams.
 
 **[Click here for instructions on how to back up your database.](https://dispatcharr.github.io/Dispatcharr-Docs/troubleshooting/?h=backup#how-can-i-make-a-backup-of-the-database)**
 
@@ -38,7 +38,8 @@ You pick a real provider lineup, such as Sky TV or DIRECTV Premier, and the plug
 - **Orders streams by quality**, 4K before UHD before FHD before HD before SD, using the name or [IPTV Checker](https://github.com/PiratesIRC/Dispatcharr-IPTV-Checker-Plugin) metadata.
 - **Previews before it commits.** A dry run writes a CSV of what would match and how confidently, so you can read it first.
 - **Reports what it did.** A shareable HTML page and CSV per run, optionally emailed through the [Newsflasharr](https://github.com/PiratesIRC/Dispatcharr-Newsflasharr-Plugin) plugin.
-- **Adds without destroying.** An optional mode appends matched streams instead of replacing them, so a second M3U source can be layered on safely.
+- **Replaces by default, appends on request.** A stream match normally replaces each channel's whole stream list and then deletes channels left with no streams. Turn on **Preserve Existing Streams** and it appends instead, skipping duplicates and deleting nothing, so a second M3U source can be layered on safely.
+- **Colours its buttons by consequence.** Red can remove a stream or a channel and always asks first, orange writes but removes nothing, blue only reads and reports.
 - **Runs inside Dispatcharr** with direct database access, so no API credentials are needed.
 
 Over 200 built-in channel aliases, plus your own in JSON. Every setting and action is covered in the [user guide](docs/USER-GUIDE.md).

@@ -1,6 +1,6 @@
 {
   "name": "Lineuparr",
-  "version": "1.26.2421451",
+  "version": "1.26.2481620",
   "description": "Mirror real-world provider channel lineups by creating channel groups, channels, and fuzzy-matching IPTV streams to them.",
   "author": "PiratesIRC",
   "license": "MIT",
@@ -30,28 +30,28 @@
       "id": "preview_stream_match",
       "label": "Preview Stream Match",
       "button_label": "👁️ Preview",
-      "description": "Dry-run: show stream-to-channel matches with confidence scores (CSV export)",
+      "description": "Dry run. Shows which stream would attach to each lineup channel and how confidently, and writes a CSV export and an HTML report. Changes no channel, stream or guide.",
       "button_variant": "outline",
-      "button_color": "cyan"
+      "button_color": "blue"
     },
     {
       "id": "full_sync",
       "label": "Full Sync",
       "button_label": "🚀 Full Sync",
-      "description": "Create groups and channels from lineup, fuzzy-match streams, assign EPG, assign logos, enable in profiles, and clean up unmatched channels",
+      "description": "Every step in one run: create groups and channels from the lineup, match streams, assign guides and logos, and enable the channels in your profile. Unless Preserve Existing Streams is on, the stream matching step replaces each channel's whole stream list and then deletes any channel left with no streams.",
       "button_variant": "filled",
-      "button_color": "violet",
+      "button_color": "red",
       "confirm": {
-        "message": "This will create groups, channels, match streams, assign EPG data, assign logos, enable channels in profiles, and remove unmatched channels. Continue?"
+        "message": "Full Sync creates groups and channels, matches streams, assigns guides and logos, and enables the channels in your profile. Unless Preserve Existing Streams is on, it also REPLACES each channel's existing stream list and DELETES channels left with no streams. Continue?"
       }
     },
     {
       "id": "sync_channels",
       "label": "Sync Channels Only",
       "button_label": "📺 Sync Channels",
-      "description": "Create/update groups and channels from lineup (no stream matching)",
+      "description": "Creates and updates the channel groups and channels the lineup describes. Adds and renumbers only; it matches no streams and deletes nothing.",
       "button_variant": "filled",
-      "button_color": "green",
+      "button_color": "orange",
       "confirm": {
         "message": "This will create groups and channels from the lineup. Continue?"
       }
@@ -60,20 +60,20 @@
       "id": "apply_stream_match",
       "label": "Apply Stream Match Only",
       "button_label": "🎯 Match Streams",
-      "description": "Attach matched streams to existing channels with quality ordering",
+      "description": "Attaches matched streams to channels that already exist, in quality order. Unless Preserve Existing Streams is on, it replaces each channel's whole stream list rather than adding to it, and then deletes any channel left with no streams.",
       "button_variant": "filled",
-      "button_color": "green",
+      "button_color": "red",
       "confirm": {
-        "message": "This will attach matched streams to channels and remove unmatched channels. Continue?"
+        "message": "This attaches matched streams to your channels. Unless Preserve Existing Streams is on, it REPLACES each channel's existing stream list and DELETES channels left with no streams. Continue?"
       }
     },
     {
       "id": "apply_epg_match",
       "label": "Apply EPG Match",
       "button_label": "📰 Match EPG",
-      "description": "Fuzzy-match EPG data to channels and assign program guides",
+      "description": "Matches guide entries to your channels and assigns the programme guide. A channel that already has a guide is left alone, so this adds and never replaces.",
       "button_variant": "filled",
-      "button_color": "green",
+      "button_color": "orange",
       "confirm": {
         "message": "This will assign EPG data to Lineuparr-managed channels. Continue?"
       }
@@ -82,9 +82,9 @@
       "id": "apply_logo_match",
       "label": "Assign Logos",
       "button_label": "🎨 Assign Logos",
-      "description": "Auto-assign channel logos from EPG icons, Logo Manager, or tv-logos GitHub repo",
+      "description": "Assigns a logo to each channel, taken from the guide entry's icon, the Logo Manager, or the tv-logos repository on GitHub, in that order. Sets a logo where there is none and removes none.",
       "button_variant": "filled",
-      "button_color": "green",
+      "button_color": "orange",
       "confirm": {
         "message": "This will assign logos to channels that don't have one. Continue?"
       }
@@ -93,27 +93,27 @@
       "id": "resort_streams",
       "label": "Re-sort Streams by Quality",
       "button_label": "⭐ Re-sort",
-      "description": "Re-order already-attached streams using latest quality data. Run this after IPTV Checker scans your streams to use actual resolution/bitrate instead of name-based quality detection.",
-      "button_variant": "outline",
+      "description": "Re-orders the streams a channel already has, using the newest quality data. Run it after IPTV Checker has scanned your streams so the order uses measured resolution rather than the quality tag in the name. It changes the order only; no stream is added or removed.",
+      "button_variant": "filled",
       "button_color": "orange"
     },
     {
       "id": "clear_csv_exports",
       "label": "Clear CSV Exports",
       "button_label": "🗑️ Clear CSV",
-      "description": "Delete all Lineuparr CSV export files",
-      "button_variant": "outline",
-      "button_color": "red",
+      "description": "Deletes every lineuparr_*.csv file in /data/exports, however new. It touches no channel, stream or guide, and ignores the Delete CSV Exports Older Than setting.",
+      "button_variant": "filled",
+      "button_color": "orange",
       "confirm": {
-        "message": "Delete all Lineuparr CSV exports?"
+        "message": "Delete every Lineuparr CSV export in /data/exports? Your channels, streams and guides are not affected."
       }
     },
     {
       "id": "email_report",
       "label": "Email Report Now",
-      "description": "Send the newest report to Newsflasharr for delivery. Sends what is already on disk rather than re-running a match.",
+      "description": "Sends the newest report already on disk to Newsflasharr for delivery. It does not re-run a match, so the report is as old as the last run that produced one.",
       "button_label": "✉️ Email Report",
-      "button_variant": "outline",
+      "button_variant": "filled",
       "button_color": "cyan"
     }
   ]
