@@ -23,3 +23,4 @@ Lineuparr/matching_core.py text eol=lf
 # .github/scripts/check_client_parity.py against client_manifest.json, so it MUST stay
 # LF on every OS: a CRLF checkout would change the hash and break the gate.
 Lineuparr/notify_client.py text eol=lf
+.githooks/* text eol=lf

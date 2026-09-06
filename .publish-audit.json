@@ -64,6 +64,10 @@
     {
       "pattern": "/data/exports",
       "reason": "where the plugin writes its CSV exports, documented deliberately"
+    },
+    {
+      "pattern": "CNN 192\\.168\\.1\\.50",
+      "reason": "tests/test_reports.py: documentary LAN address used as INPUT to the redaction test, which asserts it is removed from report text. Not this installation's address."
     }
   ]
 }

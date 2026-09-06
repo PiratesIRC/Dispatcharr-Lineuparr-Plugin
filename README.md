@@ -124,8 +124,8 @@ If you would like a provider added but cannot build the file yourself, open a **
 Version format is `1.26.{DDD}{HHMM}`, a three digit day of year plus a four digit UTC time. Both `Lineuparr/plugin.json` and `PluginConfig.PLUGIN_VERSION` in `Lineuparr/plugin.py` must stay in step, so use the helper rather than editing them by hand:
 
 ```bash
-python3 bump_version.py              # auto from the current UTC time
-python3 bump_version.py 1.26.1031200 # explicit
+python scripts/bump_version.py              # auto from the current UTC time
+python scripts/bump_version.py --set 1.26.1031200 # explicit
 ```
 
 ---

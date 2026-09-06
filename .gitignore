@@ -44,13 +44,13 @@ GEMINI.md
 # local working material: ignore the lot, then re-include the published
 # pages by name below, so a new page is a deliberate decision.
 docs/*
-tests/
-test_*.py
+/test_*.py
 *.cmd
 MEMORY.md
 *.md
 !README.md
 !docs/USER-GUIDE.md
+!CHANGELOG.md
 !docs/LINEUP-FORMAT.md
 # Screenshots used by the published documentation. Everything else under
 # docs/ stays local, so a new image is a deliberate decision.
@@ -64,11 +64,11 @@ feedback_*.md
 project_*.md
 reference_*.md
 
-# Dev tooling / scripts — kept locally, NOT part of the shipped plugin.
+# Dev tooling / scripts - kept locally, NOT part of the shipped plugin.
 # The repo should contain ONLY the plugin's runtime files (everything under
 # Lineuparr/) plus README/LICENSE/.github. Anything else lives here.
-bump_version.py
-conftest.py
+/bump_version.py
+/conftest.py
 *smoke*.py
 # NOTE ON scripts/: the rule above says the repository holds only the plugin
 # runtime. Two things under scripts/ are deliberate exceptions and ARE tracked:
@@ -81,7 +81,7 @@ conftest.py
 # literal workspace path (both build theirs from environment variables) and the
 # gist id they hold is already public in the README badge URL.
 
-# OpenWolf local context (AI memory — not part of the plugin)
+# OpenWolf local context (AI memory - not part of the plugin)
 .wolf/
 
 # Local run / export artifacts
