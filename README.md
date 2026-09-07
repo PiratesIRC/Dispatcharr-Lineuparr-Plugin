@@ -33,6 +33,7 @@ You pick a real provider lineup, such as Sky TV or DIRECTV Premier, and the plug
 
 - **Builds the lineup.** Channel groups and channels that mirror the provider's package, keeping the provider's channel numbers.
 - **Matches your streams to it.** A four stage pipeline: alias, exact, substring, then fuzzy token sort, with US broadcast callsign anchoring and length scaled thresholds to keep false positives down. Four sensitivity presets from Relaxed to Exact.
+- **Keeps reviewed false positives out.** Optional per-channel `excluded_aliases` block a known wrong stream before any positive matching stage without suppressing it from other channels.
 - **Rejects streams from the wrong country.** A lineup keeps only same country or untagged streams. Detection covers the tag formats real providers use, including parenthesized, colon separated, box bar separated, bare space, and country glued to a quality tag. When a stream name carries no country at all, the provider group it came from is read instead, which is what catches a provider that labels streams by platform rather than by country.
 - **Knows about regional variants**, so an East, West or Pacific channel reaches the matching regional stream.
 - **Assigns EPG data and logos.** Programme guides from any configured EPG source, and logos from EPG icons, the Logo Manager, or the [tv-logos](https://github.com/tv-logo/tv-logos) repository.
