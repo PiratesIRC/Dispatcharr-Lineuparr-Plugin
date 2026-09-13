@@ -103,6 +103,15 @@ _KNOWN_COUNTRY_CODES = {
     # SI=Arena Sport, ET=Ethiopia via "ETH: Addis TV"). "MT" is NOT added: in
     # these feeds it tags theme channels (Cooking/Clubbing 4K), not Malta.
     "VN", "PK", "SI", "ET",
+    # Qatar, for the beIN MENA lineup. ONLY QA: that lineup is regional,
+    # the filter is single-country, and the MENA channels are tagged by
+    # LANGUAGE in these feeds ("AR: beIN DRAMA HD", 2710 AR-prefixed names
+    # in a 53,992-name export) rather than by country. Recognizing SA, AE,
+    # LB and the rest would make a QA lineup drop streams it legitimately
+    # carries: the correct "SA: beIN SPORTS 1" feeds read as untagged today
+    # and are kept, and they must stay that way. "AR" stays excluded for the
+    # reason given above: it tags Arabic, not Argentina.
+    "QA",
 }
 
 # ISO-3 or colloquial codes seen in M3U streams → ISO-2.

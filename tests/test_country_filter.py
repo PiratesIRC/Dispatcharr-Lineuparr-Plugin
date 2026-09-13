@@ -366,3 +366,71 @@ class TestCrossBorderSharedChannels:
             "ESPN", candidates, alias_map={}, lineup_country="US",
         )
         assert matcher.country_filter_drops == 3
+
+
+class TestQatarLineupCountryFilter:
+    """QA is recognized so the beIN MENA lineup gets a working country filter.
+
+    Before QA was added to _KNOWN_COUNTRY_CODES, match_all_streams took its
+    defensive branch for an unrecognized lineup_country and applied no filter at
+    all, so a French or Australian beIN feed attached to a Qatari beIN channel.
+
+    Only QA is recognized, deliberately. The wider MENA codes stay out: the
+    lineup is regional rather than single country, and a stream tagged "SA:"
+    carries channels that lineup legitimately lists, so recognizing SA would
+    make the single-country filter drop beIN SPORTS 1 to 9 from a QA lineup.
+    """
+
+    def test_qa_colon_prefix_is_detected(self):
+        assert detect_stream_country("QA: beIN SPORTS 1") == "QA"
+
+    def test_qa_lineup_rejects_french_stream(self, matcher):
+        candidates = ["QA: beIN SPORTS 1", "FR: beIN SPORTS 1"]
+        names = [r[0] for r in matcher.match_all_streams(
+            "beIN SPORTS 1", candidates, alias_map={}, lineup_country="QA",
+        )]
+        assert "QA: beIN SPORTS 1" in names
+        assert "FR: beIN SPORTS 1" not in names
+
+    def test_qa_lineup_rejects_australian_stream(self, matcher):
+        candidates = ["beIN SPORTS 1", "AU: beIN SPORTS 1"]
+        names = [r[0] for r in matcher.match_all_streams(
+            "beIN SPORTS 1", candidates, alias_map={}, lineup_country="QA",
+        )]
+        assert "AU: beIN SPORTS 1" not in names
+
+    def test_qa_lineup_keeps_untagged_stream(self, matcher):
+        candidates = ["beIN SPORTS 1", "FR: beIN SPORTS 1"]
+        names = [r[0] for r in matcher.match_all_streams(
+            "beIN SPORTS 1", candidates, alias_map={}, lineup_country="QA",
+        )]
+        assert "beIN SPORTS 1" in names
+
+    def test_qa_lineup_keeps_saudi_tagged_stream(self, matcher):
+        """SA stays unrecognized, so an SA-tagged stream reads as untagged."""
+        candidates = ["SA: beIN SPORTS 1", "FR: beIN SPORTS 1"]
+        names = [r[0] for r in matcher.match_all_streams(
+            "beIN SPORTS 1", candidates, alias_map={}, lineup_country="QA",
+        )]
+        assert "SA: beIN SPORTS 1" in names
+
+    def test_qa_lineup_keeps_arabic_tagged_stream(self, matcher):
+        """AR tags a language in these feeds, not Argentina, so it is not a country."""
+        assert detect_stream_country("AR: beIN DRAMA HD") is None
+        candidates = ["AR: beIN DRAMA", "FR: beIN DRAMA"]
+        names = [r[0] for r in matcher.match_all_streams(
+            "beIN DRAMA", candidates, alias_map={}, lineup_country="QA",
+        )]
+        assert "AR: beIN DRAMA" in names
+
+    @pytest.mark.parametrize("cc", [
+        "SA", "AE", "LB", "MA", "TN", "LY", "JO", "SY",
+        "IQ", "DZ", "KW", "BH", "OM", "EG", "PS", "SD", "YE", "AR",
+    ])
+    def test_wider_mena_codes_stay_unrecognized(self, cc):
+        from Lineuparr import fuzzy_matcher as _fm
+        assert cc not in _fm._KNOWN_COUNTRY_CODES, (
+            f"{cc} was added to _KNOWN_COUNTRY_CODES. The beIN MENA lineup is "
+            f"regional and the country filter is single-country, so recognizing "
+            f"{cc} makes a QA lineup drop streams it legitimately carries."
+        )
