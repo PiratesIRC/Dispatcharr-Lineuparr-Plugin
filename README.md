@@ -71,6 +71,7 @@ Over 200 built-in channel aliases, plus your own in JSON. Every setting and acti
 | `AU_Foxtel_lineup.json` | Foxtel Platinum Plus | AU | ~140 |
 | `CA_Telus-Optik_lineup.json` | Telus Optik | CA | ~130 |
 | `NL_ODIDO_lineup.json` | ODIDO | NL | ~155 |
+| `NL_KPN_lineup.json` | KPN Interactive TV, television and radio | NL | ~290 |
 | `QA_beIN-MENA_lineup.json` | beIN MENA (Middle East and North Africa) | QA | ~168 |
 
 The beIN MENA lineup is regional rather than single country, so its country filtering is partial. Its filename country code is QA, which rejects streams tagged for a country outside the region: an Australian, Belgian or French beIN feed will not attach to one of its channels. Streams tagged for another Middle East or North Africa country, and streams tagged AR for Arabic, are treated as untagged and are kept, which is deliberate because those are the tags the region's own feeds carry.
