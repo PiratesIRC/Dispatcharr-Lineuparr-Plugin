@@ -71,6 +71,9 @@ Over 200 built-in channel aliases, plus your own in JSON. Every setting and acti
 | `AU_Foxtel_lineup.json` | Foxtel Platinum Plus | AU | ~140 |
 | `CA_Telus-Optik_lineup.json` | Telus Optik | CA | ~130 |
 | `NL_ODIDO_lineup.json` | ODIDO | NL | ~155 |
+| `QA_beIN-MENA_lineup.json` | beIN MENA (Middle East and North Africa) | QA | ~168 |
+
+The beIN MENA lineup is regional rather than single country, and country detection does not yet recognize the MENA country codes, so the country filter does not apply to it: a same named stream tagged for another country can still match. Set Match Sensitivity higher for that lineup if you carry beIN feeds from more than one region.
 
 These are community-compiled channel lists based on publicly available provider lineup information. You can write your own: see the [lineup file format](docs/LINEUP-FORMAT.md).
 
