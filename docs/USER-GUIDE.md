@@ -19,6 +19,10 @@ it does and how to install it.
 - [Step by step](#step-by-step)
 - [The actions, one by one](#the-actions-one-by-one)
 - [Unmatched channel cleanup](#unmatched-channel-cleanup)
+- [Adding a second provider](#adding-a-second-provider)
+- [Keeping channels up to date](#keeping-channels-up-to-date)
+- [Using more than one lineup](#using-more-than-one-lineup)
+- [Requesting a lineup](#requesting-a-lineup)
 - [Custom aliases](#custom-aliases)
 - [Country matching](#country-matching)
 - [IPTV Checker integration](#iptv-checker-integration)
@@ -55,7 +59,7 @@ order, so a setting is listed where you will find it on screen.
 | Setting | Type | Default | What it does |
 |---------|------|---------|--------------|
 | Lineup File | select | `DirecTV Premier (US)` | The provider lineup to mirror. The list is built from the `*_lineup.json` files in the plugin directory. The two-letter country code at the front of the filename is also what the country filter compares a stream against. |
-| M3U Source | select | `All sources` | Which M3U account's streams to match against. Leave it on All to use every active source. |
+| M3U Source | select | `All sources` | Which M3U account's streams to match against. Leave it on All to use every active source. Accounts switched off in Dispatcharr are never listed or matched. The list is built when the settings page loads, so reload the Plugins page after adding an M3U account. |
 | EPG Sources for Matching | string | *(blank)* | Which guide sources to match against. Blank means all of them, in the priority order configured in Dispatcharr. Otherwise give one or more source names separated by commas; `*` and `?` wildcards work, so `UK*` takes every source whose name starts with UK. Earlier names win. |
 | Channel Profile | select | `None` | Channel profile that synced channels are enabled in. |
 
@@ -119,7 +123,7 @@ channel has failover options. A large multi-country playlist can therefore
 attach a sibling-but-different feed that shares a common word: a US "Fox Sports
 1" picking up "TNT Sports 1", "Sky Sports F1" or "AFN Sports", or "Sports Mix"
 picking up "Sky Sports Mix". Those land in the 81 to 89 percent range, so
-**Strict** removes them while keeping the genuine matches.
+**Strict** removes them while keeping the correct matches.
 
 If Strict still lets a few through, there are two more levers. Matching only
 ever reads the stream **name**, never its channel group, so:
@@ -213,6 +217,91 @@ Two things bound it:
 
 To see what would go before committing to it, run **Preview Stream Match** and
 read the unmatched rows in the CSV.
+
+---
+
+## Adding a second provider
+
+To match streams from a new M3U account as well as your existing one:
+
+1. **Make sure Dispatcharr has the streams.** Lineuparr only sees streams
+   Dispatcharr has already imported. Refresh the new M3U account, enable the
+   groups you want, and check that its streams show up on the Streams page.
+2. **Set M3U Source to All sources.** If it names your first provider, only that
+   provider's streams are read. Reload the Plugins page first if the new account
+   is missing from the list.
+3. **Check the country prefixes.** A stream named with a different country from
+   the lineup's, such as `UK: Sky News` against a US lineup, is skipped on purpose.
+   See [Country matching](#country-matching).
+4. **Run Preview Stream Match** and confirm the new provider's streams appear in
+   the CSV.
+5. **Decide on Preserve Existing Streams, then run Apply Stream Match Only.**
+   - Off: each channel's stream list is rebuilt from every selected provider and
+     sorted by quality. Your current order is replaced.
+   - On: the new provider's streams are added after the ones already on each
+     channel, duplicates are skipped, and nothing is removed or deleted.
+
+With more than one stream on a channel, Dispatcharr moves to the next stream in
+the list when the one playing fails, so the stream you trust most belongs at the
+top.
+
+---
+
+## Keeping channels up to date
+
+**Lineuparr has no scheduler.** It runs only when you press a button, so a stream
+that appears or is renamed after your last run stays unattached until the next
+one.
+
+Streams your provider drops are handled by Dispatcharr, not by Lineuparr. When an
+M3U refresh no longer finds a stream, Dispatcharr removes it (after the account's
+stale stream period, if one is set), and it leaves every channel it was on.
+
+A routine that works: after your M3U accounts refresh, run **Apply Stream Match
+Only** (or **Full Sync**).
+
+- With **Preserve Existing Streams off**, every run rebuilds each channel's list
+  from scratch, which also drops streams that no longer match. It also deletes a
+  Lineuparr channel left with no match at all, which can happen when a provider is
+  down during the run. Run **Preview Stream Match** first if a provider has been
+  having problems.
+- With it **on**, runs only ever add. A stream that stops matching stays on the
+  channel until Dispatcharr deletes it or you remove it.
+
+If another tool orders your streams, run it after Lineuparr, or turn off **Order
+Matched Streams by Quality**, because a run with Preserve Existing Streams off
+replaces the existing order. **Re-sort Streams by Quality** only changes the order
+and never adds or removes a stream.
+
+---
+
+## Using more than one lineup
+
+Lineuparr works from one lineup file at a time. To cover several providers in
+one country, choose a combined lineup: `US_Combined` merges DirecTV, DISH and
+Verizon into one de-duplicated lineup, and `UK_Combined` merges Freeview and Sky
+TV. For a mix that is not shipped, such as US and Canadian channels together, you
+can write your own lineup file (see the [lineup file format](LINEUP-FORMAT.md))
+and give individual channels their own country, or ask for a combined file to be
+added.
+
+---
+
+## Requesting a lineup
+
+To get a lineup for your country or provider added, open an issue on the
+[GitHub repository](https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/issues)
+and attach the channel list in whatever form you have it. You do not need to
+write JSON. Any of these is enough:
+
+- a screenshot or PDF of a provider's channel guide
+- a link to a provider's own public channel list page
+- an M3U or XMLTV export with the channel names and numbers in it
+- a plain text or spreadsheet list of `number, channel name`
+
+A lineup holds channel names, numbers and categories only. It carries no stream
+addresses, logos or programme data. If you would rather build the file yourself,
+the [lineup file format](LINEUP-FORMAT.md) explains the rules it has to pass.
 
 ---
 
@@ -310,6 +399,12 @@ worker start and when the Plugins page is opened.
 - Add **Custom Aliases** for channels whose provider names differ.
 - Confirm the M3U source actually carries the channels you expect.
 
+### A new provider's streams are not matched
+
+Work through [Adding a second provider](#adding-a-second-provider). The usual
+causes are M3U Source still naming the first provider, the new account not yet
+refreshed in Dispatcharr, or stream names carrying another country's prefix.
+
 ### Channels created but no streams attached
 
 - Check that the M3U Source setting points at the right account.
@@ -367,7 +462,8 @@ Five guards apply across all four:
 - **Callsign anchoring.** A shared high-confidence US broadcast callsign such as
   "WABC" rescues a correct match, and a disagreeing one rejects a false match.
 - **Channel number boost.** A three-or-more-digit channel number appearing in the
-  stream name breaks ties. Only active in "Use Channel Database Numbers" mode.
+  stream name breaks ties. Only active when Channel Numbering is set to use the lineup
+  file's own numbers, which is the default.
 
 ---
 
