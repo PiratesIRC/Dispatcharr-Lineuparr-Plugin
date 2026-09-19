@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+<!-- Asking for a lineup for a country or provider? Please use the "Lineup request" form instead of this template. -->
+
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 

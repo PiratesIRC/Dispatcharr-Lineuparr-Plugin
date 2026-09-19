@@ -1,0 +1,85 @@
+name: Lineup request
+description: Ask for a channel lineup for a country or provider to be added.
+title: "[Lineup request] <country>: <provider>"
+labels: ["lineup-request", "needs-info"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A lineup is built from a real channel list, so a request can only be worked on once it includes one.
+        A request that names a country but no provider, or includes no channel list, will be closed until one is added.
+        You do not need to write JSON. See [Requesting a lineup](https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/blob/main/docs/USER-GUIDE.md#requesting-a-lineup) in the user guide.
+
+        **One provider per request, please.** If you want lineups for several countries, open one request for each.
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: The country the lineup is for.
+      placeholder: "Brazil"
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider or service
+      description: The TV provider whose channel numbering and names the lineup should follow. A country on its own is not a lineup; different providers in the same country number and name their channels differently.
+      placeholder: "Claro TV+"
+    validations:
+      required: true
+  - type: input
+    id: package
+    attributes:
+      label: Package or tier
+      description: If the provider sells more than one package, which one. Leave empty if there is only one, or if you want the largest one.
+      placeholder: "Full package"
+    validations:
+      required: false
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: What are you providing?
+      description: Pick every form of channel list you are including below.
+      multiple: true
+      options:
+        - A link to the provider's own public channel list page
+        - A screenshot or PDF of the provider's channel guide
+        - An M3U or XMLTV export with channel names and numbers
+        - A pasted or attached list of channel numbers and names
+    validations:
+      required: true
+  - type: input
+    id: source_link
+    attributes:
+      label: Link to the channel list
+      description: The provider's public channel list page, if there is one.
+      placeholder: "https://"
+    validations:
+      required: false
+  - type: textarea
+    id: channel_list
+    attributes:
+      label: Channel list
+      description: |
+        Paste the list here, one channel per line as `number, channel name`, or drag and drop a screenshot, PDF, spreadsheet or text file into this box.
+        Categories (News, Sports, Movies and so on) are helpful if the provider groups its channels.
+        Do not include stream addresses, usernames or passwords. A lineup holds channel names, numbers and categories only.
+      placeholder: |
+        101, Channel One
+        102, Channel Two
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Regional variants, channels that differ by city, or anything else that affects the numbering.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have included a channel list, or a link to one, for a single named provider.
+          required: true

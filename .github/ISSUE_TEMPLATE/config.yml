@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: How to request a lineup
+    url: https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/blob/main/docs/USER-GUIDE.md#requesting-a-lineup
+    about: What information a lineup request needs, and what forms of channel list are accepted.
+  - name: User guide
+    url: https://github.com/PiratesIRC/Dispatcharr-Lineuparr-Plugin/blob/main/docs/USER-GUIDE.md
+    about: Answers to common setup questions, including using a second provider and why the plugin has no scheduler.
