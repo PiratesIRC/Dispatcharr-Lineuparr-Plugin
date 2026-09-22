@@ -19,7 +19,8 @@ from glob import glob
 from django.db import transaction
 
 from .fuzzy_matcher import (FuzzyMatcher, has_upgrade_quality, detect_category_country,
-                            detect_name_country_prefix, country_codes_in_text)
+                            detect_name_country_prefix, country_codes_in_text,
+                            parse_excluded_aliases)
 from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
 from . import notify_bridge, report_count, reports
@@ -766,6 +767,7 @@ class Plugin:
         if "categories" not in data:
             raise ValueError(f"Invalid lineup file: missing 'categories' key")
 
+        self._normalize_excluded_aliases(data, logger)
         self._rewrite_country_prefixes(data, logger)
 
         # Apply category detail level transformation
@@ -775,6 +777,24 @@ class Plugin:
         self._lineup_cache_file = cache_key
         logger.info(f"{LOG_PREFIX} Loaded lineup: {data.get('package', 'Unknown')} ({sum(len(v) for v in data['categories'].values())} channels, {len(data['categories'])} categories, detail={detail})")
         return data
+
+    @staticmethod
+    def _normalize_excluded_aliases(data, logger):
+        """Normalize optional excluded_aliases fields once when a lineup loads."""
+        for channels in data.get("categories", {}).values():
+            if not isinstance(channels, list):
+                continue
+            for entry in channels:
+                if not isinstance(entry, dict) or "excluded_aliases" not in entry:
+                    continue
+                cleaned = parse_excluded_aliases(
+                    entry.get("excluded_aliases"), logger=logger,
+                    channel_name=entry.get("name"),
+                )
+                if cleaned:
+                    entry["excluded_aliases"] = cleaned
+                else:
+                    entry.pop("excluded_aliases", None)
 
     @staticmethod
     def _rewrite_country_prefixes(data, logger):
@@ -2633,6 +2653,7 @@ class Plugin:
                         lineup_country=entry_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
                         candidate_countries=stream_countries,
+                        excluded_aliases=entry.get("excluded_aliases"),
                     )
 
                     if matches:
@@ -3352,6 +3373,7 @@ class Plugin:
                         lineup_country=entry_cc,
                         quality_aware=(ch_name in upgrade_twin_set),
                         candidate_countries=stream_countries,
+                        excluded_aliases=entry.get("excluded_aliases"),
                     )
 
                     if matches:
