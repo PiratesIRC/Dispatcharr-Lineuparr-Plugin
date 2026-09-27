@@ -156,6 +156,13 @@ class PluginConfig:
     DEFAULT_RATE_LIMITING = "none"
     DEFAULT_CHANNEL_NUMBERING = "lineup"
 
+    # Sentinel category key _apply_category_detail uses for "None - single
+    # group" (Category Detail = "none"): every channel is merged under this one
+    # key, and _make_group_name special-cases it to mean "prefix only, no
+    # category suffix". Shared here so the two places that must agree on the
+    # exact string cannot drift apart.
+    SINGLE_GROUP_CATEGORY = "All"
+
     RATE_LIMIT_NONE = 0.0
     RATE_LIMIT_LOW = 0.1
     RATE_LIMIT_MEDIUM = 0.5
@@ -845,7 +852,7 @@ class Plugin:
             all_channels = []
             for channels in original_cats.values():
                 all_channels.extend(channels)
-            result["categories"] = {"All": all_channels}
+            result["categories"] = {PluginConfig.SINGLE_GROUP_CATEGORY: all_channels}
             return result
 
         if detail in ("simple", "refined"):
@@ -1037,7 +1044,22 @@ class Plugin:
         """Build full group name from prefix and category.
         If prefix ends with a separator character, append category directly.
         Otherwise add ': ' between prefix and category.
-        Examples: 'DTV-' + 'News' = 'DTV-News', 'DIRECTV' + 'News' = 'DIRECTV: News'"""
+        Examples: 'DTV-' + 'News' = 'DTV-News', 'DIRECTV' + 'News' = 'DIRECTV: News'
+
+        Category Detail = "none" ("single group (prefix only, no categories)")
+        is the one exception: it merges every channel under the sentinel
+        category PluginConfig.SINGLE_GROUP_CATEGORY, and the resulting group
+        name must be the prefix ALONE, not "<prefix>: All" - the setting's own
+        description promises "no categories". Every caller reaches this
+        sentinel the same way (it flows out of _apply_category_detail via
+        lineup["categories"]), so handling it here is the single place that
+        keeps every one of this method's callers in agreement. A real lineup
+        category that happens to be named exactly "All" under Normal/Simple/
+        Refined detail collapses the same way; that is an accepted, harmless
+        edge case rather than something worth a second sentinel value."""
+        if category == PluginConfig.SINGLE_GROUP_CATEGORY:
+            stripped_prefix = prefix.rstrip(" :_-/") if prefix else ""
+            return stripped_prefix or PluginConfig.SINGLE_GROUP_CATEGORY
         if prefix:
             if prefix[-1] in ":_-/ ":
                 return f"{prefix}{category}"
@@ -2727,12 +2749,58 @@ class Plugin:
     # DESTRUCTIVE ACTIONS
     # ========================================================================
 
+    def _migrate_single_group_name(self, prefix, dry_run, logger):
+        """Rename a pre-fix "<prefix>: All" group to the new prefix-only name.
+
+        Before this fix, Category Detail = "none" built its group name the
+        same way every other category did, giving "<prefix>: All" instead of
+        the "prefix only" the setting promises. Someone already using this
+        mode has that old group in Dispatcharr; without this step, the next
+        sync would create a second, new "<prefix>" group under the fixed
+        name and leave the old one behind as an orphaned duplicate holding
+        their existing channels.
+
+        Renaming (not recreating) preserves the group's id, so every channel
+        already assigned to it stays assigned - only its name changes. If a
+        "<prefix>" group already exists too, merging the two would mean
+        moving channels between groups, which is a bigger and riskier
+        decision than this fix should make silently, so both are left alone
+        and a warning is logged instead.
+        """
+        old_name = f"{prefix}: All" if prefix and prefix[-1] not in ":_-/ " else f"{prefix}All" if prefix else "All"
+        new_name = self._make_group_name(prefix, PluginConfig.SINGLE_GROUP_CATEGORY)
+        if old_name == new_name:
+            return  # no prefix - "All" both before and after the fix
+
+        old_group = ChannelGroup.objects.filter(name=old_name).first()
+        if not old_group:
+            return  # nothing to migrate
+
+        if ChannelGroup.objects.filter(name=new_name).exists():
+            logger.warning(
+                f"{LOG_PREFIX} Both '{old_name}' and '{new_name}' channel groups exist; "
+                f"leaving both as-is. Merge them manually if '{old_name}' is a leftover "
+                f"from before this fix."
+            )
+            return
+
+        if dry_run:
+            logger.info(f"{LOG_PREFIX} [DRY RUN] Would rename group '{old_name}' to '{new_name}'")
+            return
+
+        old_group.name = new_name
+        old_group.save(update_fields=["name"])
+        logger.info(f"{LOG_PREFIX} Renamed group '{old_name}' to '{new_name}' (ID: {old_group.id})")
+
     def _sync_groups(self, settings, logger):
         """Create/update ChannelGroups from lineup categories."""
         dry_run = settings.get("dry_run_mode", False)
         lineup = self._load_lineup(settings, logger)
         prefix = self._get_group_prefix(settings, lineup)
         rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
+
+        if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
+            self._migrate_single_group_name(prefix, dry_run, logger)
 
         created = 0
         existed = 0
@@ -2816,6 +2884,16 @@ class Plugin:
         prefix = self._get_group_prefix(settings, lineup)
         rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
         assigner = self._init_assigner_state(settings)
+
+        # Sync Channels builds its own group lookup below rather than going
+        # through _sync_groups, so it needs this same migration call: without
+        # it, a lineup using Category Detail = "none" whose only prior sync
+        # was ever via this button (there is no Sync Groups button in the
+        # UI) would never see its pre-fix "<prefix>: All" group renamed, and
+        # get_or_create just below would create a second "<prefix>" group
+        # instead, orphaning the channels already on the old one.
+        if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
+            self._migrate_single_group_name(prefix, dry_run, logger)
 
         # Ensure groups exist
         existing_groups = {g['name']: g['id'] for g in ChannelGroup.objects.all().values('id', 'name')}
