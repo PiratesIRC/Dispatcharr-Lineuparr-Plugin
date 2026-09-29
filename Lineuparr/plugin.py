@@ -5,6 +5,7 @@ and fuzzy-matching IPTV streams to them.
 """
 
 import copy
+import hashlib
 import logging
 import json
 import csv
@@ -13,6 +14,7 @@ import re
 import time
 import fnmatch
 import threading
+import uuid
 from datetime import datetime, timedelta
 from glob import glob
 
@@ -216,6 +218,22 @@ class PluginConfig:
     OPERATION_LOCK_FILE = "/data/lineuparr_operation.lock"
     OPERATION_LOCK_TIMEOUT_MINUTES = 10
 
+    # Automatic Full Sync (issue #31). A separate file from STATE_FILE: that
+    # one is overwritten wholesale by several unrelated steps (e.g. the stream
+    # match step inside a Full Sync itself), so a scheduled-run marker written
+    # there would be clobbered before anyone saw it.
+    SCHEDULE_STATE_FILE = "/data/lineuparr_schedule_state.json"
+    # django-celery-beat PeriodicTask row name (must be unique) and the Celery
+    # task name it points at. Namespaced so they cannot collide with another
+    # plugin's schedule.
+    SCHEDULE_TASK_NAME = "Lineuparr: Automatic Full Sync"
+    SCHEDULED_TASK_CELERY_NAME = "lineuparr.scheduled_full_sync"
+    # A hash of whatever _reconcile_schedule last actually wrote to the
+    # PeriodicTask row, so it can skip that write (and the query it takes)
+    # on an action dispatch where nothing schedule-relevant changed, instead
+    # of hitting the database on every single plugin action.
+    SCHEDULE_RECONCILE_HASH_FILE = "/data/lineuparr_schedule_reconcile_hash.json"
+
     # Simplified category mapping: simplified name -> list of original categories to merge
     SIMPLIFIED_CATEGORIES = {
         "News & Info": ["News", "Discovery", "Crime"],
@@ -363,6 +381,11 @@ USAGE = UsageReporter(
 class Plugin:
     name = "Lineuparr"
     version = PluginConfig.PLUGIN_VERSION
+    # Class-level fallbacks for the lock reentrancy state __init__ sets below,
+    # so a test (or anything else) building a Plugin via Plugin.__new__(Plugin)
+    # - bypassing __init__ - still finds these attributes defined.
+    _lock_owner = None
+    _lock_depth = 0
 
     def __init__(self):
         self._thread = None
@@ -374,6 +397,14 @@ class Plugin:
         # sub-steps don't each fire a channel-list refresh; the parent
         # operation fires exactly one refresh when it finishes.
         self._suppress_refresh = False
+        # Operation lock reentrancy: set while this instance holds
+        # OPERATION_LOCK_FILE, so its own nested calls (a scheduled Full
+        # Sync's groups/channels/stream/EPG/logo steps, all on the one
+        # Plugin() instance that started it) extend the same lock instead
+        # of finding it already held and rejecting themselves. See
+        # _acquire_lock.
+        self._lock_owner = None
+        self._lock_depth = 0
 
     def _try_start_thread(self, target, args):
         """Atomically check if a thread is running and start a new one.
@@ -396,6 +427,11 @@ class Plugin:
     @property
     def fields(self):
         """Dynamically generate field definitions with current options."""
+        # Dispatcharr's own configured time zone, offered as this field's
+        # default so a fresh install schedules in the box's actual zone
+        # without the operator needing to already know its IANA name.
+        detected_timezone = self._detected_timezone()
+
         # Discover lineup files
         plugin_dir = os.path.dirname(__file__)
         lineup_options = []
@@ -661,6 +697,77 @@ class Plugin:
                 ],
                 "help_text": "A notification carries one attachment, so choosing both sends two emails per run.",
             },
+            # --- Section: Automation ---
+            {
+                "id": "_sec_automation",
+                "type": "info",
+                "label": "Automation",
+                "help_text": "Optionally run Full Sync on a schedule instead of only when you click it. Off by default. A scheduled run reuses the exact settings saved here at the time it fires, and takes a snapshot of them the next time any Lineuparr action runs after you save - including this settings page's own Validate Settings check - so save your settings and then run any action once to pick up a change. If another Lineuparr operation is already in progress when the scheduled time arrives, the scheduled run is skipped rather than overlapping it.",
+            },
+            {
+                "id": "auto_full_sync",
+                "label": "Automatic Full Sync",
+                "type": "select",
+                "default": "off",
+                "options": [
+                    {"value": "off", "label": "Off"},
+                    {"value": "daily", "label": "Daily"},
+                    {"value": "weekly", "label": "Weekly"},
+                    {"value": "monthly", "label": "Monthly"},
+                    {"value": "custom", "label": "Custom (cron expression)"},
+                ],
+                "help_text": "Run Full Sync automatically on this schedule. Uses the same process as the manual Full Sync button (groups, channels, stream matching, EPG matching, logo assignment). Monthly uses Sync Day Of Month below; Custom ignores Sync Time/Sync Day/Sync Day Of Month entirely and uses the Custom Cron Expression instead.",
+            },
+            {
+                "id": "auto_full_sync_time",
+                "label": "Sync Time",
+                "type": "string",
+                "default": "03:00",
+                "placeholder": "HH:MM (24-hour)",
+                "help_text": "Time of day the scheduled Full Sync runs, 24-hour HH:MM, in the Time Zone set below. Ignored while Automatic Full Sync is Off.",
+            },
+            {
+                "id": "auto_full_sync_timezone",
+                "label": "Time Zone",
+                "type": "string",
+                "default": detected_timezone,
+                "placeholder": "e.g. America/New_York, Europe/London",
+                "help_text": f"IANA time zone name Sync Time is interpreted in. Pre-filled with {detected_timezone}, detected from Dispatcharr's own configured time zone - change it if it is wrong, or if you want the schedule on a different zone than the server itself. Falls back to UTC if left blank or set to something not recognized, which is not necessarily the server's own zone, so an unrecognized value here can run the sync at the wrong hour.",
+            },
+            {
+                "id": "auto_full_sync_day",
+                "label": "Sync Day",
+                "type": "select",
+                "default": "monday",
+                "options": [
+                    {"value": "monday", "label": "Monday"},
+                    {"value": "tuesday", "label": "Tuesday"},
+                    {"value": "wednesday", "label": "Wednesday"},
+                    {"value": "thursday", "label": "Thursday"},
+                    {"value": "friday", "label": "Friday"},
+                    {"value": "saturday", "label": "Saturday"},
+                    {"value": "sunday", "label": "Sunday"},
+                ],
+                "help_text": "Day of the week the scheduled Full Sync runs. Only used when Automatic Full Sync is set to Weekly.",
+            },
+            {
+                "id": "auto_full_sync_day_of_month",
+                "label": "Sync Day Of Month",
+                "type": "number",
+                "default": 1,
+                "min": 1,
+                "max": 31,
+                "step": 1,
+                "help_text": "Day of the month the scheduled Full Sync runs, using Sync Time above. Only used when Automatic Full Sync is set to Monthly. A month shorter than this day (e.g. 31 in April) is simply skipped that month, same as standard cron behavior.",
+            },
+            {
+                "id": "auto_full_sync_cron",
+                "label": "Custom Cron Expression",
+                "type": "string",
+                "default": "",
+                "placeholder": "minute hour day-of-month month day-of-week, e.g. 0 3 * * 0",
+                "help_text": "Standard 5-field cron expression (minute, hour, day of month, month, day of week), evaluated in the Time Zone setting above. Only used when Automatic Full Sync is set to Custom - Sync Time, Sync Day and Sync Day Of Month are all ignored in that mode. Leave the other three fields alone and use this for anything the presets above cannot express, such as twice a day or a specific week of the month.",
+            },
             # --- Section: Advanced ---
             {
                 "id": "_sec_advanced",
@@ -705,6 +812,14 @@ class Plugin:
     def run(self, action, params, context):
         logger = context.get("logger", LOGGER)
         settings = context.get("settings", {})
+
+        # Keep the Automatic Full Sync schedule in sync with current settings
+        # on every action, not just this one - see _reconcile_schedule for why.
+        # Never allowed to block or fail the action actually requested.
+        try:
+            self._reconcile_schedule(settings, logger)
+        except Exception as e:
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync schedule reconciliation failed: {e}")
 
         try:
             action_map = {
@@ -774,6 +889,11 @@ class Plugin:
         the user can check progress on demand without reading the logs."""
         progress = load_progress(PluginConfig.PROGRESS_FILE)
         message = build_status_message(progress)
+
+        schedule_row = self._schedule_status_row(settings)
+        if schedule_row["Value"] != "Off":
+            message += f"\n\n{schedule_row['Setting']} ({schedule_row['Value']}): {schedule_row['Status']}"
+
         logger.info(f"{LOG_PREFIX} Status requested: {message.splitlines()[0]}")
         return {"status": "ok", "message": message}
 
@@ -1684,12 +1804,33 @@ class Plugin:
         return sorted(streams, key=get_quality_score)
 
     def _acquire_lock(self, logger):
-        """Acquire operation lock. Returns True if acquired."""
+        """Acquire the operation lock. Returns True if acquired.
+
+        Reentrant per Plugin instance via an owner token stored in the lock
+        file: once this instance holds the lock, a further call on the same
+        instance recognizes its own token and extends the lock (bumping
+        _lock_depth) instead of finding it already held and rejecting
+        itself. This is what lets run_scheduled_full_sync hold the lock for
+        the whole of _do_full_sync while that method's own groups, channels,
+        stream match, EPG match and logo assignment steps each call
+        _acquire_lock/_release_lock around their own work exactly like a
+        manual click does - on the one Plugin() instance the scheduled task
+        created for this run. A manual action runs on a different Plugin
+        instance (Dispatcharr's own loader owns that one), so it is a
+        genuinely different owner and is rejected normally while a run is in
+        progress, same as before.
+        """
         lock_file = PluginConfig.OPERATION_LOCK_FILE
+        owner = self._lock_owner
         try:
             if os.path.exists(lock_file):
                 with open(lock_file, 'r') as f:
                     lock_data = json.load(f)
+                if owner and lock_data.get('owner') == owner:
+                    self._lock_depth += 1
+                    self._write_lock_file(lock_file, owner)
+                    return True
+
                 lock_time = datetime.fromisoformat(lock_data.get('timestamp', ''))
                 elapsed = (datetime.now() - lock_time).total_seconds() / 60
                 if elapsed < PluginConfig.OPERATION_LOCK_TIMEOUT_MINUTES:
@@ -1697,19 +1838,37 @@ class Plugin:
                     return False
                 logger.warning(f"{LOG_PREFIX} Stale lock detected ({elapsed:.0f}m old), overriding")
 
-            os.makedirs(os.path.dirname(lock_file), exist_ok=True)
-            tmp = lock_file + ".tmp"
-            with open(tmp, 'w') as f:
-                json.dump({"timestamp": datetime.now().isoformat(), "action": "lineuparr"}, f)
-            os.replace(tmp, lock_file)
+            owner = owner or uuid.uuid4().hex
+            self._lock_owner = owner
+            self._lock_depth = 1
+            self._write_lock_file(lock_file, owner)
             return True
         except Exception as e:
             logger.error(f"{LOG_PREFIX} Failed to acquire lock: {e}")
             return False
 
+    @staticmethod
+    def _write_lock_file(lock_file, owner):
+        os.makedirs(os.path.dirname(lock_file), exist_ok=True)
+        tmp = lock_file + ".tmp"
+        with open(tmp, 'w') as f:
+            json.dump({"timestamp": datetime.now().isoformat(), "action": "lineuparr", "owner": owner}, f)
+        os.replace(tmp, lock_file)
+
     def _release_lock(self, logger):
-        """Release operation lock."""
+        """Release the operation lock, respecting reentrant depth.
+
+        An inner release (a Full Sync sub-step finishing while
+        run_scheduled_full_sync's own outer acquire is still holding the
+        lock for this same run) only decrements _lock_depth; the file is
+        only removed once the outermost acquire's matching release runs.
+        """
         try:
+            if self._lock_depth > 1:
+                self._lock_depth -= 1
+                return
+            self._lock_depth = 0
+            self._lock_owner = None
             if os.path.exists(PluginConfig.OPERATION_LOCK_FILE):
                 os.remove(PluginConfig.OPERATION_LOCK_FILE)
         except Exception as e:
@@ -2291,6 +2450,310 @@ class Plugin:
         except Exception as e:
             logger.error(f"{LOG_PREFIX} Failed to save state: {e}")
 
+    def _save_schedule_state(self, state_data, logger):
+        """Save the last Automatic Full Sync outcome atomically, for Validate
+        Settings / Plugin Status to show. A separate file from STATE_FILE:
+        that one is overwritten wholesale by several unrelated steps (the
+        stream-match step inside a Full Sync included), so a scheduled-run
+        marker written there would be clobbered before anyone saw it."""
+        try:
+            os.makedirs(os.path.dirname(PluginConfig.SCHEDULE_STATE_FILE), exist_ok=True)
+            tmp = PluginConfig.SCHEDULE_STATE_FILE + ".tmp"
+            with open(tmp, 'w') as f:
+                json.dump(state_data, f, indent=2)
+            os.replace(tmp, PluginConfig.SCHEDULE_STATE_FILE)
+        except Exception as e:
+            logger.error(f"{LOG_PREFIX} Failed to save schedule state: {e}")
+
+    @staticmethod
+    def _load_schedule_state():
+        """Last recorded Automatic Full Sync outcome, or None if it has
+        never run (or the file cannot be read)."""
+        try:
+            with open(PluginConfig.SCHEDULE_STATE_FILE, 'r') as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return None
+
+    # Weekly Sync Day setting value -> the 3-letter form CrontabSchedule's
+    # day_of_week expects.
+    _SCHEDULE_DAY_TO_CRON = {
+        "monday": "mon", "tuesday": "tue", "wednesday": "wed", "thursday": "thu",
+        "friday": "fri", "saturday": "sat", "sunday": "sun",
+    }
+
+    @staticmethod
+    def _detected_timezone():
+        """Dispatcharr's own configured time zone, as a best-effort guess for
+        the Time Zone field's default - so a fresh install of this plugin
+        schedules in the box's actual zone without the operator having to
+        already know its IANA name. Never authoritative: whatever is actually
+        saved in settings always wins once the operator touches the field.
+
+        Reads core.models.CoreSettings.get_system_time_zone() first - the
+        same source progress_status.py's _display_tz() already uses -
+        rather than Django's settings.TIME_ZONE. Dispatcharr pins that
+        Django setting (and the container's $TZ) to UTC regardless of the
+        admin-configured zone, so checking it first always returned "UTC":
+        a valid IANA name, so the function returned right there without
+        ever reaching CoreSettings or DISPATCHARR_TIME_ZONE. Measured live
+        on a container whose system time zone was America/Chicago -
+        Django's TIME_ZONE still read "UTC", silently scheduling the
+        default 03:00 sync at 22:00 Central instead."""
+        try:
+            from core.models import CoreSettings
+            tz = CoreSettings.get_system_time_zone()
+            if tz:
+                import zoneinfo
+                zoneinfo.ZoneInfo(tz)  # raises if not a real IANA name
+                return tz
+        except Exception:
+            pass
+
+        tz = os.environ.get("DISPATCHARR_TIME_ZONE")
+        if tz:
+            try:
+                import zoneinfo
+                zoneinfo.ZoneInfo(tz)
+                return tz
+            except Exception:
+                pass
+
+        return "UTC"
+
+    def _reconcile_schedule(self, settings, logger):
+        """Create, update or remove the Automatic Full Sync periodic task so
+        it matches the current settings.
+
+        Called at the top of every action dispatch (see run()), not only
+        when settings are saved: Dispatcharr's plugin API gives a plugin no
+        "settings changed" hook, so the only way to notice a change is the
+        next time any of the plugin's own code runs at all. This is also why
+        the scheduled task's settings snapshot lives in the PeriodicTask row
+        itself (its `kwargs`) rather than being read live - a Celery task run
+        by beat has no access to "whatever is currently saved in the settings
+        UI", only what was written here. That snapshot self-refreshes the
+        same way, on the next action, with no separate "Apply Schedule"
+        button needed.
+
+        Failures here (django-celery-beat not installed, an invalid time
+        string) are logged and swallowed: they must never break the actual
+        action the user asked for.
+        """
+        mode = (settings.get("auto_full_sync") or "off").strip().lower()
+
+        try:
+            from django_celery_beat.models import PeriodicTask, CrontabSchedule
+        except ImportError:
+            if mode != "off":
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync is set to '{mode}' but "
+                    f"django-celery-beat is not installed, so it cannot run."
+                )
+            return
+
+        if mode == "off":
+            off_hash = self._reconcile_hash("off")
+            if self._load_reconcile_hash() == off_hash:
+                return  # already off as of the last reconcile - nothing to query
+            deleted, _ = PeriodicTask.objects.filter(name=PluginConfig.SCHEDULE_TASK_NAME).delete()
+            if deleted:
+                logger.info(f"{LOG_PREFIX} Automatic Full Sync turned off; removed its schedule.")
+            self._save_reconcile_hash(off_hash)
+            return
+
+        if mode not in ("daily", "weekly", "monthly", "custom"):
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync: unrecognized mode '{mode}' - schedule not updated.")
+            return
+
+        # Explicit, not inferred from the server/container: relying on
+        # whatever django-celery-beat's CrontabSchedule defaults to (which is
+        # not guaranteed to be the box's local time - it can be UTC) silently
+        # runs the sync at the wrong hour, which is exactly what happened
+        # testing this against a real install with DISPATCHARR_TIME_ZONE set
+        # to America/New_York: the schedule fired on UTC time instead.
+        tz_str = (settings.get("auto_full_sync_timezone") or "").strip() or self._detected_timezone()
+        try:
+            import zoneinfo
+            zoneinfo.ZoneInfo(tz_str)
+        except (zoneinfo.ZoneInfoNotFoundError, KeyError, ValueError):
+            logger.warning(
+                f"{LOG_PREFIX} Automatic Full Sync: unrecognized Time Zone '{tz_str}' "
+                f"- schedule not updated. Use an IANA name such as 'America/New_York'."
+            )
+            return
+
+        if mode == "custom":
+            cron_str = (settings.get("auto_full_sync_cron") or "").strip()
+            fields = cron_str.split()
+            if len(fields) != 5:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: Custom Cron Expression '{cron_str}' must have exactly "
+                    f"5 fields (minute hour day-of-month month day-of-week) - schedule not updated."
+                )
+                return
+            minute_f, hour_f, dom_f, month_f, dow_f = fields
+            try:
+                # celery's own crontab parser validates each field's syntax
+                # and range without needing a live app/broker - use it as a
+                # dry-run check before writing anything to the database.
+                from celery.schedules import crontab as _crontab_validator
+                _crontab_validator(minute=minute_f, hour=hour_f, day_of_month=dom_f,
+                                   month_of_year=month_f, day_of_week=dow_f)
+            except Exception as e:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: invalid Custom Cron Expression "
+                    f"'{cron_str}': {e} - schedule not updated."
+                )
+                return
+            minute, hour, day_of_month, month_of_year, day_of_week = minute_f, hour_f, dom_f, month_f, dow_f
+            when = f"custom '{cron_str}' {tz_str}"
+        else:
+            time_str = (settings.get("auto_full_sync_time") or "03:00").strip()
+            try:
+                hour_str, minute_str = time_str.split(":", 1)
+                hour, minute = int(hour_str), int(minute_str)
+                if not (0 <= hour <= 23 and 0 <= minute <= 59):
+                    raise ValueError
+            except ValueError:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Time '{time_str}' "
+                    f"(expected 24-hour HH:MM) - schedule not updated."
+                )
+                return
+            minute, hour = str(minute), str(hour)
+            month_of_year = "*"
+
+            if mode == "weekly":
+                day = (settings.get("auto_full_sync_day") or "monday").strip().lower()
+                day_of_week = self._SCHEDULE_DAY_TO_CRON.get(day)
+                if not day_of_week:
+                    logger.warning(f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Day '{day}' - schedule not updated.")
+                    return
+                day_of_month = "*"
+                when = f"weekly at {time_str} {tz_str} on {day}"
+            elif mode == "monthly":
+                dom_raw = settings.get("auto_full_sync_day_of_month", 1)
+                try:
+                    dom_int = int(dom_raw)
+                    if not (1 <= dom_int <= 31):
+                        raise ValueError
+                except (TypeError, ValueError):
+                    logger.warning(
+                        f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Day Of Month '{dom_raw}' "
+                        f"(expected 1-31) - schedule not updated."
+                    )
+                    return
+                day_of_week = "*"
+                day_of_month = str(dom_int)
+                when = f"monthly at {time_str} {tz_str} on day {dom_int}"
+            else:  # daily
+                day_of_week = "*"
+                day_of_month = "*"
+                when = f"daily at {time_str} {tz_str}"
+
+        # The DB write below (and the query it takes) is only needed when it
+        # would actually change something. kwargs carries the full settings
+        # snapshot, so the hash has to cover settings too, not just the
+        # crontab fields - otherwise an unrelated settings change (e.g. a
+        # lineup file swap) would never refresh what the scheduled run
+        # itself sees next time it fires.
+        reconcile_hash = self._reconcile_hash({
+            "mode": mode, "minute": minute, "hour": hour, "day_of_week": day_of_week,
+            "day_of_month": day_of_month, "month_of_year": month_of_year, "tz": tz_str,
+            "settings": settings,
+        })
+        if self._load_reconcile_hash() == reconcile_hash:
+            return  # nothing that would change the PeriodicTask row - skip the query
+
+        schedule, _ = CrontabSchedule.objects.get_or_create(
+            minute=str(minute), hour=str(hour), day_of_week=str(day_of_week),
+            day_of_month=str(day_of_month), month_of_year=str(month_of_year), timezone=tz_str,
+        )
+        task, created = PeriodicTask.objects.update_or_create(
+            name=PluginConfig.SCHEDULE_TASK_NAME,
+            defaults={
+                "crontab": schedule,
+                "interval": None,
+                "task": PluginConfig.SCHEDULED_TASK_CELERY_NAME,
+                "queue": "dvr",
+                "enabled": True,
+                "kwargs": json.dumps({"settings": dict(settings)}),
+                "description": "Lineuparr Automatic Full Sync",
+            },
+        )
+        if created:
+            logger.info(f"{LOG_PREFIX} Automatic Full Sync scheduled: {when}")
+        self._save_reconcile_hash(reconcile_hash)
+
+    @staticmethod
+    def _reconcile_hash(value):
+        """Stable hash of whatever _reconcile_schedule is about to write (or
+        delete), so a later call with an identical value can tell nothing
+        changed without touching the database."""
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, default=str).encode()
+        ).hexdigest()
+
+    @staticmethod
+    def _load_reconcile_hash():
+        try:
+            with open(PluginConfig.SCHEDULE_RECONCILE_HASH_FILE, 'r') as f:
+                return json.load(f).get('hash')
+        except Exception:
+            return None
+
+    @staticmethod
+    def _save_reconcile_hash(value):
+        try:
+            hash_file = PluginConfig.SCHEDULE_RECONCILE_HASH_FILE
+            os.makedirs(os.path.dirname(hash_file), exist_ok=True)
+            tmp = hash_file + ".tmp"
+            with open(tmp, 'w') as f:
+                json.dump({"hash": value}, f)
+            os.replace(tmp, hash_file)
+        except Exception:
+            pass  # a failure to persist this just means the next call reconciles again, not a correctness issue
+
+    def _schedule_status_row(self, settings):
+        """One results-table row summarizing Automatic Full Sync, for
+        Validate Settings and Plugin Status. Never raises - a broken
+        schedule read must not stop either report from finishing."""
+        mode = (settings.get("auto_full_sync") or "off").strip().lower()
+        if mode == "off":
+            return {"Setting": "Automatic Full Sync", "Value": "Off", "Status": "OK"}
+
+        tz_display = settings.get('auto_full_sync_timezone') or self._detected_timezone()
+        if mode == "custom":
+            when = f"custom '{settings.get('auto_full_sync_cron', '')}' {tz_display}"
+        else:
+            when = f"{mode} at {settings.get('auto_full_sync_time', '03:00')} {tz_display}"
+            if mode == "weekly":
+                when += f" on {settings.get('auto_full_sync_day', 'monday')}"
+            elif mode == "monthly":
+                when += f" on day {settings.get('auto_full_sync_day_of_month', 1)}"
+
+        try:
+            last = self._load_schedule_state()
+        except Exception:
+            last = None
+
+        if not last:
+            return {"Setting": "Automatic Full Sync", "Value": when, "Status": "OK (has not run yet)"}
+
+        status = last.get("status", "unknown")
+        ran_at = last.get("ran_at", "unknown time")
+        # Capped: this row gets appended to the Plugin Status toast message,
+        # which Dispatcharr's own UI cuts at roughly 280 characters, so an
+        # uncapped exception message here could push the "Automatic Full
+        # Sync" line itself out of what is shown.
+        detail = last.get("message", "")[:80]
+        return {
+            "Setting": "Automatic Full Sync",
+            "Value": when,
+            "Status": f"Last run {ran_at}: {status}" + (f" - {detail}" if detail else ""),
+        }
+
     def _trigger_frontend_refresh(self, logger):
         """Tell the Dispatcharr UI to refetch the channel list.
 
@@ -2507,6 +2970,9 @@ class Plugin:
         except Exception as e:
             results.append({"Setting": "Database", "Value": "", "Status": f"ERROR: {e}"})
             errors += 1
+
+        # Automatic Full Sync
+        results.append(self._schedule_status_row(settings))
 
         warn_details = [r["Setting"] + ": " + r["Status"] for r in results if "WARNING" in r.get("Status", "")]
         status = "ok" if errors == 0 else "error"
@@ -2868,46 +3334,57 @@ class Plugin:
         logger.info(f"{LOG_PREFIX} Renamed group '{old_name}' to '{new_name}' (ID: {old_group.id})")
 
     def _sync_groups(self, settings, logger):
-        """Create/update ChannelGroups from lineup categories."""
-        dry_run = settings.get("dry_run_mode", False)
-        lineup = self._load_lineup(settings, logger)
-        prefix = self._get_group_prefix(settings, lineup)
-        rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
+        """Create/update ChannelGroups from lineup categories.
 
-        if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
-            self._migrate_single_group_name(prefix, dry_run, logger)
+        Takes the operation lock like the other destructive actions
+        (_do_sync_channels, the three _do_apply_* steps): without it, this
+        step of a scheduled Full Sync could run at the same time as a
+        manual action touching the same ChannelGroup rows.
+        """
+        if not self._acquire_lock(logger):
+            return {"status": "error", "error": "Another operation is in progress. Try again later."}
+        try:
+            dry_run = settings.get("dry_run_mode", False)
+            lineup = self._load_lineup(settings, logger)
+            prefix = self._get_group_prefix(settings, lineup)
+            rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
 
-        created = 0
-        existed = 0
+            if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
+                self._migrate_single_group_name(prefix, dry_run, logger)
 
-        for category in lineup["categories"]:
-            group_name = self._make_group_name(prefix, category)
+            created = 0
+            existed = 0
 
-            if dry_run:
-                exists = ChannelGroup.objects.filter(name=group_name).exists()
-                if exists:
-                    existed += 1
+            for category in lineup["categories"]:
+                group_name = self._make_group_name(prefix, category)
+
+                if dry_run:
+                    exists = ChannelGroup.objects.filter(name=group_name).exists()
+                    if exists:
+                        existed += 1
+                    else:
+                        created += 1
+                        logger.info(f"{LOG_PREFIX} [DRY RUN] Would create group: '{group_name}'")
                 else:
-                    created += 1
-                    logger.info(f"{LOG_PREFIX} [DRY RUN] Would create group: '{group_name}'")
-            else:
-                group, was_created = ChannelGroup.objects.get_or_create(name=group_name)
-                if was_created:
-                    created += 1
-                    logger.info(f"{LOG_PREFIX} Created group: '{group_name}' (ID: {group.id})")
-                else:
-                    existed += 1
+                    group, was_created = ChannelGroup.objects.get_or_create(name=group_name)
+                    if was_created:
+                        created += 1
+                        logger.info(f"{LOG_PREFIX} Created group: '{group_name}' (ID: {group.id})")
+                    else:
+                        existed += 1
 
-            rate_limiter.wait()
+                rate_limiter.wait()
 
-        if not dry_run:
-            self._trigger_frontend_refresh(logger)
+            if not dry_run:
+                self._trigger_frontend_refresh(logger)
 
-        prefix_str = f" (dry run)" if dry_run else ""
-        return {
-            "status": "ok",
-            "message": f"Groups synced{prefix_str}: {created} created, {existed} already existed.",
-        }
+            prefix_str = f" (dry run)" if dry_run else ""
+            return {
+                "status": "ok",
+                "message": f"Groups synced{prefix_str}: {created} created, {existed} already existed.",
+            }
+        finally:
+            self._release_lock(logger)
 
     def _sync_channels(self, settings, logger):
         """Create channels from lineup and assign to groups.
@@ -2953,117 +3430,128 @@ class Plugin:
             })
 
     def _do_sync_channels(self, settings, logger):
-        """Core sync channels logic."""
-        dry_run = settings.get("dry_run_mode", False)
-        lineup = self._load_lineup(settings, logger)
-        prefix = self._get_group_prefix(settings, lineup)
-        rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
-        assigner = self._init_assigner_state(settings)
+        """Core sync channels logic.
 
-        # Sync Channels builds its own group lookup below rather than going
-        # through _sync_groups, so it needs this same migration call: without
-        # it, a lineup using Category Detail = "none" whose only prior sync
-        # was ever via this button (there is no Sync Groups button in the
-        # UI) would never see its pre-fix "<prefix>: All" group renamed, and
-        # get_or_create just below would create a second "<prefix>" group
-        # instead, orphaning the channels already on the old one.
-        if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
-            self._migrate_single_group_name(prefix, dry_run, logger)
+        Takes the operation lock like _sync_groups and the three
+        _do_apply_* steps: without it, this step of a scheduled Full Sync
+        could run at the same time as a manual action touching the same
+        Channel/ChannelGroup rows.
+        """
+        if not self._acquire_lock(logger):
+            return {"status": "error", "error": "Another operation is in progress. Try again later."}
+        try:
+            dry_run = settings.get("dry_run_mode", False)
+            lineup = self._load_lineup(settings, logger)
+            prefix = self._get_group_prefix(settings, lineup)
+            rate_limiter = SmartRateLimiter(settings.get("rate_limiting", PluginConfig.DEFAULT_RATE_LIMITING))
+            assigner = self._init_assigner_state(settings)
 
-        # Ensure groups exist
-        existing_groups = {g['name']: g['id'] for g in ChannelGroup.objects.all().values('id', 'name')}
-        for category in lineup["categories"]:
-            group_name = self._make_group_name(prefix, category)
-            if group_name not in existing_groups:
-                if dry_run:
-                    logger.info(f"{LOG_PREFIX} [DRY RUN] Group '{group_name}' does not exist, would need sync_groups first")
-                    return {"status": "error", "error": f"Group '{group_name}' does not exist. Run 'Sync Groups' first."}
-                else:
-                    group, _ = ChannelGroup.objects.get_or_create(name=group_name)
-                    existing_groups[group_name] = group.id
-                    logger.info(f"{LOG_PREFIX} Auto-created group: '{group_name}'")
+            # Sync Channels builds its own group lookup below rather than going
+            # through _sync_groups, so it needs this same migration call: without
+            # it, a lineup using Category Detail = "none" whose only prior sync
+            # was ever via this button (there is no Sync Groups button in the
+            # UI) would never see its pre-fix "<prefix>: All" group renamed, and
+            # get_or_create just below would create a second "<prefix>" group
+            # instead, orphaning the channels already on the old one.
+            if PluginConfig.SINGLE_GROUP_CATEGORY in lineup["categories"]:
+                self._migrate_single_group_name(prefix, dry_run, logger)
 
-        created = 0
-        updated = 0
-        unchanged = 0
-        failed = 0
-        synced_channel_ids = []
-
-        total_channels = sum(len(v) for v in lineup["categories"].values())
-        progress = ProgressTracker(total_channels, "sync_channels", logger)
-
-        for category, channels in lineup["categories"].items():
-            group_name = self._make_group_name(prefix, category)
-            group_id = existing_groups[group_name]
-
-            for entry in channels:
-                ch_name = entry["name"]
-                ch_number = self._get_channel_number(settings, entry, assigner)
-
-                try:
+            # Ensure groups exist
+            existing_groups = {g['name']: g['id'] for g in ChannelGroup.objects.all().values('id', 'name')}
+            for category in lineup["categories"]:
+                group_name = self._make_group_name(prefix, category)
+                if group_name not in existing_groups:
                     if dry_run:
-                        existing = Channel.objects.filter(name=ch_name, channel_group_id=group_id).values('id', 'channel_number').first()
-                        if existing:
-                            synced_channel_ids.append(existing['id'])
-                            if ch_number is not None and existing['channel_number'] != ch_number:
-                                updated += 1
-                            else:
-                                unchanged += 1
-                        else:
-                            created += 1
+                        logger.info(f"{LOG_PREFIX} [DRY RUN] Group '{group_name}' does not exist, would need sync_groups first")
+                        return {"status": "error", "error": f"Group '{group_name}' does not exist. Run 'Sync Groups' first."}
                     else:
-                        defaults = {"channel_number": ch_number} if ch_number is not None else {}
-                        ch, was_created = Channel.objects.get_or_create(
-                            name=ch_name,
-                            channel_group_id=group_id,
-                            defaults=defaults
-                        )
-                        synced_channel_ids.append(ch.id)
-                        if was_created:
-                            created += 1
-                            logger.debug(f"{LOG_PREFIX} Created channel: '{ch_name}' #{ch_number} in '{group_name}'")
-                        else:
-                            # Update channel number if different
-                            if ch_number is not None and ch.channel_number != ch_number:
-                                ch.channel_number = ch_number
-                                ch.save(update_fields=['channel_number'])
-                                updated += 1
+                        group, _ = ChannelGroup.objects.get_or_create(name=group_name)
+                        existing_groups[group_name] = group.id
+                        logger.info(f"{LOG_PREFIX} Auto-created group: '{group_name}'")
+
+            created = 0
+            updated = 0
+            unchanged = 0
+            failed = 0
+            synced_channel_ids = []
+
+            total_channels = sum(len(v) for v in lineup["categories"].values())
+            progress = ProgressTracker(total_channels, "sync_channels", logger)
+
+            for category, channels in lineup["categories"].items():
+                group_name = self._make_group_name(prefix, category)
+                group_id = existing_groups[group_name]
+
+                for entry in channels:
+                    ch_name = entry["name"]
+                    ch_number = self._get_channel_number(settings, entry, assigner)
+
+                    try:
+                        if dry_run:
+                            existing = Channel.objects.filter(name=ch_name, channel_group_id=group_id).values('id', 'channel_number').first()
+                            if existing:
+                                synced_channel_ids.append(existing['id'])
+                                if ch_number is not None and existing['channel_number'] != ch_number:
+                                    updated += 1
+                                else:
+                                    unchanged += 1
                             else:
-                                unchanged += 1
+                                created += 1
+                        else:
+                            defaults = {"channel_number": ch_number} if ch_number is not None else {}
+                            ch, was_created = Channel.objects.get_or_create(
+                                name=ch_name,
+                                channel_group_id=group_id,
+                                defaults=defaults
+                            )
+                            synced_channel_ids.append(ch.id)
+                            if was_created:
+                                created += 1
+                                logger.debug(f"{LOG_PREFIX} Created channel: '{ch_name}' #{ch_number} in '{group_name}'")
+                            else:
+                                # Update channel number if different
+                                if ch_number is not None and ch.channel_number != ch_number:
+                                    ch.channel_number = ch_number
+                                    ch.save(update_fields=['channel_number'])
+                                    updated += 1
+                                else:
+                                    unchanged += 1
 
-                except Exception as e:
-                    logger.error(f"{LOG_PREFIX} Failed to sync channel '{ch_name}': {e}")
-                    failed += 1
+                    except Exception as e:
+                        logger.error(f"{LOG_PREFIX} Failed to sync channel '{ch_name}': {e}")
+                        failed += 1
 
-                rate_limiter.wait()
-                progress.update()
+                    rate_limiter.wait()
+                    progress.update()
 
-        progress.finish()
+            progress.finish()
 
-        # Enable synced channels in configured profiles
-        if not dry_run and synced_channel_ids:
-            self._enable_channels_in_profiles(synced_channel_ids, settings, logger)
+            # Enable synced channels in configured profiles
+            if not dry_run and synced_channel_ids:
+                self._enable_channels_in_profiles(synced_channel_ids, settings, logger)
 
-        if not dry_run:
-            # Record what this run actually created, for the lifetime tally the
-            # public badge sums. Guarded by dry_run because the preview branch
-            # increments the same counter for channels it WOULD have made, so
-            # recording unconditionally would inflate the badge on every Preview.
-            self._record_channels_created(created, "sync_channels", logger)
-            self._trigger_frontend_refresh(logger)
+            if not dry_run:
+                # Record what this run actually created, for the lifetime tally the
+                # public badge sums. Guarded by dry_run because the preview branch
+                # increments the same counter for channels it WOULD have made, so
+                # recording unconditionally would inflate the badge on every Preview.
+                self._record_channels_created(created, "sync_channels", logger)
+                self._trigger_frontend_refresh(logger)
 
-        prefix_str = " (dry run)" if dry_run else ""
-        msg = f"Channels synced{prefix_str}: {created} created, {updated} updated, {unchanged} unchanged"
-        if failed:
-            msg += f", {failed} failed"
-        total = created + updated + unchanged + failed
-        if failed == 0 or total == 0:
-            status = "ok"
-        elif failed == total:
-            status = "error"
-        else:
-            status = "warning"
-        return action_result(status, msg)
+            prefix_str = " (dry run)" if dry_run else ""
+            msg = f"Channels synced{prefix_str}: {created} created, {updated} updated, {unchanged} unchanged"
+            if failed:
+                msg += f", {failed} failed"
+            total = created + updated + unchanged + failed
+            if failed == 0 or total == 0:
+                status = "ok"
+            elif failed == total:
+                status = "error"
+            else:
+                status = "warning"
+            return action_result(status, msg)
+        finally:
+            self._release_lock(logger)
 
     def _apply_stream_match(self, settings, logger):
         """Attach matched streams to channels with quality ordering.
@@ -4231,3 +4719,88 @@ class Plugin:
                     logger.error(f"{LOG_PREFIX} Failed to delete {f}: {e}")
 
         return {"status": "ok", "message": f"Removed {removed} CSV export file(s)."}
+
+    def run_scheduled_full_sync(self, settings, logger):
+        """The actual work behind the Automatic Full Sync schedule - kept as
+        a plain method (not inline in the Celery task below) so it can be
+        unit tested without Celery installed.
+
+        Acquires the operation lock itself and holds it for the whole of
+        _do_full_sync, as the owner for this run. _do_full_sync's own
+        groups, channels, stream match, EPG match and logo assignment steps
+        each call _acquire_lock/_release_lock around their own work exactly
+        like a manual click does, on this same Plugin() instance, so they
+        recognize the lock as already held by this run and extend it rather
+        than rejecting themselves - see _acquire_lock. Earlier, this method
+        only peeked at the lock without holding it, which let a manual
+        action start partway through a scheduled run and touch the same
+        groups/channels rows; it also meant the lock went stale and let a
+        second scheduled run start while the first was still going, if any
+        one sub-step ran past OPERATION_LOCK_TIMEOUT_MINUTES.
+
+        Skips, without raising, if a different Plugin instance (a manual
+        action) already holds the lock - a Celery retry would just collide
+        with the still-running operation again - per the issue's "skip
+        rather than overlap" requirement. Records the outcome for Validate
+        Settings / Plugin Status to show, via _save_schedule_state.
+        """
+        settings = settings or {}
+        ran_at = datetime.now().isoformat()
+
+        if not self._acquire_lock(logger):
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync skipped: another Lineuparr operation is already running.")
+            self._save_schedule_state(
+                {"ran_at": ran_at, "status": "skipped", "message": "another operation was already running"},
+                logger,
+            )
+            return {"status": "skipped"}
+
+        try:
+            self._do_full_sync(settings, logger)
+            self._save_schedule_state({"ran_at": ran_at, "status": "ok", "message": ""}, logger)
+            return {"status": "ok"}
+        except Exception as e:
+            logger.exception(f"{LOG_PREFIX} Automatic Full Sync failed: {e}")
+            self._save_schedule_state({"ran_at": ran_at, "status": "error", "message": str(e)}, logger)
+            return {"status": "error", "error": str(e)}
+        finally:
+            self._release_lock(logger)
+
+
+# --------------------------------------------------------------------------
+# Automatic Full Sync (issue #31): the Celery entry point django-celery-beat
+# fires on its schedule. Registered at module import time, the same way
+# every Dispatcharr plugin that schedules its own work does it (Dispatcharr
+# has no plugin scheduling API of its own) - a module-level @shared_task,
+# not a Plugin method, because Celery has to find and register it once at
+# import, before any Plugin instance exists. Deliberately a thin wrapper:
+# the actual work is Plugin.run_scheduled_full_sync, above, so it stays
+# unit-testable in an environment without Celery installed.
+#
+# Routed to the "dvr" queue - not by this decorator, which names no queue,
+# but by the "queue": "dvr" field _reconcile_schedule sets on the
+# PeriodicTask row itself. That row is what actually matters: a task left on
+# Dispatcharr's default "celery" queue is silently never executed, even
+# though it shows up as registered and Beat's own run counter still
+# increments - that counter only records that a message was sent, not that
+# a worker picked it up.
+try:
+    from celery import shared_task as _lineuparr_shared_task
+
+    @_lineuparr_shared_task(name=PluginConfig.SCHEDULED_TASK_CELERY_NAME)
+    def _lineuparr_scheduled_full_sync(settings=None):
+        import logging
+        # Use Dispatcharr's own plugin-action logger, the same one its
+        # action dispatcher hands every manual click via context["logger"],
+        # so a scheduled run's log lines look and route identically to a
+        # manual Full Sync's - same prefix, same place in the container log -
+        # rather than appearing under a separate, easy-to-miss logger name.
+        logger = logging.getLogger("apps.plugins.loader")
+        return Plugin().run_scheduled_full_sync(settings, logger)
+except Exception as _lineuparr_celery_register_err:
+    # Celery may not be importable in every environment this module is
+    # loaded in (e.g. a management command, or these tests). Logged to
+    # stderr, not raised, so importing plugin.py never fails because of it -
+    # if scheduling silently never fires, this is the line that explains why.
+    import sys as _sys
+    print(f"[Lineuparr] Celery task registration failed: {_lineuparr_celery_register_err}", file=_sys.stderr)
