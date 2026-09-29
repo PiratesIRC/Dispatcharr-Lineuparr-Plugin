@@ -33,6 +33,7 @@ SECTION_BOUNDARIES = [
     ("_sec_groups", "group_prefix"),
     ("_sec_matching", "match_sensitivity"),
     ("_sec_notify", "notify_enabled"),
+    ("_sec_automation", "auto_full_sync"),
     ("_sec_advanced", "rate_limiting"),
 ]
 
