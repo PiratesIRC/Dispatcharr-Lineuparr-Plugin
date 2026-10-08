@@ -1007,6 +1007,47 @@ class Plugin:
         assigner_state['next'] = n + 1
         return n
 
+    @staticmethod
+    def _override_pinned_numbers():
+        """Channel numbers held by ChannelOverride rows, as ints.
+
+        Dispatcharr 0.32.0 stores the number an operator assigns to an
+        auto-synced channel in ChannelOverride.channel_number and leaves
+        Channel.channel_number at the provider value, so the number the channel
+        shows is only in the override. Dispatcharr treats both columns as taken,
+        and so must the auto numbering here. A Dispatcharr without the model
+        has no such numbers. A failed query falls back to raw numbers only and
+        logs a warning, because this is a backstop and must not stop a sync.
+        """
+        try:
+            from apps.channels.models import ChannelOverride
+        except ImportError:
+            return set()
+        except Exception as e:
+            LOGGER.warning(
+                f"{LOG_PREFIX} Could not import ChannelOverride, "
+                f"numbering from Channel.channel_number only: {e}"
+            )
+            return set()
+        pinned = set()
+        try:
+            rows = ChannelOverride.objects.filter(
+                channel_number__isnull=False
+            ).values_list("channel_number", flat=True)
+            for n in rows:
+                if n is not None:
+                    try:
+                        pinned.add(int(n))
+                    except (ValueError, TypeError):
+                        pass
+        except Exception as e:
+            LOGGER.warning(
+                f"{LOG_PREFIX} Could not read ChannelOverride channel numbers, "
+                f"numbering from Channel.channel_number only: {e}"
+            )
+            return set()
+        return pinned
+
     @classmethod
     def _init_assigner_state(cls, settings):
         """Initialize the channel number assigner state based on settings."""
@@ -1020,6 +1061,7 @@ class Plugin:
                         used.add(int(n))
                     except (ValueError, TypeError):
                         pass
+            used |= cls._override_pinned_numbers()
 
         if mode == "auto_next":
             start = 1
