@@ -208,6 +208,17 @@ class PluginConfig:
     OPERATION_LOCK_FILE = "/data/lineuparr_operation.lock"
     OPERATION_LOCK_TIMEOUT_MINUTES = 10
 
+    # Automatic Full Sync (issue #31). A separate file from STATE_FILE: that
+    # one is overwritten wholesale by several unrelated steps (e.g. the stream
+    # match step inside a Full Sync itself), so a scheduled-run marker written
+    # there would be clobbered before anyone saw it.
+    SCHEDULE_STATE_FILE = "/data/lineuparr_schedule_state.json"
+    # django-celery-beat PeriodicTask row name (must be unique) and the Celery
+    # task name it points at. Namespaced so they can't collide with another
+    # plugin's schedule.
+    SCHEDULE_TASK_NAME = "Lineuparr: Automatic Full Sync"
+    SCHEDULED_TASK_CELERY_NAME = "lineuparr.scheduled_full_sync"
+
     # Simplified category mapping: simplified name -> list of original categories to merge
     SIMPLIFIED_CATEGORIES = {
         "News & Info": ["News", "Discovery", "Crime"],
@@ -367,6 +378,11 @@ class Plugin:
     @property
     def fields(self):
         """Dynamically generate field definitions with current options."""
+        # Dispatcharr's own configured time zone, offered as this field's
+        # default so a fresh install schedules in the box's actual zone
+        # without the operator needing to already know its IANA name.
+        detected_timezone = self._detected_timezone()
+
         # Discover lineup files
         plugin_dir = os.path.dirname(__file__)
         lineup_options = []
@@ -632,6 +648,77 @@ class Plugin:
                 ],
                 "help_text": "A notification carries one attachment, so choosing both sends two emails per run.",
             },
+            # --- Section: Automation ---
+            {
+                "id": "_sec_automation",
+                "type": "info",
+                "label": "Automation",
+                "help_text": "Optionally run Full Sync on a schedule instead of only when you click it. Off by default. A scheduled run reuses the exact settings saved here at the time it fires, and takes a snapshot of them the next time any Lineuparr action runs after you save - including this settings page's own Validate Settings check - so save your settings and then run any action once to pick up a change. If another Lineuparr operation is already in progress when the scheduled time arrives, the scheduled run is skipped rather than overlapping it.",
+            },
+            {
+                "id": "auto_full_sync",
+                "label": "Automatic Full Sync",
+                "type": "select",
+                "default": "off",
+                "options": [
+                    {"value": "off", "label": "Off"},
+                    {"value": "daily", "label": "Daily"},
+                    {"value": "weekly", "label": "Weekly"},
+                    {"value": "monthly", "label": "Monthly"},
+                    {"value": "custom", "label": "Custom (cron expression)"},
+                ],
+                "help_text": "Run Full Sync automatically on this schedule. Uses the same process as the manual Full Sync button (groups, channels, stream matching, EPG matching, logo assignment). Monthly uses Sync Day Of Month below; Custom ignores Sync Time/Sync Day/Sync Day Of Month entirely and uses the Custom Cron Expression instead.",
+            },
+            {
+                "id": "auto_full_sync_time",
+                "label": "Sync Time",
+                "type": "string",
+                "default": "03:00",
+                "placeholder": "HH:MM (24-hour)",
+                "help_text": "Time of day the scheduled Full Sync runs, 24-hour HH:MM, in the Time Zone set below. Ignored while Automatic Full Sync is Off.",
+            },
+            {
+                "id": "auto_full_sync_timezone",
+                "label": "Time Zone",
+                "type": "string",
+                "default": detected_timezone,
+                "placeholder": "e.g. America/New_York, Europe/London",
+                "help_text": f"IANA time zone name Sync Time is interpreted in. Pre-filled with {detected_timezone}, detected from Dispatcharr's own configured time zone - change it if that's wrong, or if you want the schedule on a different zone than the server itself. Falls back to UTC if left blank or set to something not recognized, which is not necessarily the server's own zone, so an unrecognized value here can run the sync at the wrong hour.",
+            },
+            {
+                "id": "auto_full_sync_day",
+                "label": "Sync Day",
+                "type": "select",
+                "default": "monday",
+                "options": [
+                    {"value": "monday", "label": "Monday"},
+                    {"value": "tuesday", "label": "Tuesday"},
+                    {"value": "wednesday", "label": "Wednesday"},
+                    {"value": "thursday", "label": "Thursday"},
+                    {"value": "friday", "label": "Friday"},
+                    {"value": "saturday", "label": "Saturday"},
+                    {"value": "sunday", "label": "Sunday"},
+                ],
+                "help_text": "Day of the week the scheduled Full Sync runs. Only used when Automatic Full Sync is set to Weekly.",
+            },
+            {
+                "id": "auto_full_sync_day_of_month",
+                "label": "Sync Day Of Month",
+                "type": "number",
+                "default": 1,
+                "min": 1,
+                "max": 31,
+                "step": 1,
+                "help_text": "Day of the month the scheduled Full Sync runs, using Sync Time above. Only used when Automatic Full Sync is set to Monthly. A month shorter than this day (e.g. 31 in April) is simply skipped that month, same as standard cron behavior.",
+            },
+            {
+                "id": "auto_full_sync_cron",
+                "label": "Custom Cron Expression",
+                "type": "string",
+                "default": "",
+                "placeholder": "minute hour day-of-month month day-of-week, e.g. 0 3 * * 0",
+                "help_text": "Standard 5-field cron expression (minute, hour, day of month, month, day of week), evaluated in the Time Zone setting above. Only used when Automatic Full Sync is set to Custom - Sync Time, Sync Day and Sync Day Of Month are all ignored in that mode. Leave the other three fields alone and use this for anything the presets above can't express, such as twice a day or a specific week of the month.",
+            },
             # --- Section: Advanced ---
             {
                 "id": "_sec_advanced",
@@ -669,6 +756,14 @@ class Plugin:
     def run(self, action, params, context):
         logger = context.get("logger", LOGGER)
         settings = context.get("settings", {})
+
+        # Keep the Automatic Full Sync schedule in sync with current settings
+        # on every action, not just this one - see _reconcile_schedule for why.
+        # Never allowed to block or fail the action actually requested.
+        try:
+            self._reconcile_schedule(settings, logger)
+        except Exception as e:
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync schedule reconciliation failed: {e}")
 
         try:
             action_map = {
@@ -735,6 +830,11 @@ class Plugin:
         the user can check progress on demand without reading the logs."""
         progress = load_progress(PluginConfig.PROGRESS_FILE)
         message = build_status_message(progress)
+
+        schedule_row = self._schedule_status_row(settings)
+        if schedule_row["Value"] != "Off":
+            message += f"\n\n{schedule_row['Setting']} ({schedule_row['Value']}): {schedule_row['Status']}"
+
         logger.info(f"{LOG_PREFIX} Status requested: {message.splitlines()[0]}")
         return {"status": "ok", "message": message}
 
@@ -2236,6 +2336,247 @@ class Plugin:
         except Exception as e:
             logger.error(f"{LOG_PREFIX} Failed to save state: {e}")
 
+    def _save_schedule_state(self, state_data, logger):
+        """Save the last Automatic Full Sync outcome atomically, for Validate
+        Settings / Plugin Status to show. A separate file from STATE_FILE:
+        that one is overwritten wholesale by several unrelated steps (the
+        stream-match step inside a Full Sync included), so a scheduled-run
+        marker written there would be clobbered before anyone saw it."""
+        try:
+            os.makedirs(os.path.dirname(PluginConfig.SCHEDULE_STATE_FILE), exist_ok=True)
+            tmp = PluginConfig.SCHEDULE_STATE_FILE + ".tmp"
+            with open(tmp, 'w') as f:
+                json.dump(state_data, f, indent=2)
+            os.replace(tmp, PluginConfig.SCHEDULE_STATE_FILE)
+        except Exception as e:
+            logger.error(f"{LOG_PREFIX} Failed to save schedule state: {e}")
+
+    @staticmethod
+    def _load_schedule_state():
+        """Last recorded Automatic Full Sync outcome, or None if it has
+        never run (or the file can't be read)."""
+        try:
+            with open(PluginConfig.SCHEDULE_STATE_FILE, 'r') as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return None
+
+    # Weekly Sync Day setting value -> the 3-letter form CrontabSchedule's
+    # day_of_week expects.
+    _SCHEDULE_DAY_TO_CRON = {
+        "monday": "mon", "tuesday": "tue", "wednesday": "wed", "thursday": "thu",
+        "friday": "fri", "saturday": "sat", "sunday": "sun",
+    }
+
+    @staticmethod
+    def _detected_timezone():
+        """Dispatcharr's own configured time zone, as a best-effort guess for
+        the Time Zone field's default - so a fresh install of this plugin
+        schedules in the box's actual zone without the operator having to
+        already know its IANA name. Never authoritative: whatever is actually
+        saved in settings always wins once the operator touches the field."""
+        try:
+            from django.conf import settings as django_settings
+            tz = getattr(django_settings, "TIME_ZONE", None)
+            if tz:
+                import zoneinfo
+                zoneinfo.ZoneInfo(tz)  # raises if not a real IANA name
+                return tz
+        except Exception:
+            pass
+
+        tz = os.environ.get("DISPATCHARR_TIME_ZONE")
+        if tz:
+            try:
+                import zoneinfo
+                zoneinfo.ZoneInfo(tz)
+                return tz
+            except Exception:
+                pass
+
+        return "UTC"
+
+    def _reconcile_schedule(self, settings, logger):
+        """Create, update or remove the Automatic Full Sync periodic task so
+        it matches the current settings.
+
+        Called at the top of every action dispatch (see run()), not only
+        when settings are saved: Dispatcharr's plugin API gives a plugin no
+        "settings changed" hook, so the only way to notice a change is the
+        next time any of the plugin's own code runs at all. This is also why
+        the scheduled task's settings snapshot lives in the PeriodicTask row
+        itself (its `kwargs`) rather than being read live - a Celery task run
+        by beat has no access to "whatever is currently saved in the settings
+        UI", only what was written here. That snapshot self-refreshes the
+        same way, on the next action, with no separate "Apply Schedule"
+        button needed.
+
+        Failures here (django-celery-beat not installed, an invalid time
+        string) are logged and swallowed: they must never break the actual
+        action the user asked for.
+        """
+        mode = (settings.get("auto_full_sync") or "off").strip().lower()
+
+        try:
+            from django_celery_beat.models import PeriodicTask, CrontabSchedule
+        except ImportError:
+            if mode != "off":
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync is set to '{mode}' but "
+                    f"django-celery-beat is not installed, so it cannot run."
+                )
+            return
+
+        if mode == "off":
+            deleted, _ = PeriodicTask.objects.filter(name=PluginConfig.SCHEDULE_TASK_NAME).delete()
+            if deleted:
+                logger.info(f"{LOG_PREFIX} Automatic Full Sync turned off; removed its schedule.")
+            return
+
+        if mode not in ("daily", "weekly", "monthly", "custom"):
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync: unrecognized mode '{mode}' - schedule not updated.")
+            return
+
+        # Explicit, not inferred from the server/container: relying on
+        # whatever django-celery-beat's CrontabSchedule defaults to (which is
+        # not guaranteed to be the box's local time - it can be UTC) silently
+        # runs the sync at the wrong hour, which is exactly what happened
+        # testing this against a real install with DISPATCHARR_TIME_ZONE set
+        # to America/New_York: the schedule fired on UTC time instead.
+        tz_str = (settings.get("auto_full_sync_timezone") or "").strip() or self._detected_timezone()
+        try:
+            import zoneinfo
+            zoneinfo.ZoneInfo(tz_str)
+        except (zoneinfo.ZoneInfoNotFoundError, KeyError, ValueError):
+            logger.warning(
+                f"{LOG_PREFIX} Automatic Full Sync: unrecognized Time Zone '{tz_str}' "
+                f"- schedule not updated. Use an IANA name such as 'America/New_York'."
+            )
+            return
+
+        if mode == "custom":
+            cron_str = (settings.get("auto_full_sync_cron") or "").strip()
+            fields = cron_str.split()
+            if len(fields) != 5:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: Custom Cron Expression '{cron_str}' must have exactly "
+                    f"5 fields (minute hour day-of-month month day-of-week) - schedule not updated."
+                )
+                return
+            minute_f, hour_f, dom_f, month_f, dow_f = fields
+            try:
+                # celery's own crontab parser validates each field's syntax
+                # and range without needing a live app/broker - use it as a
+                # dry-run check before writing anything to the database.
+                from celery.schedules import crontab as _crontab_validator
+                _crontab_validator(minute=minute_f, hour=hour_f, day_of_month=dom_f,
+                                   month_of_year=month_f, day_of_week=dow_f)
+            except Exception as e:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: invalid Custom Cron Expression "
+                    f"'{cron_str}': {e} - schedule not updated."
+                )
+                return
+            minute, hour, day_of_month, month_of_year, day_of_week = minute_f, hour_f, dom_f, month_f, dow_f
+            when = f"custom '{cron_str}' {tz_str}"
+        else:
+            time_str = (settings.get("auto_full_sync_time") or "03:00").strip()
+            try:
+                hour_str, minute_str = time_str.split(":", 1)
+                hour, minute = int(hour_str), int(minute_str)
+                if not (0 <= hour <= 23 and 0 <= minute <= 59):
+                    raise ValueError
+            except ValueError:
+                logger.warning(
+                    f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Time '{time_str}' "
+                    f"(expected 24-hour HH:MM) - schedule not updated."
+                )
+                return
+            minute, hour = str(minute), str(hour)
+            month_of_year = "*"
+
+            if mode == "weekly":
+                day = (settings.get("auto_full_sync_day") or "monday").strip().lower()
+                day_of_week = self._SCHEDULE_DAY_TO_CRON.get(day)
+                if not day_of_week:
+                    logger.warning(f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Day '{day}' - schedule not updated.")
+                    return
+                day_of_month = "*"
+                when = f"weekly at {time_str} {tz_str} on {day}"
+            elif mode == "monthly":
+                dom_raw = settings.get("auto_full_sync_day_of_month", 1)
+                try:
+                    dom_int = int(dom_raw)
+                    if not (1 <= dom_int <= 31):
+                        raise ValueError
+                except (TypeError, ValueError):
+                    logger.warning(
+                        f"{LOG_PREFIX} Automatic Full Sync: invalid Sync Day Of Month '{dom_raw}' "
+                        f"(expected 1-31) - schedule not updated."
+                    )
+                    return
+                day_of_week = "*"
+                day_of_month = str(dom_int)
+                when = f"monthly at {time_str} {tz_str} on day {dom_int}"
+            else:  # daily
+                day_of_week = "*"
+                day_of_month = "*"
+                when = f"daily at {time_str} {tz_str}"
+
+        schedule, _ = CrontabSchedule.objects.get_or_create(
+            minute=str(minute), hour=str(hour), day_of_week=str(day_of_week),
+            day_of_month=str(day_of_month), month_of_year=str(month_of_year), timezone=tz_str,
+        )
+        task, created = PeriodicTask.objects.update_or_create(
+            name=PluginConfig.SCHEDULE_TASK_NAME,
+            defaults={
+                "crontab": schedule,
+                "interval": None,
+                "task": PluginConfig.SCHEDULED_TASK_CELERY_NAME,
+                "queue": "dvr",
+                "enabled": True,
+                "kwargs": json.dumps({"settings": dict(settings)}),
+                "description": "Lineuparr Automatic Full Sync",
+            },
+        )
+        if created:
+            logger.info(f"{LOG_PREFIX} Automatic Full Sync scheduled: {when}")
+
+    def _schedule_status_row(self, settings):
+        """One results-table row summarizing Automatic Full Sync, for
+        Validate Settings and Plugin Status. Never raises - a broken
+        schedule read must not stop either report from finishing."""
+        mode = (settings.get("auto_full_sync") or "off").strip().lower()
+        if mode == "off":
+            return {"Setting": "Automatic Full Sync", "Value": "Off", "Status": "OK"}
+
+        tz_display = settings.get('auto_full_sync_timezone') or self._detected_timezone()
+        if mode == "custom":
+            when = f"custom '{settings.get('auto_full_sync_cron', '')}' {tz_display}"
+        else:
+            when = f"{mode} at {settings.get('auto_full_sync_time', '03:00')} {tz_display}"
+            if mode == "weekly":
+                when += f" on {settings.get('auto_full_sync_day', 'monday')}"
+            elif mode == "monthly":
+                when += f" on day {settings.get('auto_full_sync_day_of_month', 1)}"
+
+        try:
+            last = self._load_schedule_state()
+        except Exception:
+            last = None
+
+        if not last:
+            return {"Setting": "Automatic Full Sync", "Value": when, "Status": "OK (has not run yet)"}
+
+        status = last.get("status", "unknown")
+        ran_at = last.get("ran_at", "unknown time")
+        detail = last.get("message", "")
+        return {
+            "Setting": "Automatic Full Sync",
+            "Value": when,
+            "Status": f"Last run {ran_at}: {status}" + (f" - {detail}" if detail else ""),
+        }
+
     def _trigger_frontend_refresh(self, logger):
         """Tell the Dispatcharr UI to refetch the channel list.
 
@@ -2452,6 +2793,9 @@ class Plugin:
         except Exception as e:
             results.append({"Setting": "Database", "Value": "", "Status": f"ERROR: {e}"})
             errors += 1
+
+        # Automatic Full Sync
+        results.append(self._schedule_status_row(settings))
 
         warn_details = [r["Setting"] + ": " + r["Status"] for r in results if "WARNING" in r.get("Status", "")]
         status = "ok" if errors == 0 else "error"
@@ -4120,3 +4464,100 @@ class Plugin:
                     logger.error(f"{LOG_PREFIX} Failed to delete {f}: {e}")
 
         return {"status": "ok", "message": f"Removed {removed} CSV export file(s)."}
+
+    def _is_operation_locked(self):
+        """Read-only check: is another Lineuparr operation currently running?
+
+        Deliberately does not acquire anything itself (unlike _acquire_lock).
+        _do_full_sync's own sub-steps (stream match, EPG match, logo
+        assignment) already call _acquire_lock/_release_lock around their own
+        expensive work, exactly like a manual Full Sync click - wrapping the
+        whole call in a second, outer acquisition here would hold the lock
+        across all of them, and each one would then see it already held (by
+        this same run) and bail out. Measured live: that produced exactly
+        three "Operation locked" warnings from one single scheduled
+        invocation and no completed sync, ever, because every sub-step
+        rejected itself. This peek exists only to skip starting a run at all
+        when one is clearly already in progress; the real, race-safe
+        protection is still each sub-step's own lock, same as the manual path.
+        """
+        try:
+            if not os.path.exists(PluginConfig.OPERATION_LOCK_FILE):
+                return False
+            with open(PluginConfig.OPERATION_LOCK_FILE, 'r') as f:
+                lock_data = json.load(f)
+            lock_time = datetime.fromisoformat(lock_data.get('timestamp', ''))
+            elapsed = (datetime.now() - lock_time).total_seconds() / 60
+            return elapsed < PluginConfig.OPERATION_LOCK_TIMEOUT_MINUTES
+        except Exception:
+            return False  # can't prove it's locked - let the sub-steps decide
+
+    def run_scheduled_full_sync(self, settings, logger):
+        """The actual work behind the Automatic Full Sync schedule - kept as
+        a plain method (not inline in the Celery task below) so it can be
+        unit tested without Celery installed.
+
+        Skips, without raising, if another Lineuparr run already looks to be
+        in progress - a Celery retry would just collide with the still-
+        running operation again - per the issue's "skip rather than overlap"
+        requirement. Does NOT take the operation lock itself around
+        _do_full_sync; see _is_operation_locked for why. Records the outcome
+        for Validate Settings / Plugin Status to show, via
+        _save_schedule_state.
+        """
+        settings = settings or {}
+        ran_at = datetime.now().isoformat()
+
+        if self._is_operation_locked():
+            logger.warning(f"{LOG_PREFIX} Automatic Full Sync skipped: another Lineuparr operation is already running.")
+            self._save_schedule_state(
+                {"ran_at": ran_at, "status": "skipped", "message": "another operation was already running"},
+                logger,
+            )
+            return {"status": "skipped"}
+
+        try:
+            self._do_full_sync(settings, logger)
+            self._save_schedule_state({"ran_at": ran_at, "status": "ok", "message": ""}, logger)
+            return {"status": "ok"}
+        except Exception as e:
+            logger.exception(f"{LOG_PREFIX} Automatic Full Sync failed: {e}")
+            self._save_schedule_state({"ran_at": ran_at, "status": "error", "message": str(e)}, logger)
+            return {"status": "error", "error": str(e)}
+
+
+# --------------------------------------------------------------------------
+# Automatic Full Sync (issue #31): the Celery entry point django-celery-beat
+# fires on its schedule. Registered at module import time, the same way
+# every Dispatcharr plugin that schedules its own work does it (Dispatcharr
+# has no plugin scheduling API of its own) - a module-level @shared_task,
+# not a Plugin method, because Celery has to find and register it once at
+# import, before any Plugin instance exists. Deliberately a thin wrapper:
+# the actual work is Plugin.run_scheduled_full_sync, above, so it stays
+# unit-testable in an environment without Celery installed.
+#
+# Routed to the "dvr" queue (both here and on the PeriodicTask row itself in
+# _reconcile_schedule): a task left on Dispatcharr's default "celery" queue
+# is silently never executed, even though it shows up as registered and
+# Beat's own run counter still increments - that counter only records that a
+# message was sent, not that a worker picked it up.
+try:
+    from celery import shared_task as _lineuparr_shared_task
+
+    @_lineuparr_shared_task(name=PluginConfig.SCHEDULED_TASK_CELERY_NAME)
+    def _lineuparr_scheduled_full_sync(settings=None):
+        import logging
+        # Use Dispatcharr's own plugin-action logger, the same one its
+        # action dispatcher hands every manual click via context["logger"],
+        # so a scheduled run's log lines look and route identically to a
+        # manual Full Sync's - same prefix, same place in the container log -
+        # rather than appearing under a separate, easy-to-miss logger name.
+        logger = logging.getLogger("apps.plugins.loader")
+        return Plugin().run_scheduled_full_sync(settings, logger)
+except Exception as _lineuparr_celery_register_err:
+    # Celery may not be importable in every environment this module is
+    # loaded in (e.g. a management command, or these tests). Logged to
+    # stderr, not raised, so importing plugin.py never fails because of it -
+    # if scheduling silently never fires, this is the line that explains why.
+    import sys as _sys
+    print(f"[Lineuparr] Celery task registration failed: {_lineuparr_celery_register_err}", file=_sys.stderr)
