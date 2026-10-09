@@ -2,6 +2,23 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.2821835 (2026-10-09)
+
+### Fixed
+
+- Category Detail set to None now names the single channel group with the
+  group prefix alone, as the setting describes, instead of `<prefix>: All`.
+  A group created under the old name is renamed in place the next time Full
+  Sync or Sync Channels runs, so its channels stay where they are and no
+  second group is created. If both names already exist, neither is changed
+  and a warning is logged. Contributed by sbcrumb in pull request #32,
+  fixing issue #30.
+- Automatic channel numbering no longer hands out a number another channel
+  already shows. Dispatcharr 0.32.0 keeps a number assigned in its interface
+  to an auto-synced channel in a separate override field, and the
+  Auto-assign next available, Auto-assign after highest and Use specific
+  number modes did not read it. They now count those numbers as taken.
+
 ## 1.26.2561550 (2026-09-13)
 
 ### Added
