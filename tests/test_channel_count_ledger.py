@@ -22,8 +22,8 @@ go down. That was an explicit operator decision.
 
 PRIVACY. The tally holds integers and one short mode string. No channel name, no
 group name, no lineup filename, no URL, no hostname. Only the summed integer
-reaches the published badge, and the gist behind that badge is unlisted rather
-than private, so treat the number as public.
+reaches the published badges, which read the plugin-stats Worker, so treat the
+number as public.
 
 Ported from the equivalent tally in the sibling IPTV Checker plugin.
 """

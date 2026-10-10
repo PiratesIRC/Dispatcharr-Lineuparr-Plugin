@@ -71,15 +71,8 @@ reference_*.md
 /conftest.py
 *smoke*.py
 # NOTE ON scripts/: the rule above says the repository holds only the plugin
-# runtime. Two things under scripts/ are deliberate exceptions and ARE tracked:
-# validate_zip.py, which the release runbook calls, and the badge tooling
-# (update_channels_created_badge.py, its .ps1 wrapper, and the gist id in
-# .channels_created_badge_gist). They are tracked because keeping them out gave
-# them no version control and no backup either: the workspace notes sweep covers
-# CLAUDE.md, docs/CLAUDE-*, everything under .claude/skills/, SCHEDULING_LOGIC.md,
-# TODO.md and four .wolf files, and matches none of those paths. They carry no
-# literal workspace path (both build theirs from environment variables) and the
-# gist id they hold is already public in the README badge URL.
+# runtime. validate_zip.py is the one deliberate exception under scripts/: the
+# release runbook calls it, so it is tracked.
 
 # OpenWolf local context (AI memory - not part of the plugin)
 .wolf/
