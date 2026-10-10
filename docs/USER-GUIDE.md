@@ -640,8 +640,9 @@ the last 30 UTC days. A report is sent when an action finishes (syncs and the
 Apply actions report when their background work finishes), at most once an
 hour, or ten minutes after the last report when a sync has just created
 channels, so an install that stops being used stops counting after 30 days. A
-badge changes when an install reports, and the badge cache updates within about
-five minutes.
+badge changes after the server's hourly recount, which runs at the start of each
+UTC hour, and Shields may cache the badge for up to an hour more, so a new
+report can take up to about two hours to show.
 
 The setting is the last one in the Advanced section. Unticking it takes effect
 when the next action or sync finishes; the plugin then asks the server to delete
