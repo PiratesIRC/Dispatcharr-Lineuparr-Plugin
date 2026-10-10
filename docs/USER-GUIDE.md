@@ -619,23 +619,26 @@ deletes every `lineuparr_*.csv` file, however new.
 ## Anonymous usage counts
 
 The Channels Created and Active Installs badges count every install that leaves
-the "Share anonymous usage counts" setting ticked (it is on by default). When the
-plugin runs, at most once an hour, it sends this plugin's Channels Created total and
-a random id for this plugin on this install to the plugin author's counter at
-plugin-stats.dpas.workers.dev. The server stores that id with the total and the date
-of the last report. The connection shows the server your public IP address; the
-server uses it only to limit abuse and does not store it in its database, though when
-an install first registers it keeps a salted one-way hash of it (of its /64 block for
-IPv6) for up to three days. Cloudflare, which hosts the server, keeps its own request
-logs. No names, channels, streams, providers or settings are sent. The figures are
-self-reported by installs and capped by the server, not verified. Untick the setting
-to stop sending; this install's figures are deleted from the server the next time an
-action or sync finishes after you untick.
+the "Share anonymous usage counts" setting ticked and runs at least one action
+or sync (it is on by default). When an action or sync finishes, at most once an
+hour, the plugin sends this plugin's Channels Created total and a random id for
+this plugin on this install to the plugin author's counter at
+plugin-stats.dpas.workers.dev. The server stores that id with the total and the
+date of the last report. The connection shows the server your public IP address;
+the server uses it only to limit abuse and does not store it in its database,
+though when an install first registers it keeps a salted one-way hash of it (of
+its /64 block for IPv6) for up to three days. Cloudflare, which hosts the
+server, keeps its own request logs. No names, channels, streams, providers or
+settings are sent. The figures are self-reported by installs and capped by the
+server, not verified. Untick the setting to stop sending; this install's figures
+are deleted from the server the next time an action or sync finishes after you
+untick.
 
-What counts as an active install: an install that sent at least one report in the
-last 30 days. A report is sent when an action finishes (syncs and the Apply actions
-report when their background work finishes), at most once an hour, so an install
-that is never used stops counting after 30 days. The badges refresh about once an hour.
+What counts as an active install: an install that sent at least one report in
+the last 30 days. A report is sent when an action finishes (syncs and the Apply
+actions report when their background work finishes), at most once an hour, so an
+install that stops being used stops counting after 30 days. The badges refresh
+about once an hour.
 
 The setting is the last one in the Advanced section. Unticking it takes effect when
 the next action or sync finishes; the plugin then asks the server to delete this
