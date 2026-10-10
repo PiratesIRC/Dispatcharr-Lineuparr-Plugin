@@ -2,6 +2,22 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.2831530 (2026-10-10)
+
+### Added
+
+- Anonymous usage counts. The Channels Created and Active Installs badges now
+  count every install that keeps the new "Share anonymous usage counts" setting
+  ticked (it is on by default and is the last setting in the Advanced section)
+  and runs at least one action or sync. When an action or sync finishes, at most
+  once an hour, or ten minutes after the last report when a sync has just
+  created channels, the plugin sends its Channels Created total and a random id
+  for this plugin on this install to plugin-stats.dpas.workers.dev. No names,
+  channels, streams, providers or settings are sent. Unticking the setting stops
+  the reports and has this install's figures deleted from the server the next
+  time an action or sync finishes. The user guide section "Anonymous usage
+  counts" describes exactly what the server stores and for how long.
+
 ## 1.26.2821835 (2026-10-09)
 
 ### Fixed
