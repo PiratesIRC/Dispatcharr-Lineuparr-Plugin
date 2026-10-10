@@ -99,7 +99,7 @@ order, so a setting is listed where you will find it on screen.
 |---------|------|---------|--------------|
 | Rate Limiting | select | `None` | Pauses after each channel a run processes, to leave the database free for the rest of Dispatcharr: None, Low (0.1s), Medium (0.5s) or High (2s). The pause is between database writes, not between requests to your provider, so it does nothing for a slow M3U source. |
 | Delete CSV Exports Older Than (Days) | number | `0` | Housekeeping for `/data/exports/`. After each export, this plugin's own exports older than this many days are deleted. `0` keeps every file. See [Tidying up old CSV exports](#tidying-up-old-csv-exports). |
-| Share anonymous usage counts | boolean | `true` | Sends this install's Channels Created total and a random install id to the plugin author's counter, at most once an hour. Untick to stop. See [Anonymous usage counts](#anonymous-usage-counts). |
+| Share anonymous usage counts | boolean | `true` | Sends this install's Channels Created total and a random install id to the plugin author's counter, at most once an hour, or ten minutes after the last report when a sync has just created channels. Untick to stop. See [Anonymous usage counts](#anonymous-usage-counts). |
 
 ---
 
@@ -619,10 +619,11 @@ deletes every `lineuparr_*.csv` file, however new.
 ## Anonymous usage counts
 
 The Channels Created and Active Installs badges count every install that leaves
-the "Share anonymous usage counts" setting (on by default) ticked and runs at least one action
-or sync. When an action or sync finishes, at most once an
-hour, the plugin sends this plugin's Channels Created total and a random id for
-this plugin on this install to the plugin author's counter at
+the "Share anonymous usage counts" setting (on by default) ticked and runs at
+least one action or sync. When an action or sync finishes, at most once an hour,
+or ten minutes after the last report when a sync has just created channels, the
+plugin sends this plugin's Channels Created total and a random id for this
+plugin on this install to the plugin author's counter at
 plugin-stats.dpas.workers.dev. The server stores that id with the total and the
 date of the last report. The connection shows the server your public IP address;
 the server uses it only to limit abuse and does not store it in its database,
@@ -636,7 +637,8 @@ untick.
 
 What counts as an active install: an install that sent at least one report in
 the last 30 days. A report is sent when an action finishes (syncs and the Apply
-actions report when their background work finishes), at most once an hour, so an
+actions report when their background work finishes), at most once an hour, or
+ten minutes after the last report when a sync has just created channels, so an
 install that stops being used stops counting after 30 days. The badges refresh
 about once an hour.
 

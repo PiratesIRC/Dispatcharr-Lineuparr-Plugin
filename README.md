@@ -150,10 +150,11 @@ The software is provided as-is, without warranty of any kind, as set out in the 
 ## Anonymous usage counts
 
 The Channels Created and Active Installs badges count every install that leaves
-the "Share anonymous usage counts" setting (on by default) ticked and runs at least one action
-or sync. When an action or sync finishes, at most once an
-hour, the plugin sends this plugin's Channels Created total and a random id for
-this plugin on this install to the plugin author's counter at
+the "Share anonymous usage counts" setting (on by default) ticked and runs at
+least one action or sync. When an action or sync finishes, at most once an hour,
+or ten minutes after the last report when a sync has just created channels, the
+plugin sends this plugin's Channels Created total and a random id for this
+plugin on this install to the plugin author's counter at
 plugin-stats.dpas.workers.dev. The server stores that id with the total and the
 date of the last report. The connection shows the server your public IP address;
 the server uses it only to limit abuse and does not store it in its database,

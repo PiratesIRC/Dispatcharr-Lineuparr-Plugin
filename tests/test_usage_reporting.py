@@ -104,21 +104,37 @@ def test_a_failed_ledger_write_does_not_report(usage, tmp_path, monkeypatch):
     assert usage.calls == []
 
 
-def test_each_ledger_write_sends_its_new_total(tmp_path, monkeypatch):
+def _real_reporter(tmp_path, sent, clock):
     from Lineuparr import usage_client as uc
-    sent = []
-    real = uc.UsageReporter(
+    return uc.UsageReporter(
         plugin="lineuparr", counter="channels_created", label="Channels Created",
         total_fn=lambda: 1, settings_fn=lambda: {}, data_dir=str(tmp_path / "stats"),
         http=lambda method, url, body: sent.append(body) or 202,
-        start=lambda fn: fn(), lock=lambda fd: True,
+        start=lambda fn: fn(), lock=lambda fd: True, clock=lambda: clock[0],
     )
-    monkeypatch.setattr(plugin_module, "USAGE", real)
+
+
+def test_each_ledger_write_sends_its_new_total(tmp_path, monkeypatch):
+    sent = []
+    clock = [1_800_000_000.0]
+    monkeypatch.setattr(plugin_module, "USAGE", _real_reporter(tmp_path, sent, clock))
+    monkeypatch.setattr(PluginConfig, "CHANNEL_COUNT_LEDGER_FILE", str(tmp_path / "c.jsonl"))
+    p = Plugin()
+    assert p._record_channels_created(2, "sync_channels", plugin_module.LOGGER) is True
+    clock[0] += 601
+    assert p._record_channels_created(3, "sync_channels", plugin_module.LOGGER) is True
+    assert len(sent) == 2
+
+
+def test_two_ledger_writes_within_ten_minutes_send_once(tmp_path, monkeypatch):
+    sent = []
+    clock = [1_800_000_000.0]
+    monkeypatch.setattr(plugin_module, "USAGE", _real_reporter(tmp_path, sent, clock))
     monkeypatch.setattr(PluginConfig, "CHANNEL_COUNT_LEDGER_FILE", str(tmp_path / "c.jsonl"))
     p = Plugin()
     assert p._record_channels_created(2, "sync_channels", plugin_module.LOGGER) is True
     assert p._record_channels_created(3, "sync_channels", plugin_module.LOGGER) is True
-    assert len(sent) == 2
+    assert len(sent) == 1
 
 
 def test_the_checkbox_sits_in_the_advanced_section():
