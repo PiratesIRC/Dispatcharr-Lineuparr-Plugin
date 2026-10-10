@@ -16,8 +16,8 @@ class FakeUsage:
     def __init__(self):
         self.calls = []
 
-    def report(self, settings=None, logger=None):
-        self.calls.append(settings)
+    def report(self, settings=None, logger=None, force=False):
+        self.calls.append((settings, force))
 
 
 @pytest.fixture
@@ -52,7 +52,7 @@ def test_a_request_action_reports_with_the_live_settings(usage, monkeypatch):
     monkeypatch.setattr(p, "_plugin_status", lambda settings, logger: {"status": "ok", "message": "fine"})
     settings = {"share_usage_counts": True, "x": 1}
     p.run("plugin_status", {}, {"settings": settings, "logger": plugin_module.LOGGER})
-    assert usage.calls == [settings]
+    assert usage.calls == [(settings, False)]
 
 
 def test_a_background_action_does_not_report_from_run(usage, monkeypatch):
@@ -79,7 +79,7 @@ def test_a_recorded_sync_reports_after_the_ledger_write(usage, tmp_path, monkeyp
     monkeypatch.setattr(PluginConfig, "CHANNEL_COUNT_LEDGER_FILE", str(ledger))
     assert Plugin()._record_channels_created(3, "sync_channels", plugin_module.LOGGER) is True
     assert ledger.read_text(encoding="utf-8").count("\n") == 1
-    assert usage.calls == [None]
+    assert usage.calls == [(None, True)]
 
 
 def test_a_rejected_count_does_not_report(usage, tmp_path, monkeypatch):
@@ -104,7 +104,7 @@ def test_a_failed_ledger_write_does_not_report(usage, tmp_path, monkeypatch):
     assert usage.calls == []
 
 
-def test_a_throttled_report_after_a_sync_is_skipped_quietly(tmp_path, monkeypatch):
+def test_each_ledger_write_sends_its_new_total(tmp_path, monkeypatch):
     from Lineuparr import usage_client as uc
     sent = []
     real = uc.UsageReporter(
@@ -118,7 +118,7 @@ def test_a_throttled_report_after_a_sync_is_skipped_quietly(tmp_path, monkeypatc
     p = Plugin()
     assert p._record_channels_created(2, "sync_channels", plugin_module.LOGGER) is True
     assert p._record_channels_created(3, "sync_channels", plugin_module.LOGGER) is True
-    assert len(sent) == 1
+    assert len(sent) == 2
 
 
 def test_the_checkbox_sits_in_the_advanced_section():
@@ -138,7 +138,7 @@ def test_a_background_action_reports_when_its_thread_finishes(usage):
     assert p._try_start_thread(lambda a, b: ran.append((a, b)), ("s", "l")) is True
     p._thread.join(5)
     assert ran == [("s", "l")]
-    assert usage.calls == [None]
+    assert usage.calls == [(None, False)]
 
 
 @pytest.mark.filterwarnings("ignore::pytest.PytestUnhandledThreadExceptionWarning")
@@ -150,4 +150,4 @@ def test_a_background_action_that_raises_still_reports(usage):
 
     assert p._try_start_thread(boom, ("s", "l")) is True
     p._thread.join(5)
-    assert usage.calls == [None]
+    assert usage.calls == [(None, False)]

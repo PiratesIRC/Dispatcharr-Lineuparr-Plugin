@@ -695,10 +695,10 @@ class Plugin:
             },
         ], USAGE)
 
-    def _report_usage(self, settings, logger):
+    def _report_usage(self, settings, logger, force=False):
         """Hand the usage total to the reporter; never lets anything escape."""
         try:
-            USAGE.report(settings, logger)
+            USAGE.report(settings, logger, force=force)
         except Exception:
             pass
 
@@ -2238,7 +2238,7 @@ class Plugin:
             with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
                       encoding="utf-8") as handle:
                 handle.write(line + "\n")
-            self._report_usage(None, log)
+            self._report_usage(None, log, force=True)
             return True
         except Exception as exc:
             log.warning(f"{LOG_PREFIX} Could not record the channel tally: {exc}")

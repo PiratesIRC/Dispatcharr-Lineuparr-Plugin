@@ -150,8 +150,8 @@ The software is provided as-is, without warranty of any kind, as set out in the 
 ## Anonymous usage counts
 
 The Channels Created and Active Installs badges count every install that leaves
-the "Share anonymous usage counts" setting ticked and runs at least one action
-or sync (it is on by default). When an action or sync finishes, at most once an
+the "Share anonymous usage counts" setting (on by default) ticked and runs at least one action
+or sync. When an action or sync finishes, at most once an
 hour, the plugin sends this plugin's Channels Created total and a random id for
 this plugin on this install to the plugin author's counter at
 plugin-stats.dpas.workers.dev. The server stores that id with the total and the

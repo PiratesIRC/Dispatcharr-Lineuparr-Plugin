@@ -250,11 +250,12 @@ def _in_future(path, now):
     return until is not None and until > now
 
 
-def _blocked(directory, now):
+def _blocked(directory, now, ignore_sent=False):
     """True while a report must not be sent: sent within the hour, or a backoff or
-    disabled file whose mtime is still in the future."""
+    disabled file whose mtime is still in the future. ignore_sent skips only the
+    hourly check, never a backoff or a disabled file."""
     sent = _mtime(os.path.join(directory, "sent"))
-    if sent is not None and now - sent < SEND_INTERVAL:
+    if not ignore_sent and sent is not None and now - sent < SEND_INTERVAL:
         return True
     return _in_future(os.path.join(directory, "backoff"), now) or \
         _in_future(os.path.join(directory, "disabled"), now)
@@ -303,9 +304,11 @@ class UsageReporter:
         self._lock = lock
         self._clock = clock
 
-    def report(self, settings=None, logger=None):
+    def report(self, settings=None, logger=None, force=False):
+        """Send if due. force is for the call made right after the plugin records new
+        work, so a fresh total is not held back by an earlier report within the hour."""
         try:
-            self._report(settings, logger)
+            self._report(settings, logger, force)
         except Exception as exc:
             _warn_once(logger, "report:" + self.plugin,
                        "usage report skipped for " + self.plugin + " (" + _errno_name(exc) + ")")
@@ -321,7 +324,7 @@ class UsageReporter:
             return True
         return _opted_in(settings[SETTING_ID])
 
-    def _report(self, settings, logger):
+    def _report(self, settings, logger, force=False):
         lock = self._lock or (_flock if fcntl is not None else None)
         if lock is None:
             return
@@ -329,7 +332,7 @@ class UsageReporter:
         if consent is None:
             return
         if consent:
-            if _blocked(self.directory, self._clock()):
+            if _blocked(self.directory, self._clock(), ignore_sent=force):
                 return
             action = self._send_report
         else:
@@ -345,7 +348,7 @@ class UsageReporter:
             if not lock(fd):
                 os.close(fd)
                 return
-            if consent and _blocked(self.directory, self._clock()):
+            if consent and _blocked(self.directory, self._clock(), ignore_sent=force):
                 os.close(fd)
                 return
             self._start(lambda: self._run(fd, action, logger))
@@ -473,8 +476,8 @@ def with_usage_field(fields, reporter):
     help_text = (
         "Sends this plugin's " + reporter.label + " total and a random id for this plugin on "
         "this install to the plugin author's counter at " + host + " when the plugin runs, at "
-        "most once an hour, so the README badges count every install. The server stores that "
-        "id with the total and the date of the last report. The connection shows the server "
+        "most once an hour, so the README badges count every install that runs at least one "
+        "action. The server stores that id with the total and the date of the last report. The connection shows the server "
         "your public IP address; the server uses it only to limit abuse and does not store it in "
         "its database, though when an install first registers it keeps a salted one-way hash of "
         "it (of its /64 block for IPv6) for up to three days. Cloudflare, which hosts the "
