@@ -382,7 +382,14 @@ class Plugin:
             if self._thread and self._thread.is_alive():
                 return False
             self._stop_event.clear()
-            self._thread = threading.Thread(target=target, args=args, daemon=True)
+
+            def _run_then_report(*call_args):
+                try:
+                    target(*call_args)
+                finally:
+                    self._report_usage(None, LOGGER)
+
+            self._thread = threading.Thread(target=_run_then_report, args=args, daemon=True)
             self._thread.start()
             return True
 

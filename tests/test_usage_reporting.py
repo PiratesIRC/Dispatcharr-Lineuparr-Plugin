@@ -130,3 +130,24 @@ def test_the_advanced_heading_no_longer_says_both():
     heading = next(f for f in Plugin().fields if f.get("id") == "_sec_advanced")
     assert "leave both alone" not in heading["help_text"]
     assert "usage counts" in heading["help_text"]
+
+
+def test_a_background_action_reports_when_its_thread_finishes(usage):
+    p = Plugin()
+    ran = []
+    assert p._try_start_thread(lambda a, b: ran.append((a, b)), ("s", "l")) is True
+    p._thread.join(5)
+    assert ran == [("s", "l")]
+    assert usage.calls == [None]
+
+
+@pytest.mark.filterwarnings("ignore::pytest.PytestUnhandledThreadExceptionWarning")
+def test_a_background_action_that_raises_still_reports(usage):
+    p = Plugin()
+
+    def boom(a, b):
+        raise RuntimeError("background failed")
+
+    assert p._try_start_thread(boom, ("s", "l")) is True
+    p._thread.join(5)
+    assert usage.calls == [None]
