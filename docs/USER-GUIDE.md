@@ -31,6 +31,7 @@ it does and how to install it.
 - [Reports](#reports)
 - [Reading a CSV export](#reading-a-csv-export)
 - [Tidying up old CSV exports](#tidying-up-old-csv-exports)
+- [Anonymous usage counts](#anonymous-usage-counts)
 - [File locations](#file-locations)
 
 ---
@@ -98,6 +99,7 @@ order, so a setting is listed where you will find it on screen.
 |---------|------|---------|--------------|
 | Rate Limiting | select | `None` | Pauses after each channel a run processes, to leave the database free for the rest of Dispatcharr: None, Low (0.1s), Medium (0.5s) or High (2s). The pause is between database writes, not between requests to your provider, so it does nothing for a slow M3U source. |
 | Delete CSV Exports Older Than (Days) | number | `0` | Housekeeping for `/data/exports/`. After each export, this plugin's own exports older than this many days are deleted. `0` keeps every file. See [Tidying up old CSV exports](#tidying-up-old-csv-exports). |
+| Share anonymous usage counts | boolean | `true` | Sends this install's Channels Created total and a random install id to the plugin author's counter, at most once an hour. Untick to stop. See [Anonymous usage counts](#anonymous-usage-counts). |
 
 ---
 
@@ -614,6 +616,33 @@ deletes every `lineuparr_*.csv` file, however new.
 
 ---
 
+## Anonymous usage counts
+
+The Channels Created and Active Installs badges count every install that leaves
+the "Share anonymous usage counts" setting ticked (it is on by default). When the
+plugin runs, at most once an hour, it sends this plugin's Channels Created total and
+a random id for this plugin on this install to the plugin author's counter at
+plugin-stats.dpas.workers.dev. The server stores that id with the total and the date
+of the last report. The connection shows the server your public IP address; the
+server uses it only to limit abuse and does not store it in its database, though when
+an install first registers it keeps a salted one-way hash of it (of its /64 block for
+IPv6) for up to three days. Cloudflare, which hosts the server, keeps its own request
+logs. No names, channels, streams, providers or settings are sent. The figures are
+self-reported by installs and capped by the server, not verified. Untick the setting
+to stop sending; this install's figures are deleted from the server the next time an
+action or sync finishes after you untick.
+
+What counts as an active install: an install that sent at least one report in the
+last 30 days. A report is sent when an action finishes (syncs and the Apply actions
+report when their background work finishes), at most once an hour, so an install
+that is never used stops counting after 30 days. The badges refresh about once an hour.
+
+The setting is the last one in the Advanced section. Unticking it takes effect when
+the next action or sync finishes; the plugin then asks the server to delete this
+install's figures and forgets its id. Ticking it again later starts a new id.
+
+---
+
 ## File locations
 
 | What | Where |
@@ -622,6 +651,7 @@ deletes every `lineuparr_*.csv` file, however new.
 | Reports | `/data/lineuparr_reports/lineuparr_report_*.html` and `*.csv`, eight of each kept |
 | Report count | `/data/lineuparr/report_count.json`, read by Newsflasharr |
 | Channels-created tally | `/data/lineuparr_channel_counts.jsonl`, one line per finished sync, summed by the Channels Created badge on the README |
+| Usage report state | `/data/plugin_stats/lineuparr/`: the install id and the timing files of the usage report (install_id, sent, backoff, disabled, delete_backoff, lock); delete the folder to start a new id |
 | Plugin directory | `/data/plugins/lineuparr/` inside the Dispatcharr data volume |
 | Lineup files | the same plugin directory, named `{CC}_{Provider}_lineup.json` |
 | Logs | `docker logs dispatcharr \| grep "Lineuparr"` |
