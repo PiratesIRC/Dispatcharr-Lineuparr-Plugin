@@ -15,6 +15,70 @@
     "usanetwork|usanetwork": 1.0,
     "|": 0.0
   },
+  "excluded_aliases": {
+    "callsign_rescue_blocked": [],
+    "channel_scoped": [
+      [
+        "US-ReelzChannel",
+        100,
+        "alias"
+      ]
+    ],
+    "literal_blocks_positive_alias": [],
+    "normalized_variant_positive": [
+      [
+        "US | Reelz Channel HD",
+        100,
+        "exact"
+      ]
+    ],
+    "parse_invalid_container": [],
+    "parse_invalid_items": [
+      "Reelz Channel"
+    ],
+    "parse_list": [
+      "US-ReelzChannel",
+      "Reelz Channel"
+    ],
+    "parse_string": [
+      "US-ReelzChannel"
+    ],
+    "positive_alias": [
+      [
+        "US-ReelzChannel",
+        100,
+        "alias"
+      ]
+    ],
+    "quality_bypass_positive": [
+      [
+        "US: Example 4K",
+        100,
+        "alias"
+      ]
+    ],
+    "regex_prefix_is_literal": [
+      [
+        "US-ReelzChannel",
+        100,
+        "alias"
+      ]
+    ],
+    "unlisted_full_name_survives": [
+      [
+        "US | Reelz Channel HD",
+        100,
+        "exact"
+      ]
+    ],
+    "unlisted_quality_prefix_survives": [
+      [
+        "US: Example 4K",
+        100,
+        "alias"
+      ]
+    ]
+  },
   "extract_callsign": {
     "(D1) CBS": null,
     "(PRIME) FOX News": null,
