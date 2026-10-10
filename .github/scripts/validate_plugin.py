@@ -28,7 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 PLUGIN_DIR = ROOT / "Lineuparr"
-EM_DASH = "—"
+EM_DASH = "\u2014"
 FILENAME_RE = re.compile(r"^[A-Z]{2,}_.+_lineup\.json$")
 PY_VERSION_RE = re.compile(r'PLUGIN_VERSION\s*=\s*"([^"]+)"')
 
@@ -113,7 +113,7 @@ def check_manifest() -> None:
 # text to edit: each is sha256-pinned by its own parity gate, so changing one
 # character here would fail that gate instead. An intended change goes into the
 # shared source and is re-vendored into every plugin that carries a copy.
-VENDORED = {"matching_core.py", "notify_client.py"}
+VENDORED = {"matching_core.py", "notify_client.py", "usage_client.py"}
 
 
 def check_no_em_dashes() -> None:
