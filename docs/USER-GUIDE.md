@@ -660,7 +660,7 @@ could not reach the server, the plugin keeps the id and retries.
 | Reports | `/data/lineuparr_reports/lineuparr_report_*.html` and `*.csv`, eight of each kept |
 | Report count | `/data/lineuparr/report_count.json`, read by Newsflasharr |
 | Channels-created tally | `/data/lineuparr_channel_counts.jsonl`, one line per finished sync, summed by the Channels Created badge on the README |
-| Usage report state | `/data/plugin_stats/lineuparr/`: the install id and the timing files of the usage report (install_id, sent, backoff, disabled, delete_backoff, lock); delete the folder to start a new id |
+| Usage report state | `/data/plugin_stats/lineuparr/`: the install id and the timing files of the usage report (install_id, sent, backoff, disabled, delete_backoff, lock). To start a new id, untick Share anonymous usage counts and let an action finish so the server deletes this install's figures; deleting the folder instead leaves the old figures on the server, and the new id sends the full total again, so the badge counts it twice |
 | Plugin directory | `/data/plugins/lineuparr/` inside the Dispatcharr data volume |
 | Lineup files | the same plugin directory, named `{CC}_{Provider}_lineup.json` |
 | Logs | `docker logs dispatcharr \| grep "Lineuparr"` |
