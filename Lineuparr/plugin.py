@@ -23,6 +23,7 @@ from .fuzzy_matcher import (FuzzyMatcher, has_upgrade_quality, detect_category_c
 from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
 from . import notify_bridge, report_count, reports
+from .usage_client import UsageReporter, jsonl_sum, load_plugin_settings, with_usage_field
 
 from apps.channels.models import Channel, ChannelGroup, ChannelProfile, ChannelProfileMembership, ChannelStream, Stream
 from apps.m3u.models import M3UAccount
@@ -345,6 +346,20 @@ class SmartRateLimiter:
             time.sleep(self.delay)
 
 
+# Reports the Channels Created total and a random install id to the plugin-stats
+# Worker, so the README badges count every install (see docs/USER-GUIDE.md,
+# "Anonymous usage counts"). The total is read from the same append-only ledger the
+# tally test pins. report() returns at once and never raises; the network work runs
+# on a background thread.
+USAGE = UsageReporter(
+    plugin="lineuparr",
+    counter="channels_created",
+    label="Channels Created",
+    total_fn=lambda: jsonl_sum(PluginConfig.CHANNEL_COUNT_LEDGER_FILE + "*", key="channels"),
+    settings_fn=lambda: load_plugin_settings("lineuparr"),
+)
+
+
 class Plugin:
     name = "Lineuparr"
     version = PluginConfig.PLUGIN_VERSION
@@ -439,7 +454,7 @@ class Plugin:
         # Alphabetize discovered profiles, keeping "None" pinned first
         profile_options[1:] = sorted(profile_options[1:], key=lambda o: o["label"].lower())
 
-        return [
+        return with_usage_field([
             # --- Section: Lineup & Sources ---
             {
                 "id": "_sec_sources",
@@ -644,7 +659,7 @@ class Plugin:
                 "id": "_sec_advanced",
                 "type": "info",
                 "label": "Advanced",
-                "help_text": "How fast a run is allowed to write to the database, and how long its CSV exports are kept. Most setups can leave both alone. Rate Limiting pauses between database writes rather than between network calls, so it helps when a large sync makes the rest of Dispatcharr sluggish and does nothing for a slow provider. The export cleanup only ever deletes this plugin's own lineuparr_*.csv files, because /data/exports is shared with several other plugins.",
+                "help_text": "How fast a run is allowed to write to the database, how long its CSV exports are kept, and whether this install shares its anonymous usage counts. Most setups can leave these alone. Rate Limiting pauses between database writes rather than between network calls, so it helps when a large sync makes the rest of Dispatcharr sluggish and does nothing for a slow provider. The export cleanup only ever deletes this plugin's own lineuparr_*.csv files, because /data/exports is shared with several other plugins. The usage counts setting is explained under Anonymous usage counts in the user guide.",
             },
             {
                 "id": "rate_limiting",
@@ -671,7 +686,14 @@ class Plugin:
                 "step": 1,
                 "help_text": "Housekeeping for the CSV files this plugin writes to /data/exports/. After each export, its own exports older than this many days are deleted. 0 keeps every file, which is the default, so nothing is removed unless you ask for it. The file just written is never deleted, and at least one file always survives. Only files named lineuparr_*.csv are touched, because that directory is shared with other plugins. A whole number of days is required; anything else keeps every file and says so in the container log. Note that an HTML report which had to drop rows names its full CSV by filename, so setting this shorter than the age of the reports people still open leaves those reports pointing at a deleted file. Clear CSV Exports still clears everything and ignores this setting.",
             },
-        ]
+        ], USAGE)
+
+    def _report_usage(self, settings, logger):
+        """Hand the usage total to the reporter; never lets anything escape."""
+        try:
+            USAGE.report(settings, logger)
+        except Exception:
+            pass
 
     def run(self, action, params, context):
         logger = context.get("logger", LOGGER)
@@ -723,6 +745,9 @@ class Plugin:
                     "type": "plugin", "plugin": "Lineuparr",
                     "message": f"{emoji} {notify_msg}"
                 })
+
+            if not is_bg:
+                self._report_usage(settings, logger)
 
             return result
 
@@ -2206,6 +2231,7 @@ class Plugin:
             with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
                       encoding="utf-8") as handle:
                 handle.write(line + "\n")
+            self._report_usage(None, log)
             return True
         except Exception as exc:
             log.warning(f"{LOG_PREFIX} Could not record the channel tally: {exc}")
