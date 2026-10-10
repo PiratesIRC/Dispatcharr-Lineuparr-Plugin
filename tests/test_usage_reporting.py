@@ -82,6 +82,14 @@ def test_a_recorded_sync_reports_after_the_ledger_write(usage, tmp_path, monkeyp
     assert usage.calls == [(None, True)]
 
 
+def test_a_zero_count_sync_reports_without_forcing(usage, tmp_path, monkeypatch):
+    ledger = tmp_path / "counts.jsonl"
+    monkeypatch.setattr(PluginConfig, "CHANNEL_COUNT_LEDGER_FILE", str(ledger))
+    assert Plugin()._record_channels_created(0, "sync_channels", plugin_module.LOGGER) is True
+    assert ledger.read_text(encoding="utf-8").count(chr(10)) == 1
+    assert usage.calls == [(None, False)]
+
+
 def test_a_rejected_count_does_not_report(usage, tmp_path, monkeypatch):
     monkeypatch.setattr(PluginConfig, "CHANNEL_COUNT_LEDGER_FILE", str(tmp_path / "c.jsonl"))
     assert Plugin()._record_channels_created(-1, "sync_channels", plugin_module.LOGGER) is False

@@ -2238,7 +2238,7 @@ class Plugin:
             with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
                       encoding="utf-8") as handle:
                 handle.write(line + "\n")
-            self._report_usage(None, log, force=True)
+            self._report_usage(None, log, force=count > 0)
             return True
         except Exception as exc:
             log.warning(f"{LOG_PREFIX} Could not record the channel tally: {exc}")
