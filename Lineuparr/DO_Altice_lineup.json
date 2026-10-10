@@ -1,0 +1,927 @@
+{
+  "package": "Altice (RD)",
+  "date": "2018-02-28",
+  "description": "Altice Dominicana - Plan Max HD lineup.",
+  "source": "Conectate.com.do - Listado de Canales del Telecable Altice",
+  "notes": "Uses Plan Max HD, the largest package in the source. The ten named digital-music channels listed in the separate package table were also included because Max HD includes digital music. Obvious spelling/OCR errors were normalized; channel 415 was labeled National Geographic HD using the earlier table in the same source, which distinguishes it from NatGeo Wild HD on 414. Filtered to television/video channels: PPV entries and provider digital-audio or radio-only music services were removed, while actual music television channels such as MTV, MTV Hits, HTV, Telehit, C-Music, Bandamax, Tarima TV, and their HD versions were retained where present. Categories and channels are ordered by their lowest channel number, with channels sorted numerically within each category. Category names use the original provider/source terminology. Categories are ordered by their lowest channel number, and channels are sorted numerically within each category.",
+  "categories": {
+    "Nacionales": [
+      {
+        "name": "Caribbean TV HD",
+        "number": 1
+      },
+      {
+        "name": "Teleantillas",
+        "number": 2
+      },
+      {
+        "name": "Supercanal",
+        "number": 3
+      },
+      {
+        "name": "CERTV",
+        "number": 4
+      },
+      {
+        "name": "Telemicro",
+        "number": 5
+      },
+      {
+        "name": "Canal del Sol",
+        "number": 6
+      },
+      {
+        "name": "Antena Latina",
+        "number": 7
+      },
+      {
+        "name": "Color Visión",
+        "number": 9
+      },
+      {
+        "name": "Canal 10",
+        "number": 10
+      },
+      {
+        "name": "Telesistema",
+        "number": 11
+      },
+      {
+        "name": "Teleradio América",
+        "number": 12
+      },
+      {
+        "name": "Telecentro",
+        "number": 13
+      },
+      {
+        "name": "Market TV",
+        "number": 14
+      },
+      {
+        "name": "Digital 15",
+        "number": 15
+      },
+      {
+        "name": "Amé",
+        "number": 17
+      },
+      {
+        "name": "Mango TV",
+        "number": 18
+      },
+      {
+        "name": "Cinevisión",
+        "number": 19
+      },
+      {
+        "name": "Teleunión",
+        "number": 20
+      },
+      {
+        "name": "Antena 21",
+        "number": 21
+      },
+      {
+        "name": "Teleimpacto",
+        "number": 22
+      },
+      {
+        "name": "Telefuturo",
+        "number": 23
+      },
+      {
+        "name": "Santo Domingo TV",
+        "number": 24
+      },
+      {
+        "name": "Telemedios",
+        "number": 25
+      },
+      {
+        "name": "Carivisión",
+        "number": 26
+      },
+      {
+        "name": "RNN",
+        "number": 27
+      },
+      {
+        "name": "CDN SportsMax",
+        "number": 28
+      },
+      {
+        "name": "Teleuniverso",
+        "number": 29
+      },
+      {
+        "name": "CTN",
+        "number": 30
+      },
+      {
+        "name": "GO TV",
+        "number": 31
+      },
+      {
+        "name": "VTV",
+        "number": 32
+      },
+      {
+        "name": "Entelevisión HD",
+        "number": 33
+      },
+      {
+        "name": "Sport Visión",
+        "number": 34
+      },
+      {
+        "name": "Bajo Techo TV",
+        "number": 36
+      },
+      {
+        "name": "CDN SportsMax",
+        "number": 37
+      },
+      {
+        "name": "SI TV",
+        "number": 38
+      },
+      {
+        "name": "Acento TV HD",
+        "number": 39
+      },
+      {
+        "name": "Señales TV (Sto. Dgo.)",
+        "number": 40
+      },
+      {
+        "name": "Televida",
+        "number": 41
+      },
+      {
+        "name": "Megavisión",
+        "number": 43
+      },
+      {
+        "name": "Venevisión Plus",
+        "number": 44
+      },
+      {
+        "name": "NEXXO TV",
+        "number": 46
+      },
+      {
+        "name": "Romana TV (La Romana)",
+        "number": 48
+      },
+      {
+        "name": "TVO (Televisión Oriental 49)",
+        "number": 49
+      },
+      {
+        "name": "Licey TV HD",
+        "number": 50
+      },
+      {
+        "name": "TNI Canal 51",
+        "number": 51
+      },
+      {
+        "name": "La Voz del Trópico",
+        "number": 54
+      },
+      {
+        "name": "SuperTV55",
+        "number": 55
+      },
+      {
+        "name": "Gigantes TV HD",
+        "number": 62
+      },
+      {
+        "name": "Digital Visión",
+        "number": 63
+      },
+      {
+        "name": "Toros TV HD",
+        "number": 64
+      },
+      {
+        "name": "Escogido TV",
+        "number": 65
+      },
+      {
+        "name": "Leidsa",
+        "number": 66
+      },
+      {
+        "name": "Telemacorís",
+        "number": 70
+      },
+      {
+        "name": "Extremo Premium",
+        "number": 71
+      },
+      {
+        "name": "CLC",
+        "number": 74
+      },
+      {
+        "name": "Caña TV",
+        "number": 88
+      },
+      {
+        "name": "Flor TV",
+        "number": 89
+      },
+      {
+        "name": "Altice 1,2,3",
+        "number": 99
+      }
+    ],
+    "Religión": [
+      {
+        "name": "Cielo TV",
+        "number": 100
+      },
+      {
+        "name": "Enlace TBN",
+        "number": 101
+      },
+      {
+        "name": "3ABN",
+        "number": 103
+      },
+      {
+        "name": "Cadena Del Milagro",
+        "number": 104
+      },
+      {
+        "name": "Comunión TV HD",
+        "number": 105
+      }
+    ],
+    "Noticias": [
+      {
+        "name": "CNN en Español",
+        "number": 110
+      },
+      {
+        "name": "CNN Live",
+        "number": 111
+      },
+      {
+        "name": "CNN International",
+        "number": 112
+      },
+      {
+        "name": "Headline News",
+        "number": 113
+      },
+      {
+        "name": "Fox News",
+        "number": 115
+      },
+      {
+        "name": "NHK HD",
+        "number": 116
+      },
+      {
+        "name": "i24 News inglés",
+        "number": 117
+      },
+      {
+        "name": "i24 News francés",
+        "number": 118
+      }
+    ],
+    "Internacionales": [
+      {
+        "name": "ABC",
+        "number": 130
+      },
+      {
+        "name": "NBC",
+        "number": 131
+      },
+      {
+        "name": "CBS",
+        "number": 132
+      },
+      {
+        "name": "CNBC",
+        "number": 133
+      },
+      {
+        "name": "WGN",
+        "number": 134
+      },
+      {
+        "name": "WPIX",
+        "number": 135
+      },
+      {
+        "name": "RTVE",
+        "number": 136
+      },
+      {
+        "name": "RAI",
+        "number": 137
+      },
+      {
+        "name": "DW",
+        "number": 138
+      },
+      {
+        "name": "Antena 3",
+        "number": 141
+      },
+      {
+        "name": "Azteca Mundo",
+        "number": 142
+      },
+      {
+        "name": "Telefe Internacional",
+        "number": 143
+      },
+      {
+        "name": "Cubavisión",
+        "number": 145
+      },
+      {
+        "name": "CCTV-E",
+        "number": 146
+      },
+      {
+        "name": "Globovision",
+        "number": 149
+      },
+      {
+        "name": "Telesur",
+        "number": 151
+      }
+    ],
+    "Cultura": [
+      {
+        "name": "Discovery Channel",
+        "number": 170
+      },
+      {
+        "name": "National Geographic",
+        "number": 171
+      },
+      {
+        "name": "Animal Planet",
+        "number": 172
+      },
+      {
+        "name": "TLC",
+        "number": 173
+      },
+      {
+        "name": "H2",
+        "number": 174
+      },
+      {
+        "name": "The History Channel",
+        "number": 175
+      },
+      {
+        "name": "Agrotendencia TV",
+        "number": 176
+      },
+      {
+        "name": "NatGeo Wild",
+        "number": 177
+      },
+      {
+        "name": "Discovery Civilization",
+        "number": 178
+      },
+      {
+        "name": "Discovery Science",
+        "number": 179
+      }
+    ],
+    "Infantiles": [
+      {
+        "name": "Baby TV",
+        "number": 200
+      },
+      {
+        "name": "Discovery Kids",
+        "number": 201
+      },
+      {
+        "name": "Nickelodeon HD",
+        "number": 202
+      },
+      {
+        "name": "Boomerang",
+        "number": 204
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 205
+      },
+      {
+        "name": "Disney XD",
+        "number": 206
+      },
+      {
+        "name": "Disney Junior",
+        "number": 207
+      },
+      {
+        "name": "Nat Geo Kids",
+        "number": 208
+      },
+      {
+        "name": "TIIN",
+        "number": 209
+      },
+      {
+        "name": "Tooncast",
+        "number": 210
+      }
+    ],
+    "Música": [
+      {
+        "name": "MTV",
+        "number": 230
+      },
+      {
+        "name": "HTV",
+        "number": 231
+      },
+      {
+        "name": "C-Music",
+        "number": 233
+      },
+      {
+        "name": "Ritmoson",
+        "number": 234
+      },
+      {
+        "name": "Telehit",
+        "number": 235
+      },
+      {
+        "name": "Much Music",
+        "number": 236
+      },
+      {
+        "name": "Bandamax",
+        "number": 237
+      },
+      {
+        "name": "MTV HITS",
+        "number": 239
+      },
+      {
+        "name": "Tarima TV HD",
+        "number": 240
+      }
+    ],
+    "Entretenimiento": [
+      {
+        "name": "Discovery Home & Health",
+        "number": 250
+      },
+      {
+        "name": "El Gourmet",
+        "number": 251
+      },
+      {
+        "name": "Canal de las Estrellas",
+        "number": 252
+      },
+      {
+        "name": "Mas Chic",
+        "number": 255
+      },
+      {
+        "name": "E!",
+        "number": 258
+      },
+      {
+        "name": "Distrito Comedia",
+        "number": 259
+      },
+      {
+        "name": "Telemundo",
+        "number": 260
+      },
+      {
+        "name": "Azteca Corazón HD",
+        "number": 261
+      },
+      {
+        "name": "TLNovelas",
+        "number": 262
+      },
+      {
+        "name": "Sun Channel",
+        "number": 263
+      },
+      {
+        "name": "Lifetime",
+        "number": 264
+      },
+      {
+        "name": "Fox Life",
+        "number": 265
+      }
+    ],
+    "Películas y Series": [
+      {
+        "name": "Universal TV",
+        "number": 300
+      },
+      {
+        "name": "Investigation Discovery",
+        "number": 301
+      },
+      {
+        "name": "Canal Fox",
+        "number": 302
+      },
+      {
+        "name": "AXN",
+        "number": 303
+      },
+      {
+        "name": "Sony",
+        "number": 304
+      },
+      {
+        "name": "TNT",
+        "number": 305
+      },
+      {
+        "name": "FX Movies",
+        "number": 306
+      },
+      {
+        "name": "Warner Channel",
+        "number": 307
+      },
+      {
+        "name": "A&E",
+        "number": 308
+      },
+      {
+        "name": "Studio Universal",
+        "number": 309
+      },
+      {
+        "name": "AMC",
+        "number": 310
+      },
+      {
+        "name": "FX",
+        "number": 311
+      },
+      {
+        "name": "TCM",
+        "number": 312
+      },
+      {
+        "name": "Space",
+        "number": 313
+      },
+      {
+        "name": "Cinecanal",
+        "number": 315
+      },
+      {
+        "name": "Film & Arts HD",
+        "number": 316
+      },
+      {
+        "name": "Cinemax",
+        "number": 317
+      },
+      {
+        "name": "SyFy",
+        "number": 318
+      },
+      {
+        "name": "De Película",
+        "number": 319
+      },
+      {
+        "name": "TBS Very Funny",
+        "number": 320
+      },
+      {
+        "name": "Golden Edge",
+        "number": 321
+      },
+      {
+        "name": "TNT Series",
+        "number": 322
+      },
+      {
+        "name": "Golden",
+        "number": 323
+      },
+      {
+        "name": "Isat",
+        "number": 324
+      },
+      {
+        "name": "Tru TV",
+        "number": 325
+      },
+      {
+        "name": "Paramount Channel",
+        "number": 326
+      },
+      {
+        "name": "Sundance Channel HD",
+        "number": 327
+      },
+      {
+        "name": "Europa Europa HD",
+        "number": 328
+      },
+      {
+        "name": "Mórbido TV HD",
+        "number": 329
+      }
+    ],
+    "Deportes": [
+      {
+        "name": "ESPN",
+        "number": 350
+      },
+      {
+        "name": "ESPN 3",
+        "number": 351
+      },
+      {
+        "name": "ESPN 2",
+        "number": 352
+      },
+      {
+        "name": "Fox Sports 3",
+        "number": 353
+      },
+      {
+        "name": "NBA TV",
+        "number": 354
+      },
+      {
+        "name": "The Golf Channel",
+        "number": 358
+      },
+      {
+        "name": "Discovery Turbo",
+        "number": 359
+      },
+      {
+        "name": "Fox Sports Plus",
+        "number": 361
+      }
+    ],
+    "HD": [
+      {
+        "name": "CNN HD",
+        "number": 400
+      },
+      {
+        "name": "ABC HD",
+        "number": 401
+      },
+      {
+        "name": "NBC HD",
+        "number": 402
+      },
+      {
+        "name": "CBS HD",
+        "number": 403
+      },
+      {
+        "name": "Azteca Mundo HD",
+        "number": 404
+      },
+      {
+        "name": "NHK HD",
+        "number": 406
+      },
+      {
+        "name": "History Channel HD",
+        "number": 410
+      },
+      {
+        "name": "Investigation Discovery HD",
+        "number": 411
+      },
+      {
+        "name": "Discovery HD Theater",
+        "number": 412
+      },
+      {
+        "name": "Discovery World",
+        "number": 413
+      },
+      {
+        "name": "NatGeo Wild HD",
+        "number": 414
+      },
+      {
+        "name": "National Geographic HD",
+        "number": 415
+      },
+      {
+        "name": "Film & Arts HD",
+        "number": 416
+      },
+      {
+        "name": "Sundance TV HD",
+        "number": 417
+      },
+      {
+        "name": "Europa HD",
+        "number": 418
+      },
+      {
+        "name": "Nickelodeon HD",
+        "number": 419
+      },
+      {
+        "name": "Disney Channel HD",
+        "number": 420
+      },
+      {
+        "name": "Discovery Kids HD",
+        "number": 421
+      },
+      {
+        "name": "Nick HD",
+        "number": 422
+      },
+      {
+        "name": "MTV HD",
+        "number": 424
+      },
+      {
+        "name": "MTV Live HD",
+        "number": 425
+      },
+      {
+        "name": "C-Music HD",
+        "number": 427
+      },
+      {
+        "name": "Tarima TV HD",
+        "number": 428
+      },
+      {
+        "name": "Gourmet HD",
+        "number": 429
+      },
+      {
+        "name": "Discovery Home & Health HD",
+        "number": 430
+      },
+      {
+        "name": "Canal de las Estrellas HD",
+        "number": 431
+      },
+      {
+        "name": "Azteca Corazón HD",
+        "number": 432
+      },
+      {
+        "name": "Comunión TV HD",
+        "number": 434
+      },
+      {
+        "name": "CDN SportsMax HD",
+        "number": 435
+      },
+      {
+        "name": "Go HD",
+        "number": 436
+      },
+      {
+        "name": "CDN HD",
+        "number": 437
+      },
+      {
+        "name": "Enjoy HD",
+        "number": 438
+      },
+      {
+        "name": "Acento TV HD",
+        "number": 439
+      },
+      {
+        "name": "Telemicro HD",
+        "number": 440
+      },
+      {
+        "name": "Universal TV HD",
+        "number": 441
+      },
+      {
+        "name": "Fox HD",
+        "number": 442
+      },
+      {
+        "name": "AXN HD",
+        "number": 443
+      },
+      {
+        "name": "Sony HD",
+        "number": 444
+      },
+      {
+        "name": "TNT HD",
+        "number": 445
+      },
+      {
+        "name": "Warner HD",
+        "number": 446
+      },
+      {
+        "name": "A&E HD",
+        "number": 447
+      },
+      {
+        "name": "Space HD",
+        "number": 448
+      },
+      {
+        "name": "Cinecanal HD",
+        "number": 449
+      },
+      {
+        "name": "Golden HD",
+        "number": 450
+      },
+      {
+        "name": "Cinemax HD",
+        "number": 451
+      },
+      {
+        "name": "AMC HD",
+        "number": 454
+      },
+      {
+        "name": "Paramount Channel HD",
+        "number": 455
+      },
+      {
+        "name": "De Película HD",
+        "number": 456
+      },
+      {
+        "name": "Comedy Central HD",
+        "number": 457
+      },
+      {
+        "name": "Tru TV HD",
+        "number": 458
+      },
+      {
+        "name": "ESPN HD",
+        "number": 460
+      },
+      {
+        "name": "ESPN+ HD",
+        "number": 461
+      },
+      {
+        "name": "ESPN2 HD",
+        "number": 462
+      },
+      {
+        "name": "ESPN3 HD",
+        "number": 463
+      },
+      {
+        "name": "Fox Sports HD",
+        "number": 464
+      },
+      {
+        "name": "Fox Sports 2 HD",
+        "number": 465
+      },
+      {
+        "name": "Fox Sports 3 HD",
+        "number": 466
+      },
+      {
+        "name": "NBA TV HD",
+        "number": 467
+      },
+      {
+        "name": "Golf Channel HD",
+        "number": 469
+      }
+    ]
+  }
+}
