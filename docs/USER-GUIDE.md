@@ -636,15 +636,18 @@ are deleted from the server the next time an action or sync finishes after you
 untick.
 
 What counts as an active install: an install that sent at least one report in
-the last 30 days. A report is sent when an action finishes (syncs and the Apply
-actions report when their background work finishes), at most once an hour, or
-ten minutes after the last report when a sync has just created channels, so an
-install that stops being used stops counting after 30 days. The badges refresh
-about once an hour.
+the last 30 UTC days. A report is sent when an action finishes (syncs and the
+Apply actions report when their background work finishes), at most once an
+hour, or ten minutes after the last report when a sync has just created
+channels, so an install that stops being used stops counting after 30 days. A
+badge changes when an install reports, and the badge cache updates within about
+five minutes.
 
-The setting is the last one in the Advanced section. Unticking it takes effect when
-the next action or sync finishes; the plugin then asks the server to delete this
-install's figures and forgets its id. Ticking it again later starts a new id.
+The setting is the last one in the Advanced section. Unticking it takes effect
+when the next action or sync finishes; the plugin then asks the server to delete
+this install's figures. Once the server confirms the delete, the plugin forgets
+its id, and ticking the setting again later starts a new one; if the delete
+could not reach the server, the plugin keeps the id and retries.
 
 ---
 
