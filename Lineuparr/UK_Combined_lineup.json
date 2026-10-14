@@ -67,6 +67,10 @@
         "number": 119
       },
       {
+        "name": "TRT World",
+        "number": 121
+      },
+      {
         "name": "TVC News",
         "number": 122
       }
@@ -105,12 +109,28 @@
         "number": 208
       },
       {
+        "name": "Sky Sports F1",
+        "number": 209
+      },
+      {
         "name": "Sky Sports Football HD",
         "number": 210
       },
       {
         "name": "Sky Sports Golf HD",
         "number": 211
+      },
+      {
+        "name": "Sky Sports Main Event",
+        "number": 212
+      },
+      {
+        "name": "Sky Sports Mix",
+        "number": 213
+      },
+      {
+        "name": "Sky Sports News",
+        "number": 214
       },
       {
         "name": "Sky Sports Premier League HD",
@@ -129,8 +149,24 @@
         "number": 218
       },
       {
+        "name": "TNT Sports 1",
+        "number": 219
+      },
+      {
         "name": "TNT Sports 10",
         "number": 220
+      },
+      {
+        "name": "TNT Sports 2",
+        "number": 221
+      },
+      {
+        "name": "TNT Sports 3",
+        "number": 222
+      },
+      {
+        "name": "TNT Sports 4",
+        "number": 223
       },
       {
         "name": "TNT Sports 5 HD",
@@ -169,6 +205,10 @@
       {
         "name": "Disney+ Cinema HD",
         "number": 301
+      },
+      {
+        "name": "Film4",
+        "number": 302
       },
       {
         "name": "GREAT! Action +1",
@@ -253,12 +293,20 @@
         "number": 402
       },
       {
+        "name": "Boomerang",
+        "number": 403
+      },
+      {
         "name": "Cartoon Classics",
         "number": 404
       },
       {
         "name": "Cartoon Network +1",
         "number": 405
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 406
       },
       {
         "name": "Cartoonito",
@@ -289,12 +337,20 @@
         "number": 415
       },
       {
+        "name": "Nick Jr.",
+        "number": 416
+      },
+      {
         "name": "Nick Jr. Peppa",
         "number": 417
       },
       {
         "name": "Nickelodeon +1",
         "number": 418
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 419
       },
       {
         "name": "Nicktoons",
@@ -399,8 +455,16 @@
         "number": 521
       },
       {
+        "name": "Comedy Central",
+        "number": 522
+      },
+      {
         "name": "Court TV",
         "number": 523
+      },
+      {
+        "name": "Crime+Investigation",
+        "number": 524
       },
       {
         "name": "Dave",
@@ -409,6 +473,10 @@
       {
         "name": "Dave ja vu",
         "number": 526
+      },
+      {
+        "name": "Discovery Channel",
+        "number": 527
       },
       {
         "name": "Discovery History",
@@ -445,10 +513,6 @@
       {
         "name": "E4 Extra",
         "number": 536
-      },
-      {
-        "name": "Film4",
-        "number": 538
       },
       {
         "name": "Film4 +1",
@@ -497,14 +561,6 @@
       {
         "name": "High Street TV",
         "number": 550
-      },
-      {
-        "name": "HobbyMaker",
-        "number": 551
-      },
-      {
-        "name": "Ideal World",
-        "number": 552
       },
       {
         "name": "Investigation Discovery",
@@ -575,8 +631,16 @@
         "number": 572
       },
       {
-        "name": "Must Have Ideas",
-        "number": 575
+        "name": "MTV",
+        "number": 574
+      },
+      {
+        "name": "National Geographic",
+        "number": 576
+      },
+      {
+        "name": "National Geographic Wild",
+        "number": 577
       },
       {
         "name": "PBS America",
@@ -595,10 +659,6 @@
         "number": 582
       },
       {
-        "name": "QVC",
-        "number": 583
-      },
-      {
         "name": "QVC Beauty",
         "number": 584
       },
@@ -609,6 +669,10 @@
       {
         "name": "Rewind TV",
         "number": 586
+      },
+      {
+        "name": "S4C",
+        "number": 587
       },
       {
         "name": "Shop On TV",
@@ -623,12 +687,48 @@
         "number": 590
       },
       {
+        "name": "Sky Atlantic",
+        "number": 592
+      },
+      {
+        "name": "Sky Comedy",
+        "number": 593
+      },
+      {
+        "name": "Sky Crime",
+        "number": 594
+      },
+      {
+        "name": "Sky Documentaries",
+        "number": 595
+      },
+      {
         "name": "Sky History 2",
         "number": 596
       },
       {
+        "name": "Sky History",
+        "number": 597
+      },
+      {
         "name": "Sky Mix",
         "number": 598
+      },
+      {
+        "name": "Sky Nature",
+        "number": 600
+      },
+      {
+        "name": "Sky One",
+        "number": 601
+      },
+      {
+        "name": "Sky Sci-Fi",
+        "number": 602
+      },
+      {
+        "name": "Sky Witness",
+        "number": 603
       },
       {
         "name": "SonLife",
@@ -667,8 +767,8 @@
         "number": 613
       },
       {
-        "name": "TJC",
-        "number": 614
+        "name": "TLC",
+        "number": 615
       },
       {
         "name": "Together TV",
@@ -691,12 +791,24 @@
         "number": 621
       },
       {
+        "name": "U&Alibi",
+        "number": 622
+      },
+      {
+        "name": "U&Dave",
+        "number": 623
+      },
+      {
         "name": "U&Drama",
         "number": 624
       },
       {
         "name": "U&Eden",
         "number": 625
+      },
+      {
+        "name": "U&Gold",
+        "number": 626
       },
       {
         "name": "U&W",
@@ -805,12 +917,32 @@
         "number": 905
       },
       {
+        "name": "HobbyMaker",
+        "number": 906
+      },
+      {
+        "name": "Ideal World",
+        "number": 907
+      },
+      {
+        "name": "Must Have Ideas",
+        "number": 908
+      },
+      {
         "name": "QVC Extra",
         "number": 909
       },
       {
+        "name": "QVC",
+        "number": 910
+      },
+      {
         "name": "QVC Style HD",
         "number": 911
+      },
+      {
+        "name": "TJC",
+        "number": 912
       },
       {
         "name": "TV Warehouse",
@@ -1145,6 +1277,10 @@
         "number": 1412
       },
       {
+        "name": "Colors",
+        "number": 1413
+      },
+      {
         "name": "Colors Rishtey",
         "number": 1414
       },
@@ -1277,8 +1413,16 @@
         "number": 1446
       },
       {
+        "name": "Sony Max",
+        "number": 1447
+      },
+      {
         "name": "Sony SAB",
         "number": 1448
+      },
+      {
+        "name": "Sony TV",
+        "number": 1449
       },
       {
         "name": "Takbeer TV",
@@ -1293,12 +1437,24 @@
         "number": 1452
       },
       {
+        "name": "Utsav Gold",
+        "number": 1453
+      },
+      {
+        "name": "Utsav Plus",
+        "number": 1454
+      },
+      {
         "name": "Zee Cinema",
         "number": 1455
       },
       {
         "name": "Zee Punjabi",
         "number": 1456
+      },
+      {
+        "name": "Zee TV",
+        "number": 1457
       }
     ],
     "Radio": [
@@ -1463,164 +1619,8 @@
     ],
     "Secondary & Information": [
       {
-        "name": "Boomerang",
-        "number": 1701
-      },
-      {
-        "name": "Cartoon Network",
-        "number": 1702
-      },
-      {
         "name": "Channel Line-up",
         "number": 1703
-      },
-      {
-        "name": "Colors",
-        "number": 1704
-      },
-      {
-        "name": "Comedy Central",
-        "number": 1705
-      },
-      {
-        "name": "Crime+Investigation",
-        "number": 1706
-      },
-      {
-        "name": "Discovery Channel",
-        "number": 1707
-      },
-      {
-        "name": "MTV",
-        "number": 1708
-      },
-      {
-        "name": "National Geographic",
-        "number": 1709
-      },
-      {
-        "name": "National Geographic Wild",
-        "number": 1710
-      },
-      {
-        "name": "Nick Jr.",
-        "number": 1711
-      },
-      {
-        "name": "Nickelodeon",
-        "number": 1712
-      },
-      {
-        "name": "S4C",
-        "number": 1713
-      },
-      {
-        "name": "Sky Atlantic",
-        "number": 1714
-      },
-      {
-        "name": "Sky Comedy",
-        "number": 1715
-      },
-      {
-        "name": "Sky Crime",
-        "number": 1716
-      },
-      {
-        "name": "Sky Documentaries",
-        "number": 1717
-      },
-      {
-        "name": "Sky History",
-        "number": 1718
-      },
-      {
-        "name": "Sky Nature",
-        "number": 1719
-      },
-      {
-        "name": "Sky One",
-        "number": 1720
-      },
-      {
-        "name": "Sky Sci-Fi",
-        "number": 1721
-      },
-      {
-        "name": "Sky Sports F1",
-        "number": 1722
-      },
-      {
-        "name": "Sky Sports Main Event",
-        "number": 1724
-      },
-      {
-        "name": "Sky Sports Mix",
-        "number": 1726
-      },
-      {
-        "name": "Sky Sports News",
-        "number": 1727
-      },
-      {
-        "name": "Sky Witness",
-        "number": 1728
-      },
-      {
-        "name": "Sony Max",
-        "number": 1729
-      },
-      {
-        "name": "Sony TV",
-        "number": 1730
-      },
-      {
-        "name": "TLC",
-        "number": 1731
-      },
-      {
-        "name": "TNT Sports 1",
-        "number": 1732
-      },
-      {
-        "name": "TNT Sports 2",
-        "number": 1733
-      },
-      {
-        "name": "TNT Sports 3",
-        "number": 1734
-      },
-      {
-        "name": "TNT Sports 4",
-        "number": 1735
-      },
-      {
-        "name": "TRT World",
-        "number": 1736
-      },
-      {
-        "name": "U&Alibi",
-        "number": 1737
-      },
-      {
-        "name": "U&Dave",
-        "number": 1738
-      },
-      {
-        "name": "U&Gold",
-        "number": 1739
-      },
-      {
-        "name": "Utsav Gold",
-        "number": 1740
-      },
-      {
-        "name": "Utsav Plus",
-        "number": 1741
-      },
-      {
-        "name": "Zee TV",
-        "number": 1742
       }
     ]
   }
