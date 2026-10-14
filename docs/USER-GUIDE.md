@@ -438,6 +438,29 @@ Operations run in the background and keep going even if the browser gives up.
 Click **Show Status** for live progress and an estimated finish time, or the last
 run's summary. The container logs carry the same detail.
 
+### Groups without the prefix keep appearing
+
+Lineuparr does not create these. Lineuparr has no schedule of its own: it acts
+only when you press one of its buttons, and every group it creates carries the
+Channel Group Prefix (for example `Sky: Entertainment`). The one exception is a
+prefix set to `none`.
+
+Groups named only `Entertainment`, `Music` and so on, appearing after an
+overnight run, come from Dispatcharr's own M3U refresh. Each refresh creates a
+group for every group-title in your provider's playlist, so if the provider
+files its streams under those names the groups return after every refresh,
+even after you delete them. The account's refresh interval is why it happens on
+a schedule, and it happens whether or not Lineuparr is enabled.
+
+To confirm and stop it:
+
+1. Open one of the unprefixed groups. If it holds streams rather than
+   channels, it is a provider group.
+2. On the **M3U Accounts** page, edit the account and open its group settings.
+   Untick the groups you do not want.
+3. Check that **Auto Channel Sync** is off for those groups, unless you want
+   Dispatcharr creating channels in them on every refresh.
+
 ---
 
 ## How matching works
