@@ -1,0 +1,614 @@
+{
+  "package": "Azam TV",
+  "date": "2026-10-14",
+  "description": "Azam TV Tanzania channel lineup",
+  "source": "Azam TV",
+  "categories": {
+    "Documentary": [
+      {
+        "name": "History",
+        "number": 103
+      },
+      {
+        "name": "National Geographic",
+        "number": 104
+      },
+      {
+        "name": "Nat Geo WILD",
+        "number": 105
+      },
+      {
+        "name": "Investigation Discovery",
+        "number": 110
+      },
+      {
+        "name": "Discovery Africa",
+        "number": 111
+      },
+      {
+        "name": "Travel XP",
+        "number": 161
+      },
+      {
+        "name": "Real Time",
+        "number": 168
+      },
+      {
+        "name": "Foodies",
+        "number": 221
+      }
+    ],
+    "Entertainment": [
+      {
+        "name": "UTV",
+        "number": 31
+      },
+      {
+        "name": "MBC Drama",
+        "number": 46
+      },
+      {
+        "name": "MBC 4",
+        "number": 47
+      },
+      {
+        "name": "MBC Action",
+        "number": 66
+      },
+      {
+        "name": "Africa Movie Channel",
+        "number": 69
+      },
+      {
+        "name": "ZBC 2",
+        "number": 72
+      },
+      {
+        "name": "Azam ONE",
+        "number": 97
+      },
+      {
+        "name": "MBC Plus Power",
+        "number": 114
+      },
+      {
+        "name": "Azam TWO HD",
+        "number": 118
+      },
+      {
+        "name": "Zamaradi TV",
+        "number": 147
+      },
+      {
+        "name": "Salam TV",
+        "number": 148
+      },
+      {
+        "name": "UC TV",
+        "number": 149
+      },
+      {
+        "name": "Sky TV",
+        "number": 150
+      },
+      {
+        "name": "Baba TV",
+        "number": 151
+      },
+      {
+        "name": "Bunyoro TV",
+        "number": 152
+      },
+      {
+        "name": "WestNile",
+        "number": 153
+      },
+      {
+        "name": "Times TV",
+        "number": 154
+      },
+      {
+        "name": "Romanza Africa",
+        "number": 165
+      },
+      {
+        "name": "MUTV",
+        "number": 408
+      },
+      {
+        "name": "Nolly Africa",
+        "number": 411
+      }
+    ],
+    "Indian Entertainment": [
+      {
+        "name": "Sony Max",
+        "number": 23
+      },
+      {
+        "name": "Star Plus",
+        "number": 25
+      },
+      {
+        "name": "MBC Bollywood",
+        "number": 30
+      },
+      {
+        "name": "Sony SAB",
+        "number": 32
+      },
+      {
+        "name": "Zoom",
+        "number": 33
+      },
+      {
+        "name": "Colors",
+        "number": 34
+      },
+      {
+        "name": "MAA TV",
+        "number": 35
+      },
+      {
+        "name": "ETV Telugu",
+        "number": 38
+      },
+      {
+        "name": "Mazhavil Manorama",
+        "number": 41
+      },
+      {
+        "name": "Star Vijay",
+        "number": 44
+      },
+      {
+        "name": "Asianet Middle East",
+        "number": 91
+      },
+      {
+        "name": "Star Bharat",
+        "number": 92
+      },
+      {
+        "name": "Rishtey Asia",
+        "number": 99
+      },
+      {
+        "name": "Star GOLD",
+        "number": 102
+      },
+      {
+        "name": "Star Life",
+        "number": 148
+      },
+      {
+        "name": "Colors Rishtey",
+        "number": 150
+      },
+      {
+        "name": "Sony SET",
+        "number": 190
+      }
+    ],
+    "Kids": [
+      {
+        "name": "Fix & Foxi",
+        "number": 48
+      },
+      {
+        "name": "MBC 3",
+        "number": 63
+      },
+      {
+        "name": "Cartoonito",
+        "number": 107
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 109
+      },
+      {
+        "name": "Boing",
+        "number": 123
+      },
+      {
+        "name": "Baby TV",
+        "number": 179
+      },
+      {
+        "name": "Cbeebies",
+        "number": 212
+      },
+      {
+        "name": "Cartoon Network",
+        "number": 226
+      }
+    ],
+    "Movies": [
+      {
+        "name": "Sinema Zetu",
+        "number": 3
+      },
+      {
+        "name": "MBC 2",
+        "number": 65
+      },
+      {
+        "name": "MBC Max",
+        "number": 98
+      },
+      {
+        "name": "KIX",
+        "number": 210
+      }
+    ],
+    "Music": [
+      {
+        "name": "Wanasah",
+        "number": 115
+      },
+      {
+        "name": "TV - E",
+        "number": 121
+      },
+      {
+        "name": "WASAFI TV",
+        "number": 135
+      },
+      {
+        "name": "Jive TV",
+        "number": 154
+      },
+      {
+        "name": "Crown TV",
+        "number": 393
+      },
+      {
+        "name": "Music Box Hits",
+        "number": 422
+      },
+      {
+        "name": "Music Box Dance",
+        "number": 433
+      }
+    ],
+    "News": [
+      {
+        "name": "BBC News",
+        "number": 21
+      },
+      {
+        "name": "Puthiya Thalamurai",
+        "number": 43
+      },
+      {
+        "name": "Al Jazeera News Arabic",
+        "number": 45
+      },
+      {
+        "name": "France 24 English",
+        "number": 50
+      },
+      {
+        "name": "Al Jazeera",
+        "number": 52
+      },
+      {
+        "name": "CNN",
+        "number": 106
+      },
+      {
+        "name": "Fox News",
+        "number": 127
+      },
+      {
+        "name": "MSNBC",
+        "number": 128
+      },
+      {
+        "name": "CGTN",
+        "number": 136
+      },
+      {
+        "name": "Euro News",
+        "number": 151
+      },
+      {
+        "name": "France 24 French",
+        "number": 152
+      },
+      {
+        "name": "News 18 International",
+        "number": 164
+      },
+      {
+        "name": "Africa News",
+        "number": 170
+      },
+      {
+        "name": "Bloomberg",
+        "number": 178
+      }
+    ],
+    "Regional": [
+      {
+        "name": "TBC1",
+        "number": 4
+      },
+      {
+        "name": "Chanel 10",
+        "number": 5
+      },
+      {
+        "name": "ZBC",
+        "number": 15
+      },
+      {
+        "name": "Clouds TV",
+        "number": 16
+      },
+      {
+        "name": "ITV",
+        "number": 18
+      },
+      {
+        "name": "NTV Kenya",
+        "number": 73
+      },
+      {
+        "name": "EATV",
+        "number": 75
+      },
+      {
+        "name": "Citizen TV",
+        "number": 76
+      },
+      {
+        "name": "UBC",
+        "number": 77
+      },
+      {
+        "name": "Urban TV",
+        "number": 78
+      },
+      {
+        "name": "NBS TV",
+        "number": 79
+      },
+      {
+        "name": "KTN News",
+        "number": 80
+      },
+      {
+        "name": "TV West",
+        "number": 82
+      },
+      {
+        "name": "Rwanda TV",
+        "number": 83
+      },
+      {
+        "name": "Bukedde TV 1",
+        "number": 85
+      },
+      {
+        "name": "Bukedde TV 2",
+        "number": 85
+      },
+      {
+        "name": "NTV Uganda",
+        "number": 86
+      },
+      {
+        "name": "KTN",
+        "number": 88
+      },
+      {
+        "name": "K24",
+        "number": 90
+      },
+      {
+        "name": "Star TV",
+        "number": 93
+      },
+      {
+        "name": "Capital TV",
+        "number": 94
+      },
+      {
+        "name": "KBC",
+        "number": 95
+      },
+      {
+        "name": "Malawi National TV",
+        "number": 96
+      },
+      {
+        "name": "KTV",
+        "number": 116
+      },
+      {
+        "name": "Kass TV",
+        "number": 119
+      },
+      {
+        "name": "Spark TV",
+        "number": 122
+      },
+      {
+        "name": "Mibawa TV",
+        "number": 125
+      },
+      {
+        "name": "Universal TV",
+        "number": 130
+      },
+      {
+        "name": "Great Dominion",
+        "number": 137
+      },
+      {
+        "name": "Chanel 10 Plus",
+        "number": 149
+      },
+      {
+        "name": "Inooro TV",
+        "number": 153
+      },
+      {
+        "name": "Kameme TV",
+        "number": 155
+      },
+      {
+        "name": "KC2 TV",
+        "number": 156
+      },
+      {
+        "name": "KeYonaTV",
+        "number": 157
+      },
+      {
+        "name": "KSTV",
+        "number": 158
+      },
+      {
+        "name": "MBC 2 Malawi",
+        "number": 160
+      },
+      {
+        "name": "MBC Malawi",
+        "number": 160
+      },
+      {
+        "name": "TTV",
+        "number": 162
+      },
+      {
+        "name": "Zodiak",
+        "number": 163
+      },
+      {
+        "name": "Zodiak TV",
+        "number": 163
+      },
+      {
+        "name": "Salt TV",
+        "number": 167
+      },
+      {
+        "name": "RNTB",
+        "number": 169
+      },
+      {
+        "name": "Tanzania Safari",
+        "number": 171
+      },
+      {
+        "name": "TV 10",
+        "number": 172
+      },
+      {
+        "name": "Channel 44",
+        "number": 173
+      },
+      {
+        "name": "Top TV",
+        "number": 174
+      },
+      {
+        "name": "BBS TV",
+        "number": 184
+      },
+      {
+        "name": "Chamuka",
+        "number": 208
+      }
+    ],
+    "Religious": [
+      {
+        "name": "Upendo TV",
+        "number": 129
+      },
+      {
+        "name": "TV Islam",
+        "number": 139
+      },
+      {
+        "name": "Horizon TV",
+        "number": 140
+      },
+      {
+        "name": "Mahaasin TV",
+        "number": 141
+      },
+      {
+        "name": "TV Imaan",
+        "number": 142
+      },
+      {
+        "name": "Hope TV",
+        "number": 143
+      },
+      {
+        "name": "Arise and Shine TV",
+        "number": 145
+      },
+      {
+        "name": "WRM TV",
+        "number": 145
+      },
+      {
+        "name": "Tumaini TV",
+        "number": 146
+      },
+      {
+        "name": "Al Huda TV",
+        "number": 148
+      },
+      {
+        "name": "Luntha TV",
+        "number": 159
+      }
+    ],
+    "Sports": [
+      {
+        "name": "ESPN",
+        "number": 100
+      },
+      {
+        "name": "ESPN 2",
+        "number": 101
+      },
+      {
+        "name": "Azam Sports 3 HD",
+        "number": 108
+      },
+      {
+        "name": "Azam Sports 1 HD",
+        "number": 117
+      },
+      {
+        "name": "Azam Sports 2 HD",
+        "number": 188
+      },
+      {
+        "name": "Azam Sports 4 HD",
+        "number": 392
+      },
+      {
+        "name": "Azam Sprts 5 HD",
+        "number": 401
+      }
+    ],
+    "Telenovela": [
+      {
+        "name": "Nina Novelas",
+        "number": 138
+      },
+      {
+        "name": "Romanza",
+        "number": 165
+      }
+    ]
+  }
+}
