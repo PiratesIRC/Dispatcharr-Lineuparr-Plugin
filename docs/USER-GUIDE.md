@@ -445,21 +445,32 @@ only when you press one of its buttons, and every group it creates carries the
 Channel Group Prefix (for example `Sky: Entertainment`). The one exception is a
 prefix set to `none`.
 
-Groups named only `Entertainment`, `Music` and so on, appearing after an
-overnight run, come from Dispatcharr's own M3U refresh. Each refresh creates a
-group for every group-title in your provider's playlist, so if the provider
-files its streams under those names the groups return after every refresh,
-even after you delete them. The account's refresh interval is why it happens on
-a schedule, and it happens whether or not Lineuparr is enabled.
+In Dispatcharr itself, the only thing that creates groups automatically is an
+M3U account refresh. Each refresh creates a group for every category the
+provider sends: the group-title values in an M3U playlist or, for an Xtream
+Codes login, the live category list the provider's server returns. That list
+can contain categories the provider's own app or website does not show. The
+refresh creates every one of these groups whether or not it is ticked in the
+account's group settings; the tick only decides whether that group's streams
+are imported. A deleted group therefore comes back at the next refresh, and an
+unticked group stays listed but empty.
 
-To confirm and stop it:
+To find out what created a group:
 
-1. Open one of the unprefixed groups. If it holds streams rather than
-   channels, it is a provider group.
-2. On the **M3U Accounts** page, edit the account and open its group settings.
-   Untick the groups you do not want.
-3. Check that **Auto Channel Sync** is off for those groups, unless you want
-   Dispatcharr creating channels in them on every refresh.
+1. On the **M3U Accounts** page, edit each account and open its group
+   settings. If the group is listed there, that account's refresh created it.
+2. Search the Dispatcharr log around the time the groups appeared. A refresh
+   that creates groups logs `Creating N new groups for account <id>`, and an
+   Xtream Codes account also logs `Adding category: <name>` for each category.
+3. If neither shows it, something outside Dispatcharr's refresh created the
+   group: another plugin, or a script or app that uses Dispatcharr's API.
+   Check the Plugins page for other plugins that create groups.
+
+An M3U refresh runs on the account's refresh schedule, when a refresh button is
+pressed, and, for a playlist file placed in Dispatcharr's M3U folder, whenever
+that file changes. A refresh interval of 0 turns the schedule off only when no
+cron schedule is set on the account. If you want channels created for the
+provider's groups, also check whether **Auto Channel Sync** is on for them.
 
 ---
 
