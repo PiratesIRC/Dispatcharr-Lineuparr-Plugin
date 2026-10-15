@@ -2,6 +2,23 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.2880000 (2026-10-15)
+
+### Fixed
+
+- UK Combined lineup: 45 channels are back in their proper category (issue
+  #34). Sky Sports Main Event, Mix, News and F1 and TNT Sports 1 to 4 are in
+  Sports again (209 to 223), and the same fix returns TRT World to News, Film4
+  to Movies, Boomerang, Cartoon Network, Nick Jr. and Nickelodeon to Kids, the
+  Sky, U& and factual channels to Entertainment, QVC and four others to
+  Shopping, and six Indian channels to International. An earlier clean-up had
+  kept the copy of each channel from Sky's "Secondary & Information" list.
+  No channel was added or removed, and the other UK lineups were not affected.
+  **After updating:** Full Sync creates each moved channel in its new group and
+  leaves the old copy, with its streams, in the old group. Delete any of these
+  channels that now appear twice; the copy to remove is the one in the old
+  group.
+
 ## 1.26.2831530 (2026-10-10)
 
 ### Added
