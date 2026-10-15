@@ -1,0 +1,798 @@
+{
+  "package": "DStv Premium",
+  "date": "2026-10-14",
+  "description": "DStv Premium Tanzania channel lineup",
+  "source": "DStv premium package",
+  "categories": {
+    "Documentary": [
+      {
+        "name": "Discovery ID",
+        "number": 171
+      },
+      {
+        "name": "National Geographic",
+        "number": 181
+      },
+      {
+        "name": "Nat Geo Wild",
+        "number": 182
+      },
+      {
+        "name": "WildEarth",
+        "number": 183
+      },
+      {
+        "name": "Curiosity Channel",
+        "number": 185
+      },
+      {
+        "name": "History",
+        "number": 186
+      },
+      {
+        "name": "Safari TV",
+        "number": 292
+      },
+      {
+        "name": "TF1",
+        "number": 727
+      },
+      {
+        "name": "France 2",
+        "number": 728
+      },
+      {
+        "name": "Planete",
+        "number": 740
+      }
+    ],
+    "Entertainment": [
+      {
+        "name": "M-Net",
+        "number": 102
+      },
+      {
+        "name": "Universal TV",
+        "number": 117
+      },
+      {
+        "name": "TeleMundo",
+        "number": 118
+      },
+      {
+        "name": "BBC Brit",
+        "number": 120
+      },
+      {
+        "name": "Discovery Channel HD",
+        "number": 121
+      },
+      {
+        "name": "Comedy Central",
+        "number": 122
+      },
+      {
+        "name": "Bravo",
+        "number": 124
+      },
+      {
+        "name": "FOX",
+        "number": 125
+      },
+      {
+        "name": "BET",
+        "number": 129
+      },
+      {
+        "name": "CBS Reality",
+        "number": 132
+      },
+      {
+        "name": "Novelas+",
+        "number": 133
+      },
+      {
+        "name": "Discovery Family HD",
+        "number": 136
+      },
+      {
+        "name": "Mambo Moto",
+        "number": 140
+      },
+      {
+        "name": "Magic Showcase",
+        "number": 143
+      },
+      {
+        "name": "Maisha Magic POA",
+        "number": 144
+      },
+      {
+        "name": "ABOL TV",
+        "number": 146
+      },
+      {
+        "name": "Pearl Magic Prime",
+        "number": 148
+      },
+      {
+        "name": "Akwaaba Magic",
+        "number": 150
+      },
+      {
+        "name": "Africa Magic Showcase HD",
+        "number": 151
+      },
+      {
+        "name": "Africa Magic Family",
+        "number": 154
+      },
+      {
+        "name": "Africa Magic Hausa",
+        "number": 156
+      },
+      {
+        "name": "Africa Magic Yoruba",
+        "number": 157
+      },
+      {
+        "name": "Maisha Magic East HD",
+        "number": 158
+      },
+      {
+        "name": "Africa Magic Igbo",
+        "number": 159
+      },
+      {
+        "name": "Maisha Magic Bongo",
+        "number": 160
+      },
+      {
+        "name": "Pearl Magic",
+        "number": 161
+      },
+      {
+        "name": "Maisha Magic Plus HD",
+        "number": 163
+      },
+      {
+        "name": "Zee World",
+        "number": 166
+      },
+      {
+        "name": "Star Life",
+        "number": 167
+      },
+      {
+        "name": "ROK 2",
+        "number": 169
+      },
+      {
+        "name": "CBS Justice",
+        "number": 170
+      },
+      {
+        "name": "Pulaagu",
+        "number": 191
+      },
+      {
+        "name": "Televista",
+        "number": 194
+      },
+      {
+        "name": "Trybe",
+        "number": 195
+      },
+      {
+        "name": "KBCTV",
+        "number": 270
+      },
+      {
+        "name": "NTV",
+        "number": 271
+      },
+      {
+        "name": "TV47",
+        "number": 274
+      },
+      {
+        "name": "NTVU",
+        "number": 283
+      },
+      {
+        "name": "TBC1",
+        "number": 290
+      },
+      {
+        "name": "ZBC TV",
+        "number": 291
+      },
+      {
+        "name": "TVE Tanzania",
+        "number": 295
+      },
+      {
+        "name": "Maboke",
+        "number": 298
+      },
+      {
+        "name": "Rwanda TV",
+        "number": 299
+      },
+      {
+        "name": "Zacu",
+        "number": 397
+      },
+      {
+        "name": "Sunu Yeuf",
+        "number": 428
+      },
+      {
+        "name": "Mandeka",
+        "number": 429
+      },
+      {
+        "name": "ZeeTV",
+        "number": 452
+      },
+      {
+        "name": "SET Max",
+        "number": 457
+      },
+      {
+        "name": "Maaddii Abol",
+        "number": 489
+      }
+    ],
+    "Kids": [
+      {
+        "name": "Cartoon Network",
+        "number": 301
+      },
+      {
+        "name": "Cartoonito",
+        "number": 302
+      },
+      {
+        "name": "Disney Channel",
+        "number": 303
+      },
+      {
+        "name": "DreamWorks",
+        "number": 304
+      },
+      {
+        "name": "Nickelodeon",
+        "number": 305
+      },
+      {
+        "name": "Cbeebies",
+        "number": 306
+      },
+      {
+        "name": "NickJr",
+        "number": 307
+      },
+      {
+        "name": "NickTOONS",
+        "number": 308
+      },
+      {
+        "name": "Disney Junior",
+        "number": 309
+      },
+      {
+        "name": "Jim Jam",
+        "number": 310
+      },
+      {
+        "name": "Moonbug",
+        "number": 314
+      },
+      {
+        "name": "EDU Channel",
+        "number": 316
+      },
+      {
+        "name": "Mindset",
+        "number": 319
+      },
+      {
+        "name": "Teletoon+",
+        "number": 744
+      },
+      {
+        "name": "Piwi+",
+        "number": 745
+      }
+    ],
+    "Lifestyle": [
+      {
+        "name": "TLC HD",
+        "number": 135
+      },
+      {
+        "name": "Real Time",
+        "number": 155
+      },
+      {
+        "name": "BBC Lifestyle",
+        "number": 174
+      },
+      {
+        "name": "Food Network",
+        "number": 175
+      },
+      {
+        "name": "The Wedding Channel",
+        "number": 176
+      },
+      {
+        "name": "Spice TV",
+        "number": 190
+      }
+    ],
+    "Local Channels": [
+      {
+        "name": "eTV Africa",
+        "number": 250
+      },
+      {
+        "name": "K24",
+        "number": 275
+      },
+      {
+        "name": "Wasafi TV",
+        "number": 296
+      },
+      {
+        "name": "CHANNEL ONE TV",
+        "number": 363
+      },
+      {
+        "name": "Y254",
+        "number": 376
+      },
+      {
+        "name": "ITV",
+        "number": 383
+      },
+      {
+        "name": "etv News",
+        "number": 474
+      },
+      {
+        "name": "KTN",
+        "number": 272
+      },
+      {
+        "name": "Citizen TV",
+        "number": 273
+      },
+      {
+        "name": "Ugandan Broadcasting Corporation",
+        "number": 282
+      },
+      {
+        "name": "Bukedde TV",
+        "number": 284
+      },
+      {
+        "name": "NBS",
+        "number": 286
+      },
+      {
+        "name": "Sanyuka TV",
+        "number": 288
+      },
+      {
+        "name": "TV Imaan",
+        "number": 385
+      },
+      {
+        "name": "Channel 10",
+        "number": 386
+      },
+      {
+        "name": "Star TV",
+        "number": 389
+      },
+      {
+        "name": "TV10",
+        "number": 396
+      },
+      {
+        "name": "AYV TV",
+        "number": 399
+      }
+    ],
+    "Movies": [
+      {
+        "name": "M Movies+ East",
+        "number": 106
+      },
+      {
+        "name": "M-Net Movies 2",
+        "number": 106
+      },
+      {
+        "name": "M Movies Stars",
+        "number": 107
+      },
+      {
+        "name": "M Movies Legends",
+        "number": 108
+      },
+      {
+        "name": "Studio Universal HD",
+        "number": 112
+      },
+      {
+        "name": "MovieRoom Africa HD",
+        "number": 113
+      },
+      {
+        "name": "KIX",
+        "number": 114
+      },
+      {
+        "name": "TNT Africa",
+        "number": 137
+      },
+      {
+        "name": "Africa Magic Epic",
+        "number": 152
+      },
+      {
+        "name": "ROK",
+        "number": 168
+      },
+      {
+        "name": "Canal+",
+        "number": 720
+      },
+      {
+        "name": "Canal+ Cinema Centre",
+        "number": 721
+      },
+      {
+        "name": "Canal+ Sports 2",
+        "number": 723
+      },
+      {
+        "name": "Canal+ Sports 3",
+        "number": 724
+      },
+      {
+        "name": "RTL 9",
+        "number": 732
+      }
+    ],
+    "Music": [
+      {
+        "name": "MTV",
+        "number": 130
+      },
+      {
+        "name": "Base Pulse",
+        "number": 322
+      },
+      {
+        "name": "TRACE Mziki",
+        "number": 323
+      },
+      {
+        "name": "HIP TV",
+        "number": 324
+      },
+      {
+        "name": "TRACE Naija",
+        "number": 325
+      },
+      {
+        "name": "AFRO Music",
+        "number": 326
+      },
+      {
+        "name": "Sound City",
+        "number": 327
+      },
+      {
+        "name": "Trace Jama",
+        "number": 333
+      },
+      {
+        "name": "TRACE Muzika",
+        "number": 334
+      },
+      {
+        "name": "EATV",
+        "number": 384
+      },
+      {
+        "name": "Trace Brasil",
+        "number": 584
+      },
+      {
+        "name": "Trace Africa French",
+        "number": 735
+      }
+    ],
+    "News": [
+      {
+        "name": "BBC World News",
+        "number": 400
+      },
+      {
+        "name": "CNN International",
+        "number": 401
+      },
+      {
+        "name": "Sky News",
+        "number": 402
+      },
+      {
+        "name": "SABC News",
+        "number": 404
+      },
+      {
+        "name": "Newzroom Afrika",
+        "number": 405
+      },
+      {
+        "name": "Al Jazeera",
+        "number": 406
+      },
+      {
+        "name": "CGTN News",
+        "number": 409
+      },
+      {
+        "name": "CNBC Africa",
+        "number": 410
+      },
+      {
+        "name": "Bloomberg Television",
+        "number": 411
+      },
+      {
+        "name": "NDTV 24x7",
+        "number": 413
+      },
+      {
+        "name": "EuroNews",
+        "number": 414
+      },
+      {
+        "name": "Arise News",
+        "number": 416
+      },
+      {
+        "name": "Africanews",
+        "number": 417
+      },
+      {
+        "name": "Joy News",
+        "number": 421
+      },
+      {
+        "name": "News Central TV",
+        "number": 422
+      },
+      {
+        "name": "EuroNews French",
+        "number": 438
+      },
+      {
+        "name": "EuroNews German",
+        "number": 445
+      },
+      {
+        "name": "TPA noticias",
+        "number": 689
+      },
+      {
+        "name": "FRANCE 24",
+        "number": 736
+      }
+    ],
+    "Religion": [
+      {
+        "name": "Trace Gospel",
+        "number": 332
+      },
+      {
+        "name": "FAITH",
+        "number": 341
+      },
+      {
+        "name": "Day Star",
+        "number": 342
+      },
+      {
+        "name": "TBN",
+        "number": 343
+      },
+      {
+        "name": "SBN",
+        "number": 345
+      },
+      {
+        "name": "ISLAM CHANNEL",
+        "number": 347
+      },
+      {
+        "name": "Eternal Word Television Network",
+        "number": 348
+      },
+      {
+        "name": "Dove TV",
+        "number": 349
+      },
+      {
+        "name": "Upendo TV",
+        "number": 388
+      },
+      {
+        "name": "TV Mundial (P)",
+        "number": 579
+      }
+    ],
+    "Foreign": [
+      {
+        "name": "RAI International",
+        "number": 430
+      },
+      {
+        "name": "NHK",
+        "number": 431
+      },
+      {
+        "name": "TV5 Monde Afrique",
+        "number": 437
+      },
+      {
+        "name": "CCTV Entertainment",
+        "number": 444
+      },
+      {
+        "name": "CCTV 4",
+        "number": 447
+      },
+      {
+        "name": "CGTN Documentary",
+        "number": 448
+      },
+      {
+        "name": "CGTN French",
+        "number": 449
+      },
+      {
+        "name": "SET Asia",
+        "number": 450
+      },
+      {
+        "name": "China Movie Channel",
+        "number": 481
+      },
+      {
+        "name": "Shanghai Dragon TV",
+        "number": 482
+      },
+      {
+        "name": "Hunan TV",
+        "number": 483
+      },
+      {
+        "name": "Zhejiang TV",
+        "number": 484
+      },
+      {
+        "name": "Phoenix News and Entertainment",
+        "number": 485
+      },
+      {
+        "name": "RTPi (P)",
+        "number": 556
+      },
+      {
+        "name": "A+",
+        "number": 729
+      }
+    ],
+    "Sports": [
+      {
+        "name": "SuperSport Events",
+        "number": 199
+      },
+      {
+        "name": "SuperSport Extra 2",
+        "number": 217
+      },
+      {
+        "name": "ESPN",
+        "number": 218
+      },
+      {
+        "name": "ESPN 2 HD",
+        "number": 219
+      },
+      {
+        "name": "SuperSport Blitz",
+        "number": 220
+      },
+      {
+        "name": "SuperSport Grandstand",
+        "number": 221
+      },
+      {
+        "name": "SuperSport Football Plus",
+        "number": 222
+      },
+      {
+        "name": "SuperSport Premier League",
+        "number": 223
+      },
+      {
+        "name": "SuperSport La Liga",
+        "number": 224
+      },
+      {
+        "name": "SuperSport Football",
+        "number": 225
+      },
+      {
+        "name": "WWE",
+        "number": 226
+      },
+      {
+        "name": "SuperSport Kickoff",
+        "number": 227
+      },
+      {
+        "name": "SuperSport Africa",
+        "number": 228
+      },
+      {
+        "name": "SuperSport Action",
+        "number": 229
+      },
+      {
+        "name": "SuperSport Extra",
+        "number": 230
+      },
+      {
+        "name": "SuperSport Rugby",
+        "number": 231
+      },
+      {
+        "name": "SuperSport Cricket",
+        "number": 232
+      },
+      {
+        "name": "SuperSport Golf",
+        "number": 233
+      },
+      {
+        "name": "SuperSport Tennis",
+        "number": 234
+      },
+      {
+        "name": "SuperSport Motorsport",
+        "number": 235
+      },
+      {
+        "name": "SuperSport Maximo 1",
+        "number": 241
+      },
+      {
+        "name": "SuperSport Maximo 2",
+        "number": 242
+      },
+      {
+        "name": "InfoSports+",
+        "number": 726
+      }
+    ]
+  }
+}
