@@ -2,6 +2,27 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.2881058 (2026-10-15)
+
+### Added
+
+- Three Tanzania lineups, taking the built-in count from 22 to 25, contributed
+  by FainiDenis in pull request #36 (issue #35). `TZ_Azam-TV_lineup.json`
+  carries Azam TV, 146 channels across 11 categories.
+  `TZ_DStv-Premium_lineup.json` carries DStv Premium in Tanzania, 192
+  channels across 11 categories. `TZ_Combined_lineup.json` merges the two
+  into 310 channels across 13 categories, with each channel the two packages
+  share listed once and renumbered by category, because the two providers
+  use the same numbers for different channels.
+
+### Known
+
+- `TZ` is not one of the recognized country codes, so stream matching does
+  not apply the country filter to the Tanzania lineups.
+- In the Azam TV lineup, `Zodiak` and `Zodiak TV` share number 163, and the
+  combined lineup carries the same pair at 955 and 956. Matching removes
+  "TV" from a name, so one stream can match both.
+
 ## 1.26.2880000 (2026-10-15)
 
 ### Fixed
