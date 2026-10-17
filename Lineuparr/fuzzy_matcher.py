@@ -7,6 +7,7 @@ Forked from Stream-Mapparr's fuzzy_matcher.py (v26.018.0100) with enhancements:
 """
 
 import re
+import time
 import logging
 import unicodedata
 
@@ -334,6 +335,13 @@ def country_codes_in_text(text):
     return codes
 
 
+# Names between yields in precompute_normalizations. Dispatcharr runs plugins
+# under gevent with early monkey-patching, where time.sleep(0) is gevent.sleep(0)
+# and hands the worker back; on this installation 23,240 EPG names held it for 1.5 s with no yield
+# (measured 2026-10-17). Elsewhere time.sleep(0) does nothing.
+PRECOMPUTE_YIELD_EVERY = 500
+
+
 class FuzzyMatcher(FuzzyMatcherCore):
     """Handles fuzzy matching for Lineuparr with alias support and channel number boosting."""
 
@@ -368,7 +376,9 @@ class FuzzyMatcher(FuzzyMatcherCore):
         self._processed_cache.clear()
         self._callsign_cache.clear()
 
-        for name in names:
+        for index, name in enumerate(names):
+            if index and index % PRECOMPUTE_YIELD_EVERY == 0:
+                time.sleep(0)
             if self._is_group_header(name):
                 continue
             norm = self.normalize_name(name, user_ignored_tags)
