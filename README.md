@@ -77,6 +77,10 @@ Over 200 built-in channel aliases, plus your own in JSON. Every setting and acti
 | `TZ_Azam-TV_lineup.json` | Azam TV | TZ | ~146 |
 | `TZ_DStv-Premium_lineup.json` | DStv Premium | TZ | ~192 |
 | `TZ_Combined_lineup.json` | TZ Combined (Azam TV + DStv Premium) | TZ | ~310 |
+| `DO_Altice_lineup.json` | Altice | DO | ~224 |
+| `DO_Claro_lineup.json` | Claro | DO | ~261 |
+| `DO_Combined_lineup.json` | DO Combined (Altice + Claro) | DO | ~309 |
+| `PE_Claro_lineup.json` | Claro Peru | PE | ~201 |
 
 The beIN MENA lineup is regional rather than single country, so its country filtering is partial. Its filename country code is QA, which rejects streams tagged for a country outside the region: an Australian, Belgian or French beIN feed will not attach to one of its channels. Streams tagged for another Middle East or North Africa country, and streams tagged AR for Arabic, are treated as untagged and are kept, which is deliberate because those are the tags the region's own feeds carry.
 

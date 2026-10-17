@@ -2,6 +2,42 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.2901915 (2026-10-17)
+
+### Added
+
+- Four lineups for the Dominican Republic and Peru, taking the built-in count
+  from 25 to 29, contributed by taos15 in pull request #29 (issue #28).
+  `DO_Altice_lineup.json` carries Altice, 224 channels across 11 categories.
+  `DO_Claro_lineup.json` carries Claro, 261 channels across 11 categories.
+  `DO_Combined_lineup.json` merges the two into 309 channels across 11
+  categories. `PE_Claro_lineup.json` carries Claro Peru, 201 channels across
+  12 categories. The `DO` and `PE` alias sections help these lineups match
+  local channel names.
+
+### Fixed
+
+- Matching no longer pauses the rest of Dispatcharr while it prepares. Before
+  matching, each action prepares every stream or EPG name once, and that step
+  never paused for other work: on an installation with about 23,000 EPG names
+  it held the Dispatcharr worker for over a second, so other requests and
+  streams served by that worker waited. It now pauses every 500 names. Match
+  results are unchanged.
+
+### Changed
+
+- The release archive now carries signed build provenance. Check a downloaded
+  copy with `gh attestation verify Lineuparr.zip -R
+  PiratesIRC/Dispatcharr-Lineuparr-Plugin --signer-workflow
+  PiratesIRC/Dispatcharr-Lineuparr-Plugin/.github/workflows/ci.yml`.
+
+### Known
+
+- `DO` and `PE` are not recognized country codes, so stream matching does not
+  apply the country filter to these lineups.
+- The two Dominican Republic provider lists are dated 2018, the newest public
+  lists found.
+
 ## 1.26.2881058 (2026-10-15)
 
 ### Added
