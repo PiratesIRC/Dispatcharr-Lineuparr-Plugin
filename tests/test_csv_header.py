@@ -202,7 +202,7 @@ SETTINGS_LINES = {
     "# Single Channel Match:": "single_channel_name",
     "# Channel Numbering:": "channel_numbering",
     "# Rate Limiting:": "rate_limiting",
-    "# Channel Profile:": "channel_profiles",
+    "# Channel Profiles:": "channel_profiles",
 }
 
 

@@ -451,15 +451,17 @@ class Plugin:
         epg_source_names = [o["label"] for o in epg_source_options[1:]]
         epg_sources_hint = ", ".join(epg_source_names) if epg_source_names else "(none discovered)"
 
-        # Discover channel profiles
-        profile_options = [{"value": "_none", "label": "None (don't enable in profiles)"}]
+        # Discover channel profiles. The field is free text (Dispatcharr's plugin
+        # form has no multi-select type), so the discovered names are listed in
+        # its help text instead of as dropdown options.
+        profile_names = []
         try:
             for p in ChannelProfile.objects.all().values('id', 'name'):
-                profile_options.append({"value": p['name'], "label": p['name']})
+                profile_names.append(p['name'])
         except Exception:
             pass
-        # Alphabetize discovered profiles, keeping "None" pinned first
-        profile_options[1:] = sorted(profile_options[1:], key=lambda o: o["label"].lower())
+        profile_names.sort(key=str.lower)
+        profiles_hint = ", ".join(profile_names) if profile_names else "(none discovered)"
 
         return with_usage_field([
             # --- Section: Lineup & Sources ---
@@ -501,11 +503,15 @@ class Plugin:
             },
             {
                 "id": "channel_profiles",
-                "label": "Channel Profile",
-                "type": "select",
-                "default": "_none",
-                "options": profile_options,
-                "help_text": "Automatically enable matched channels in this profile after sync.",
+                "label": "Channel Profiles",
+                "type": "string",
+                "default": "",
+                "placeholder": "blank = none  |  Living Room, Kids",
+                "help_text": (
+                    "Channel profile(s) to enable the synced channels in. Leave blank to "
+                    "leave profiles alone. To use more than one, separate the names with "
+                    "commas. Names are not case-sensitive. Available profiles: " + profiles_hint
+                ),
             },
             # --- Section: Channel Groups & Numbering ---
             {
@@ -1596,7 +1602,8 @@ class Plugin:
                     found = p
                     break
             if found:
-                resolved.append(found)
+                if all(r['id'] != found['id'] for r in resolved):
+                    resolved.append(found)
             else:
                 logger.warning(f"{LOG_PREFIX} Channel profile '{name}' not found")
 
@@ -2158,7 +2165,7 @@ class Plugin:
             f"# Lineup File: {settings.get('lineup_file') or '(none selected)'}",
             f"# M3U Source: {self._describe_m3u_sources(settings, logger)}",
             f"# EPG Sources for Matching: {self._describe_epg_sources(settings)}",
-            f"# Channel Profile: {settings.get('channel_profiles') or '_none'}",
+            f"# Channel Profiles: {settings.get('channel_profiles') or '_none'}",
             f"# Channel Group Prefix: {settings.get('group_prefix') or '(auto, from the lineup name)'}",
             f"# Category Detail: {self.CATEGORY_DETAIL_LABELS.get(detail, detail)}",
             f"# Channel Numbering: {self.NUMBERING_LABELS.get(numbering, numbering)}",

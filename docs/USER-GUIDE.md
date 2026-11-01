@@ -62,7 +62,7 @@ order, so a setting is listed where you will find it on screen.
 | Lineup File | select | `DirecTV Premier (US)` | The provider lineup to mirror. The list is built from the `*_lineup.json` files in the plugin directory. The two-letter country code at the front of the filename is also what the country filter compares a stream against. |
 | M3U Source | select | `All sources` | Which M3U account's streams to match against. Leave it on All to use every active source. Accounts switched off in Dispatcharr are never listed or matched. The list is built when the settings page loads, so reload the Plugins page after adding an M3U account. |
 | EPG Sources for Matching | string | *(blank)* | Which guide sources to match against. Blank means all of them, in the priority order configured in Dispatcharr. Otherwise give one or more source names separated by commas; `*` and `?` wildcards work, so `UK*` takes every source whose name starts with UK. Earlier names win. |
-| Channel Profile | select | `None` | Channel profile that synced channels are enabled in. |
+| Channel Profiles | string | *(blank)* | Channel profiles that synced channels are enabled in. Blank leaves profiles alone. Separate several names with commas; names are not case-sensitive. Lineuparr only adds channels to these profiles and never removes a channel from any profile, although a deleted channel leaves every profile. |
 
 ### Channel Groups and Numbering
 
@@ -148,7 +148,7 @@ ever reads the stream **name**, never its channel group, so:
 ## Step by step
 
 **1. Configure.** Select the Lineup File and M3U Source, optionally set a
-Channel Group Prefix and Channel Profile, choose a Match Sensitivity, and save.
+Channel Group Prefix and Channel Profiles, choose a Match Sensitivity, and save.
 
 **2. Validate Settings.** Verifies the lineup file and the M3U source, and
 reports channel counts per category. It also warns when the channel group prefix
@@ -161,7 +161,7 @@ this is safe at any time. Recommended.
 
 **4. Full Sync.** Creates channel groups from the lineup categories, creates the
 channels with the right numbers, matches streams, assigns EPG data, assigns
-logos, enables the channels in the selected profile, and removes channels that
+logos, enables the channels in the selected profiles, and removes channels that
 matched no streams. See [Unmatched channel cleanup](#unmatched-channel-cleanup).
 
 ---
