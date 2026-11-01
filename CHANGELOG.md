@@ -2,6 +2,18 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3052143 (2026-11-01)
+
+### Changed
+
+- The Channel Profile setting is now Channel Profiles and takes more than one
+  profile. It is a text box instead of a dropdown, because Dispatcharr's
+  plugin settings have no multi-select field: list the profile names
+  separated by commas (for example `Living Room, Kids`), in any letter case.
+  Synced channels are enabled in every profile listed. The profiles that
+  exist are listed in the setting's help text. A profile saved with the old
+  dropdown carries over unchanged, and a blank value still means no profile.
+
 ## 1.26.2901915 (2026-10-17)
 
 ### Added
