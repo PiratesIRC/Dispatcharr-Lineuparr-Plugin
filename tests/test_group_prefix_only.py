@@ -212,8 +212,9 @@ class TestSyncChannelsAlsoMigrates:
     """
 
     def test_sync_channels_renames_the_old_group_instead_of_duplicating_it(
-        self, plugin, logger, monkeypatch
+        self, plugin, logger, monkeypatch, tmp_path
     ):
+        monkeypatch.setattr(PluginConfig, "OPERATION_LOCK_FILE", str(tmp_path / "op.lock"))
         old = _FakeGroup("Spectrum: All", id=7)
         fake = _FakeChannelGroup([old])
         monkeypatch.setattr(plugin_module, "ChannelGroup", fake)
