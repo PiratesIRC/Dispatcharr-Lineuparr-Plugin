@@ -22,7 +22,7 @@ from .fuzzy_matcher import (FuzzyMatcher, has_upgrade_quality, detect_category_c
                             detect_name_country_prefix, country_codes_in_text)
 from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
 from .progress_status import save_progress_atomic, load_progress, build_status_message
-from . import notify_bridge, report_count, reports
+from . import lineuparr_fields, notify_bridge, report_count, reports
 from .usage_client import UsageReporter, jsonl_sum, load_plugin_settings, with_usage_field
 
 from apps.channels.models import Channel, ChannelGroup, ChannelProfile, ChannelProfileMembership, ChannelStream, Stream
@@ -374,6 +374,10 @@ class Plugin:
         # sub-steps don't each fire a channel-list refresh; the parent
         # operation fires exactly one refresh when it finishes.
         self._suppress_refresh = False
+        # The new 0.34 field ids get_fields drew (lineuparr_fields), so run()
+        # writes them back into the text settings. Empty on 0.33, which never
+        # calls get_fields, and on the flat fallback.
+        self._built_form_ids = set()
 
     def _try_start_thread(self, target, args):
         """Atomically check if a thread is running and start a new one.
@@ -701,6 +705,37 @@ class Plugin:
             },
         ], USAGE)
 
+    def get_fields(self, context=None):
+        """The settings form for Dispatcharr 0.34 and later, in collapsible sections.
+
+        Dispatcharr 0.34 calls this at discovery and on a reload instead of
+        reading ``fields``; 0.33 and earlier never call it and keep the flat
+        form, which holds no field type they do not know. The layout is
+        ``lineuparr_fields.form_034``. The loader does not catch an exception
+        raised here, so any failure falls back to the flat form.
+        """
+        self._built_form_ids = set()
+        flat = self.fields
+        try:
+            settings = (context or {}).get("settings") or {}
+            fields, built = lineuparr_fields.form_034(
+                flat, settings, self._profile_names(), _clean_json_text)
+            self._built_form_ids = built
+            return fields
+        except Exception as exc:
+            LOGGER.warning(f"{LOG_PREFIX} Sectioned settings form failed, using the flat form: {exc}")
+            return flat
+
+    @staticmethod
+    def _profile_names():
+        """Channel profile names for the settings pick list. Never raises: on a
+        database error the list is empty and the saved values still show."""
+        try:
+            return list(ChannelProfile.objects.values_list("name", flat=True))
+        except Exception as exc:
+            LOGGER.warning(f"{LOG_PREFIX} Could not read channel profiles for the settings list: {exc}")
+            return []
+
     def _report_usage(self, settings, logger, force=False):
         """Hand the usage total to the reporter; never lets anything escape."""
         try:
@@ -711,6 +746,11 @@ class Plugin:
     def run(self, action, params, context):
         logger = context.get("logger", LOGGER)
         settings = context.get("settings", {})
+        # On Dispatcharr 0.34 the form edits a pick list and a table under new
+        # ids; write them back into the text settings every reader parses.
+        built = getattr(self, "_built_form_ids", None)
+        if built:
+            settings = lineuparr_fields.legacy_settings(settings, built)
 
         try:
             action_map = {
@@ -762,7 +802,7 @@ class Plugin:
             if not is_bg:
                 self._report_usage(settings, logger)
 
-            return result
+            return lineuparr_fields.status_for_dispatcharr(result)
 
         except Exception as e:
             logger.exception(f"{LOG_PREFIX} Error in action '{action}': {e}")
