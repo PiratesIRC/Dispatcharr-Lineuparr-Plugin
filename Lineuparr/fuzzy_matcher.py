@@ -132,6 +132,31 @@ _PLUTO_COUNTRY_MAP = {
     # "LATIN"/"EUROPE" etc. intentionally omitted - ambiguous region.
 }
 
+# Full English country names, as public iptv-org playlists write them in
+# parentheses anywhere in a stream name ("TNT (Russia) HD (1080p)", issue #38).
+# Only names whose code is in _KNOWN_COUNTRY_CODES, and only the WHOLE bracket
+# content counts, so "(New York)", "(East)" or "(Qatar Edition)" stay untagged.
+# "KOREA" alone is left out (North or South), and Georgia is not a lineup code,
+# so "(Georgia)", usually the US state, stays untagged too.
+_COUNTRY_NAME_TO_CODE = {
+    "UNITED STATES": "US", "USA": "US", "UNITED KINGDOM": "UK", "GREAT BRITAIN": "UK",
+    "CANADA": "CA", "AUSTRALIA": "AU", "GERMANY": "DE", "FRANCE": "FR", "ITALY": "IT",
+    "SPAIN": "ES", "NETHERLANDS": "NL", "BRAZIL": "BR", "MEXICO": "MX", "INDIA": "IN",
+    "IRELAND": "IE", "SWEDEN": "SE", "NORWAY": "NO", "DENMARK": "DK", "PORTUGAL": "PT",
+    "POLAND": "PL", "AUSTRIA": "AT", "SWITZERLAND": "CH", "BELGIUM": "BE",
+    "FINLAND": "FI", "TURKEY": "TR", "TURKIYE": "TR", "GREECE": "GR", "IRAN": "IR",
+    "ALBANIA": "AL", "BULGARIA": "BG", "ROMANIA": "RO", "RUSSIA": "RU",
+    "AZERBAIJAN": "AZ", "CROATIA": "HR", "THAILAND": "TH", "SERBIA": "RS",
+    "NORTH MACEDONIA": "MK", "MACEDONIA": "MK", "ISRAEL": "IL", "COLOMBIA": "CO",
+    "COSTA RICA": "CR", "CYPRUS": "CY", "JAPAN": "JP", "SOUTH KOREA": "KR",
+    "CZECH REPUBLIC": "CZ", "CZECHIA": "CZ", "HUNGARY": "HU", "NEW ZEALAND": "NZ",
+    "PHILIPPINES": "PH", "VIETNAM": "VN", "VIET NAM": "VN", "PAKISTAN": "PK",
+    "SLOVENIA": "SI", "ETHIOPIA": "ET", "QATAR": "QA",
+}
+
+# One parenthesized run of letters, spaces, dots, apostrophes and hyphens.
+_PAREN_WORDS_RE = re.compile(r"\(\s*([A-Za-z][A-Za-z .'-]*?)\s*\)")
+
 # Cross-border country matching is STRICT by default: a lineup accepts only
 # streams tagged with its own country (plus untagged streams, which can't be
 # proven wrong). Blanket compatibility was removed - it wrongly merged
@@ -233,6 +258,14 @@ def detect_stream_country(name):
     m = re.match(r'^\s*USA\s+(?!NETWORK\b)', name, re.IGNORECASE)
     if m:
         return "US"
+
+    # Last: a full country name in parentheses anywhere in the name, the
+    # iptv-org form ("Cinemax (Czech Republic)", issue #38). Checked after every
+    # prefix form, so a leading tag still decides.
+    for m in _PAREN_WORDS_RE.finditer(name):
+        code = _COUNTRY_NAME_TO_CODE.get(re.sub(r'\s+', ' ', m.group(1)).upper())
+        if code in _KNOWN_COUNTRY_CODES:
+            return code
 
     return None
 
