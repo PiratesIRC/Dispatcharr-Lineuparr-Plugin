@@ -2,6 +2,42 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3251844 (2026-11-21)
+
+This version needs Dispatcharr 0.34.0 or newer. Its manifest declares
+manifest version 1, so the Plugin Hub does not offer it to Dispatcharr 0.33.0
+or older.
+
+### Changed
+
+- On Dispatcharr 0.34 the settings form is split into five collapsible
+  sections: Lineup & Sources, Channel Groups & Numbering, Stream & EPG
+  Matching, Report delivery and Advanced. Report delivery and Advanced start
+  closed.
+- Channel Profiles is a pick list of the channel profiles that exist. Profiles
+  saved as text before carry over.
+- EPG Sources for Matching is a pick list. The order you pick sources in is
+  their priority: a source picked earlier wins. Besides every source name, it
+  offers wildcards that fit two or more sources, such as `guru-* (4 sources)`.
+  A value saved as text before carries over, wildcards included, in the same
+  order.
+- Custom Channel Aliases is a table with one row per lineup channel. When the
+  saved JSON holds something a row cannot show, the text box stays.
+- The pick lists read the profiles and EPG sources when the plugin loads.
+  After creating a profile or adding a source, press the refresh control on the
+  Plugins page to see it.
+
+### Fixed
+
+- The country filter now reads a full country name in parentheses anywhere in
+  a stream name, the form public iptv-org playlists use, such as
+  `TNT (Russia) HD (1080p)` or `Cinemax (Czech Republic)`. Before, these
+  streams counted as untagged and reached the channels of a lineup from
+  another country. `ESPN (United States)` now counts as a US stream and ranks
+  first on a US lineup. Only the whole bracket counts, and only for countries
+  the lineup files use, so `(New York)`, `(East)` and `(Georgia)` stay
+  untagged. Reported by magrhino in issue #38.
+
 ## 1.26.3052143 (2026-11-01)
 
 ### Changed

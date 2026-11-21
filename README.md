@@ -90,7 +90,8 @@ The Verizon FiOS ZIP 11743 lineup is the one to look at if you are writing your 
 
 ## Requirements
 
-- Dispatcharr v0.20.0 or newer
+- Dispatcharr v0.34.0 or newer. The Plugin Hub does not offer this version to
+  Dispatcharr v0.33.0 or older.
 - At least one M3U source configured with streams
 - EPG sources configured, optional, for EPG matching
 

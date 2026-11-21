@@ -52,7 +52,8 @@ tells you whether your match sensitivity is set sensibly for your source.
 
 ## Settings reference
 
-The settings form is divided into five sections. This table follows the same
+On Dispatcharr 0.34 and newer the settings form is divided into five
+collapsible sections. This table follows the same
 order, so a setting is listed where you will find it on screen.
 
 ### Lineup and Sources
@@ -61,8 +62,8 @@ order, so a setting is listed where you will find it on screen.
 |---------|------|---------|--------------|
 | Lineup File | select | `DirecTV Premier (US)` | The provider lineup to mirror. The list is built from the `*_lineup.json` files in the plugin directory. The two-letter country code at the front of the filename is also what the country filter compares a stream against. |
 | M3U Source | select | `All sources` | Which M3U account's streams to match against. Leave it on All to use every active source. Accounts switched off in Dispatcharr are never listed or matched. The list is built when the settings page loads, so reload the Plugins page after adding an M3U account. |
-| EPG Sources for Matching | string | *(blank)* | Which guide sources to match against. Blank means all of them, in the priority order configured in Dispatcharr. Otherwise give one or more source names separated by commas; `*` and `?` wildcards work, so `UK*` takes every source whose name starts with UK. Earlier names win. |
-| Channel Profiles | string | *(blank)* | Channel profiles that synced channels are enabled in. Blank leaves profiles alone. Separate several names with commas; names are not case-sensitive. Lineuparr only adds channels to these profiles and never removes a channel from any profile, although a deleted channel leaves every profile. |
+| EPG Sources for Matching | pick list | *(empty)* | Which guide sources to match against, in priority order: a source picked earlier wins when two sources carry the same channel. Empty means all of them, in the priority order configured in Dispatcharr. Entries ending in a count, such as `guru-* (4 sources)`, are wildcards that select every source whose name fits; they are offered when a shared name start or end fits two or more sources. A new pick goes to the end, so to move a source up, remove the entries above it and pick them again. The list is read when the plugin loads: after adding an EPG source, press the refresh control on the Plugins page. |
+| Channel Profiles | pick list | *(empty)* | Channel profiles that synced channels are enabled in. Empty leaves profiles alone. Pick one or more. Lineuparr only adds channels to these profiles and never removes a channel from any profile, although a deleted channel leaves every profile. The list is read when the plugin loads: after creating a profile, press the refresh control on the Plugins page. |
 
 ### Channel Groups and Numbering
 
@@ -83,7 +84,7 @@ order, so a setting is listed where you will find it on screen.
 | Quality-Aware Stream Matching | boolean | `false` | When the lineup holds both a channel and its upgrade twin, such as TF1 and TF1 UHD, each is restricted to streams of its own quality tier. Channels with no twin are unaffected, and a stream named in a channel's aliases bypasses the restriction. |
 | Preserve Existing Streams | boolean | `false` | The setting with the largest consequence here. When off, a stream match replaces each channel's whole stream list and then deletes channels left with no streams. Turn it on to append instead: duplicates are skipped and nothing is deleted. |
 | Single Channel Match | string | *(blank)* | Scopes Preview Stream Match, Apply Stream Match, Apply EPG Match and Assign Logos to the one lineup channel with this exact name, case-insensitive. Full Sync ignores it. |
-| Custom Channel Aliases (advanced) | text | *(blank)* | Your own alias overrides. See [Custom aliases](#custom-aliases). |
+| Custom Channel Aliases (advanced) | table | *(empty)* | Your own alias overrides, one row per lineup channel. See [Custom aliases](#custom-aliases). |
 
 ### Report delivery
 
@@ -138,6 +139,9 @@ ever reads the stream **name**, never its channel group, so:
 - **Prefix the stream name with a country code.** A stream whose name carries a
   recognized country marker different from the lineup's country is dropped:
   `UK: Sky Sports F1`, `UK| Sky Sports`, `UK Sky Sports` or `(UK) Sky Sports`.
+  A full country name in parentheses anywhere in the name also counts, the form
+  public iptv-org playlists use: `TNT (Russia) HD (1080p)` or
+  `ESPN (United States)`.
   Bulk-renaming the offending streams makes them drop out of a US lineup
   automatically. One exception: a bare `IN ` prefix is not read as India,
   because it collides with the English word "in" (the real channel "In Country
@@ -310,10 +314,16 @@ the [lineup file format](LINEUP-FORMAT.md) explains the rules it has to pass.
 ## Custom aliases
 
 An alias is another name your provider uses for a channel. The plugin ships more
-than 200 built-in aliases; the **Custom Channel Aliases (JSON)** setting adds
-your own on top. Keys are the **exact lineup channel name**, values are the
-provider's names for it. A single alias may be a plain string instead of a
-one-item list.
+than 200 built-in aliases; the **Custom Channel Aliases** setting adds your own
+on top. It is a table: add one row per lineup channel, type the **exact lineup
+channel name** in the first column and the provider's names for it in the second,
+separated by commas.
+
+The setting is stored as JSON, and the table is the same data. Keys are the
+lineup channel names, values are the provider's names; a single alias may be a
+plain string instead of a one-item list. When the saved JSON holds something a
+row cannot show (an alias containing a comma, for example), the form shows a
+text box with the JSON instead of the table.
 
 ```json
 {
@@ -341,6 +351,12 @@ A stream whose name carries a country marker that differs from the lineup's own
 country is dropped. That is what stops a Canadian feed attaching to a US channel.
 Streams with no marker at all are kept, because they cannot be proven wrong and
 dropping them would break sources that never tag country.
+
+A full country name in parentheses counts as a marker too, wherever it sits in
+the name, so `Cinemax (Czech Republic)` is dropped from a US lineup and
+`ESPN (United States)` is ranked as a US stream. Only the whole bracket counts,
+and only for the countries the lineup files use, so `(New York)`, `(East)` or
+`(Georgia)` leave a stream untagged.
 
 Some providers do not put a country in the stream name at all. They label by
 platform instead, so the same list carries `GO: ESPN`, `RK: VEVO POP` and
