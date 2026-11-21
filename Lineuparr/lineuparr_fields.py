@@ -7,25 +7,30 @@ drop a field of a type they do not know, with only a log warning. So the plugin
 keeps its flat form in ``Plugin.fields``, which every version reads, and builds
 the 0.34 copy here for ``Plugin.get_fields``, which only 0.34 and later call.
 
-Two text settings are drawn differently in the 0.34 form, each under a NEW id,
-because a multiselect or table needs a list value and a stored text value under
-the same id would break the form:
+Three text settings are drawn differently in the 0.34 form, each under a NEW
+id, because a multiselect or table needs a list value and a stored text value
+under the same id would break the form:
 
 - ``channel_profiles`` (comma-separated names) as the pick list
   ``channel_profile_list``;
+- ``epg_sources`` (comma-separated names and shell wildcards, earlier wins) as
+  the pick list ``epg_source_list``;
 - ``custom_aliases`` (a JSON object) as the table ``custom_alias_rows``, but only
   when the saved JSON can be shown as rows without losing anything.
 
 ``legacy_settings`` writes the new values back into the old text settings at the
 start of every run, so every parser and validator reads one text form.
 
-``epg_sources`` stays a text field on purpose: it accepts shell wildcards and the
-order of the names sets priority, and the 0.34 pick list can neither accept a
-typed value nor show an order (measured in the 0.34.1 compiled frontend: the
-multiselect is searchable, not creatable).
+The EPG source order is kept because the 0.34.1 frontend appends a picked value
+to the end of the list and draws the pills in list order, and the loader stores
+the list as sent (measured in the compiled frontend and in ``loader.py``). The
+pick list is searchable, not creatable, so a wildcard can be picked only when it
+is an option: the options are every source name, the wildcards derived from
+shared name prefixes and suffixes, and every value already saved.
 """
 
 import copy
+import fnmatch
 import json
 
 # The ``info`` fields that head each group of settings in the flat form.
@@ -49,6 +54,13 @@ HELP_SUFFIX = "_help_"
 
 PROFILE_LIST_ID = "channel_profile_list"
 PROFILE_TEXT_ID = "channel_profiles"
+EPG_LIST_ID = "epg_source_list"
+EPG_TEXT_ID = "epg_sources"
+
+# Tokens the EPG source parser reads as every source (Plugin._parse_source_filter).
+EPG_ALL_TOKENS = frozenset(("_all", "all", "*"))
+# Characters a derived wildcard splits a source name at.
+WILDCARD_SEPARATORS = "-_. "
 ALIAS_ROWS_ID = "custom_alias_rows"
 ALIAS_TEXT_ID = "custom_aliases"
 
@@ -56,6 +68,10 @@ NEW_FIELDS = {
     PROFILE_LIST_ID: {
         "label": "Channel Profiles",
         "help_text": "The channel profiles to enable the synced channels in. Pick one or more, or leave empty to leave profiles alone. The list is read when the plugin loads: after creating a profile, press the refresh control on the Plugins page to see it here.",
+    },
+    EPG_LIST_ID: {
+        "label": "EPG Sources for Matching",
+        "help_text": "The EPG sources to match guide entries against, in priority order: a source picked earlier wins when two sources have the same channel. Leave empty to use every source, ordered by the priority set in Dispatcharr. Entries ending in a count, such as guru-* (3 sources), are wildcards that select every source whose name fits. A new pick goes to the end; to move a source up, remove the entries above it and pick them again. The list is read when the plugin loads: after adding an EPG source, press the refresh control on the Plugins page to see it here.",
     },
     ALIAS_ROWS_ID: {
         "label": "Custom Channel Aliases (advanced)",
@@ -118,6 +134,58 @@ def _canonical(values, names):
     """Each value spelled as the matching name (case-insensitive), else as typed."""
     by_key = {str(n).casefold(): str(n) for n in names or ()}
     return [by_key.get(v.casefold(), v) for v in values]
+
+
+def derived_wildcards(names):
+    """Wildcards that each select two or more of ``names``, as ``{pattern: count}``.
+
+    A pattern is a name's start up to and including its first separator followed
+    by ``*`` (``guru-*``), or ``*`` followed by its end from its last separator
+    (``*-US``). Counted the way the plugin's parser matches: fnmatch on upper
+    case. A name holding a comma or a wildcard character makes no pattern.
+    """
+    names = [str(n or "").strip() for n in names or ()]
+    names = [n for n in names if n and not any(c in n for c in ",*?[]")]
+    candidates = set()
+    for name in names:
+        first = min((name.find(c) for c in WILDCARD_SEPARATORS if c in name), default=-1)
+        if first > 0:
+            candidates.add(name[:first + 1] + "*")
+        last = max(name.rfind(c) for c in WILDCARD_SEPARATORS)
+        if 0 <= last < len(name) - 1:
+            candidates.add("*" + name[last:])
+    upper = [n.upper() for n in names]
+    out = {}
+    seen = set()
+    # The parser ignores case, so ``*-US`` and ``*-us`` are one pattern: keep the
+    # spelling that sorts first.
+    for pattern in sorted(candidates):
+        if pattern.casefold() in seen:
+            continue
+        seen.add(pattern.casefold())
+        count = sum(fnmatch.fnmatchcase(n, pattern.upper()) for n in upper)
+        if count >= 2:
+            out[pattern] = count
+    return out
+
+
+def _epg_options(names, extra=()):
+    """Pick-list options: source names, then derived wildcards labelled with how
+    many sources they select, then any saved value that is neither."""
+    options = _options(names)
+    seen = {o["value"].casefold() for o in options}
+    wildcards = derived_wildcards(names)
+    for pattern in sorted(wildcards, key=str.casefold):
+        if pattern.casefold() not in seen:
+            seen.add(pattern.casefold())
+            options.append({"label": f"{pattern} ({wildcards[pattern]} sources)",
+                            "value": pattern})
+    for value in extra or ():
+        value = str(value or "").strip()
+        if value and value.casefold() not in seen:
+            seen.add(value.casefold())
+            options.append({"label": value, "value": value})
+    return options
 
 
 def rows_from_alias_json(text, clean=lambda s: (s or "").strip()):
@@ -186,6 +254,8 @@ def legacy_settings(settings, built_ids):
     built_ids = set(built_ids or ())
     if PROFILE_LIST_ID in built_ids and isinstance(out.get(PROFILE_LIST_ID), list):
         out[PROFILE_TEXT_ID] = ", ".join(split_list(out[PROFILE_LIST_ID]))
+    if EPG_LIST_ID in built_ids and isinstance(out.get(EPG_LIST_ID), list):
+        out[EPG_TEXT_ID] = ", ".join(split_list(out[EPG_LIST_ID]))
     if ALIAS_ROWS_ID in built_ids and isinstance(out.get(ALIAS_ROWS_ID), list):
         out[ALIAS_TEXT_ID] = alias_json_from_rows(out[ALIAS_ROWS_ID])
     return out
@@ -196,10 +266,12 @@ def _stored_list(settings, new_id):
     return split_list(value) if isinstance(value, list) else []
 
 
-def pick_list_fields(flat_fields, settings=None, profile_names=(), clean=None):
-    """Return ``(fields, built_ids)``: the flat form with channel_profiles as a
-    pick list and custom_aliases as a table (when its JSON fits), each under its
-    new id, and the set of new ids built. The input is not modified.
+def pick_list_fields(flat_fields, settings=None, profile_names=(), clean=None,
+                     epg_source_names=()):
+    """Return ``(fields, built_ids)``: the flat form with channel_profiles and
+    epg_sources as pick lists and custom_aliases as a table (when its JSON
+    fits), each under its new id, and the set of new ids built. The input is not
+    modified.
 
     ``settings`` are the saved settings; a new field's default is built from the
     old text setting, so an install that never saved the new field keeps its
@@ -229,6 +301,22 @@ def pick_list_fields(flat_fields, settings=None, profile_names=(), clean=None):
                 "help_text": meta["help_text"],
             })
             built.add(PROFILE_LIST_ID)
+            continue
+        if fid == EPG_TEXT_ID:
+            meta = NEW_FIELDS[EPG_LIST_ID]
+            tokens = split_list(settings.get(EPG_TEXT_ID, field.get("default", "")))
+            if any(t.casefold() in EPG_ALL_TOKENS for t in tokens):
+                tokens = []
+            # Never sorted: the order of the names is their priority.
+            default = _canonical(tokens, epg_source_names)
+            stored = _stored_list(settings, EPG_LIST_ID)
+            out.append({
+                "id": EPG_LIST_ID, "label": meta["label"], "type": "multiselect",
+                "default": default,
+                "options": _epg_options(epg_source_names, default + stored),
+                "help_text": meta["help_text"],
+            })
+            built.add(EPG_LIST_ID)
             continue
         if fid == ALIAS_TEXT_ID:
             old_value = settings.get(ALIAS_TEXT_ID, field.get("default", ""))
@@ -311,9 +399,10 @@ def _split_help(item, section):
     return extra
 
 
-def form_034(flat_fields, settings=None, profile_names=(), clean=None):
+def form_034(flat_fields, settings=None, profile_names=(), clean=None, epg_source_names=()):
     """The whole 0.34 form and the set of new ids it holds."""
-    fields, built = pick_list_fields(flat_fields, settings, profile_names, clean)
+    fields, built = pick_list_fields(flat_fields, settings, profile_names, clean,
+                                     epg_source_names)
     return sectioned_fields(fields), built
 
 

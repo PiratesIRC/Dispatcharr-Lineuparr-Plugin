@@ -23,7 +23,10 @@ from Lineuparr import lineuparr_fields as lf
 from Lineuparr.plugin import Plugin
 
 OLD_TYPES = {"string", "number", "boolean", "select", "text", "info"}
-NEW_ID_FOR = {"channel_profiles": lf.PROFILE_LIST_ID, "custom_aliases": lf.ALIAS_ROWS_ID}
+NEW_ID_FOR = {"channel_profiles": lf.PROFILE_LIST_ID, "custom_aliases": lf.ALIAS_ROWS_ID,
+              "epg_sources": lf.EPG_LIST_ID}
+ALL_BUILT = {lf.PROFILE_LIST_ID, lf.ALIAS_ROWS_ID, lf.EPG_LIST_ID}
+SOURCES = ("epgshare-AU", "epgshare-UK", "guru-US", "guru-UK", "epg.pw-US", "Solo Source")
 
 
 def _plugin():
@@ -36,8 +39,9 @@ def _flat():
     return _plugin().fields
 
 
-def _form(settings=None, profiles=("Living Room", "Kids")):
-    return lf.form_034(_flat(), settings or {}, profiles, plugin_module._clean_json_text)
+def _form(settings=None, profiles=("Living Room", "Kids"), sources=SOURCES):
+    return lf.form_034(_flat(), settings or {}, profiles, plugin_module._clean_json_text,
+                       epg_source_names=sources)
 
 
 def _by_id(fields):
@@ -59,7 +63,7 @@ def test_every_flat_setting_is_in_the_034_form_or_replaced():
         if f["type"] == "info":
             continue
         assert fid in ids or NEW_ID_FOR.get(fid) in ids, fid
-    assert built == {lf.PROFILE_LIST_ID, lf.ALIAS_ROWS_ID}
+    assert built == ALL_BUILT
 
 
 def test_sections_are_markers_and_every_field_after_the_first_names_one():
@@ -77,6 +81,7 @@ def test_sections_are_markers_and_every_field_after_the_first_names_one():
     by_id = _by_id(fields)
     assert by_id["_sec_sources_about"]["help_text"]
     assert by_id[lf.PROFILE_LIST_ID]["section"] == "_sec_sources"
+    assert by_id[lf.EPG_LIST_ID]["section"] == "_sec_sources"
     assert by_id[lf.ALIAS_ROWS_ID]["section"] == "_sec_matching"
     assert by_id["csv_retention_days"]["section"] == "_sec_advanced"
 
@@ -188,9 +193,10 @@ def test_every_new_text_is_one_paragraph_without_em_dashes():
 def test_get_fields_builds_the_034_form_and_flags_write_back(monkeypatch):
     p = _plugin()
     monkeypatch.setattr(Plugin, "_profile_names", staticmethod(lambda: ["Kids"]))
+    monkeypatch.setattr(Plugin, "_epg_source_names", staticmethod(lambda: ["guru-US"]))
     fields = p.get_fields({"settings": {"channel_profiles": "Kids"}})
     assert any(f["type"] == "section" for f in fields)
-    assert p._built_form_ids == {lf.PROFILE_LIST_ID, lf.ALIAS_ROWS_ID}
+    assert p._built_form_ids == ALL_BUILT
 
 
 def test_get_fields_falls_back_to_the_flat_form_on_error(monkeypatch):
@@ -227,3 +233,76 @@ def test_status_for_dispatcharr_leaves_other_statuses():
     for status in ("ok", "error", "success"):
         r = {"status": status}
         assert lf.status_for_dispatcharr(r) is r
+
+
+def _epg(settings=None, sources=SOURCES):
+    fields, built = _form(settings, sources=sources)
+    return _by_id(fields)[lf.EPG_LIST_ID], built
+
+
+def test_epg_pick_list_keeps_the_saved_order_and_spells_names_as_dispatcharr():
+    f, built = _epg({"epg_sources": "GURU-us, epgshare-*, Gone Source"})
+    assert f["type"] == "multiselect"
+    assert lf.EPG_LIST_ID in built
+    # The order is the priority, so the default is never sorted.
+    assert f["default"] == ["guru-US", "epgshare-*", "Gone Source"]
+
+
+def test_epg_every_saved_token_is_an_option():
+    f, _ = _epg({"epg_sources": "Gone Source, my-custom-?", lf.EPG_LIST_ID: ["Old*Stored"]})
+    values = {o["value"] for o in f["options"]}
+    assert {"Gone Source", "my-custom-?", "Old*Stored"} <= values
+    assert set(SOURCES) <= values
+
+
+def test_epg_wildcards_are_derived_only_when_they_match_two_sources():
+    f, _ = _epg()
+    labels = {o["value"]: o["label"] for o in f["options"]}
+    assert labels["epgshare-*"] == "epgshare-* (2 sources)"
+    assert labels["guru-*"] == "guru-* (2 sources)"
+    assert labels["*-US"] == "*-US (2 sources)"
+    assert labels["*-UK"] == "*-UK (2 sources)"
+    for lonely in ("epg.*", "Solo *", "* Source", "*-AU"):
+        assert lonely not in labels
+    # A plain source name is its own label.
+    assert labels["guru-US"] == "guru-US"
+
+
+def test_epg_wildcards_differing_only_in_case_are_offered_once():
+    found = lf.derived_wildcards(["guru-US", "pluto-us", "samsung-us"])
+    assert found == {"*-US": 3}
+
+
+def test_epg_name_with_a_comma_is_not_offered_and_makes_no_wildcard():
+    f, _ = _epg(sources=("A, B", "A, C", "Plain"))
+    values = {o["value"] for o in f["options"]}
+    assert values == {"Plain"}
+
+
+@pytest.mark.parametrize("saved", ["", "*", "all", "_all", "guru-US, _all"])
+def test_epg_all_is_an_empty_default(saved):
+    f, _ = _epg({"epg_sources": saved})
+    assert f["default"] == []
+
+
+def test_epg_write_back_keeps_the_picked_order():
+    out = lf.legacy_settings({"epg_sources": "guru-US", lf.EPG_LIST_ID: ["epgshare-*", "guru-US"]},
+                             {lf.EPG_LIST_ID})
+    assert out["epg_sources"] == "epgshare-*, guru-US"
+    out = lf.legacy_settings({"epg_sources": "guru-US", lf.EPG_LIST_ID: []}, {lf.EPG_LIST_ID})
+    assert out["epg_sources"] == ""
+
+
+def test_epg_stored_list_does_not_overwrite_text_when_not_built():
+    settings = {"epg_sources": "guru-US", lf.EPG_LIST_ID: ["epgshare-*"]}
+    assert lf.legacy_settings(settings, {lf.PROFILE_LIST_ID})["epg_sources"] == "guru-US"
+
+
+def test_epg_derived_wildcards_select_what_the_label_says():
+    """The count in a wildcard label is what the plugin's own parser selects."""
+    import fnmatch
+    f, _ = _epg()
+    for o in f["options"]:
+        if o["label"] != o["value"]:
+            n = sum(fnmatch.fnmatch(s.upper(), o["value"].upper()) for s in SOURCES)
+            assert o["label"] == f"{o['value']} ({n} sources)"

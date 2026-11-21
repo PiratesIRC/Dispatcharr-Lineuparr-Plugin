@@ -719,7 +719,8 @@ class Plugin:
         try:
             settings = (context or {}).get("settings") or {}
             fields, built = lineuparr_fields.form_034(
-                flat, settings, self._profile_names(), _clean_json_text)
+                flat, settings, self._profile_names(), _clean_json_text,
+                epg_source_names=self._epg_source_names())
             self._built_form_ids = built
             return fields
         except Exception as exc:
@@ -734,6 +735,18 @@ class Plugin:
             return list(ChannelProfile.objects.values_list("name", flat=True))
         except Exception as exc:
             LOGGER.warning(f"{LOG_PREFIX} Could not read channel profiles for the settings list: {exc}")
+            return []
+
+    @staticmethod
+    def _epg_source_names():
+        """EPG source names for the settings pick list. Never raises: on a
+        database error the list is empty and the saved values still show."""
+        if not _EPG_AVAILABLE:
+            return []
+        try:
+            return list(EPGSource.objects.values_list("name", flat=True))
+        except Exception as exc:
+            LOGGER.warning(f"{LOG_PREFIX} Could not read EPG sources for the settings list: {exc}")
             return []
 
     def _report_usage(self, settings, logger, force=False):
