@@ -21,7 +21,7 @@ from django.db import transaction
 from .fuzzy_matcher import (FuzzyMatcher, has_upgrade_quality, detect_category_country,
                             detect_name_country_prefix, country_codes_in_text)
 from .aliases import CHANNEL_ALIASES, COUNTRY_ALIASES
-from .progress_status import save_progress_atomic, load_progress, build_status_message
+from .progress_status import save_progress_atomic, load_progress, build_status_message, format_local_timestamp
 from . import lineuparr_fields, notify_bridge, report_count, reports
 from .usage_client import UsageReporter, jsonl_sum, load_plugin_settings, with_usage_field
 
@@ -2286,7 +2286,7 @@ class Plugin:
 
         lines = [
             f"# Lineuparr Export v{PluginConfig.PLUGIN_VERSION}",
-            f"# Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            f"# Generated: {format_local_timestamp(time.time(), '%Y-%m-%d %H:%M:%S')}",
             "#",
             "# WHAT THIS FILE IS",
             "# A report written by the Lineuparr plugin for Dispatcharr. Every line",
@@ -2773,7 +2773,7 @@ class Plugin:
         update_count = sum(1 for r in results if r["Status"].startswith("Update"))
 
         # Export CSV
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        ts = format_local_timestamp(time.time(), "%Y%m%d_%H%M%S")
         csv_name = f"lineuparr_preview_channels_{ts}.csv"
         self._export_csv(csv_name, results,
                          ["Channel", "Number", "Category", "Group", "Status"], logger, settings,
@@ -2931,7 +2931,7 @@ class Plugin:
             # Sort: unmatched first, then by score ascending
             results.sort(key=lambda r: (0 if r["Score"] == 0 else 1, r["Score"]))
 
-            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+            ts = format_local_timestamp(time.time(), "%Y%m%d_%H%M%S")
             csv_name = f"lineuparr_preview_match_{ts}.csv"
             self._export_csv(csv_name, results,
                              ["Channel", "Number", "Category", "Best Match", "Score", "Match Type", "Total Matches", "Top Matches"],
@@ -3784,7 +3784,7 @@ class Plugin:
                 )
 
             # Export CSV
-            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+            ts = format_local_timestamp(time.time(), "%Y%m%d_%H%M%S")
             mode = "dryrun" if dry_run else "applied"
             csv_name = f"lineuparr_match_{mode}_{ts}.csv"
             # The unmatched-channel cleanup runs after this export is written,
@@ -4145,7 +4145,7 @@ class Plugin:
 
             # Export CSV
             if csv_rows:
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                timestamp = format_local_timestamp(time.time(), "%Y%m%d_%H%M%S")
                 csv_name = f"lineuparr_epg_match_{timestamp}.csv"
                 self._export_csv(
                     csv_name,
