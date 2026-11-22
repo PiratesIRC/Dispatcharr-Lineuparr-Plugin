@@ -248,6 +248,42 @@ class PluginConfig:
     ]
 
 
+# Per-thread state for a long action that runs inline inside a Celery task
+# (Dispatcharr 0.34). Thread-local, so a daemon thread never sees it.
+_OP_STATE = threading.local()
+# Returned by Plugin._start_operation when another operation holds the guard.
+_BUSY = object()
+
+
+def _in_celery_task():
+    """True when this code runs inside a Celery task (Dispatcharr 0.34 runs
+    every plugin action in one). Never raises; False when Celery is absent."""
+    try:
+        from celery import current_task
+        return bool(current_task is not None and getattr(current_task.request, "id", None))
+    except Exception:
+        return False
+
+
+def _in_inline_operation():
+    """True on the thread running a long action inline (its sub-steps check this)."""
+    return bool(getattr(_OP_STATE, "inline", False))
+
+
+def _forward_task_progress(action_id, percent, message):
+    """Pass progress to Dispatcharr 0.34's task reporter, which fills the plugin
+    page's Tasks list. Only the top-level action forwards, so a sub-step's own
+    0 to 100 does not move the parent's percent backwards. A no-op without a
+    reporter (0.33, or a daemon thread). Never raises."""
+    reporter = getattr(_OP_STATE, "reporter", None)
+    if reporter is None or getattr(_OP_STATE, "action", None) != action_id:
+        return
+    try:
+        reporter(max(0, min(100, int(percent))), message)
+    except Exception as exc:
+        LOGGER.debug(f"{LOG_PREFIX} task progress report failed: {exc}")
+
+
 class ProgressTracker:
     """Tracks operation progress with periodic logging."""
 
@@ -312,6 +348,10 @@ class ProgressTracker:
             save_progress_atomic(PluginConfig.PROGRESS_FILE, record)
         except Exception as e:
             self.logger.warning(f"{LOG_PREFIX} Could not write progress file: {e}")
+        percent = 100 if status == "done" else self.processed_items * 100 // self.total_items
+        _forward_task_progress(
+            self.action_id, percent,
+            f"{self.action_id}: {self.processed_items}/{self.total_items}")
 
     def _format_eta(self, seconds):
         return ProgressTracker._format_eta_static(seconds)
@@ -367,6 +407,7 @@ class Plugin:
     def __init__(self):
         self._thread = None
         self._thread_lock = threading.Lock()
+        self._inline_running = False
         self._stop_event = threading.Event()
         self._lineup_cache = None
         self._lineup_cache_file = None
@@ -396,6 +437,50 @@ class Plugin:
             self._thread = threading.Thread(target=_run_then_report, args=args, daemon=True)
             self._thread.start()
             return True
+
+    def _start_operation(self, target, args, inline):
+        """Start a long action the way Dispatcharr's task banner expects.
+
+        Inside a Celery task (0.34) the action runs inline and its result is
+        returned, so the banner turns green or red when it finishes; a daemon
+        thread would end the task at once. Outside a task (0.33) the thread
+        path is unchanged. Returns _BUSY when another operation holds the guard,
+        the result dict when it ran inline, or None when a thread was started.
+        """
+        if _in_celery_task():
+            return self._run_inline(inline, args)
+        if not self._try_start_thread(target, args):
+            return _BUSY
+        return None
+
+    def _run_inline(self, action_fn, args):
+        """Run action_fn on this thread under the same guard as the thread path."""
+        with self._thread_lock:
+            if self._inline_running or (self._thread and self._thread.is_alive()):
+                return _BUSY
+            self._inline_running = True
+            self._stop_event.clear()
+        _OP_STATE.inline = True
+        try:
+            result = action_fn(*args)
+        except Exception as exc:
+            LOGGER.exception(f"{LOG_PREFIX} Operation failed: {exc}")
+            result = action_result("error", f"Operation failed: {exc}")
+        finally:
+            _OP_STATE.inline = False
+            with self._thread_lock:
+                self._inline_running = False
+        if not isinstance(result, dict):
+            result = action_result("ok", "Finished.")
+        return result
+
+    def _runs_nested(self):
+        """True when an action method is a sub-step of an operation already running
+        on this thread (Full Sync's steps, or the daemon thread of a 0.33 action),
+        so it must run directly rather than start an operation of its own."""
+        if _in_inline_operation():
+            return True
+        return threading.current_thread() is not threading.main_thread() and not _in_celery_task()
 
     @property
     def fields(self):
@@ -791,7 +876,14 @@ class Plugin:
                 return {"status": "error", "error": f"Unknown action: {action}"}
 
             logger.info(f"{LOG_PREFIX} ▶ Action triggered: {action}")
-            result = handler(settings, logger)
+            reporter = context.get("report_progress") if isinstance(context, dict) else None
+            _OP_STATE.action = action
+            _OP_STATE.reporter = reporter if callable(reporter) else None
+            try:
+                result = handler(settings, logger)
+            finally:
+                _OP_STATE.action = None
+                _OP_STATE.reporter = None
             status = result.get("status", "?") if isinstance(result, dict) else "ok"
             msg = result_text(result)[:200]
             is_bg = result.get("background", False) if isinstance(result, dict) else False
@@ -862,7 +954,7 @@ class Plugin:
             data = json.load(f)
 
         if "categories" not in data:
-            raise ValueError(f"Invalid lineup file: missing 'categories' key")
+            raise ValueError("Invalid lineup file: missing 'categories' key")
 
         self._rewrite_country_prefixes(data, logger)
 
@@ -2719,8 +2811,12 @@ class Plugin:
             stream_count = 0
             eta_str = "unknown"
 
-        if not self._try_start_thread(self._do_preview_stream_match, (dict(settings), logger)):
+        started = self._start_operation(self._do_preview_stream_match, (dict(settings), logger),
+                                        self._do_preview_stream_match)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"Preview started: matching {total_channels} channels against {stream_count} streams. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
@@ -2963,7 +3059,7 @@ class Plugin:
         if not dry_run:
             self._trigger_frontend_refresh(logger)
 
-        prefix_str = f" (dry run)" if dry_run else ""
+        prefix_str = " (dry run)" if dry_run else ""
         return {
             "status": "ok",
             "message": f"Groups synced{prefix_str}: {created} created, {existed} already existed.",
@@ -2973,7 +3069,7 @@ class Plugin:
         """Create channels from lineup and assign to groups.
         Runs as daemon thread to avoid HTTP timeout."""
         # When called from _do_full_sync (already in a thread), run inline
-        if threading.current_thread() is not threading.main_thread():
+        if self._runs_nested():
             return self._do_sync_channels(settings, logger)
 
         # Calculate initial ETA estimate
@@ -2986,8 +3082,12 @@ class Plugin:
         except Exception:
             eta_str = "unknown"
 
-        if not self._try_start_thread(self._do_sync_channels_bg, (dict(settings), logger)):
+        started = self._start_operation(self._do_sync_channels_bg, (dict(settings), logger),
+                                        self._do_sync_channels)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"Sync Channels started: {total_channels} channels. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
@@ -3129,7 +3229,7 @@ class Plugin:
         """Attach matched streams to channels with quality ordering.
         Runs as daemon thread to avoid HTTP timeout."""
         # When called from _do_full_sync (already in a thread), run inline
-        if threading.current_thread() is not threading.main_thread():
+        if self._runs_nested():
             return self._do_apply_stream_match(settings, logger)
 
         try:
@@ -3141,8 +3241,12 @@ class Plugin:
             total_channels = 0
             eta_str = "unknown"
 
-        if not self._try_start_thread(self._do_apply_stream_match_bg, (dict(settings), logger)):
+        started = self._start_operation(self._do_apply_stream_match_bg, (dict(settings), logger),
+                                        self._do_apply_stream_match)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"Stream matching started for {total_channels} channels. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
@@ -3156,7 +3260,7 @@ class Plugin:
             return {"status": "error", "error": "EPG models not available in this Dispatcharr installation."}
 
         # When called from _do_full_sync (already in a thread), run inline
-        if threading.current_thread() is not threading.main_thread():
+        if self._runs_nested():
             return self._do_apply_epg_match(settings, logger)
 
         try:
@@ -3168,8 +3272,12 @@ class Plugin:
             total_channels = 0
             eta_str = "unknown"
 
-        if not self._try_start_thread(self._do_apply_epg_match_bg, (dict(settings), logger)):
+        started = self._start_operation(self._do_apply_epg_match_bg, (dict(settings), logger),
+                                        self._do_apply_epg_match)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"EPG matching started for {total_channels} channels. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
@@ -3183,7 +3291,7 @@ class Plugin:
             return {"status": "error", "error": "Logo model not available in this Dispatcharr installation."}
 
         # When called from _do_full_sync (already in a thread), run inline
-        if threading.current_thread() is not threading.main_thread():
+        if self._runs_nested():
             return self._do_apply_logo_match(settings, logger)
 
         try:
@@ -3195,8 +3303,12 @@ class Plugin:
             total_channels = 0
             eta_str = "unknown"
 
-        if not self._try_start_thread(self._do_apply_logo_match_bg, (dict(settings), logger)):
+        started = self._start_operation(self._do_apply_logo_match_bg, (dict(settings), logger),
+                                        self._do_apply_logo_match)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"Logo assignment started for {total_channels} channels. ETA: ~{eta_str}. Click 📊 Status to watch progress.",
@@ -4148,8 +4260,11 @@ class Plugin:
         except Exception:
             eta_msg = ""
 
-        if not self._try_start_thread(self._do_full_sync, (dict(settings), logger)):
+        started = self._start_operation(self._do_full_sync, (dict(settings), logger), self._do_full_sync)
+        if started is _BUSY:
             return {"status": "error", "error": "An operation is already running. Please wait for it to finish."}
+        if started is not None:
+            return started
         return {
             "status": "ok",
             "message": f"Full Sync started: groups, channels, stream matching, EPG matching, and logo assignment.{eta_msg} Click 📊 Status to watch progress.",
@@ -4178,7 +4293,7 @@ class Plugin:
             if self._stop_event.is_set():
                 logger.info(f"{LOG_PREFIX} Full sync cancelled.")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Full sync cancelled."})
-                return
+                return action_result("warning", "Full Sync was cancelled before it finished.")
             logger.info(f"{LOG_PREFIX} Step 1/5: Syncing groups...")
             send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Step 1/5: Syncing groups..."})
             result = self._sync_groups(settings, logger)
@@ -4193,7 +4308,7 @@ class Plugin:
             if self._stop_event.is_set():
                 logger.info(f"{LOG_PREFIX} Full sync cancelled.")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Full sync cancelled."})
-                return
+                return action_result("warning", "Full Sync was cancelled before it finished.")
             logger.info(f"{LOG_PREFIX} Step 2/5: Syncing channels...")
             send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Step 2/5: Syncing channels..."})
             result = self._sync_channels(settings, logger)
@@ -4212,7 +4327,7 @@ class Plugin:
             if self._stop_event.is_set():
                 logger.info(f"{LOG_PREFIX} Full sync cancelled.")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Full sync cancelled."})
-                return
+                return action_result("warning", "Full Sync was cancelled before it finished.")
             logger.info(f"{LOG_PREFIX} Step 3/5: Matching streams...")
             send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Step 3/5: Matching streams..."})
             result = self._apply_stream_match(settings, logger)
@@ -4223,7 +4338,7 @@ class Plugin:
             if self._stop_event.is_set():
                 logger.info(f"{LOG_PREFIX} Full sync cancelled.")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Full sync cancelled."})
-                return
+                return action_result("warning", "Full Sync was cancelled before it finished.")
             if _EPG_AVAILABLE:
                 logger.info(f"{LOG_PREFIX} Step 4/5: Matching EPG data...")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Step 4/5: Matching EPG data..."})
@@ -4238,7 +4353,7 @@ class Plugin:
             if self._stop_event.is_set():
                 logger.info(f"{LOG_PREFIX} Full sync cancelled.")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Full sync cancelled."})
-                return
+                return action_result("warning", "Full Sync was cancelled before it finished.")
             if _LOGO_AVAILABLE:
                 logger.info(f"{LOG_PREFIX} Step 5/5: Assigning logos...")
                 send_websocket_update('updates', 'update', {"type": "plugin", "plugin": "Lineuparr", "message": "Step 5/5: Assigning logos..."})
@@ -4258,6 +4373,7 @@ class Plugin:
                 "type": "plugin", "plugin": "Lineuparr",
                 "message": f"✅ FULL SYNC COMPLETE in {elapsed_str}!"
             })
+            return action_result("ok", f"Full Sync complete in {elapsed_str}.")
 
         except Exception as e:
             logger.exception(f"{LOG_PREFIX} Full sync error: {e}")
@@ -4265,6 +4381,7 @@ class Plugin:
                 "type": "plugin", "plugin": "Lineuparr",
                 "message": f"❌ Full sync error: {e}"
             })
+            return action_result("error", f"Full Sync failed: {e}")
         finally:
             # Always clear the flag -- including on early returns (cancel/
             # abort) and exceptions -- so later operations refresh normally.
