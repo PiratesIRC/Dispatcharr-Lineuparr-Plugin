@@ -29,6 +29,7 @@ CHANNEL_ALIASES = {
     "Newsmax": ["Newsmax", "Newsmax TV"],
     "NewsNation": ["NewsNation", "News Nation", "WGN America", "WGN"],
     "Weather Channel": ["Weather Channel", "TWC", "The Weather Channel"],
+    "Yahoo Finance": ["Yahoo Finance", "Yahoo Finance Live"],
 
     # --- Sports ---
     "ACC Network": ["ACC Network", "ACCN"],
@@ -39,6 +40,8 @@ CHANNEL_ALIASES = {
     "ESPN2": ["ESPN 2", "ESPN2"],
     "ESPNEWS": ["ESPN News", "ESPNEWS", "ESPNews"],
     "ESPNU": ["ESPNU"],
+    # Lineup name carries the colon; the provider names the feed without it.
+    "ESPN8: The Ocho": ["ESPN8 The Ocho", "ESPN 8 The Ocho", "ESPN Ocho"],
     "FanDuel TV": ["FanDuel TV", "FanDuel", "TVG"],
     # NOTE: Do NOT alias regional FanDuel Sports feeds (Cincinnati, Detroit,
     # Florida, Midwest, North, Ohio, Oklahoma, SoCal, South, Southeast,
@@ -219,6 +222,8 @@ CHANNEL_ALIASES = {
     "Hillsong Channel": ["Hillsong Channel", "TBN Inspire", "Hillsong", "The Church Channel"],
 
     # --- Movies (rebrands / discontinued) ---
+    # UK channel. The lineup carries the "!" and the provider drops it.
+    "Great! Movies": ["Great Movies"],
     # Showtime Beyond was rebranded SHO×BET on 2020-07-15.
     "Showtime Beyond": ["Showtime Beyond", "SHO×BET", "SHO BET", "SHOxBET", "Showtime BET", "SHO X BET"],
 
@@ -253,6 +258,11 @@ CHANNEL_ALIASES = {
 
     # --- UK: Kids ---
     "Baby TV": ["Baby Tv", "Baby TV", "BabyTV"],
+
+    # --- UK: ITV ---
+    # The lineup names the main channel "ITV"; providers carry it as ITV1 or
+    # "ITV 1". Only the bare number forms: "ITV +1" and "ITV1 +1" are timeshifts.
+    "ITV": ["ITV1", "ITV 1"],
 
     # --- UK: UKTV / Entertainment ---
     # UKTV rebranded all channels under the "U" masterbrand on 16 July 2024
