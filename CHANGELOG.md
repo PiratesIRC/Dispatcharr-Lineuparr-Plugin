@@ -2,6 +2,20 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3262133 (2026-11-22)
+
+This version needs Dispatcharr 0.34.0 or newer, as before.
+
+### Changed
+
+- Preview, Full Sync, Sync Channels and the stream, EPG and logo Apply actions report their real result on Dispatcharr 0.34. They now run as Dispatcharr tasks, so the task banner turns green or red with the plugin's own message when the run ends, and the plugin page's Tasks list shows the percentage while it runs. A Plugins page reload waits until a running action finishes. On Dispatcharr 0.33 they run in the background as before.
+- Built-in aliases for ESPN8 The Ocho, Yahoo Finance, ITV (ITV1) and Great! Movies. Timeshift feeds such as ITV +1 and Great Movies +1 are not matched by them.
+- Export file names and the CSV "Generated" line use Dispatcharr's time zone instead of UTC.
+
+### Fixed
+
+- A stream rescued by a call-letter alias is skipped when it names a different network from the channel, so a CBS channel no longer receives the FOX feed a station carries on a subchannel under the same call letters.
+
 ## 1.26.3251844 (2026-11-21)
 
 This version needs Dispatcharr 0.34.0 or newer. Its manifest declares
