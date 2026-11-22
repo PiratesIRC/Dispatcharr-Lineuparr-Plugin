@@ -78,6 +78,20 @@ def check_lineups() -> None:
                     err(f"{path.name}: {cat_name}[{i}] missing 'name'")
                 if "number" not in ch:
                     err(f"{path.name}: channel '{name}' in '{cat_name}' missing 'number'")
+                excluded = ch.get("excluded_aliases")
+                if excluded is not None:
+                    excluded_values = [excluded] if isinstance(excluded, str) else excluded
+                    if not isinstance(excluded_values, list):
+                        err(
+                            f"{path.name}: channel '{name}' in '{cat_name}' "
+                            "excluded_aliases must be a string or list"
+                        )
+                    elif any(not isinstance(value, str) or not value.replace("*", "").strip()
+                             for value in excluded_values):
+                        err(
+                            f"{path.name}: channel '{name}' in '{cat_name}' "
+                            "excluded_aliases must contain non-empty strings, not wildcard-only patterns"
+                        )
                 seen[name] = seen.get(name, 0) + 1
             dups = [f"{n!r} x{c}" for n, c in seen.items() if c > 1]
             if dups:
