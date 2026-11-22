@@ -56,6 +56,40 @@ def has_upgrade_quality(name: str) -> bool:
     return bool(_UPGRADE_QUALITY_RE.search(name))
 
 
+# US broadcast network labels. Many stations carry a second network on a
+# subchannel under the same call letters (WEVV is CBS on its main channel and
+# FOX on DT2), so a callsign match alone can put another network's stream on a
+# channel. A label may be followed directly by a channel number ("FOX2",
+# "ABC7"); a letter after the label ends the match, so CNBC names no network.
+# MY, MYTV and MYNETWORK are one network.
+_NETWORK_LABEL_RE = re.compile(
+    r'\b(ABC|NBC|CBS|FOX|CW|PBS|MYTV|MYNETWORK|MY)(?=\d|\b)', re.IGNORECASE)
+
+
+def networks_named(name):
+    """The set of US broadcast networks a channel or stream name names."""
+    found = set()
+    for m in _NETWORK_LABEL_RE.finditer(name or ""):
+        label = m.group(1).upper()
+        found.add("MY" if label.startswith("MY") else label)
+    return found
+
+
+def network_conflicts(channel_name, stream_name):
+    """True when the stream names another network and not the channel's own.
+
+    The channel must name exactly one network; with none or several the answer
+    is False, because there is nothing to compare. A stream that names no
+    network, or that names the channel's network among others, does not
+    conflict.
+    """
+    channel_nets = networks_named(channel_name)
+    if len(channel_nets) != 1:
+        return False
+    stream_nets = networks_named(stream_name)
+    return bool(stream_nets) and not (channel_nets & stream_nets)
+
+
 # Country tokens for the delimited provider-prefix patterns below; curated so a
 # bare delimited word ("(SPORTS)") isn't misread as a country. Keep in sync with
 # detect_stream_country().
@@ -561,7 +595,8 @@ class FuzzyMatcher(FuzzyMatcherCore):
         # Stage 0b: alias-anchored callsign rescue.
         matches.extend(
             self._alias_callsign_matches(aliases, candidate_names,
-                                         already_matched={m[0] for m in matches})
+                                         already_matched={m[0] for m in matches},
+                                         channel_name=lineup_name)
         )
 
         # Sort by score descending
@@ -625,7 +660,7 @@ class FuzzyMatcher(FuzzyMatcherCore):
             self._alias_callsign_patterns[callsign] = pattern
         return pattern
 
-    def _alias_callsign_matches(self, aliases, candidate_names, already_matched):
+    def _alias_callsign_matches(self, aliases, candidate_names, already_matched, channel_name=None):
         """Match streams that carry a callsign this channel's aliases declare.
 
         The core callsign anchor in match_all_streams only fires when the LINEUP
@@ -637,6 +672,11 @@ class FuzzyMatcher(FuzzyMatcherCore):
         exact alias match, and returned with its own match type so a report can
         tell the two apart. These matches stay subject to the country and region
         filters in match_all_streams.
+
+        When channel_name names one network (CBS in "CBS - IN Evansville (WEVV)"),
+        a candidate that names a different network is not rescued: WEVV's FOX
+        subchannel ("US FOX 44 (WEVV DT2)") carries the same callsign. A channel
+        that names no network, or several, is not checked.
         """
         callsigns = {cs for cs in (self._alias_callsign(a) for a in aliases) if cs}
         if not callsigns:
@@ -648,6 +688,8 @@ class FuzzyMatcher(FuzzyMatcherCore):
                 continue
             for callsign in callsigns:
                 if self._alias_callsign_pattern(callsign).search(candidate):
+                    if channel_name is not None and network_conflicts(channel_name, candidate):
+                        break
                     rescued.append((candidate, 95, "alias-callsign"))
                     break
         return rescued
