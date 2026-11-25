@@ -65,3 +65,26 @@ def hub_hold():
             yield
 
     return guard
+
+
+@pytest.fixture(autouse=True)
+def redirect_legacy_state(tmp_path, monkeypatch):
+    """Every legacy /data state path points under tmp_path, and storage refuses a real /data write.
+
+    storage.bind runs at import in legacy mode here (no Dispatcharr sandbox), so the constants
+    hold the literal /data paths. Each one, and LEGACY_PATHS, is moved into tmp_path for the test.
+    REFUSE_REAL_DATA makes the storage helpers raise on any /data path that still gets through.
+    """
+    from Lineuparr import plugin as plugin_module, reports, storage
+
+    cfg = plugin_module.PluginConfig
+    base = tmp_path / "legacy-state"
+    redirected = {}
+    for name, literal in cfg.LEGACY_PATHS.items():
+        redirected[name] = str(base / literal[len("/data/"):])
+    monkeypatch.setattr(cfg, "LEGACY_PATHS", dict(redirected))
+    for name, value in redirected.items():
+        monkeypatch.setattr(cfg, name, value)
+    monkeypatch.setattr(reports, "REPORT_DIR", redirected["REPORT_DIR"])
+    monkeypatch.setattr(storage._ps, "REFUSE_REAL_DATA", True)
+    yield

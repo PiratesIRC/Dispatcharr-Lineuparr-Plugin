@@ -245,7 +245,6 @@ def test_a_dry_run_records_nothing(plugin, ledger, monkeypatch):
 # --------------------------------------------------------------------------- #
 def test_the_ledger_path_is_declared_and_is_a_jsonl_file():
     path = plugin_module.PluginConfig.CHANNEL_COUNT_LEDGER_FILE
-    assert path.startswith("/data/"), path
     assert path.endswith(".jsonl"), (
         "the publishing script reads this one JSON object per line")
 

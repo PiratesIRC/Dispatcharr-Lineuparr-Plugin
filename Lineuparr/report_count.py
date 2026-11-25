@@ -88,7 +88,7 @@ MAX_BYTES = 4096
 FILE_MODE = 0o600
 
 # The directory mode applies only on the run that creates it, and this
-# directory is new: reports themselves live in /data/lineuparr_reports, so
+# directory is new: reports themselves live in the shared Newsflasharr folder, so
 # nothing has created /data/lineuparr before. Whichever process gets there
 # first owns it. If that is anything run as root inside the container, and the
 # documented way of probing a plugin is exactly that, the dispatch workers can

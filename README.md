@@ -174,6 +174,29 @@ server, not verified. Untick the setting to stop sending; this install's figures
 are deleted from the server the next time an action or sync finishes after you
 untick.
 
+## Where Lineuparr keeps its files
+
+Lineuparr keeps its private files in its data folder. Dispatcharr creates that folder under `/data/plugins/_data/`, named for the plugin's key (`lineuparr` for a folder install). On the first start after an upgrade the plugin copies the files it used to keep under `/data` into that folder. The copy never deletes, renames or edits an old file, and a file already in the data folder is left as it is. The copy is recorded in `migrated.json` in the data folder.
+
+Inside the data folder:
+
+- `lineuparr_state.json`: the saved plugin state.
+- `lineuparr_progress.json`: the progress of the running or last action, read by Show Status.
+- `lineuparr_channel_counts.jsonl`: the Channels Created tally, one line per finished sync. It is append only. Its offsets file and lock are kept beside it in the same folder.
+- `usage/lineuparr/`: the usage reporter's install id and send record.
+
+Beside the data folder, in `/data/plugins/_data/`:
+
+- `lineuparr.operation.lock`: the lock that stops two operations running at once. Every worker has to see the same file, so it is never copied into the data folder. While the rollout lasts, the plugin also takes the previous version's lock at `/data/lineuparr_operation.lock` first, so an old worker and a new one cannot run an operation together. The plugin removes both locks when an operation ends.
+
+Outside the data folder:
+
+- `/data/plugins/_shared/newsflasharr/lineuparr/`: the emailed reports that Newsflasharr attaches. Newsflasharr reads them from there.
+- `/data/exports/`: the CSV exports. Seven plugins share this folder, and Lineuparr deletes only its own `lineuparr_*.csv` files from it.
+- `/data/lineuparr/report_count.json`: the count of reports built. Newsflasharr reads it at this fixed path, so it stays there.
+
+Delete data on uninstall removes the data folder, with the tally and the install id in it. It does not remove the shared reports folder, `/data/exports` or the lock beside the data folder. Once `migrated.json` shows no failed copy, the old `/data` files can be removed by hand, provided no old file has changed since the time recorded in `migrated.json`, because a process still running the previous version keeps writing them.
+
 ## License
 
 MIT. See [`LICENSE`](LICENSE).

@@ -523,7 +523,7 @@ Five guards apply across all four:
 
 Every action that produces a CSV also writes a shareable report: one HTML page
 and one CSV, both named for the moment they were written, in
-`/data/lineuparr_reports` inside the container. The eight newest of each are
+`/data/plugins/_shared/newsflasharr/lineuparr/` inside the container. The eight newest of each are
 kept and older ones are deleted.
 
 ### What the page looks like
@@ -707,10 +707,12 @@ could not reach the server, the plugin keeps the id and retries.
 | What | Where |
 |---|---|
 | CSV exports | `/data/exports/lineuparr_*.csv`, kept across container restarts unless you set a retention in days |
-| Reports | `/data/lineuparr_reports/lineuparr_report_*.html` and `*.csv`, eight of each kept |
+| Reports | `/data/plugins/_shared/newsflasharr/lineuparr/lineuparr_report_*.html` and `*.csv`, eight of each kept |
 | Report count | `/data/lineuparr/report_count.json`, read by Newsflasharr |
-| Channels-created tally | `/data/lineuparr_channel_counts.jsonl`, one line per finished sync, summed by the Channels Created badge on the README |
-| Usage report state | `/data/plugin_stats/lineuparr/`: the install id and the timing files of the usage report (install_id, sent, backoff, disabled, delete_backoff, lock). To start a new id, untick Share anonymous usage counts and let an action finish so the server deletes this install's figures; deleting the folder instead leaves the old figures on the server, and the new id sends the full total again, so the badge counts it twice |
+| Channels-created tally | `/data/plugins/_data/lineuparr/lineuparr_channel_counts.jsonl`, one line per finished sync, summed by the Channels Created badge on the README |
+| Usage report state | `/data/plugins/_data/lineuparr/usage/lineuparr/`: the install id and the timing files of the usage report (install_id, sent, backoff, disabled, delete_backoff, lock). To start a new id, untick Share anonymous usage counts and let an action finish so the server deletes this install's figures; deleting the folder instead leaves the old figures on the server, and the new id sends the full total again, so the badge counts it twice |
+| Private state (saved state, progress) | `/data/plugins/_data/lineuparr/`, named for the plugin key; see [Where Lineuparr keeps its files](../README.md#where-lineuparr-keeps-its-files) in the README |
+| Operation lock | `/data/plugins/_data/lineuparr.operation.lock`, beside the data folder |
 | Plugin directory | `/data/plugins/lineuparr/` inside the Dispatcharr data volume |
 | Lineup files | the same plugin directory, named `{CC}_{Provider}_lineup.json` |
 | Logs | `docker logs dispatcharr \| grep "Lineuparr"` |

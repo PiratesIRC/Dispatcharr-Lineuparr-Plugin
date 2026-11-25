@@ -29,8 +29,9 @@ import os
 import re
 import time
 
-# Reports are written here, deliberately NOT under /data/logos: Dispatcharr's
-# nginx serves that tree unauthenticated to the entire local network.
+# The legacy default. storage.bind resolves the shared Newsflasharr folder (PluginConfig.REPORT_DIR),
+# and plugin.py assigns that value to this module's REPORT_DIR at import. Reports are never written under
+# /data/logos: Dispatcharr's nginx serves that tree unauthenticated to the entire local network.
 REPORT_DIR = "/data/lineuparr_reports"
 
 # Every report file starts with this. The pruner matches on it, so a copied and

@@ -25,6 +25,11 @@ from .progress_status import save_progress_atomic, load_progress, build_status_m
 from . import lineuparr_fields, notify_bridge, report_count, reports
 from .usage_client import UsageReporter, jsonl_sum, load_plugin_settings, with_usage_field
 
+try:
+    from . import storage
+except ImportError:  # loaded as a bare module, as the test harness allows
+    import storage
+
 from apps.channels.models import Channel, ChannelGroup, ChannelProfile, ChannelProfileMembership, ChannelStream, Stream
 from apps.m3u.models import M3UAccount
 from core.utils import send_websocket_update
@@ -148,6 +153,17 @@ def _clean_json_text(s):
     return s.strip().strip(_INVISIBLE_CHARS).strip()
 
 
+def _plugin_key_for_dir(path):
+    """The key Dispatcharr's loader gives a plugin installed in this folder."""
+    return os.path.basename(os.path.normpath(path)).replace(" ", "_").lower()
+
+
+# The PluginConfig key follows the install folder, which differs by install route (a hand copy
+# keeps "lineuparr", a Hub install may not). storage.resolve uses it when the loader context is
+# unavailable, so it is computed from this folder rather than written out.
+PLUGIN_DB_KEY = _plugin_key_for_dir(os.path.dirname(os.path.abspath(__file__)))
+
+
 class PluginConfig:
     PLUGIN_VERSION = "1.26.3262133"
 
@@ -195,7 +211,11 @@ class PluginConfig:
     TV_LOGOS_REPO = "tv-logo/tv-logos"
     TV_LOGOS_BRANCH = "main"
 
-    DATA_DIR = "/data"
+    # Private state, moved into the plugin data directory by storage.bind. The
+    # literals here are the legacy paths: storage keeps them in LEGACY_PATHS for
+    # the carry-over and for legacy mode, and rebinds each constant at import.
+    PLUGIN_DB_KEY = PLUGIN_DB_KEY
+    # Shared by seven plugins and read by the operator: stays in /data.
     EXPORTS_DIR = "/data/exports"
     # The exports directory is SHARED with at least six other plugins, so
     # anything that deletes from it selects on this plugin's own filename
@@ -212,9 +232,19 @@ class PluginConfig:
     # happens or it cannot be recovered.
     CHANNEL_COUNT_LEDGER_FILE = "/data/lineuparr_channel_counts.jsonl"
     STATE_FILE = "/data/lineuparr_state.json"
+    # Written by ProgressTracker in whichever worker runs an action and read only
+    # by the Show Status readout (plugin_status), so it moves into the data
+    # directory with the other private state.
     PROGRESS_FILE = "/data/lineuparr_progress.json"
+    # Cross-worker: kept BESIDE the data directories (storage.py _BESIDE), never
+    # copied. operation_lock_files adds the old path during the rollout.
     OPERATION_LOCK_FILE = "/data/lineuparr_operation.lock"
     OPERATION_LOCK_TIMEOUT_MINUTES = 10
+    # The usage reporter's directory: install id, send record and lock.
+    USAGE_DATA_DIR = "/data/plugin_stats"
+    # Newsflasharr attaches these reports, so they live in the shared folder it
+    # reads. storage.bind sets the value; the reports module reads it at call time.
+    REPORT_DIR = "/data/lineuparr_reports"
 
     # Simplified category mapping: simplified name -> list of original categories to merge
     SIMPLIFIED_CATEGORIES = {
@@ -386,6 +416,12 @@ class SmartRateLimiter:
             time.sleep(self.delay)
 
 
+# Bind the state paths to the plugin data directory, once per import, before anything reads
+# them (the usage reporter below and the Plugin class). Legacy mode leaves them as written.
+storage.bind(PluginConfig, __file__, LOGGER)
+# The report writer names the shared reports folder, so it must hold the value bind resolved.
+reports.REPORT_DIR = PluginConfig.REPORT_DIR
+
 # Reports the Channels Created total and a random install id to the plugin-stats
 # Worker, so the README badges count every install (see docs/USER-GUIDE.md,
 # "Anonymous usage counts"). The total is read from the same append-only ledger the
@@ -397,7 +433,22 @@ USAGE = UsageReporter(
     label="Channels Created",
     total_fn=lambda: jsonl_sum(PluginConfig.CHANNEL_COUNT_LEDGER_FILE + "*", key="channels"),
     settings_fn=lambda: load_plugin_settings("lineuparr"),
+    data_dir=PluginConfig.USAGE_DATA_DIR,
 )
+
+
+def _block_usage_if_install_id_blocked(usage, migration):
+    """Silence the usage reporter when the old install id could not be carried over.
+
+    A fresh id minted here would count this install twice, and the settings argument cannot
+    prevent that, so this process reports nothing. Returns the reporter for convenience.
+    """
+    if migration is not None and migration.install_id_blocked:
+        usage.report = lambda *args, **kwargs: None
+    return usage
+
+
+_block_usage_if_install_id_blocked(USAGE, PluginConfig.STORAGE_MIGRATION)
 
 
 class Plugin:
@@ -843,6 +894,10 @@ class Plugin:
 
     def run(self, action, params, context):
         logger = context.get("logger", LOGGER)
+        try:
+            storage.check_context(PluginConfig.STORAGE_LAYOUT, context, LOGGER)
+        except Exception:
+            pass  # a diagnostic warning must never fail the action
         settings = context.get("settings", {})
         # On Dispatcharr 0.34 the form edits a pick list and a table under new
         # ids; write them back into the text settings every reader parses.
@@ -1836,8 +1891,23 @@ class Plugin:
         return sorted(streams, key=get_quality_score)
 
     def _acquire_lock(self, logger):
-        """Acquire operation lock. Returns True if acquired."""
-        lock_file = PluginConfig.OPERATION_LOCK_FILE
+        """Acquire the operation lock on every path it is kept at. True only if all were taken.
+
+        The paths come from storage.operation_lock_files: the old /data path first, while the
+        rollout keeps it, then the data-directory path. A refusal on any of them stops the
+        operation, and a path already taken is released again.
+        """
+        taken = []
+        for lock_file in storage.operation_lock_files(PluginConfig):
+            if not self._acquire_one_lock(lock_file, logger):
+                for path in taken:
+                    self._remove_lock_file(path, logger)
+                return False
+            taken.append(lock_file)
+        return True
+
+    def _acquire_one_lock(self, lock_file, logger):
+        """Take one lock file with the timestamp protocol the previous release uses. True if taken."""
         try:
             if os.path.exists(lock_file):
                 with open(lock_file, 'r') as f:
@@ -1860,10 +1930,14 @@ class Plugin:
             return False
 
     def _release_lock(self, logger):
-        """Release operation lock."""
+        """Release the operation lock on every path it is kept at."""
+        for lock_file in storage.operation_lock_files(PluginConfig):
+            self._remove_lock_file(lock_file, logger)
+
+    def _remove_lock_file(self, lock_file, logger):
         try:
-            if os.path.exists(PluginConfig.OPERATION_LOCK_FILE):
-                os.remove(PluginConfig.OPERATION_LOCK_FILE)
+            if os.path.exists(lock_file):
+                os.remove(lock_file)
         except Exception as e:
             logger.error(f"{LOG_PREFIX} Failed to release lock: {e}")
 
@@ -2386,6 +2460,12 @@ class Plugin:
                         f"negative ({count})")
             return False
         line = json.dumps({"ts": int(time.time()), "channels": count, "mode": mode})
+        try:
+            # An old-code worker may have appended to the old tally since the copy: bring it in first.
+            # Legacy mode returns at once, so this is a no-op there.
+            storage.sync_tally_tail(PluginConfig.STORAGE_LAYOUT, PluginConfig.CHANNEL_COUNT_LEDGER_FILE, log)
+        except Exception as exc:
+            log.debug(f"{LOG_PREFIX} could not append the old tally tail: {exc}")
         try:
             with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
                       encoding="utf-8") as handle:
