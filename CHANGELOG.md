@@ -2,6 +2,14 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3301641 (2026-11-26)
+
+This version needs Dispatcharr 0.34.0 or newer, as before. The plugin code is unchanged from 1.26.3301606.
+
+### Fixed
+
+- Installs from the Plugin Hub now get the same plugin manifest as the GitHub release. The Hub copy was missing the task setting on Preview, Full Sync, Sync Channels and the stream, EPG and logo Apply actions, which 1.26.3262133 added so their result shows in the task banner, and it declared no capabilities. Installs from the GitHub release were not affected.
+
 ## 1.26.3301606 (2026-11-26)
 
 This version needs Dispatcharr 0.34.0 or newer, as before.

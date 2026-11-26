@@ -165,7 +165,7 @@ PLUGIN_DB_KEY = _plugin_key_for_dir(os.path.dirname(os.path.abspath(__file__)))
 
 
 class PluginConfig:
-    PLUGIN_VERSION = "1.26.3301606"
+    PLUGIN_VERSION = "1.26.3301641"
 
     DEFAULT_FUZZY_MATCH_THRESHOLD = 80
     DEFAULT_PRIORITIZE_QUALITY = True
