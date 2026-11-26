@@ -2,6 +2,18 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3301606 (2026-11-26)
+
+This version needs Dispatcharr 0.34.0 or newer, as before.
+
+### Changed
+
+- Lineuparr's private state moves into Dispatcharr's per-plugin data directory, `/data/plugins/_data/lineuparr/`. The files are the saved state, the progress file, the Channels Created tally and the usage reporter's install id and send record. On the first start after the upgrade the plugin copies the old files across. It never deletes, renames or edits an old file, and a file already in the data directory is left as it is. The copy is recorded in `migrated.json` in that directory.
+- The operation lock stays cross-worker: it sits beside the data directories at `/data/plugins/_data/lineuparr.operation.lock`. During the rollout the plugin also takes the previous version's lock at `/data/lineuparr_operation.lock`, first, so a worker on the previous release and a worker on this one cannot run an operation at the same time.
+- The emailed reports move to `/data/plugins/_shared/newsflasharr/lineuparr/`, the folder Newsflasharr attaches from. The report count stays at `/data/lineuparr/report_count.json`, which Newsflasharr reads at that fixed path.
+- The CSV exports in `/data/exports` stay where they are, because seven plugins share that folder.
+- The README has a new section, "Where Lineuparr keeps its files", that says what moves, what sits beside the data directory, what stays, and when the old files are safe to delete.
+
 ## 1.26.3262133 (2026-11-22)
 
 This version needs Dispatcharr 0.34.0 or newer, as before.
