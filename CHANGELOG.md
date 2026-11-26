@@ -2,6 +2,17 @@
 
 Newest first. Versions are calver Major.YY.DDDHHMM (UTC).
 
+## 1.26.3302148 (2026-11-26)
+
+This version needs Dispatcharr 0.34.0 or newer, as before. It answers the Hub storage audit in Dispatcharr/Plugins#621.
+
+### Fixed
+
+- The Channels Created total counts lines that an older worker wrote. The total now reads those lines before it sums, so a count written by the previous release is no longer missing from the total.
+- The tally append runs under the same lock as the tally sync, so two workers cannot interleave lines in the tally file.
+- The shared storage layer counts legacy tally lines once after a failed first copy, and it catches up in the same process instead of waiting for the next start.
+- State files the plugin writes are owner-only, including the temporary files it creates before a rename.
+
 ## 1.26.3301641 (2026-11-26)
 
 This version needs Dispatcharr 0.34.0 or newer, as before. The plugin code is unchanged from 1.26.3301606.
