@@ -427,11 +427,20 @@ reports.REPORT_DIR = PluginConfig.REPORT_DIR
 # "Anonymous usage counts"). The total is read from the same append-only ledger the
 # tally test pins. report() returns at once and never raises; the network work runs
 # on a background thread.
+def _channels_created_total():
+    """The Channels Created total. Old-code lines are brought in first, so they count too."""
+    try:
+        storage.sync_tally_tail(PluginConfig.STORAGE_LAYOUT, PluginConfig.CHANNEL_COUNT_LEDGER_FILE, LOGGER)
+    except Exception as exc:
+        LOGGER.debug(f"{LOG_PREFIX} could not sync the old tally before the total: {exc}")
+    return jsonl_sum(PluginConfig.CHANNEL_COUNT_LEDGER_FILE + "*", key="channels")
+
+
 USAGE = UsageReporter(
     plugin="lineuparr",
     counter="channels_created",
     label="Channels Created",
-    total_fn=lambda: jsonl_sum(PluginConfig.CHANNEL_COUNT_LEDGER_FILE + "*", key="channels"),
+    total_fn=_channels_created_total,
     settings_fn=lambda: load_plugin_settings("lineuparr"),
     data_dir=PluginConfig.USAGE_DATA_DIR,
 )
@@ -2467,9 +2476,11 @@ class Plugin:
         except Exception as exc:
             log.debug(f"{LOG_PREFIX} could not append the old tally tail: {exc}")
         try:
-            with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
-                      encoding="utf-8") as handle:
-                handle.write(line + "\n")
+            # The append takes the lock the tail sync takes, so the two never interleave.
+            with storage.tally_lock(PluginConfig.STORAGE_LAYOUT):
+                with open(PluginConfig.CHANNEL_COUNT_LEDGER_FILE, "a",
+                          encoding="utf-8") as handle:
+                    handle.write(line + "\n")
             self._report_usage(None, log, force=count > 0)
             return True
         except Exception as exc:

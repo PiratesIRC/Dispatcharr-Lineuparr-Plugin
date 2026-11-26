@@ -8,6 +8,9 @@ vendored module, so callers see the same names they always did.
 """
 from __future__ import annotations
 
+import contextlib
+import os
+
 try:
     from . import plugin_storage as _ps
 except ImportError:  # loaded as a bare module, as plugin.py allows
@@ -69,6 +72,20 @@ def migrate(layout, items, logger, version=None):
 def sync_tally_tail(layout, tally_path, logger):
     """Append the tally's new old-source bytes to it. See plugin_storage.sync_tally_tail."""
     return _ps.sync_tally_tail(SPEC, layout, tally_path, logger)
+
+
+@contextlib.contextmanager
+def tally_lock(layout):
+    """Hold the tally lock of layout's data dir, the one sync_tally_tail takes.
+
+    An append made under this lock never interleaves with a tail sync on another worker. Legacy
+    mode has no data dir to hold a lock in, so it takes none there (the old code never did).
+    """
+    if layout.legacy:
+        yield
+        return
+    with _ps._lock(os.path.join(layout.data_dir, SPEC.tally_lock)):
+        yield
 
 
 def items_for(cfg, layout):
